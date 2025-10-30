@@ -1,0 +1,193 @@
+:root {
+  --bg-900: #0a0f1a; /* very dark edge */
+  --bg-800: #121a2c; /* dark */
+  --bg-700: #1b2742; /* less dark center */
+  --text-100: #f3f5f9;
+  --text-300: #c9d3ea;
+  --primary-500: #5b8cff;
+  --primary-600: #3f73ff;
+  --border-700: #233253;
+  /* Light theme surface for main content */
+  --light-bg: #f6f8fc;
+  --light-card: #ffffff;
+  --light-text: #0b1220;
+  --light-muted: #475569;
+  --light-border: #e2e8f0;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--light-text);
+  background: var(--light-bg);
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header with dark edges and softer middle */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border-700);
+  background: radial-gradient(800px 160px at 50% 50%,
+              #1e2a44 0%, #141c2e 60%, #0b1221 100%);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 72px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-100);
+  text-decoration: none;
+  font-weight: 700;
+}
+.brand-mark { font-size: 20px; }
+.brand-name { font-size: 22px; letter-spacing: 0.2px; }
+
+.main-nav {
+  margin-left: 12px;
+  display: none;
+  gap: 18px;
+}
+.main-nav a {
+  color: var(--text-300);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+.main-nav a:hover { color: var(--text-100); }
+
+.header-cta { margin-left: auto; display: none; gap: 12px; align-items: center; }
+.link-muted { color: var(--text-300); text-decoration: none; font-size: 14px; }
+.link-muted:hover { color: var(--text-100); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-primary { background: var(--primary-500); color: #0b1120; border-color: #6b91ff; }
+.btn-primary:hover { background: var(--primary-600); }
+.btn.btn-ghost { background: transparent; border-color: var(--light-border); color: var(--light-text); }
+.btn.btn-ghost:hover { background: rgba(15,23,42,0.05); }
+.btn.btn-primary { color: #0b1120; }
+
+/* Header-specific ghost button: header is dark even in light theme */
+.site-header .btn.btn-ghost { color: var(--text-100); border-color: rgba(255,255,255,0.35); }
+.site-header .btn.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+.nav-toggle { margin-left: auto; background: transparent; color: var(--text-100); border: 0; font-size: 22px; display: inline-flex; }
+
+@media (min-width: 900px) {
+  .main-nav { display: flex; }
+  .header-cta { display: flex; }
+  .nav-toggle { display: none; }
+}
+
+/* Hero */
+.hero { padding: 56px 0 24px; }
+.hero-inner { text-align: center; }
+.hero h1 { margin: 0 0 10px; font-size: 42px; }
+.subtitle { margin: 0 auto 20px; max-width: 720px; color: var(--light-muted); }
+.hero-actions { display: inline-flex; gap: 12px; }
+
+/* Features grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 32px 20px 56px;
+}
+.feature {
+  border: 1px solid var(--light-border);
+  border-radius: 12px;
+  padding: 18px;
+  text-decoration: none;
+  color: var(--light-text);
+  background: var(--light-card);
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  gap: 14px;
+}
+.features-grid a.feature,
+.features-grid a.feature:link,
+.features-grid a.feature:visited,
+.features-grid a.feature:hover,
+.features-grid a.feature:active,
+.features-grid a.feature:focus { color: var(--light-text); text-decoration: none; }
+.features-grid a.feature h3 { margin: 0 0 6px; font-size: 18px; color: var(--light-text); }
+.feature p { margin: 0; color: var(--light-muted); font-size: 14px; }
+.feature:hover { border-color: #c7d2fe; box-shadow: 0 4px 14px rgba(17,24,39,0.06); }
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1f2937;
+  background: #ffffff;
+  border: 1.5px solid var(--light-border);
+  box-shadow: 0 1px 0 rgba(17,24,39,0.02);
+}
+.feature-copy { display: flex; flex-direction: column; }
+
+.site-footer { border-top: 1px solid var(--light-border); padding: 16px 0; background: var(--light-bg); }
+.footer-inner { text-align: center; color: var(--light-muted); font-size: 14px; }
+
+/* Theme: Dark overrides */
+.theme-dark body {
+  color: var(--text-100);
+  background: radial-gradient(1200px 220px at 50% 0,
+              var(--bg-700) 0%, var(--bg-800) 55%, var(--bg-900) 100%) fixed;
+}
+.theme-dark .subtitle { color: var(--text-300); }
+.theme-dark .features-grid { padding-bottom: 56px; }
+.theme-dark .btn.btn-ghost { color: var(--text-100); border-color: rgba(255,255,255,0.35); background: transparent; }
+.theme-dark .btn.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+.theme-dark .btn.btn-primary { color: #0b1120; }
+.theme-dark .feature {
+  border-color: var(--border-700);
+  color: var(--text-100);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+}
+.theme-dark .features-grid a.feature,
+.theme-dark .features-grid a.feature:link,
+.theme-dark .features-grid a.feature:visited,
+.theme-dark .features-grid a.feature:hover,
+.theme-dark .features-grid a.feature:active,
+.theme-dark .features-grid a.feature:focus { color: var(--text-100); }
+.theme-dark .features-grid a.feature h3 { color: var(--text-100); }
+.theme-dark .feature p { color: var(--text-300); }
+.theme-dark .feature:hover { border-color: #35508a; box-shadow: none; }
+.theme-dark .feature-icon {
+  color: var(--text-100);
+  background: radial-gradient(22px 16px at 50% 30%, rgba(91,140,255,0.35), rgba(255,255,255,0.02));
+  border-color: var(--border-700);
+}
+.theme-dark .site-footer { border-top-color: var(--border-700); background: transparent; }
+.theme-dark .footer-inner { color: var(--text-300); }
+
+
