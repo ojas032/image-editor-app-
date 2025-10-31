@@ -13,6 +13,9 @@ import (
 	"golang.org/x/image/tiff" // Import for TIFF support
 
 	_ "golang.org/x/image/webp" // Import for WebP support
+	
+	// HEIC support - using goheif library
+	_ "github.com/adrium/goheif"
 )
 
 // EncodeImage encodes an image into the specified format and writes it to a bytes.Buffer.
@@ -49,6 +52,12 @@ func EncodeImageWithQuality(img image.Image, format string, buf *bytes.Buffer, q
 		// For simplicity, we'll default to JPEG for now if WebP is the input format
 		// and no specific WebP encoder is integrated.
 		log.Printf("Warning: WebP format detected, encoding as JPEG. Consider adding a WebP encoder for full support.")
+		options := &jpeg.Options{Quality: jpegQuality}
+		err = jpeg.Encode(buf, img, options)
+	case "heic", "heif":
+		// HEIC/HEIF encoding is not commonly supported in Go libraries for writing.
+		// Convert to JPEG as a high-quality alternative
+		log.Printf("Info: Converting HEIC to JPEG format for output (HEIC encoding not supported)")
 		options := &jpeg.Options{Quality: jpegQuality}
 		err = jpeg.Encode(buf, img, options)
 	default:
