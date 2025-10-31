@@ -229,7 +229,7 @@ func CropImage(req models.CropRequest) (string, error) {
 
 // ChangeBackground processes an image background change request using HTTP.
 func ChangeBackground(req models.ChangeBackgroundRequest) (string, string, error) {
-	client := GetHTTPClient()
+	client := GetPythonClient() // Direct Python call - no Flask server
 	// If transparent flag is set or no replacement provided, just remove background
 	if req.Transparent || (req.NewBackgroundImage == "" && req.SolidColor == "") {
 		return client.RemoveBackground(req.ImageBase64)
@@ -237,9 +237,10 @@ func ChangeBackground(req models.ChangeBackgroundRequest) (string, string, error
 	return client.ChangeBackground(req.ImageBase64, req.NewBackgroundImage, req.SolidColor)
 }
 
-// RemoveBackground processes an image background removal request using HTTP.
+// RemoveBackground processes an image background removal request.
+// Uses direct Python subprocess call (no Flask server needed - saves CPU).
 func RemoveBackground(req models.RemoveBackgroundRequest) (string, string, error) {
-	client := GetHTTPClient()
+	client := GetPythonClient() // Direct Python call - no Flask server
 	return client.RemoveBackground(req.ImageBase64)
 }
 
