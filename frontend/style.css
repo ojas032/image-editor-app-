@@ -31,6 +31,15 @@ body {
   padding: 0 20px;
 }
 
+/* View routing system */
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
 /* Header with dark edges and softer middle */
 .site-header {
   position: sticky;
