@@ -27,9 +27,10 @@
       this.hideAllViews();
       this.currentView = view;
       
-      const viewElement = document.getElementById(view + 'View');
+      // Show the selected view (using 'view-' prefix to match HTML IDs)
+      const viewElement = document.getElementById('view-' + view);
       if (viewElement) {
-        viewElement.style.display = 'block';
+        viewElement.classList.add('active');
       }
 
       // Initialize view if needed
@@ -52,10 +53,9 @@
     },
 
     hideAllViews: function() {
-      const views = ['homeView', 'compressView', 'resizeView'];
-      views.forEach(function(viewId) {
-        const el = document.getElementById(viewId);
-        if (el) el.style.display = 'none';
+      // Hide all views by removing 'active' class
+      document.querySelectorAll('.view').forEach(function(view) {
+        view.classList.remove('active');
       });
     },
 
