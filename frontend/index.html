@@ -845,14 +845,30 @@
 
       // ========== CROP VIEW ==========
       function initCropView() {
-        // Redirect to crop.html for full crop functionality
-        window.location.href = 'crop.html';
+        window.cropInitialized = true;
+        const section = document.getElementById('cropSection');
+        // Load crop.html content in iframe to keep URL as #crop
+        section.innerHTML = `
+          <iframe 
+            src="crop.html" 
+            style="width:100%;border:none;min-height:900px;display:block;" 
+            title="Image Crop Tool">
+          </iframe>
+        `;
       }
 
       // ========== CONVERT VIEW ==========
       function initConvertView() {
-        // Redirect to convert.html for full convert functionality
-        window.location.href = 'convert.html';
+        window.convertInitialized = true;
+        const section = document.getElementById('convertSection');
+        // Load convert.html content in iframe to keep URL as #convert
+        section.innerHTML = `
+          <iframe 
+            src="convert.html" 
+            style="width:100%;border:none;min-height:900px;display:block;" 
+            title="Image Format Converter">
+          </iframe>
+        `;
       }
     </script>
   </body>
