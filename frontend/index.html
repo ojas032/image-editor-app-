@@ -175,8 +175,8 @@
           <!-- Remove background hidden -->
           <a href="#compress" data-route="compress">Compress</a>
           <a href="#resize" data-route="resize">Resize</a>
-          <a href="#crop" data-route="crop">Crop</a>
-          <a href="#convert" data-route="convert">Format Converter</a>
+          <a href="crop.html">Crop</a>
+          <a href="convert.html">Format Converter</a>
         </nav>
         <div class="header-cta">
           <button id="themeToggle" class="btn btn-ghost" type="button">Toggle theme</button>
@@ -230,7 +230,7 @@
             </div>
           </a>
 
-          <a class="feature" href="#crop">
+          <a class="feature" href="crop.html">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M7 3v14a3 3 0 003 3h14" />
@@ -243,7 +243,7 @@
             </div>
           </a>
 
-          <a class="feature" href="#convert">
+          <a class="feature" href="convert.html">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3h8" />
@@ -308,72 +308,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <script src="script.js"></script>
+    <script src="router.js"></script>
     
     <script>
-      // Router system
-      const router = {
-        currentView: 'home',
-        
-        navigate(view) {
-          // Hide all views
-          document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-          
-          // Update nav active state
-          document.querySelectorAll('.main-nav a').forEach(a => a.classList.remove('active'));
-          
-          // Show selected view
-          const viewEl = document.getElementById('view-' + view);
-          if (viewEl) {
-            viewEl.classList.add('active');
-            this.currentView = view;
-            
-            // Update nav active
-            const navLink = document.querySelector(`.main-nav a[data-route="${view}"]`);
-            if (navLink) navLink.classList.add('active');
-            
-            // Initialize view if needed
-            if (view === 'compress' && !window.compressInitialized) {
-              initCompressView();
-            } else if (view === 'resize' && !window.resizeInitialized) {
-              initResizeView();
-            } else if (view === 'crop' && !window.cropInitialized) {
-              initCropView();
-            } else if (view === 'convert' && !window.convertInitialized) {
-              initConvertView();
-            }
-          }
-        }
-      };
-
-      // Handle hash changes
-      window.addEventListener('hashchange', () => {
-        const hash = window.location.hash.slice(1);
-        if (hash) {
-          router.navigate(hash);
-        } else {
-          router.navigate('home');
-        }
-      });
-
-      // Handle clicks on hash links
-      document.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href^="#"]');
-        if (link) {
-          e.preventDefault();
-          const hash = link.getAttribute('href').slice(1);
-          if (hash) {
-            window.location.hash = hash;
-          } else {
-            window.location.hash = '';
-          }
-        }
-      });
-
-      // Initial route
-      const initialHash = window.location.hash.slice(1);
-      if (initialHash && ['compress', 'resize', 'crop', 'convert'].includes(initialHash)) {
-        router.navigate(initialHash);
-      }
+      // Router is now managed by router.js
+      // View initialization functions are called by the router
 
       // Utility: Fetch with timeout
       async function fetchWithTimeout(url, options = {}, timeout = 20000) {
@@ -843,33 +782,8 @@
         });
       }
 
-      // ========== CROP VIEW ==========
-      function initCropView() {
-        window.cropInitialized = true;
-        const section = document.getElementById('cropSection');
-        // Load crop.html content in iframe to keep URL as #crop
-        section.innerHTML = `
-          <iframe 
-            src="crop.html" 
-            style="width:100%;border:none;min-height:900px;display:block;" 
-            title="Image Crop Tool">
-          </iframe>
-        `;
-      }
-
-      // ========== CONVERT VIEW ==========
-      function initConvertView() {
-        window.convertInitialized = true;
-        const section = document.getElementById('convertSection');
-        // Load convert.html content in iframe to keep URL as #convert
-        section.innerHTML = `
-          <iframe 
-            src="convert.html" 
-            style="width:100%;border:none;min-height:900px;display:block;" 
-            title="Image Format Converter">
-          </iframe>
-        `;
-      }
+      // Crop and Convert are on separate pages
+      // No initCropView or initConvertView needed
     </script>
   </body>
   </html>
