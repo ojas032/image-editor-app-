@@ -175,8 +175,8 @@
           <!-- Remove background hidden -->
           <a href="#compress" data-route="compress">Compress</a>
           <a href="#resize" data-route="resize">Resize</a>
-          <a href="crop.html">Crop</a>
-          <a href="convert.html">Format Converter</a>
+          <a href="#crop" data-route="crop">Crop</a>
+          <a href="#convert" data-route="convert">Format Converter</a>
         </nav>
         <div class="header-cta">
           <button id="themeToggle" class="btn btn-ghost" type="button">Toggle theme</button>
@@ -230,7 +230,7 @@
             </div>
           </a>
 
-          <a class="feature" href="crop.html">
+          <a class="feature" href="#crop">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M7 3v14a3 3 0 003 3h14" />
@@ -243,7 +243,7 @@
             </div>
           </a>
 
-          <a class="feature" href="convert.html">
+          <a class="feature" href="#convert">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3h8" />
@@ -843,18 +843,62 @@
         });
       }
 
-      // ========== CROP VIEW (Simplified) ==========
+      // ========== CROP VIEW ==========
       function initCropView() {
         window.cropInitialized = true;
         const section = document.getElementById('cropSection');
-        section.innerHTML = `<div class="card"><p class="text-center">Crop functionality coming soon. Please use the <a href="crop.html">dedicated crop page</a> for now.</p></div>`;
+        // Load crop functionality via iframe with clean URL
+        section.innerHTML = `
+          <iframe 
+            id="cropIframe"
+            src="crop.html" 
+            style="width:100%;border:none;min-height:800px;display:block;" 
+            onload="hideIframeHeaderFooter(this)"
+            title="Image Crop Tool">
+          </iframe>
+        `;
       }
 
-      // ========== CONVERT VIEW (Simplified) ==========
+      // ========== CONVERT VIEW ==========
       function initConvertView() {
         window.convertInitialized = true;
         const section = document.getElementById('convertSection');
-        section.innerHTML = `<div class="card"><p class="text-center">Convert functionality coming soon. Please use the <a href="convert.html">dedicated convert page</a> for now.</p></div>`;
+        // Load convert functionality via iframe with clean URL
+        section.innerHTML = `
+          <iframe 
+            id="convertIframe"
+            src="convert.html" 
+            style="width:100%;border:none;min-height:800px;display:block;" 
+            onload="hideIframeHeaderFooter(this)"
+            title="Image Format Converter">
+          </iframe>
+        `;
+      }
+
+      // Helper function to hide header/footer in iframes and adjust height
+      function hideIframeHeaderFooter(iframe) {
+        try {
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+          // Hide header and footer
+          const header = iframeDoc.querySelector('.site-header');
+          const footer = iframeDoc.querySelector('.site-footer');
+          if (header) header.style.display = 'none';
+          if (footer) footer.style.display = 'none';
+          
+          // Adjust iframe height
+          setTimeout(() => {
+            iframe.style.height = (iframeDoc.documentElement.scrollHeight + 50) + 'px';
+          }, 100);
+          
+          // Watch for content changes and update height
+          const resizeObserver = new ResizeObserver(() => {
+            iframe.style.height = (iframeDoc.documentElement.scrollHeight + 50) + 'px';
+          });
+          resizeObserver.observe(iframeDoc.body);
+        } catch(e) {
+          // If there's a cross-origin issue, just set a fixed height
+          iframe.style.height = '1200px';
+        }
       }
     </script>
   </body>
