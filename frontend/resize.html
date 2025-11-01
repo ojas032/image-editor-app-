@@ -53,7 +53,7 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="index.html"><span class="brand-mark">🧠</span><span class="brand-name">ImageNerd</span></a>
-        <nav class="main-nav"><a href="remove-background.html">Remove background</a><a href="compress.html">Compress</a><a href="resize.html">Resize</a><a href="crop.html">Crop</a><a href="convert.html">Format Converter</a></nav>
+        <nav class="main-nav"><!-- <a href="remove-background.html">Remove background</a> --><a href="compress.html">Compress</a><a href="resize.html">Resize</a><a href="crop.html">Crop</a><a href="convert.html">Format Converter</a></nav>
         <div class="header-cta"><button id="themeToggle" class="btn btn-ghost" type="button">Toggle theme</button></div>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
@@ -437,7 +437,7 @@
         const finalWidthDisplay = document.getElementById('finalWidthDisplay');
         const finalHeightDisplay = document.getElementById('finalHeightDisplay');
 
-        const API_BASE = 'http://localhost:8080';
+        const API_BASE = 'http://80.225.225.50:8080';
         const ENDPOINT_RESIZE = '/resize';
 
         let currentFile = null;
@@ -676,11 +676,16 @@
               height: targetHeight
             };
 
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 20000);
+
             const res = await fetch(API_BASE + ENDPOINT_RESIZE, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(body)
+              body: JSON.stringify(body),
+              signal: controller.signal
             });
+            clearTimeout(timeoutId);
 
             const data = await res.json();
             if (!data.resized_image_base64) throw new Error(data.error || 'Resize failed');
@@ -706,7 +711,11 @@
           } catch(err) {
             console.error(err);
             processingOverlay.style.display = 'none';
-            alert('Failed to resize image: ' + err.message);
+            if (err.name === 'AbortError') {
+              alert('Request timed out after 20 seconds. Please try again.');
+            } else {
+              alert('Failed to resize image: ' + err.message);
+            }
             // Reset view
             previewSection.style.display = 'block';
             document.querySelector('.resize-settings').style.display = 'block';

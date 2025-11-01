@@ -13,9 +13,6 @@ import (
 	"golang.org/x/image/tiff" // Import for TIFF support
 
 	_ "golang.org/x/image/webp" // Import for WebP support
-	
-	// HEIC support - using goheif library
-	_ "github.com/adrium/goheif"
 )
 
 // EncodeImage encodes an image into the specified format and writes it to a bytes.Buffer.

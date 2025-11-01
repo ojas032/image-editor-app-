@@ -17,7 +17,7 @@
       <div class="container header-inner">
         <a class="brand" href="index.html"><span class="brand-mark">🧠</span><span class="brand-name">ImageNerd</span></a>
         <nav class="main-nav">
-          <a href="remove-background.html">Remove background</a>
+          <!-- <a href="remove-background.html">Remove background</a> -->
           <a href="compress.html">Compress</a>
           <a href="resize.html">Resize</a>
           <a href="crop.html">Crop</a>
@@ -463,7 +463,10 @@
           const base64Data = originalImageData.split(',')[1];
 
           // Call backend API
-          const response = await fetch('http://localhost:8080/convert', {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 20000);
+
+          const response = await fetch('http://80.225.225.50:8080/convert', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -471,8 +474,10 @@
             body: JSON.stringify({
               image_base64: base64Data,
               format: format
-            })
+            }),
+            signal: controller.signal
           });
+          clearTimeout(timeoutId);
 
           if (!response.ok) {
             const errorData = await response.json();
@@ -501,7 +506,11 @@
           downloadSection.style.display = 'block';
         } catch (error) {
           console.error('Conversion error:', error);
-          alert('Failed to convert image: ' + error.message);
+          if (error.name === 'AbortError') {
+            alert('Request timed out after 20 seconds. Please try again.');
+          } else {
+            alert('Failed to convert image: ' + error.message);
+          }
           loadingSpinner.style.display = 'none';
         } finally {
           convertBtn.disabled = false;

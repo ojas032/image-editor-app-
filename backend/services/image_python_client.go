@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os/exec"
-	"path/filepath"
 	"strings"
 )
 
@@ -32,9 +31,9 @@ type PythonResponse struct {
 
 // NewPythonClient creates a new Python client
 func NewPythonClient() *PythonClient {
-	// Get the venv python path relative to project root
-	pythonPath := filepath.Join("..", "venv", "bin", "python")
-	scriptPath := filepath.Join("..", "backend", "python_scripts", "background_remover.py")
+	// Get the venv python path - on the VM it's at /home/ubuntu/image-editor-app-/venv/bin/python
+	pythonPath := "/home/ubuntu/image-editor-app-/venv/bin/python"
+	scriptPath := "/home/ubuntu/image-editor-app-/backend/python_scripts/background_remover.py"
 
 	return &PythonClient{
 		pythonPath: pythonPath,
