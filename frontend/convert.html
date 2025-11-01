@@ -256,6 +256,20 @@
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <script src="script.js"></script>
     
+    <!-- Hide header/footer when loaded in iframe -->
+    <script>
+      if (window.self !== window.top) {
+        // We're in an iframe, hide header and footer
+        const header = document.querySelector('.site-header');
+        const footer = document.querySelector('.site-footer');
+        if (header) header.style.display = 'none';
+        if (footer) footer.style.display = 'none';
+        // Adjust main padding since header is hidden
+        const main = document.querySelector('main');
+        if (main) main.style.paddingTop = '20px';
+      }
+    </script>
+    
     <script>
       // Convert page functionality
       let originalImageData = null;
