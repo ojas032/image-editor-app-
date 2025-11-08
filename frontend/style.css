@@ -258,6 +258,7 @@ main {
     to { opacity: 1; }
   }
 }
+
 .link-muted { color: var(--text-300); text-decoration: none; font-size: 14px; }
 .link-muted:hover { color: var(--text-100); }
 
@@ -324,6 +325,7 @@ main {
   .main-nav { display: flex; }
   .header-cta { display: flex; }
   .nav-toggle { display: none; }
+  .mobile-menu-close { display: none !important; }
 }
 
 /* Hero */
