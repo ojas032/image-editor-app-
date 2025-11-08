@@ -623,82 +623,26 @@
           img.src = URL.createObjectURL(file);
         }
         
-        // Apply EXIF orientation correction
+        // Apply EXIF orientation correction - browser handles it automatically
         async function applyExifOrientation(img, file) {
           return new Promise((resolve) => {
-            // Read EXIF orientation
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              const view = new DataView(e.target.result);
-              let orientation = 1;
-              
-              // Check for EXIF orientation tag
-              if (view.getUint16(0, false) === 0xFFD8) {
-                const length = view.byteLength;
-                let offset = 2;
-                while (offset < length) {
-                  if (view.getUint16(offset + 2, false) <= 8) break;
-                  const marker = view.getUint16(offset, false);
-                  offset += 2;
-                  if (marker === 0xFFE1) {
-                    const little = view.getUint16(offset + 8, false) === 0x4949;
-                    offset += view.getUint16(offset, false);
-                    const tags = view.getUint16(offset, little);
-                    offset += 2;
-                    for (let i = 0; i < tags; i++) {
-                      if (view.getUint16(offset + (i * 12), little) === 0x0112) {
-                        orientation = view.getUint16(offset + (i * 12) + 8, little);
-                        break;
-                      }
-                    }
-                    break;
-                  } else if ((marker & 0xFF00) !== 0xFF00) {
-                    break;
-                  } else {
-                    offset += view.getUint16(offset, false);
-                  }
-                }
-              }
-              
-              // Create canvas and apply orientation
-              const canvas = document.createElement('canvas');
-              const ctx = canvas.getContext('2d');
-              let width = img.width;
-              let height = img.height;
-              
-              // Swap dimensions for orientations 5-8
-              if (orientation >= 5 && orientation <= 8) {
-                canvas.width = height;
-                canvas.height = width;
-              } else {
-                canvas.width = width;
-                canvas.height = height;
-              }
-              
-              // Apply transformation based on orientation
-              switch (orientation) {
-                case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-                case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-                case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-                case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-                case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-                case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-                case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-              }
-              
-              ctx.drawImage(img, 0, 0);
-              
-              const dataUrl = canvas.toDataURL(file.type || 'image/jpeg', 0.95);
-              const base64 = dataUrl.split(',')[1];
-              
-              resolve({
-                base64: base64,
-                dataUrl: dataUrl,
-                width: canvas.width,
-                height: canvas.height
-              });
-            };
-            reader.readAsArrayBuffer(file);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            
+            ctx.drawImage(img, 0, 0);
+            
+            const dataUrl = canvas.toDataURL(file.type || 'image/jpeg', 0.95);
+            const base64 = dataUrl.split(',')[1];
+            
+            resolve({
+              base64: base64,
+              dataUrl: dataUrl,
+              width: canvas.width,
+              height: canvas.height
+            });
           });
         }
 

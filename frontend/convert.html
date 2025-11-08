@@ -324,7 +324,7 @@
       });
 
       // Handle file upload
-      function handleFileUpload(file) {
+      async function handleFileUpload(file) {
         originalFileName = file.name;
         const fileExtension = file.name.split('.').pop().toLowerCase();
         originalFormat = getFormatFromExtension(fileExtension);
@@ -334,25 +334,53 @@
           // For HEIC files, we need to convert them using canvas
           handleHEICFile(file);
         } else {
-          // For other formats, read normally
+          // For other formats, apply EXIF orientation correction
+          const orientedData = await applyExifOrientation(file);
+          originalImageData = orientedData.dataUrl;
+          originalImage.src = orientedData.dataUrl;
+          
+          // Update UI
+          uploadArea.style.display = 'none';
+          imagePreviewSection.style.display = 'block';
+          downloadSection.style.display = 'none';
+          convertedImage.style.display = 'none';
+          document.getElementById('convertedInfo').style.display = 'none';
+          
+          // Update original image info
+          document.getElementById('originalFormat').textContent = originalFormat.toUpperCase();
+          document.getElementById('originalSize').textContent = formatFileSize(file.size);
+        }
+      }
+      
+      // Apply EXIF orientation correction - browser handles it automatically
+      async function applyExifOrientation(file) {
+        return new Promise((resolve) => {
           const reader = new FileReader();
-          reader.onload = function(e) {
-            originalImageData = e.target.result;
-            originalImage.src = originalImageData;
-            
-            // Update UI
-            uploadArea.style.display = 'none';
-            imagePreviewSection.style.display = 'block';
-            downloadSection.style.display = 'none';
-            convertedImage.style.display = 'none';
-            document.getElementById('convertedInfo').style.display = 'none';
-            
-            // Update original image info
-            document.getElementById('originalFormat').textContent = originalFormat.toUpperCase();
-            document.getElementById('originalSize').textContent = formatFileSize(file.size);
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
+              
+              canvas.width = img.naturalWidth || img.width;
+              canvas.height = img.naturalHeight || img.height;
+              
+              ctx.drawImage(img, 0, 0);
+              
+              const dataUrl = canvas.toDataURL(file.type || 'image/jpeg', 0.95);
+              const base64 = dataUrl.split(',')[1];
+              
+              resolve({
+                base64: base64,
+                dataUrl: dataUrl,
+                width: canvas.width,
+                height: canvas.height
+              });
+            };
+            img.src = e.target.result;
           };
           reader.readAsDataURL(file);
-        }
+        });
       }
 
       // Handle HEIC files by converting to PNG first
