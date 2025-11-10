@@ -112,7 +112,12 @@ main {
   font-weight: 700;
   flex-shrink: 0;
 }
-.brand-mark { font-size: 18px; }
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  object-fit: contain;
+}
 .brand-name { font-size: 18px; letter-spacing: 0.2px; }
 
 .main-nav {
@@ -317,7 +322,7 @@ main {
     gap: 16px;
     height: 72px;
   }
-  .brand-mark { font-size: 20px; }
+  .brand-mark { width: 32px; height: 32px; }
   .brand-name { font-size: 22px; }
 }
 
