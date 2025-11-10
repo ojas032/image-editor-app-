@@ -32,11 +32,15 @@ func ResizeImage(req models.ResizeRequest) (string, error) {
 		return "", fmt.Errorf("failed to decode base64 image: %w", err)
 	}
 
+	orientation := utils.GetExifOrientation(imgBytes)
+
 	// Decode the image
 	img, format, err := image.Decode(bytes.NewReader(imgBytes))
 	if err != nil {
 		return "", fmt.Errorf("failed to decode image: %w", err)
 	}
+
+	img = utils.FixOrientation(img, orientation)
 
 	targetWidth := req.Width
 	targetHeight := req.Height
@@ -77,11 +81,15 @@ func UpscaleImage(req models.UpscaleRequest) (string, error) {
 		return "", fmt.Errorf("failed to decode base64 image: %w", err)
 	}
 
+	orientation := utils.GetExifOrientation(imgBytes)
+
 	// Decode the image
 	img, format, err := image.Decode(bytes.NewReader(imgBytes))
 	if err != nil {
 		return "", fmt.Errorf("failed to decode image: %w", err)
 	}
+
+	img = utils.FixOrientation(img, orientation)
 
 	// Calculate new dimensions
 	originalWidth := img.Bounds().Dx()
@@ -110,12 +118,14 @@ func ConvertImage(req models.ConvertRequest) (string, error) {
 		return "", fmt.Errorf("failed to decode base64 image: %w", err)
 	}
 
-	// Decode the image to get the image.Image. The original format is not needed here
-	// as we are converting to a new format.
+	orientation := utils.GetExifOrientation(imgBytes)
+
 	img, _, err := image.Decode(bytes.NewReader(imgBytes))
 	if err != nil {
 		return "", fmt.Errorf("failed to decode image: %w", err)
 	}
+
+	img = utils.FixOrientation(img, orientation)
 
 	// Encode the image to the target format
 	var buf bytes.Buffer
@@ -135,11 +145,15 @@ func BlurImage(req models.BlurRequest) (string, error) {
 		return "", fmt.Errorf("failed to decode base64 image: %w", err)
 	}
 
+	orientation := utils.GetExifOrientation(imgBytes)
+
 	// Decode the image
 	img, format, err := image.Decode(bytes.NewReader(imgBytes))
 	if err != nil {
 		return "", fmt.Errorf("failed to decode image: %w", err)
 	}
+
+	img = utils.FixOrientation(img, orientation)
 
 	// Create a mask image
 	bounds := img.Bounds()
@@ -204,11 +218,15 @@ func CropImage(req models.CropRequest) (string, error) {
 		return "", fmt.Errorf("failed to decode base64 image: %w", err)
 	}
 
+	orientation := utils.GetExifOrientation(imgBytes)
+
 	// Decode the image
 	img, format, err := image.Decode(bytes.NewReader(imgBytes))
 	if err != nil {
 		return "", fmt.Errorf("failed to decode image: %w", err)
 	}
+
+	img = utils.FixOrientation(img, orientation)
 
 	// Define the crop rectangle
 	rect := image.Rect(req.X, req.Y, req.X+req.Width, req.Y+req.Height)
@@ -252,11 +270,15 @@ func CompressImage(req models.CompressRequest) (string, error) {
 		return "", fmt.Errorf("failed to decode base64 image: %w", err)
 	}
 
+	orientation := utils.GetExifOrientation(imgBytes)
+
 	// Decode the image
 	img, format, err := image.Decode(bytes.NewReader(imgBytes))
 	if err != nil {
 		return "", fmt.Errorf("failed to decode image: %w", err)
 	}
+
+	img = utils.FixOrientation(img, orientation)
 
 	// Determine output format
 	outputFormat := format
