@@ -105,9 +105,11 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       const self = this;
       console.log('Router: initializing');
 
-      // Determine if we're in production (clean URLs) or development (hash URLs)
-      const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
-      console.log('Router: environment -', isProduction ? 'production (clean URLs)' : 'development (hash URLs)');
+      // Determine routing strategy
+      const isFileProtocol = window.location.protocol === 'file:';
+      const isProduction = !isFileProtocol && window.location.hostname !== 'localhost';
+      console.log('Router: protocol -', isFileProtocol ? 'file://' : 'http://');
+      console.log('Router: environment -', isProduction ? 'production (clean URLs)' : isFileProtocol ? 'file protocol (hash URLs)' : 'localhost (index.html URLs)');
 
       if (isProduction) {
         // Production: Use clean URLs with History API
@@ -174,11 +176,11 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
           initialRoute = storedRoute;
           console.log('Router: using stored path route', initialRoute);
         }
-      } else if (pathRoute && routeConfig[pathRoute]) {
+      } else if (pathRoute && routeConfig[pathRoute] && !isFileProtocol) {
         initialRoute = pathRoute;
         console.log('Router: using pathname route', initialRoute);
-      } else if (!isProduction) {
-        // Development: Check hash for initial route as fallback
+      } else {
+        // File protocol or development: Check hash for initial route
         const hash = window.location.hash.substring(1);
         console.log('Router: initial hash', hash);
         if (hash && routeConfig[hash]) {

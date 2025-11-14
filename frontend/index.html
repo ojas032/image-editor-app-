@@ -668,19 +668,20 @@
           console.log('Navigation: clicked link with route', route, 'href:', link.href);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Use clean URLs on production, /index.html/route URLs on localhost/file://
-              const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
-              if (isProduction) {
-                const newPath = route === 'home' ? '/' : `/${route}`;
-                history.pushState(null, '', newPath);
+              // Handle routing based on protocol
+              if (window.location.protocol === 'file:') {
+                // File protocol: use hash routing
+                window.location.hash = route;
               } else {
-                // Use /index.html/route URLs for local development (supports direct access)
-                const indexUrl = route === 'home' ? '/index.html' : `/index.html/${route}`;
-                if (window.location.protocol !== 'file:') {
-                  history.pushState(null, '', indexUrl);
+                // HTTP protocol: try to use URL-based routing
+                const isProduction = window.location.hostname !== 'localhost';
+                if (isProduction) {
+                  const newPath = route === 'home' ? '/' : `/${route}`;
+                  history.pushState(null, '', newPath);
                 } else {
-                  // For file:// protocol, still use hash as fallback
-                  window.location.hash = route;
+                  // Localhost: use /index.html/route format
+                  const indexUrl = route === 'home' ? '/index.html' : `/index.html/${route}`;
+                  history.pushState(null, '', indexUrl);
                 }
               }
               window.router.navigate(route);
