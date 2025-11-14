@@ -2,8 +2,9 @@
 (function() {
   'use strict';
 
-  // Initialize Navigo router with hash routing for maximum compatibility
-  const router = new Navigo('/', { hash: true });
+  // Initialize Navigo router - use clean URLs in production, hash in development
+  const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
+  const router = new Navigo('/', { hash: !isProduction });
 
   // View configurations
   const viewConfig = {
