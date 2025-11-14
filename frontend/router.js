@@ -10,12 +10,9 @@
     home: { type: 'inline' },
     compress: { type: 'inline', init: 'initCompressView' },
     resize: { type: 'inline', init: 'initResizeView' },
-    crop: { type: 'external', file: 'crop.html' },
-    convert: { type: 'external', file: 'convert.html' },
     about: { type: 'inline' },
-    contact: { type: 'inline' },
-    privacy: { type: 'external', file: 'privacy.html' },
-    terms: { type: 'external', file: 'terms.html' }
+    contact: { type: 'inline' }
+    // External routes (crop, convert, privacy, terms) handled server-side
   };
 
   let currentView = 'home';
@@ -47,29 +44,16 @@
       return;
     }
 
-    if (config.type === 'inline') {
-      viewElement.classList.add('active');
+    // Only handle inline routes - external routes handled server-side
+    viewElement.classList.add('active');
 
-      // Initialize if needed
-      if (config.init && !window[viewName + 'Initialized']) {
-        const initFunction = window[config.init];
-        if (typeof initFunction === 'function') {
-          initFunction();
-        }
-        window[viewName + 'Initialized'] = true;
+    // Initialize if needed
+    if (config.init && !window[viewName + 'Initialized']) {
+      const initFunction = window[config.init];
+      if (typeof initFunction === 'function') {
+        initFunction();
       }
-    } else if (config.type === 'external') {
-      if (!window[viewName + 'Initialized']) {
-        viewElement.innerHTML = `
-          <iframe
-            src="${config.file}"
-            style="width:100%;min-height:900px;border:none;display:block;"
-            title="${viewName} tool">
-          </iframe>
-        `;
-        window[viewName + 'Initialized'] = true;
-      }
-      viewElement.classList.add('active');
+      window[viewName + 'Initialized'] = true;
     }
 
     // Scroll to top when showing a new view
@@ -137,6 +121,56 @@
 
   // Handle initial load with clean URL support
   function handleInitialLoad() {
+    // Check for GitHub Pages route first (with retry for timing issues)
+    function checkGitHubPagesRoute() {
+      if (window.githubPagesRoute) {
+        const route = window.githubPagesRoute;
+        console.log('Router: Handling GitHub Pages route:', route);
+        delete window.githubPagesRoute; // Clean up
+
+        // Handle special case: 'home' route should go to root
+        if (route === 'home' || route === '') {
+          router.navigate('/');
+          return true;
+        }
+
+        if (viewConfig[route]) {
+          console.log('Router: Navigating to:', '/' + route);
+          router.navigate('/' + route);
+          return true;
+        } else {
+          console.log('Router: Route not found in viewConfig:', route, '- available routes:', Object.keys(viewConfig));
+        }
+      }
+      return false;
+    }
+
+    // Try immediately
+    if (checkGitHubPagesRoute()) return;
+
+    // If not found, try again after a short delay (in case script loads after router)
+    setTimeout(() => {
+      if (checkGitHubPagesRoute()) return;
+    }, 10);
+
+    // Also check current pathname as fallback for GitHub Pages
+    const currentPath = window.location.pathname;
+    if (currentPath !== '/' && currentPath !== '/index.html' && currentPath !== '/404.html') {
+      const route = currentPath.substring(1);
+      console.log('Router: Checking current path for route:', route);
+
+      if (route === 'home' || route === '') {
+        router.navigate('/');
+        return;
+      }
+
+      if (viewConfig[route] && viewConfig[route].type === 'inline') {
+        console.log('Router: Found inline route from pathname:', route);
+        router.navigate('/' + route);
+        return;
+      }
+    }
+
     const storedPath = sessionStorage.getItem('spa-path');
     if (storedPath) {
       sessionStorage.removeItem('spa-path');
