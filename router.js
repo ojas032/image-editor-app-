@@ -62,6 +62,13 @@
       }
       viewElement.classList.add('active');
     }
+
+    // Scroll to top when showing a new view
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   // Define routes
