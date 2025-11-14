@@ -116,9 +116,30 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
         }
       });
 
+      // Handle hashchange events as fallback (convert to clean URLs)
+      window.addEventListener('hashchange', function(event) {
+        const hash = window.location.hash.substring(1);
+        console.log('Router: hashchange to', hash);
+        if (routeConfig[hash]) {
+          // Convert hash URL to clean URL
+          const cleanPath = hash === 'home' ? '/' : `/${hash}`;
+          history.replaceState(null, '', cleanPath);
+          self.navigate(hash);
+        }
+      });
+
       // Handle initial route on page load
       let initialPath = window.location.pathname.substring(1);
       console.log('Router: initial path', initialPath);
+
+      // Check if we have a hash URL and convert it to clean URL
+      const initialHash = window.location.hash.substring(1);
+      if (initialHash && routeConfig[initialHash]) {
+        console.log('Router: converting hash URL to clean URL', initialHash);
+        const cleanPath = initialHash === 'home' ? '/' : `/${initialHash}`;
+        history.replaceState(null, '', cleanPath);
+        initialPath = initialHash;
+      }
 
       // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
       const storedPath = sessionStorage.getItem('spa-path');
