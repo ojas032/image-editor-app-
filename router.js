@@ -12,7 +12,7 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
     crop: { inline: false, redirect: 'crop.html' },
     convert: { inline: false, redirect: 'convert.html' },
     about: { inline: false, redirect: 'about.html' },
-    contactus: { inline: false, redirect: 'contact.html' },
+    contact: { inline: false, redirect: 'contact.html' },
     privacy: { inline: false, redirect: 'privacy.html' },
     terms: { inline: false, redirect: 'terms.html' }
   };
@@ -62,7 +62,7 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       } else if (view === 'about' && !window.aboutInitialized) {
         console.log('Router: loading about page');
         this.loadExternalPage(view, 'about.html');
-      } else if (view === 'contactus' && !window.contactusInitialized) {
+      } else if (view === 'contact' && !window.contactInitialized) {
         console.log('Router: loading contact page');
         this.loadExternalPage(view, 'contact.html');
       } else if (view === 'privacy' && !window.privacyInitialized) {
@@ -91,11 +91,7 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       `;
       
       // Mark as initialized
-      if (view === 'contactus') {
-        window.contactusInitialized = true;
-      } else {
-        window[view + 'Initialized'] = true;
-      }
+      window[view + 'Initialized'] = true;
     },
 
     hideAllViews: function() {
