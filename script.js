@@ -88,53 +88,6 @@
       });
     }
 
-    // Theme toggle with persistence
-    const themeToggle = document.getElementById('themeToggle');
-    
-    function updateThemeButtonLabel() {
-      if (!themeToggle) {
-        console.warn('Theme toggle button not found');
-        return;
-      }
-      const isDark = root.classList.contains('theme-dark');
-      themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
-      console.log('Theme button label updated:', themeToggle.textContent);
-    }
-    
-    // Update button label on load
-    updateThemeButtonLabel();
-
-    // Add click event listener
-    if (themeToggle) {
-      console.log('Theme toggle button found, adding event listener');
-      themeToggle.addEventListener('click', (e) => {
-        console.log('Theme toggle clicked');
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Toggle theme on both html and body to ensure it works
-        root.classList.toggle('theme-dark');
-        document.body.classList.toggle('theme-dark');
-        
-        const isDark = root.classList.contains('theme-dark');
-        const theme = isDark ? 'dark' : 'light';
-        localStorage.setItem('imngrd_theme', theme);
-        updateThemeButtonLabel();
-        
-        console.log('Theme changed to:', theme);
-        console.log('HTML classList:', root.className);
-        console.log('Body classList:', document.body.className);
-        
-        // Send message to all iframes to update their theme
-        const iframes = document.querySelectorAll('iframe');
-        iframes.forEach(iframe => {
-          iframe.contentWindow.postMessage({ type: 'themeChange', theme: theme }, '*');
-          console.log('Sent theme change message to iframe:', theme);
-        });
-      });
-    } else {
-      console.error('Theme toggle button not found - cannot add event listener');
-    }
 
     // Handle window resize - close mobile menu and remove close button on desktop
     let resizeTimer;
