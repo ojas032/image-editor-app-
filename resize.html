@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resize Image Online Free - YouTube Thumbnail, Instagram, Social Media | ImageNerd</title>
+    <meta name="description" content="Free online image resizer. Resize images for YouTube thumbnails (1280x720), Instagram posts (1080x1080), Instagram Stories (1080x1920), Facebook, Twitter, TikTok, and more. Custom size, percentage, or social media presets." />
+    <link rel="canonical" href="https://www.imagenerd.in/resize.html" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="keywords" content="resize image, image resizer, resize photo, youtube thumbnail size, instagram image size, facebook cover photo size, twitter header size, social media image sizes, resize image online free, image dimensions" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Resize Image Online Free - YouTube Thumbnail, Instagram, Social Media" />
+    <meta property="og:description" content="Free online image resizer with social media presets. Resize for YouTube, Instagram, Facebook, Twitter and more." />
+    <meta property="og:url" content="https://www.imagenerd.in/resize.html" />
+    <meta property="og:image" content="https://www.imagenerd.in/icon_bg.png" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Resize Image Online Free - Social Media Image Resizer" />
+    <meta name="twitter:description" content="Free online image resizer with social media presets. Resize for YouTube, Instagram, Facebook, Twitter and more." />
+    <meta name="twitter:image" content="https://www.imagenerd.in/icon_bg.png" />
+    
+    <link rel="icon" type="image/png" href="icon_bg.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=1.0.2" />
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Image Resizer - ImageNerd",
+      "description": "Free online image resizer with social media presets for YouTube thumbnails, Instagram posts, Facebook, Twitter and more",
+      "url": "https://www.imagenerd.in/resize.html",
+      "applicationCategory": "MultimediaApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Resize by custom dimensions",
+        "Resize by percentage",
+        "Social media presets (YouTube, Instagram, Facebook, Twitter, LinkedIn, TikTok, Pinterest)",
+        "YouTube thumbnail size (1280x720)",
+        "Instagram post size (1080x1080)",
+        "Instagram story size (1080x1920)",
+        "Facebook post size",
+        "Free online tool",
+        "No registration required"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I resize an image without losing quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open ImageNerd, upload your picture, choose exact pixel dimensions or a percentage scale, and export. The tool uses browser-based resampling with bicubic interpolation to preserve crisp detail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I resize images for social media platforms automatically?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Select a preset such as Instagram post, YouTube thumbnail, LinkedIn cover or TikTok video canvas. ImageNerd instantly applies the correct width and height so your uploads meet every platform guideline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my images be uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. ImageNerd processes images locally in your browser. Files never leave your device, so private or client work stays secure."
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-94GM9PQBM1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-94GM9PQBM1');
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html"><img class="brand-mark" src="icon_without_bg.png" alt="ImageNerd logo" /><span class="brand-name">ImageNerd</span></a>
+        <nav class="main-nav"><!-- <a href="remove-background.html">Remove background</a> --><a href="compress.html">Compress</a><a href="resize.html">Resize</a><a href="crop.html">Crop</a><a href="convert.html">Format Converter</a></nav>
+        <div class="header-cta"><button id="themeToggle" class="btn btn-ghost" type="button">Toggle theme</button></div>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </header>
+    <main class="container tool-page-container">
+      <h1>Resize Image Online</h1>
+      <p class="subtitle">Resize images for YouTube thumbnails, Instagram posts, Instagram Reels, Facebook, Twitter, and all social media platforms. Free, fast, and easy.</p>
+
+      <section id="resizeSection" aria-label="Image resizer" style="margin-top:24px;">
+        <div class="resize-card" role="region" aria-live="polite">
+          <!-- Uploader (shown initially, hidden after upload) -->
+          <div class="resize-uploader" id="dropZone">
+            <input id="fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
+            <button class="btn btn-primary" id="selectBtn" type="button" aria-controls="fileInput" aria-label="Select image to resize">Select image</button>
+            <div class="resize-help">or drop image here</div>
+            <div class="file-limit" style="margin-top:12px;font-size:13px;color:var(--light-muted);">Max file size: 10 MB</div>
+          </div>
+
+          <!-- Editor (hidden initially, shown after upload) -->
+          <div id="editorView" style="display:none;max-width:900px;margin:0 auto;">
+            
+            <!-- Image Preview -->
+            <div id="previewSection" style="text-align:center;margin-bottom:32px;">
+              <img id="previewImg" src="" alt="Preview" style="max-width:100%;max-height:400px;border:1px solid var(--light-border);border-radius:8px;" />
+              <div id="imageDimensions" style="margin-top:12px;font-size:14px;color:var(--light-muted);"></div>
+            </div>
+
+            <!-- Resize Settings -->
+            <div class="resize-settings">
+              <h2 style="font-size:24px;font-weight:700;margin-bottom:24px;">Resize Settings</h2>
+              
+              <!-- Resize Method Selector -->
+              <div style="margin-bottom:28px;">
+                <label for="resizeMethod" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Resize Method</label>
+                <select id="resizeMethod" class="form-select" style="max-width:400px;">
+                  <option value="socialMedia">Social Media Preset</option>
+                  <option value="bySize">Custom Size</option>
+                  <option value="byPercent">By Percentage</option>
+                </select>
+              </div>
+
+              <!-- Social Media Options -->
+              <div id="socialMediaOptions">
+                <div style="margin-bottom:24px;">
+                  <label for="platformSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Choose the Social Media Platform</label>
+                  <select id="platformSelect" class="form-select" style="max-width:400px;">
+                    <option value="youtube" selected>YouTube</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="twitter">Twitter / X</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="pinterest">Pinterest</option>
+                  </select>
+                </div>
+
+                <div id="presetTypeContainer" style="margin-bottom:24px;display:none;">
+                  <label for="presetTypeSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Preset Type</label>
+                  <select id="presetTypeSelect" class="form-select" style="max-width:400px;">
+                    <!-- Options will be populated dynamically -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- By Size Options -->
+              <div id="bySizeOptions" style="display:none;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+                  <div class="input-group">
+                    <label for="widthInput" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Width (px)</label>
+                    <input type="number" id="widthInput" class="form-control" placeholder="Width" min="1" />
+                  </div>
+                  <div class="input-group">
+                    <label for="heightInput" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Height (px)</label>
+                    <input type="number" id="heightInput" class="form-control" placeholder="Height" min="1" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- By Percentage Options -->
+              <div id="byPercentOptions" style="display:none;">
+                <div style="margin-bottom:20px;">
+                  <label for="percentInput" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Resize Percentage (%)</label>
+                  <input type="number" id="percentInput" class="form-control" placeholder="100" value="100" min="1" max="500" style="max-width:300px;" />
+                  <small style="display:block;margin-top:6px;color:var(--light-muted);">Enter percentage (e.g., 50 for half size, 200 for double size)</small>
+                </div>
+              </div>
+
+              <!-- Dimensions Display (for all methods) -->
+              <div id="dimensionsDisplay" style="display:none;margin-bottom:24px;padding:20px;background:rgba(91,140,255,0.06);border:1px solid rgba(91,140,255,0.2);border-radius:10px;">
+                <div class="dimensions-title" style="margin-bottom:12px;font-weight:600;font-size:15px;">✓ Final Dimensions</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                  <div class="input-group">
+                    <label for="finalWidthDisplay" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Width (px)</label>
+                    <input type="number" id="finalWidthDisplay" class="form-control dimensions-display-input" readonly />
+                  </div>
+                  <div class="input-group">
+                    <label for="finalHeightDisplay" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Height (px)</label>
+                    <input type="number" id="finalHeightDisplay" class="form-control dimensions-display-input" readonly />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lock Aspect Ratio (for custom size) -->
+              <div id="aspectRatioControl" style="display:none;margin-bottom:24px;">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="lockAspectRatio" checked />
+                  <label class="form-check-label" for="lockAspectRatio" style="font-weight:600;">Lock Aspect Ratio</label>
+                </div>
+              </div>
+
+              <!-- Export Button -->
+              <div style="text-align:center;margin-top:32px;">
+                <button class="btn btn-primary" id="exportBtn" type="button" style="font-size:18px;padding:14px 40px;min-width:200px;">
+                  Export <span style="margin-left:8px;">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Processing overlay -->
+            <div id="processingOverlay" style="display:none;flex-direction:column;align-items:center;padding:40px;text-align:center;">
+              <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--primary-500);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px"></div>
+              <div style="font-weight:600;font-size:18px;color:var(--light-text);">Resizing your image...</div>
+            </div>
+
+            <!-- Success view (hidden until resized) -->
+            <div id="successView" style="display:none;text-align:center;margin-top:32px;">
+              <!-- Success message -->
+              <div style="background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#fff;border-radius:12px;padding:32px;margin-bottom:24px;">
+                <div style="font-size:24px;font-weight:700;margin-bottom:8px;">✓ Image Resized Successfully!</div>
+                <div style="font-size:18px;opacity:0.9;" id="successDimensions">
+                  New size: 1280 × 720 pixels
+                </div>
+              </div>
+
+              <!-- Preview image -->
+              <div style="margin-bottom:24px;">
+                <img id="resizedImg" src="" alt="Resized" style="max-width:100%;max-height:500px;border:1px solid var(--light-border);border-radius:8px;" />
+              </div>
+
+              <!-- Action buttons -->
+              <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                <a class="btn btn-primary" id="downloadBtn" href="#" download style="font-size:16px;padding:12px 24px;">Download Image</a>
+                <button class="btn btn-ghost" id="resizeAnotherBtn" type="button" style="font-size:16px;padding:12px 24px;">Resize Another</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO Content Section -->
+      <section class="seo-section" style="margin-top:56px;max-width:900px;margin-left:auto;margin-right:auto;">
+        <div class="seo-card" style="background:var(--light-card);border:1px solid var(--light-border);border-radius:12px;padding:32px;">
+          <h2 class="seo-title" style="font-size:28px;font-weight:700;margin-bottom:20px;color:var(--light-text);">Perfect Image Sizes for Every Platform</h2>
+          
+          <div style="margin-bottom:32px;">
+            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">📺 YouTube Image Sizes</h3>
+            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
+              <li><strong>YouTube Thumbnail:</strong> 1280 × 720 pixels (16:9 ratio) - The perfect size for video thumbnails</li>
+              <li><strong>YouTube Channel Art:</strong> 2560 × 1440 pixels - Banner displayed across all devices</li>
+              <li><strong>YouTube Profile Picture:</strong> 800 × 800 pixels - Circular display</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:32px;">
+            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">📱 Instagram Image Sizes</h3>
+            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
+              <li><strong>Instagram Post (Square):</strong> 1080 × 1080 pixels - Classic square format</li>
+              <li><strong>Instagram Post (Portrait):</strong> 1080 × 1350 pixels (4:5 ratio) - Maximum vertical space</li>
+              <li><strong>Instagram Story/Reels:</strong> 1080 × 1920 pixels (9:16 ratio) - Full vertical display</li>
+              <li><strong>Instagram Profile Picture:</strong> 320 × 320 pixels - Circular display</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:32px;">
+            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">📘 Facebook Image Sizes</h3>
+            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
+              <li><strong>Facebook Post:</strong> 1200 × 630 pixels - Optimal for link sharing</li>
+              <li><strong>Facebook Cover Photo:</strong> 820 × 312 pixels - Desktop and mobile display</li>
+              <li><strong>Facebook Profile Picture:</strong> 170 × 170 pixels - Circular display</li>
+              <li><strong>Facebook Story:</strong> 1080 × 1920 pixels (9:16 ratio)</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:32px;">
+            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">🐦 Twitter / X Image Sizes</h3>
+            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
+              <li><strong>Twitter Post Image:</strong> 1200 × 675 pixels (16:9 ratio)</li>
+              <li><strong>Twitter Header:</strong> 1500 × 500 pixels</li>
+              <li><strong>Twitter Profile Picture:</strong> 400 × 400 pixels - Circular display</li>
+            </ul>
+          </div>
+
+          <div style="margin-bottom:32px;">
+            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">💼 LinkedIn Image Sizes</h3>
+            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
+              <li><strong>LinkedIn Post:</strong> 1200 × 627 pixels</li>
+              <li><strong>LinkedIn Cover Photo:</strong> 1584 × 396 pixels</li>
+              <li><strong>LinkedIn Profile Picture:</strong> 400 × 400 pixels</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">🎵 TikTok & Pinterest Sizes</h3>
+            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
+              <li><strong>TikTok Video:</strong> 1080 × 1920 pixels (9:16 ratio) - Vertical format</li>
+              <li><strong>Pinterest Pin:</strong> 1000 × 1500 pixels (2:3 ratio) - Optimal for discovery</li>
+            </ul>
+          </div>
+        </div>
+      <section style="margin-bottom:40px;">
+        <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Best Practices for High-Quality Resizing</h2>
+        <p style="line-height:1.8;color:var(--light-muted);">
+          Keep your resized images sharp by starting with the highest resolution source you have. Downscaling cleanly preserves detail, but upscaling can introduce blur—when you must enlarge, try 110–130% increments and review results before exporting. Always leave a little breathing room around text or logos so the resized artwork stays legible on mobile screens.
+        </p>
+        <p style="line-height:1.8;color:var(--light-muted);">
+          After you resize, compress the new file with our <a href="https://www.imagenerd.in/compress.html">online compressor</a> to ship faster pages, and consider exporting a WebP version for modern browsers. Update filenames and alt text to reflect the new size (for example, <code>brand-cover-1200x628.webp</code>)—that small touch can improve image SEO and helps analytics stay organized.
+        </p>
+      </section>
+      </section>
+
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
+          <nav style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="about.html" style="color: var(--light-muted); text-decoration: none;">About Us</a>
+            <a href="contact.html" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
+            <a href="privacy.html" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
+            <a href="terms.html" style="color: var(--light-muted); text-decoration: none;">Terms</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js?v=1.0.9"></script>
+    <script>
+      // Utility styles
+      (function(){
+        var style = document.createElement('style');
+        style.textContent = `
+        .resize-card{border:1px solid var(--light-border);background:var(--light-card);border-radius:14px;padding:28px}
+        .resize-uploader{border:2px dashed var(--light-border);border-radius:12px;padding:32px;text-align:center;background:rgba(15,23,42,0.02)}
+        .resize-uploader.drag{background:rgba(91,140,255,0.10);border-color:#a5b4fc}
+        .resize-help{margin-top:10px;color:var(--light-muted);font-size:14px}
+        .resize-settings{background:rgba(15,23,42,0.02);border:1px solid var(--light-border);border-radius:12px;padding:28px}
+        .dimensions-display-input{
+          background:#ffffff!important;
+          border:1px solid #e2e8f0!important;
+          color:#0b1220!important;
+          font-weight:600!important;
+          font-size:18px!important;
+          text-align:center!important;
+          padding:12px!important;
+          cursor:default!important;
+        }
+        .form-control,.form-select{
+          background:#ffffff;
+          border:1px solid #e2e8f0;
+          color:#0b1220;
+        }
+        .form-control:focus,.form-select:focus{
+          border-color:var(--primary-500);
+          box-shadow:0 0 0 0.2rem rgba(91,140,255,0.25);
+        }
+        .dimensions-title{
+          color:#0b1220;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .theme-dark .resize-card{border-color:var(--border-700);background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))}
+        .theme-dark .resize-uploader{border-color:var(--border-700);background:rgba(255,255,255,0.02)}
+        .theme-dark .resize-uploader.drag{background:rgba(91,140,255,0.15);border-color:#5b8cff}
+        .theme-dark .resize-help{color:var(--text-300)}
+        .theme-dark .resize-settings{background:rgba(255,255,255,0.02);border-color:var(--border-700)}
+        .theme-dark #previewImg,.theme-dark #resizedImg{border-color:var(--border-700)}
+        .theme-dark section > div{border-color:var(--border-700);background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))}
+        .theme-dark #dimensionsDisplay{background:rgba(91,140,255,0.12)!important;border-color:rgba(91,140,255,0.3)!important;}
+        .theme-dark .dimensions-title{color:var(--text-100)!important;}
+        .theme-dark #dimensionsDisplay label{color:var(--text-100)!important;}
+        .theme-dark .dimensions-display-input{
+          background:rgba(255,255,255,0.08)!important;
+          border-color:rgba(255,255,255,0.15)!important;
+          color:var(--text-100)!important;
+        }
+        .theme-dark .form-control,.theme-dark .form-select{
+          background:rgba(255,255,255,0.05);
+          border-color:var(--border-700);
+          color:var(--text-100);
+        }
+        .theme-dark .form-control:focus,.theme-dark .form-select:focus{
+          background:rgba(255,255,255,0.08);
+          border-color:var(--primary-500);
+          color:var(--text-100);
+          box-shadow:0 0 0 0.2rem rgba(91,140,255,0.25);
+        }
+        .theme-dark label{
+          color:var(--text-100);
+        }
+        .theme-dark small{
+          color:var(--text-300);
+        }
+        .theme-dark .form-check-label{
+          color:var(--text-100);
+        }
+        .theme-dark .seo-card{
+          background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))!important;
+          border-color:var(--border-700)!important;
+        }
+        .theme-dark .seo-title{
+          color:var(--text-100)!important;
+        }
+        .theme-dark .seo-subtitle{
+          color:var(--text-100)!important;
+        }
+        .theme-dark .seo-list{
+          color:var(--text-300)!important;
+        }
+        .theme-dark .seo-list strong{
+          color:var(--text-100);
+        }
+        `;
+        document.head.appendChild(style);
+      })();
+
+      // Social media presets
+      const SOCIAL_PRESETS = {
+        youtube: [
+          { name: 'Thumbnail (1280 × 720)', width: 1280, height: 720 },
+          { name: 'Channel Art (2560 × 1440)', width: 2560, height: 1440 },
+          { name: 'Profile Picture (800 × 800)', width: 800, height: 800 }
+        ],
+        instagram: [
+          { name: 'Post Square (1080 × 1080)', width: 1080, height: 1080 },
+          { name: 'Post Portrait (1080 × 1350)', width: 1080, height: 1350 },
+          { name: 'Story/Reels (1080 × 1920)', width: 1080, height: 1920 },
+          { name: 'Profile Picture (320 × 320)', width: 320, height: 320 }
+        ],
+        facebook: [
+          { name: 'Post (1200 × 630)', width: 1200, height: 630 },
+          { name: 'Cover Photo (820 × 312)', width: 820, height: 312 },
+          { name: 'Profile Picture (170 × 170)', width: 170, height: 170 },
+          { name: 'Story (1080 × 1920)', width: 1080, height: 1920 }
+        ],
+        twitter: [
+          { name: 'Post Image (1200 × 675)', width: 1200, height: 675 },
+          { name: 'Header (1500 × 500)', width: 1500, height: 500 },
+          { name: 'Profile Picture (400 × 400)', width: 400, height: 400 }
+        ],
+        linkedin: [
+          { name: 'Post (1200 × 627)', width: 1200, height: 627 },
+          { name: 'Cover Photo (1584 × 396)', width: 1584, height: 396 },
+          { name: 'Profile Picture (400 × 400)', width: 400, height: 400 }
+        ],
+        tiktok: [
+          { name: 'Video (1080 × 1920)', width: 1080, height: 1920 },
+          { name: 'Profile Picture (200 × 200)', width: 200, height: 200 }
+        ],
+        pinterest: [
+          { name: 'Pin (1000 × 1500)', width: 1000, height: 1500 },
+          { name: 'Profile Picture (165 × 165)', width: 165, height: 165 }
+        ]
+      };
+
+      // Main functionality
+      (function(){
+        const fileInput = document.getElementById('fileInput');
+        const selectBtn = document.getElementById('selectBtn');
+        const dropZone = document.getElementById('dropZone');
+        const editorView = document.getElementById('editorView');
+        const previewSection = document.getElementById('previewSection');
+        const previewImg = document.getElementById('previewImg');
+        const imageDimensions = document.getElementById('imageDimensions');
+        const processingOverlay = document.getElementById('processingOverlay');
+        const successView = document.getElementById('successView');
+        const resizedImg = document.getElementById('resizedImg');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resizeAnotherBtn = document.getElementById('resizeAnotherBtn');
+        const exportBtn = document.getElementById('exportBtn');
+
+        // Method selector
+        const resizeMethod = document.getElementById('resizeMethod');
+        const socialMediaOptions = document.getElementById('socialMediaOptions');
+        const bySizeOptions = document.getElementById('bySizeOptions');
+        const byPercentOptions = document.getElementById('byPercentOptions');
+        const dimensionsDisplay = document.getElementById('dimensionsDisplay');
+        const aspectRatioControl = document.getElementById('aspectRatioControl');
+
+        // By Size inputs
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const lockAspectRatio = document.getElementById('lockAspectRatio');
+
+        // Percentage inputs
+        const percentInput = document.getElementById('percentInput');
+
+        // Social Media inputs
+        const platformSelect = document.getElementById('platformSelect');
+        const presetTypeContainer = document.getElementById('presetTypeContainer');
+        const presetTypeSelect = document.getElementById('presetTypeSelect');
+
+        // Final dimensions
+        const finalWidthDisplay = document.getElementById('finalWidthDisplay');
+        const finalHeightDisplay = document.getElementById('finalHeightDisplay');
+
+        const API_BASE = 'https://api.imagenerd.in';
+        const ENDPOINT_RESIZE = '/resize';
+
+        let currentFile = null;
+        let currentBase64 = '';
+        let originalWidth = 0;
+        let originalHeight = 0;
+        let aspectRatio = 1;
+
+        // File selection
+        selectBtn.addEventListener('click', () => fileInput.click());
+        resizeAnotherBtn.addEventListener('click', resetToUploader);
+
+        // Drag and drop
+        dropZone.addEventListener('dragover', (e)=>{ e.preventDefault(); dropZone.classList.add('drag'); });
+        dropZone.addEventListener('dragleave', ()=> dropZone.classList.remove('drag'));
+        dropZone.addEventListener('drop', (e)=>{ e.preventDefault(); dropZone.classList.remove('drag'); handleFiles(e.dataTransfer.files); });
+        fileInput.addEventListener('change', ()=> handleFiles(fileInput.files));
+
+        // Resize method change
+        resizeMethod.addEventListener('change', () => {
+          updateUIForMethod();
+        });
+
+        function updateUIForMethod() {
+          const method = resizeMethod.value;
+          
+          // Hide all options first
+          socialMediaOptions.style.display = 'none';
+          bySizeOptions.style.display = 'none';
+          byPercentOptions.style.display = 'none';
+          aspectRatioControl.style.display = 'none';
+          
+          // Show relevant options
+          if (method === 'socialMedia') {
+            socialMediaOptions.style.display = 'block';
+          } else if (method === 'bySize') {
+            bySizeOptions.style.display = 'block';
+            aspectRatioControl.style.display = 'block';
+          } else if (method === 'byPercent') {
+            byPercentOptions.style.display = 'block';
+          }
+          
+          updateDimensionsDisplay();
+        }
+
+        function updateDimensionsDisplay() {
+          const method = resizeMethod.value;
+          
+          if (method === 'socialMedia') {
+            const platform = platformSelect.value;
+            const presetIdx = parseInt(presetTypeSelect.value);
+            if (platform && SOCIAL_PRESETS[platform] && SOCIAL_PRESETS[platform][presetIdx]) {
+              const preset = SOCIAL_PRESETS[platform][presetIdx];
+              finalWidthDisplay.value = preset.width;
+              finalHeightDisplay.value = preset.height;
+              dimensionsDisplay.style.display = 'block';
+            } else {
+              dimensionsDisplay.style.display = 'none';
+            }
+          } else if (method === 'bySize') {
+            const w = parseInt(widthInput.value);
+            const h = parseInt(heightInput.value);
+            if (w > 0 && h > 0) {
+              finalWidthDisplay.value = w;
+              finalHeightDisplay.value = h;
+              dimensionsDisplay.style.display = 'block';
+            } else {
+              dimensionsDisplay.style.display = 'none';
+            }
+          } else if (method === 'byPercent') {
+            const percent = parseFloat(percentInput.value);
+            if (percent > 0 && originalWidth > 0) {
+              const w = Math.round(originalWidth * (percent / 100));
+              const h = Math.round(originalHeight * (percent / 100));
+              finalWidthDisplay.value = w;
+              finalHeightDisplay.value = h;
+              dimensionsDisplay.style.display = 'block';
+            } else {
+              dimensionsDisplay.style.display = 'none';
+            }
+          }
+        }
+
+        // By Size - Aspect ratio lock
+        let isUpdatingSize = false;
+        widthInput.addEventListener('input', () => {
+          if (lockAspectRatio.checked && !isUpdatingSize && aspectRatio) {
+            isUpdatingSize = true;
+            heightInput.value = Math.round(widthInput.value / aspectRatio);
+            isUpdatingSize = false;
+          }
+          updateDimensionsDisplay();
+        });
+        heightInput.addEventListener('input', () => {
+          if (lockAspectRatio.checked && !isUpdatingSize && aspectRatio) {
+            isUpdatingSize = true;
+            widthInput.value = Math.round(heightInput.value * aspectRatio);
+            isUpdatingSize = false;
+          }
+          updateDimensionsDisplay();
+        });
+
+        // Percentage input
+        percentInput.addEventListener('input', () => {
+          updateDimensionsDisplay();
+        });
+
+        // Social Media - Platform selection
+        platformSelect.addEventListener('change', () => {
+          const platform = platformSelect.value;
+          if (platform && SOCIAL_PRESETS[platform]) {
+            presetTypeContainer.style.display = 'block';
+            presetTypeSelect.innerHTML = '';
+            SOCIAL_PRESETS[platform].forEach((preset, idx) => {
+              const option = document.createElement('option');
+              option.value = idx;
+              option.textContent = preset.name;
+              presetTypeSelect.appendChild(option);
+            });
+            presetTypeSelect.dispatchEvent(new Event('change'));
+          } else {
+            presetTypeContainer.style.display = 'none';
+            updateDimensionsDisplay();
+          }
+        });
+
+        // Social Media - Preset selection
+        presetTypeSelect.addEventListener('change', () => {
+          updateDimensionsDisplay();
+        });
+
+        // Export button
+        exportBtn.addEventListener('click', handleExport);
+
+        function handleFiles(list){
+          const files = Array.from(list || []).filter(f=>/^image\//.test(f.type));
+          if(!files.length) return;
+          
+          const file = files[0];
+          if (file.size > 10 * 1024 * 1024) {
+            alert('File size exceeds 10 MB limit. Please choose a smaller file.');
+            return;
+          }
+          
+          processFile(file);
+        }
+
+        async function processFile(file){
+          currentFile = file;
+          currentBase64 = await fileToBase64(file);
+          
+          const objectUrl = URL.createObjectURL(file);
+          const img = new Image();
+          img.onload = () => {
+            originalWidth = img.naturalWidth || img.width;
+            originalHeight = img.naturalHeight || img.height;
+            aspectRatio = originalWidth / originalHeight;
+            
+            // Show preview
+            previewImg.src = objectUrl;
+            imageDimensions.textContent = `Original: ${originalWidth} × ${originalHeight} pixels`;
+            
+            // Set initial values for By Size inputs
+            widthInput.value = originalWidth;
+            heightInput.value = originalHeight;
+            
+            // Show editor, hide uploader
+            dropZone.style.display = 'none';
+            editorView.style.display = 'block';
+            previewSection.style.display = 'block';
+            successView.style.display = 'none';
+            
+            // Update UI for current method
+            updateUIForMethod();
+            if (resizeMethod.value === 'socialMedia') {
+              platformSelect.dispatchEvent(new Event('change'));
+            }
+            URL.revokeObjectURL(objectUrl);
+          };
+          img.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            alert('Unable to load that image. Please try another file.');
+          };
+          img.src = objectUrl;
+        }
+
+        function fileToBase64(file){
+          return new Promise((resolve, reject)=>{
+            const reader = new FileReader();
+            reader.onload = ()=> resolve(String(reader.result).split(',')[1]);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+        }
+
+        async function handleExport() {
+          if (!currentBase64) return;
+
+          let targetWidth, targetHeight;
+          const method = resizeMethod.value;
+
+          // Determine dimensions based on method
+          if (method === 'bySize') {
+            targetWidth = parseInt(widthInput.value);
+            targetHeight = parseInt(heightInput.value);
+            if (!targetWidth || !targetHeight || targetWidth <= 0 || targetHeight <= 0) {
+              alert('Please enter valid width and height values.');
+              return;
+            }
+          } else if (method === 'byPercent') {
+            const percent = parseFloat(percentInput.value);
+            if (!percent || percent <= 0) {
+              alert('Please enter a valid percentage.');
+              return;
+            }
+            targetWidth = Math.round(originalWidth * (percent / 100));
+            targetHeight = Math.round(originalHeight * (percent / 100));
+          } else if (method === 'socialMedia') {
+            const platform = platformSelect.value;
+            const presetIdx = parseInt(presetTypeSelect.value);
+            if (!platform || !SOCIAL_PRESETS[platform] || !SOCIAL_PRESETS[platform][presetIdx]) {
+              alert('Please select a platform and preset.');
+              return;
+            }
+            const preset = SOCIAL_PRESETS[platform][presetIdx];
+            targetWidth = preset.width;
+            targetHeight = preset.height;
+          }
+
+          // Show processing overlay
+          previewSection.style.display = 'none';
+          document.querySelector('.resize-settings').style.display = 'none';
+          processingOverlay.style.display = 'flex';
+          successView.style.display = 'none';
+
+          try {
+            const body = {
+              image_base64: currentBase64,
+              width: targetWidth,
+              height: targetHeight
+            };
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 20000);
+
+            const res = await fetch(API_BASE + ENDPOINT_RESIZE, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+              signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+
+            const data = await res.json();
+            if (!data.resized_image_base64) throw new Error(data.error || 'Resize failed');
+
+            // Determine output format based on original file
+            const mimeType = currentFile.type || 'image/png';
+            const fileExt = mimeType.split('/')[1] || 'png';
+
+            // Update UI
+            const downloadUrl = `data:${mimeType};base64,${data.resized_image_base64}`;
+            resizedImg.src = downloadUrl;
+
+            document.getElementById('successDimensions').textContent = `New size: ${targetWidth} × ${targetHeight} pixels`;
+
+            // Setup download
+            downloadBtn.href = downloadUrl;
+            const baseName = (currentFile.name||'image').replace(/\.[^.]+$/, '');
+            downloadBtn.download = `${baseName}-${targetWidth}x${targetHeight}.${fileExt}`;
+
+            // Show success view
+            processingOverlay.style.display = 'none';
+            successView.style.display = 'block';
+          } catch(err) {
+            console.error(err);
+            processingOverlay.style.display = 'none';
+            if (err.name === 'AbortError') {
+              alert('Request timed out after 20 seconds. Please try again.');
+            } else {
+              alert('Failed to resize image: ' + err.message);
+            }
+            // Reset view
+            previewSection.style.display = 'block';
+            document.querySelector('.resize-settings').style.display = 'block';
+          }
+        }
+
+        function resetToUploader() {
+          dropZone.style.display = 'block';
+          editorView.style.display = 'none';
+          previewSection.style.display = 'block';
+          successView.style.display = 'none';
+          document.querySelector('.resize-settings').style.display = 'block';
+          processingOverlay.style.display = 'none';
+          fileInput.value = '';
+          currentFile = null;
+          currentBase64 = '';
+          
+          // Reset inputs
+          resizeMethod.value = 'socialMedia';
+          widthInput.value = '';
+          heightInput.value = '';
+          percentInput.value = '100';
+          platformSelect.value = 'youtube';
+          presetTypeContainer.style.display = 'none';
+          dimensionsDisplay.style.display = 'none';
+          
+          updateUIForMethod();
+          // Trigger platform change to load YouTube presets
+          platformSelect.dispatchEvent(new Event('change'));
+        }
+        
+        // Initialize UI
+        updateUIForMethod();
+        // Trigger initial platform selection to load YouTube presets by default
+        platformSelect.dispatchEvent(new Event('change'));
+      })();
+    </script>
+  </body>
+  </html>
+
+
