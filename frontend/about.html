@@ -193,31 +193,6 @@
       // Set copyright year
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Theme toggle functionality for iframes
-      const themeToggle = document.getElementById('themeToggle');
-
-      if (themeToggle) {
-        if (window.self !== window.top) {
-          // We're in an iframe, communicate with parent
-          themeToggle.addEventListener('click', () => {
-            window.parent.postMessage({ type: 'toggleTheme' }, '*');
-          });
-        } else {
-          // Direct access, handle locally
-          const body = document.body;
-          const currentTheme = localStorage.getItem('theme') || 'light';
-          body.classList.toggle('theme-dark', currentTheme === 'dark');
-          themeToggle.textContent = currentTheme === 'dark' ? 'Light mode' : 'Dark mode';
-
-          themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.toggle('theme-dark');
-            const newTheme = isDark ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
-          });
-        }
-      }
-
       // Mobile navigation toggle
       const navToggle = document.querySelector('.nav-toggle');
       const mainNav = document.querySelector('.main-nav');

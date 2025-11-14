@@ -82,20 +82,13 @@
         border-radius: 4px;
       }
 
-      .theme-dark .privacy-content {
         background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
         border-color: var(--border-700);
       }
 
-      .theme-dark .privacy-content h1,
-      .theme-dark .privacy-content h2,
-      .theme-dark .privacy-content h3,
-      .theme-dark .privacy-content strong {
         color: var(--text-100);
       }
 
-      .theme-dark .privacy-content p,
-      .theme-dark .privacy-content li {
         color: var(--text-300);
       }
     </style>
@@ -272,31 +265,6 @@
     <script>
       // Set copyright year
       document.getElementById('year').textContent = new Date().getFullYear();
-
-      // Theme toggle functionality for iframes
-      const themeToggle = document.getElementById('themeToggle');
-
-      if (themeToggle) {
-        if (window.self !== window.top) {
-          // We're in an iframe, communicate with parent
-          themeToggle.addEventListener('click', () => {
-            window.parent.postMessage({ type: 'toggleTheme' }, '*');
-          });
-        } else {
-          // Direct access, handle locally
-          const body = document.body;
-          const currentTheme = localStorage.getItem('theme') || 'light';
-          body.classList.toggle('theme-dark', currentTheme === 'dark');
-          themeToggle.textContent = currentTheme === 'dark' ? 'Light mode' : 'Dark mode';
-
-          themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.toggle('theme-dark');
-            const newTheme = isDark ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
-          });
-        }
-      }
 
       // Mobile navigation toggle
       const navToggle = document.querySelector('.nav-toggle');

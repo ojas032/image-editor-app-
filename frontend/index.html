@@ -114,71 +114,45 @@
       }
       
       /* Dark theme overrides */
-      .theme-dark .compress-card,
-      .theme-dark .resize-card,
-      .theme-dark .crop-card,
-      .theme-dark .convert-card {
         border-color: var(--border-700);
         background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
       }
       
-      .theme-dark .compress-uploader,
-      .theme-dark .resize-uploader,
-      .theme-dark .crop-uploader {
         border-color: var(--border-700);
         background: rgba(255,255,255,0.02);
       }
       
-      .theme-dark .compress-uploader:hover,
-      .theme-dark .resize-uploader:hover,
-      .theme-dark .crop-uploader:hover {
         border-color: var(--primary-500);
         background: rgba(91, 140, 255, 0.08);
       }
       
-      .theme-dark .compress-uploader.drag,
-      .theme-dark .resize-uploader.drag,
-      .theme-dark .crop-uploader.drag {
         background: rgba(91,140,255,0.15);
         border-color: #5b8cff;
       }
       
-      .theme-dark .compress-help,
-      .theme-dark .resize-help,
-      .theme-dark .crop-help {
         color: var(--text-300);
       }
       
-      .theme-dark .resize-settings,
-      .theme-dark .compress-controls,
-      .theme-dark .crop-settings {
         background: rgba(255,255,255,0.02);
         border-color: var(--border-700);
       }
       
-      .theme-dark .form-control,
-      .theme-dark .form-select {
         background: rgba(255,255,255,0.05);
         border-color: var(--border-700);
         color: var(--text-100);
       }
       
-      .theme-dark .form-control:focus,
-      .theme-dark .form-select:focus {
         background: rgba(255,255,255,0.08);
         border-color: var(--primary-500);
         color: var(--text-100);
       }
       
-      .theme-dark .form-label {
         color: var(--text-100);
       }
       
-      .theme-dark .form-check-label {
         color: var(--text-100);
       }
       
-      .theme-dark img {
         border-color: var(--border-700);
       }
     </style>
@@ -198,7 +172,6 @@
           <a href="/convert" data-route="convert">Format Converter</a>
         </nav>
         <div class="header-cta">
-          <button id="themeToggle" class="btn btn-ghost" type="button">Toggle theme</button>
         </div>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
@@ -742,19 +715,15 @@
             line-height: 1.5;
           }
 
-          .theme-dark .contact-form,
-          .theme-dark .contact-info {
             background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
             border-color: var(--border-700);
           }
 
-          .theme-dark .contact-form .form-control {
             background: rgba(255,255,255,0.05);
             border-color: var(--border-700);
             color: var(--text-100);
           }
 
-          .theme-dark .contact-form .form-control::placeholder {
             color: var(--text-300);
           }
         </style>
@@ -946,39 +915,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <script src="script.js?v=1.0.9"></script>
-    
-    <!-- Theme toggle functionality -->
-    <script>
-      // Global theme toggle function
-      window.toggleTheme = function() {
-        const body = document.body;
-        const isDark = body.classList.toggle('theme-dark');
-        const newTheme = isDark ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-          themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
-        }
-        return newTheme;
-      };
 
-      // Initialize theme on page load
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      document.body.classList.toggle('theme-dark', currentTheme === 'dark');
-      const themeToggle = document.getElementById('themeToggle');
-      if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'dark' ? 'Light mode' : 'Dark mode';
-        themeToggle.addEventListener('click', window.toggleTheme);
-      }
-
-      // Listen for theme toggle messages from iframes
-      window.addEventListener('message', function(event) {
-        if (event.data && event.data.type === 'toggleTheme') {
-          window.toggleTheme();
-        }
-      });
-
-      // Handle navigation clicks
+    <!-- Handle navigation clicks
       document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href^="/"]');
         if (link && link.getAttribute('data-route')) {

@@ -1,19 +1,4 @@
 (() => {
-  // Apply theme immediately (before DOM loads) to prevent flash
-  const storedTheme = localStorage.getItem('theme') || 'light';
-  if (storedTheme === 'dark') {
-    document.body.classList.add('theme-dark');
-  }
-
-  // Listen for theme changes from parent window (for iframe pages)
-  window.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'themeChanged') {
-      const isDark = event.data.theme === 'dark';
-      document.body.classList.toggle('theme-dark', isDark);
-      console.log('Theme updated from parent:', event.data.theme);
-    }
-  });
-
   // Ensure DOM is ready
   function initializeApp() {
     const yearEl = document.getElementById('year');
