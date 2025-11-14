@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router Debug</title>
+</head>
+<body>
+    <h1>Router Debug Tool</h1>
+
+    <h2>Current Status:</h2>
+    <div id="status"></div>
+
+    <h2>Test Routes:</h2>
+    <div id="routes">
+        <button onclick="testRoute('compress')">Test /compress</button>
+        <button onclick="testRoute('resize')">Test /resize</button>
+        <button onclick="testRoute('about')">Test /about</button>
+        <button onclick="testRoute('contact')">Test /contact</button>
+        <button onclick="testRoute('home')">Test /home</button>
+    </div>
+
+    <h2>GitHub Pages Simulation:</h2>
+    <div id="github-test">
+        <p>Simulate what happens when GitHub Pages serves 404.html for /compress:</p>
+        <button onclick="simulateGitHubPages('compress')">Simulate /compress</button>
+        <button onclick="simulateGitHubPages('resize')">Simulate /resize</button>
+    </div>
+
+    <script src="https://unpkg.com/navigo@8"></script>
+    <script>
+        const statusDiv = document.getElementById('status');
+
+        // Initialize router (copy from your router.js)
+        const router = new Navigo('/', { hash: false });
+
+        const viewConfig = {
+            home: { type: 'inline' },
+            compress: { type: 'inline', init: 'initCompressView' },
+            resize: { type: 'inline', init: 'initResizeView' },
+            crop: { type: 'external', file: 'crop.html' },
+            convert: { type: 'external', file: 'convert.html' },
+            about: { type: 'inline' },
+            contact: { type: 'inline' },
+            privacy: { type: 'external', file: 'privacy.html' },
+            terms: { type: 'external', file: 'terms.html' }
+        };
+
+        function updateStatus() {
+            statusDiv.innerHTML = `
+                <p><strong>Current URL:</strong> ${window.location.href}</p>
+                <p><strong>Pathname:</strong> ${window.location.pathname}</p>
+                <p><strong>githubPagesRoute:</strong> ${window.githubPagesRoute || 'undefined'}</p>
+                <p><strong>Router initialized:</strong> ${typeof router !== 'undefined'}</p>
+            `;
+        }
+
+        function testRoute(route) {
+            console.log('Testing route:', route);
+            if (viewConfig[route]) {
+                router.navigate('/' + route);
+                setTimeout(updateStatus, 100);
+            } else {
+                console.error('Route not found:', route);
+            }
+        }
+
+        function simulateGitHubPages(route) {
+            console.log('Simulating GitHub Pages for route:', route);
+
+            // Simulate what 404.html does
+            window.githubPagesRoute = route;
+            console.log('Set window.githubPagesRoute =', route);
+
+            // Simulate router initialization
+            if (window.githubPagesRoute) {
+                const route = window.githubPagesRoute;
+                console.log('Router handling GitHub Pages route:', route);
+
+                if (route === 'home') {
+                    router.navigate('/');
+                } else if (viewConfig[route]) {
+                    router.navigate('/' + route);
+                } else {
+                    console.error('Route not found in viewConfig:', route);
+                }
+
+                delete window.githubPagesRoute;
+            }
+
+            setTimeout(updateStatus, 100);
+        }
+
+        // Set up routes
+        router.on('/', () => console.log('Home route'));
+        router.on('/compress', () => console.log('Compress route'));
+        router.on('/resize', () => console.log('Resize route'));
+        router.on('/about', () => console.log('About route'));
+        router.on('/contact', () => console.log('Contact route'));
+
+        router.resolve();
+
+        // Initial status
+        updateStatus();
+
+        // Update status on navigation
+        window.addEventListener('popstate', updateStatus);
+    </script>
+</body>
+</html>

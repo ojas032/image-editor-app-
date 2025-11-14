@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages Test</title>
+</head>
+<body>
+    <h1>GitHub Pages Routing Test</h1>
+    <p>This simulates what happens when GitHub Pages serves 404.html for SPA routes.</p>
+
+    <div id="test-results"></div>
+
+    <script>
+        // Simulate the 404.html script
+        (function() {
+            var path = window.location.pathname;
+            var results = document.getElementById('test-results');
+
+            results.innerHTML = '<h2>Test Results:</h2>';
+            results.innerHTML += '<p>Current pathname: ' + path + '</p>';
+
+            // If we're on a real route (not /404.html or root), handle SPA routing
+            if (path !== '/' && path !== '/index.html' && path !== '/404.html' && path !== '/test-github-pages.html') {
+                // Remove leading slash and store the intended route
+                var route = path.substring(1);
+
+                // Set a flag so the router knows this is from GitHub Pages redirect
+                window.githubPagesRoute = route;
+
+                results.innerHTML += '<p>✅ Detected SPA route: ' + route + '</p>';
+                results.innerHTML += '<p>✅ Set window.githubPagesRoute = "' + route + '"</p>';
+            } else {
+                results.innerHTML += '<p>❌ Not an SPA route (this is expected for root/404 pages)</p>';
+            }
+        })();
+
+        // Test the router logic
+        setTimeout(function() {
+            var results = document.getElementById('test-results');
+            if (window.githubPagesRoute) {
+                results.innerHTML += '<p>✅ Router should handle: ' + window.githubPagesRoute + '</p>';
+            } else {
+                results.innerHTML += '<p>ℹ️ No GitHub Pages route detected</p>';
+            }
+        }, 100);
+    </script>
+
+    <h2>Supported Routes:</h2>
+    <ul>
+        <li><strong>Inline (SPA):</strong> home, compress, resize, about, contact</li>
+        <li><strong>External (static files):</strong> crop.html, convert.html, privacy.html, terms.html</li>
+    </ul>
+
+    <p><strong>To test:</strong> Rename this file to 'compress' (no extension) and visit it - it should simulate GitHub Pages behavior.</p>
+</body>
+</html>
