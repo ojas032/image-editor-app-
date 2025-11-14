@@ -209,8 +209,8 @@
             <h1>Powerful image tools, zero friction</h1>
             <p class="subtitle">Compress, resize, crop, and convert images — right in your browser.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#compress" onclick="window.location.hash='compress'; return false;">Compress image</a>
-              <a class="btn btn-ghost" href="#resize" onclick="window.location.hash='resize'; return false;">Resize image</a>
+              <a class="btn btn-primary" href="/compress" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/compress';}else{window.location.hash='compress';} return false;">Compress image</a>
+              <a class="btn btn-ghost" href="/resize" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/resize';}else{window.location.hash='resize';} return false;">Resize image</a>
             </div>
           </div>
         </section>
@@ -218,7 +218,7 @@
         <section class="features-grid container" aria-label="Popular tools">
           <!-- Remove background feature hidden -->
           
-          <a class="feature" href="#compress" onclick="window.location.hash='compress'; return false;">
+          <a class="feature" href="/compress" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/compress';}else{window.location.hash='compress';} return false;">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3v4M8 17v4" />
@@ -232,7 +232,7 @@
             </div>
           </a>
 
-          <a class="feature" href="#resize" onclick="window.location.hash='resize'; return false;">
+          <a class="feature" href="/resize" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/resize';}else{window.location.hash='resize';} return false;">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 10V3h7" />
@@ -246,7 +246,7 @@
             </div>
           </a>
 
-          <a class="feature" href="#crop" onclick="window.location.hash='crop'; return false;">
+          <a class="feature" href="/crop" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/crop';}else{window.location.hash='crop';} return false;">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M7 3v14a3 3 0 003 3h14" />
@@ -259,7 +259,7 @@
             </div>
           </a>
 
-          <a class="feature" href="#convert" onclick="window.location.hash='convert'; return false;">
+          <a class="feature" href="/convert" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/convert';}else{window.location.hash='convert';} return false;">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3h8" />
@@ -931,10 +931,10 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
           <nav style="display: flex; gap: 16px; flex-wrap: wrap;">
-            <a href="#about" onclick="window.location.hash='about'; return false;" style="color: var(--light-muted); text-decoration: none;">About Us</a>
-            <a href="#contact" onclick="window.location.hash='contact'; return false;" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
-            <a href="#privacy" onclick="window.location.hash='privacy'; return false;" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
-            <a href="#terms" onclick="window.location.hash='terms'; return false;" style="color: var(--light-muted); text-decoration: none;">Terms</a>
+            <a href="/about" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/about';}else{window.location.hash='about';} return false;" style="color: var(--light-muted); text-decoration: none;">About Us</a>
+            <a href="/contact" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/contact';}else{window.location.hash='contact';} return false;" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
+            <a href="/privacy" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/privacy';}else{window.location.hash='privacy';} return false;" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
+            <a href="/terms" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/terms';}else{window.location.hash='terms';} return false;" style="color: var(--light-muted); text-decoration: none;">Terms</a>
           </nav>
         </div>
       </div>
@@ -991,8 +991,15 @@
             console.log('Window.router exists:', !!window.router);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Use hash-based routing for reliable cross-platform compatibility
-              window.location.hash = route;
+              // Use clean URLs that get converted to hash URLs internally
+              if (window.location.hostname !== 'localhost' && window.location.protocol !== 'file:') {
+                // Production: Use clean URLs (will be handled by 404.html)
+                const cleanUrl = route === 'home' ? '/' : `/${route}`;
+                window.location.href = cleanUrl;
+              } else {
+                // Development: Use hash URLs directly
+                window.location.hash = route;
+              }
               window.router.navigate(route);
             } else {
               console.error('Navigation: router not available or invalid route', route, !!window.router);

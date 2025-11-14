@@ -112,12 +112,30 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
         }
       });
 
-      // Handle initial route on page load - check hash
-      const hash = window.location.hash.substring(1);
+      // Handle initial route on page load
       let initialRoute = 'home';
-      console.log('Router: initial hash', hash);
-      if (hash && routeConfig[hash]) {
-        initialRoute = hash;
+
+      // Check if we have a stored clean URL from 404.html redirect (for clean URL support)
+      const storedPath = sessionStorage.getItem('spa-path');
+      if (storedPath) {
+        sessionStorage.removeItem('spa-path');
+        const url = new URL(storedPath, window.location.origin);
+        const cleanRoute = url.pathname.substring(1);
+        console.log('Router: stored clean URL', cleanRoute);
+
+        if (cleanRoute && routeConfig[cleanRoute]) {
+          // Convert clean URL to hash URL for internal routing
+          console.log('Router: converting', cleanRoute, 'to hash URL');
+          window.location.hash = cleanRoute;
+          initialRoute = cleanRoute;
+        }
+      } else {
+        // Check hash for initial route
+        const hash = window.location.hash.substring(1);
+        console.log('Router: initial hash', hash);
+        if (hash && routeConfig[hash]) {
+          initialRoute = hash;
+        }
       }
 
       console.log('Router: navigating to initial route', initialRoute);

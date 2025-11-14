@@ -668,8 +668,15 @@
           console.log('Navigation: clicked link with route', route, 'href:', link.href);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Use hash-based routing for reliable cross-platform compatibility
-              window.location.hash = route;
+              // Use clean URLs that get converted to hash URLs internally
+              if (window.location.hostname !== 'localhost' && window.location.protocol !== 'file:') {
+                // Production: Use clean URLs (will be handled by 404.html)
+                const cleanUrl = route === 'home' ? '/' : `/${route}`;
+                window.location.href = cleanUrl;
+              } else {
+                // Development: Use hash URLs directly
+                window.location.hash = route;
+              }
               window.router.navigate(route);
             } else {
             console.error('Navigation: router not available or invalid route', route, window.router);
