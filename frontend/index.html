@@ -189,10 +189,10 @@
         </a>
         <nav class="main-nav" aria-label="Primary">
           <!-- Remove background hidden -->
-          <a href="#compress" data-route="compress">Compress</a>
-          <a href="#resize" data-route="resize">Resize</a>
-          <a href="#crop" data-route="crop">Crop</a>
-          <a href="#convert" data-route="convert">Format Converter</a>
+          <a href="/compress" data-route="compress">Compress</a>
+          <a href="/resize" data-route="resize">Resize</a>
+          <a href="/crop" data-route="crop">Crop</a>
+          <a href="/convert" data-route="convert">Format Converter</a>
         </nav>
         <div class="header-cta">
           <button id="themeToggle" class="btn btn-ghost" type="button">Toggle theme</button>
@@ -655,6 +655,21 @@
       window.addEventListener('message', function(event) {
         if (event.data && event.data.type === 'toggleTheme') {
           window.toggleTheme();
+        }
+      });
+
+      // Handle navigation clicks with data-route attributes
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[data-route]');
+        if (link) {
+          e.preventDefault();
+          const route = link.getAttribute('data-route');
+          if (route && window.router) {
+            // Update URL using History API for clean URLs
+            const newPath = route === 'home' ? '/' : `/${route}`;
+            history.pushState(null, '', newPath);
+            window.router.navigate(route);
+          }
         }
       });
     </script>

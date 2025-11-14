@@ -105,22 +105,61 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       const self = this;
       console.log('Router: initializing');
 
-      // Handle hash changes
-      window.addEventListener('hashchange', function() {
-        const hash = window.location.hash.substring(1) || 'home';
-        console.log('Router: hash changed to', hash);
+      // Handle popstate events for clean URLs
+      window.addEventListener('popstate', function(event) {
+        const path = window.location.pathname.substring(1) || 'home';
+        console.log('Router: popstate to', path);
+        if (routeConfig[path]) {
+          self.navigate(path);
+        } else if (path === '' || path === 'index.html') {
+          self.navigate('home');
+        }
+      });
+
+      // Handle hashchange events as fallback (convert to clean URLs)
+      window.addEventListener('hashchange', function(event) {
+        const hash = window.location.hash.substring(1);
+        console.log('Router: hashchange to', hash);
         if (routeConfig[hash]) {
+          // Convert hash URL to clean URL
+          const cleanPath = hash === 'home' ? '/' : `/${hash}`;
+          history.replaceState(null, '', cleanPath);
           self.navigate(hash);
         }
       });
 
       // Handle initial route on page load
+      let initialPath = window.location.pathname.substring(1);
+      console.log('Router: initial path', initialPath);
+
+      // Check if we have a hash URL and convert it to clean URL
       const initialHash = window.location.hash.substring(1);
-      console.log('Router: initial hash', initialHash);
-      
       if (initialHash && routeConfig[initialHash]) {
-        self.navigate(initialHash);
+        console.log('Router: converting hash URL to clean URL', initialHash);
+        const cleanPath = initialHash === 'home' ? '/' : `/${initialHash}`;
+        history.replaceState(null, '', cleanPath);
+        initialPath = initialHash;
+      }
+
+      // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
+      const storedPath = sessionStorage.getItem('spa-path');
+      if (storedPath) {
+        sessionStorage.removeItem('spa-path');
+        // Extract path from stored URL
+        const url = new URL(storedPath, window.location.origin);
+        initialPath = url.pathname.substring(1);
+        console.log('Router: using stored path', initialPath);
+      }
+
+      if (initialPath && routeConfig[initialPath]) {
+        self.navigate(initialPath);
+      } else if (initialPath === '' || initialPath === 'index.html') {
+        // Update URL to clean format for home page
+        history.replaceState(null, '', '/');
+        self.navigate('home');
       } else {
+        // If path doesn't exist, redirect to home
+        history.replaceState(null, '', '/');
         self.navigate('home');
       }
     }
