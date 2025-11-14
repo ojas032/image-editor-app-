@@ -12,7 +12,7 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
     crop: { inline: false, redirect: 'crop.html' },
     convert: { inline: false, redirect: 'convert.html' },
     about: { inline: true },
-    contact: { inline: false, redirect: 'contact.html' },
+    contact: { inline: true },
     privacy: { inline: false, redirect: 'privacy.html' },
     terms: { inline: false, redirect: 'terms.html' }
   };
@@ -59,9 +59,6 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       } else if (view === 'convert' && !window.convertInitialized) {
         console.log('Router: loading convert page');
         this.loadExternalPage(view, 'convert.html');
-      } else if (view === 'contact' && !window.contactInitialized) {
-        console.log('Router: loading contact page');
-        this.loadExternalPage(view, 'contact.html');
       } else if (view === 'privacy' && !window.privacyInitialized) {
         console.log('Router: loading privacy page');
         this.loadExternalPage(view, 'privacy.html');
