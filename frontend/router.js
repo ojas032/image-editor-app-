@@ -2,9 +2,8 @@
 (function() {
   'use strict';
 
-  // Initialize Navigo router - use clean URLs in production, hash in development
-  const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
-  const router = new Navigo('/', { hash: !isProduction });
+  // Initialize Navigo router - use History API for clean URLs everywhere
+  const router = new Navigo('/', { hash: false });
 
   // View configurations
   const viewConfig = {
@@ -20,6 +19,16 @@
   };
 
   let currentView = 'home';
+
+  // Handle route changes (used for popstate and direct navigation)
+  function handleRouteChange(pathname) {
+    const route = pathname === '/' ? 'home' : pathname.substring(1);
+    if (viewConfig[route]) {
+      hideAllViews();
+      showView(route);
+      currentView = route;
+    }
+  }
 
   // Hide all views
   function hideAllViews() {
@@ -146,14 +155,35 @@
   function handleNavigationClick(e) {
     const link = e.target.closest('a[data-route]');
     if (link) {
+      console.log('Navigation click detected:', link, 'route:', link.getAttribute('data-route'));
       e.preventDefault();
+      e.stopPropagation();
       const route = link.getAttribute('data-route');
       if (route) {
         const path = route === 'home' ? '/' : '/' + route;
-        router.navigate(path);
+        console.log('Navigating to:', path, 'using router.navigate');
+        try {
+          router.navigate(path);
+          console.log('Router.navigate completed, current URL:', window.location.href);
+        } catch (error) {
+          console.error('Router.navigate failed:', error);
+          // Fallback: try to navigate directly
+          try {
+            window.history.pushState(null, '', path);
+            handleRouteChange(path);
+          } catch (fallbackError) {
+            console.error('Fallback navigation also failed:', fallbackError);
+          }
+        }
       }
+      return false;
     }
   }
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', function(event) {
+    handleRouteChange(window.location.pathname);
+  });
 
   // Initialize
   document.addEventListener('click', handleNavigationClick);
