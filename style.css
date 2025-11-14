@@ -8,20 +8,11 @@
   --primary-600: #3f73ff;
   --border-700: #233253;
   /* Light theme surface for main content */
-  --light-bg: #f6f8fc;
-  --light-card: #ffffff;
-  --light-text: #0b1220;
-  --light-muted: #475569;
-  --light-border: #e2e8f0;
-}
-
-/* Dark mode variable overrides */
-.theme-dark {
-  --light-bg: var(--bg-700);
-  --light-card: var(--bg-800);
-  --light-text: var(--text-100);
-  --light-muted: var(--text-300);
-  --light-border: var(--border-700);
+  --bg: #f6f8fc;
+  --card: #ffffff;
+  --text: #0b1220;
+  --muted: #475569;
+  --border: #e2e8f0;
 }
 
 * { box-sizing: border-box; }
@@ -34,8 +25,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--light-text);
-  background: var(--light-bg);
+  color: var(--text);
+  background: var(--bg);
 }
 
 main {
@@ -292,7 +283,7 @@ main {
 }
 .btn-primary { background: var(--primary-500); color: #0b1120; border-color: #6b91ff; }
 .btn-primary:hover { background: var(--primary-600); }
-.btn.btn-ghost { background: transparent; border-color: var(--light-border); color: var(--light-text); }
+.btn.btn-ghost { background: transparent; border-color: var(--border); color: var(--text); }
 .btn.btn-ghost:hover { background: rgba(15,23,42,0.05); }
 .btn.btn-primary { color: #0b1120; }
 
@@ -424,38 +415,6 @@ main {
   .site-footer { padding: 20px 0; }
 }
 
-/* Theme: Dark overrides */
-.theme-dark body {
-  color: var(--text-100);
-  background: radial-gradient(1200px 220px at 50% 0,
-              var(--bg-700) 0%, var(--bg-800) 55%, var(--bg-900) 100%) fixed;
-}
-.theme-dark .subtitle { color: var(--text-300); }
-.theme-dark .features-grid { padding-bottom: 56px; }
-.theme-dark .btn.btn-ghost { color: var(--text-100); border-color: rgba(255,255,255,0.35); background: transparent; }
-.theme-dark .btn.btn-ghost:hover { background: rgba(255,255,255,0.08); }
-.theme-dark .btn.btn-primary { color: #0b1120; }
-.theme-dark .feature {
-  border-color: var(--border-700);
-  color: var(--text-100);
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-}
-.theme-dark .features-grid a.feature,
-.theme-dark .features-grid a.feature:link,
-.theme-dark .features-grid a.feature:visited,
-.theme-dark .features-grid a.feature:hover,
-.theme-dark .features-grid a.feature:active,
-.theme-dark .features-grid a.feature:focus { color: var(--text-100); }
-.theme-dark .features-grid a.feature h3 { color: var(--text-100); }
-.theme-dark .feature p { color: var(--text-300); }
-.theme-dark .feature:hover { border-color: #35508a; box-shadow: none; }
-.theme-dark .feature-icon {
-  color: var(--text-100);
-  background: radial-gradient(22px 16px at 50% 30%, rgba(91,140,255,0.35), rgba(255,255,255,0.02));
-  border-color: var(--border-700);
-}
-.theme-dark .site-footer { border-top-color: var(--border-700); background: transparent; }
-.theme-dark .footer-inner { color: var(--text-300); }
 
 /* Convert Page Styles */
 .tool-header {
@@ -790,156 +749,5 @@ main {
   }
 }
 
-/* Dark Mode Overrides for Convert Page */
-.theme-dark .tool-header h1 {
-  color: var(--text-100);
-}
-
-.theme-dark .tool-header .subtitle {
-  color: var(--text-300);
-}
-
-.theme-dark .card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  border-color: var(--border-700);
-  box-shadow: none;
-}
-
-.theme-dark .upload-area {
-  border-color: var(--border-700);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.theme-dark .upload-area:hover {
-  border-color: var(--primary-500);
-  background: rgba(91, 140, 255, 0.08);
-}
-
-.theme-dark .upload-icon {
-  color: var(--text-300);
-}
-
-.theme-dark .upload-text {
-  color: var(--text-100);
-}
-
-.theme-dark .upload-hint {
-  color: var(--text-300);
-}
-
-.theme-dark .preview-box {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: var(--border-700);
-}
-
-.theme-dark .preview-title {
-  color: var(--text-100);
-}
-
-.theme-dark .preview-container {
-  background: rgba(0, 0, 0, 0.2);
-  border-color: var(--border-700);
-}
-
-.theme-dark .loading-spinner {
-  color: var(--text-300);
-}
-
-.theme-dark .image-info {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: var(--border-700);
-  color: var(--text-100);
-}
-
-.theme-dark .info-label {
-  color: var(--text-300);
-}
-
-.theme-dark .controls-section {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: var(--border-700);
-}
-
-.theme-dark .btn-outline-primary {
-  color: var(--primary-500);
-  border-color: var(--primary-500);
-}
-
-.theme-dark .btn-outline-primary:hover {
-  background: var(--primary-500);
-  color: #0b1120;
-}
-
-.theme-dark .seo-content h2,
-.theme-dark .seo-content h3 {
-  color: var(--text-100);
-}
-
-.theme-dark .seo-content p,
-.theme-dark .seo-content ul,
-.theme-dark .seo-content ol,
-.theme-dark .seo-content li {
-  color: var(--text-300);
-}
-
-/* Dark mode format cards */
-.theme-dark .seo-content div[style*="background:var(--light-card)"] {
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)) !important;
-  border-color: var(--border-700) !important;
-}
-
-.theme-dark .seo-content div[style*="background:var(--light-card)"] h3 {
-  color: var(--text-100) !important;
-}
-
-.theme-dark .seo-content div[style*="background:var(--light-card)"] p {
-  color: var(--text-300) !important;
-}
-
-.theme-dark .accordion-item {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: var(--border-700);
-}
-
-.theme-dark .accordion-button {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-100);
-}
-
-.theme-dark .accordion-button:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.theme-dark .accordion-button:not(.collapsed) {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--primary-500);
-}
-
-.theme-dark .accordion-body {
-  color: var(--text-300);
-}
-
-/* Form controls dark mode */
-.theme-dark .form-select,
-.theme-dark .form-control {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border-700);
-  color: var(--text-100);
-}
-
-.theme-dark .form-select:focus,
-.theme-dark .form-control:focus {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--primary-500);
-  color: var(--text-100);
-}
-
-.theme-dark .form-label {
-  color: var(--text-100);
-}
-
-.theme-dark .form-text {
-  color: var(--text-300);
-}
 
 
