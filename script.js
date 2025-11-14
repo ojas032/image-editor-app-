@@ -1,26 +1,15 @@
 (() => {
   // Apply theme immediately (before DOM loads) to prevent flash
-  const root = document.documentElement;
-  const storedTheme = localStorage.getItem('imngrd_theme') || 'light';
+  const storedTheme = localStorage.getItem('theme') || 'light';
   if (storedTheme === 'dark') {
-    root.classList.add('theme-dark');
-    // Also add to body when available (for pages with inline styles)
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('theme-dark');
-    }, { once: true });
+    document.body.classList.add('theme-dark');
   }
-  
+
   // Listen for theme changes from parent window (for iframe pages)
   window.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'themeChange') {
+    if (event.data && event.data.type === 'themeChanged') {
       const isDark = event.data.theme === 'dark';
-      if (isDark) {
-        root.classList.add('theme-dark');
-        document.body.classList.add('theme-dark');
-      } else {
-        root.classList.remove('theme-dark');
-        document.body.classList.remove('theme-dark');
-      }
+      document.body.classList.toggle('theme-dark', isDark);
       console.log('Theme updated from parent:', event.data.theme);
     }
   });

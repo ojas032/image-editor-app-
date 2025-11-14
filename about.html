@@ -186,29 +186,6 @@
         // Adjust main padding since header is hidden
         const main = document.querySelector('main');
         if (main) main.style.paddingTop = '20px';
-
-        // Add floating theme toggle button for iframes
-        const floatingToggle = document.createElement('button');
-        floatingToggle.id = 'floatingThemeToggle';
-        floatingToggle.className = 'btn btn-ghost';
-        floatingToggle.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          z-index: 1000;
-          background: var(--light-card);
-          border: 1px solid var(--light-border);
-          border-radius: 8px;
-          padding: 8px 16px;
-          font-size: 14px;
-          cursor: pointer;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        `;
-        floatingToggle.textContent = 'Toggle theme';
-        floatingToggle.addEventListener('click', () => {
-          window.parent.postMessage({ type: 'toggleTheme' }, '*');
-        });
-        document.body.appendChild(floatingToggle);
       }
     </script>
 
@@ -216,30 +193,6 @@
       // Set copyright year
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Theme toggle functionality for iframes
-      const themeToggle = document.getElementById('themeToggle');
-
-      if (themeToggle) {
-        if (window.self !== window.top) {
-          // We're in an iframe, communicate with parent
-          themeToggle.addEventListener('click', () => {
-            window.parent.postMessage({ type: 'toggleTheme' }, '*');
-          });
-        } else {
-          // Direct access, handle locally
-          const body = document.body;
-          const currentTheme = localStorage.getItem('theme') || 'light';
-          body.classList.toggle('theme-dark', currentTheme === 'dark');
-          themeToggle.textContent = currentTheme === 'dark' ? 'Light mode' : 'Dark mode';
-
-          themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.toggle('theme-dark');
-            const newTheme = isDark ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
-          });
-        }
-      }
 
       // Mobile navigation toggle
       const navToggle = document.querySelector('.nav-toggle');
