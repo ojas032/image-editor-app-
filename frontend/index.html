@@ -666,13 +666,17 @@
           e.stopPropagation();
           const route = link.getAttribute('data-route');
           console.log('Navigation: clicked link with route', route, 'href:', link.href);
-          if (route && window.router) {
-            console.log('Navigation: router available, navigating to', route);
-            // Update URL using History API for clean URLs
-            const newPath = route === 'home' ? '/' : `/${route}`;
-            history.pushState(null, '', newPath);
-            window.router.navigate(route);
-          } else {
+            if (route && window.router) {
+              console.log('Navigation: router available, navigating to', route);
+              // Update URL using History API for clean URLs (only if not file:// protocol)
+              if (window.location.protocol !== 'file:') {
+                const newPath = route === 'home' ? '/' : `/${route}`;
+                history.pushState(null, '', newPath);
+              } else {
+                console.log('Navigation: file:// protocol detected, skipping pushState');
+              }
+              window.router.navigate(route);
+            } else {
             console.error('Navigation: router not available or invalid route', route, window.router);
           }
           return false;

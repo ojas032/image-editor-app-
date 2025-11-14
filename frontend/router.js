@@ -121,9 +121,11 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
         const hash = window.location.hash.substring(1);
         console.log('Router: hashchange to', hash);
         if (routeConfig[hash]) {
-          // Convert hash URL to clean URL
-          const cleanPath = hash === 'home' ? '/' : `/${hash}`;
-          history.replaceState(null, '', cleanPath);
+          // Convert hash URL to clean URL (only if not file:// protocol)
+          if (window.location.protocol !== 'file:') {
+            const cleanPath = hash === 'home' ? '/' : `/${hash}`;
+            history.replaceState(null, '', cleanPath);
+          }
           self.navigate(hash);
         }
       });
@@ -136,8 +138,10 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       const initialHash = window.location.hash.substring(1);
       if (initialHash && routeConfig[initialHash]) {
         console.log('Router: converting hash URL to clean URL', initialHash);
-        const cleanPath = initialHash === 'home' ? '/' : `/${initialHash}`;
-        history.replaceState(null, '', cleanPath);
+        if (window.location.protocol !== 'file:') {
+          const cleanPath = initialHash === 'home' ? '/' : `/${initialHash}`;
+          history.replaceState(null, '', cleanPath);
+        }
         initialPath = initialHash;
       }
 
@@ -154,12 +158,16 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       if (initialPath && routeConfig[initialPath]) {
         self.navigate(initialPath);
       } else if (initialPath === '' || initialPath === 'index.html') {
-        // Update URL to clean format for home page
-        history.replaceState(null, '', '/');
+        // Update URL to clean format for home page (only if not file:// protocol)
+        if (window.location.protocol !== 'file:') {
+          history.replaceState(null, '', '/');
+        }
         self.navigate('home');
       } else {
         // If path doesn't exist, redirect to home
-        history.replaceState(null, '', '/');
+        if (window.location.protocol !== 'file:') {
+          history.replaceState(null, '', '/');
+        }
         self.navigate('home');
       }
     }
