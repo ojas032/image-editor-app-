@@ -324,7 +324,7 @@
         <section class="mb-5">
           <h2>Expert Tips for Pixel-Perfect Conversions</h2>
           <p>Plan around the destination before you convert. Choose JPG for lifelike photography, PNG for transparency and UI elements, WebP to balance compression with clarity, and keep SVGs when you need infinitely scalable logos. Publishing interface assets? Export @2x or @3x versions so high-density displays stay tack sharp.</p>
-          <p>After you generate new files, pass them through the <a href="https://www.imagenerd.in/compress.html">ImageNerd compressor</a> or <a href="https://www.imagenerd.in/resize.html">image resizer</a> to fine-tune size and dimensions, then rename each output with descriptive keywords like <code>landing-page-hero-1600.webp</code>. That workflow improves digital asset management, reduces duplicate-content risk, and helps search engines understand how each version is unique.</p>
+          <p>After you generate new files, pass them through the <a href="https://www.imagenerd.in/compress">ImageNerd compressor</a> or <a href="https://www.imagenerd.in/resize">image resizer</a> to fine-tune size and dimensions, then rename each output with descriptive keywords like <code>landing-page-hero-1600.webp</code>. That workflow improves digital asset management, reduces duplicate-content risk, and helps search engines understand how each version is unique.</p>
         </section>
       </div>
     </main>
