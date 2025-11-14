@@ -11,13 +11,73 @@
     <meta property="og:description" content="Free online image format converter. Convert from any format to any format: HEIC to JPG, PNG to WebP, SVG to PNG, JPEG to PNG, and more." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.imagenerd.in/convert.html" />
+    <meta property="og:image" content="https://www.imagenerd.in/icon_bg.png" />
     <meta name="keywords" content="HEIC converter, HEIC to JPG, HEIC to PNG, image converter, convert images online, JPEG to PNG, PNG to WebP, SVG converter, format converter, image format converter, free image converter" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Convert Images Instantly - ImageNerd Format Converter" />
+    <meta name="twitter:description" content="Drag and drop any image and convert between HEIC, JPG, PNG, WebP, SVG, GIF, BMP, TIFF, and more—directly in your browser." />
+    <meta name="twitter:image" content="https://www.imagenerd.in/icon_bg.png" />
     <link rel="icon" type="image/png" href="icon_bg.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css?v=1.0.3" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Image Format Converter - ImageNerd",
+      "url": "https://www.imagenerd.in/convert.html",
+      "description": "Convert HEIC, JPEG, PNG, SVG, WebP, GIF, BMP, and TIFF images in seconds without uploads leaving your browser.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Instant HEIC to JPEG converter",
+        "Batch-ready drag and drop workflow",
+        "Browser-based privacy with no server uploads",
+        "Support for WebP, SVG, GIF, BMP, and TIFF",
+        "Automatic metadata cleanup"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert HEIC photos to JPG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Drop your HEIC file into ImageNerd, choose JPG in the format selector, and click convert. The tool renders the new JPG instantly without sending the file to a server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert vector SVG files to PNG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. ImageNerd flattens SVG artwork into high-quality PNG or JPG bitmaps while keeping transparency intact when you choose PNG."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the converter secure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Everything runs client-side, so sensitive product shots and design assets remain on your device. Close the tab and the data is gone."
+          }
+        }
+      ]
+    }
+    </script>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-94GM9PQBM1"></script>
     <script>
@@ -262,10 +322,27 @@
             </div>
           </div>
         </section>
+        <section class="mb-5">
+          <h2>Expert Tips for Pixel-Perfect Conversions</h2>
+          <p>Plan around the destination before you convert. Choose JPG for lifelike photography, PNG for transparency and UI elements, WebP to balance compression with clarity, and keep SVGs when you need infinitely scalable logos. Publishing interface assets? Export @2x or @3x versions so high-density displays stay tack sharp.</p>
+          <p>After you generate new files, pass them through the <a href="https://www.imagenerd.in/compress.html">ImageNerd compressor</a> or <a href="https://www.imagenerd.in/resize.html">image resizer</a> to fine-tune size and dimensions, then rename each output with descriptive keywords like <code>landing-page-hero-1600.webp</code>. That workflow improves digital asset management, reduces duplicate-content risk, and helps search engines understand how each version is unique.</p>
+        </section>
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container footer-inner"><p>© <span id="year"></span> ImageNerd.</p></div></footer>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
+          <nav style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="about.html" style="color: var(--light-muted); text-decoration: none;">About Us</a>
+            <a href="contact.html" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
+            <a href="privacy.html" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
+            <a href="terms.html" style="color: var(--light-muted); text-decoration: none;">Terms</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>

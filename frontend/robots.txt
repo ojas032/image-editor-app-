@@ -4,8 +4,3 @@ Allow: /
 # Sitemap
 Sitemap: https://www.imagenerd.in/sitemap.xml
 
-# Disallow crawling of non-essential files
-Disallow: /script.js
-Disallow: /router.js
-Disallow: /style.css
-

@@ -595,11 +595,31 @@
           <div id="convertSection" aria-label="Image converter" style="margin-top:24px;"></div>
         </div>
       </div>
+
+      <!-- ABOUT VIEW -->
+      <div id="view-about" class="view"></div>
+
+      <!-- CONTACT VIEW -->
+      <div id="view-contact" class="view"></div>
+
+      <!-- PRIVACY VIEW -->
+      <div id="view-privacy" class="view"></div>
+
+      <!-- TERMS VIEW -->
+      <div id="view-terms" class="view"></div>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
+          <nav style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="#about" onclick="router.navigate('about'); return false;" style="color: var(--light-muted); text-decoration: none;">About Us</a>
+            <a href="#contact" onclick="router.navigate('contact'); return false;" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
+            <a href="#privacy" onclick="router.navigate('privacy'); return false;" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
+            <a href="#terms" onclick="router.navigate('terms'); return false;" style="color: var(--light-muted); text-decoration: none;">Terms</a>
+          </nav>
+        </div>
       </div>
     </footer>
 
