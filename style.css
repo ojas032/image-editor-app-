@@ -15,6 +15,15 @@
   --light-border: #e2e8f0;
 }
 
+/* Dark mode variable overrides */
+.theme-dark {
+  --light-bg: var(--bg-700);
+  --light-card: var(--bg-800);
+  --light-text: var(--text-100);
+  --light-muted: var(--text-300);
+  --light-border: var(--border-700);
+}
+
 * { box-sizing: border-box; }
 html, body { 
   height: 100%; 
