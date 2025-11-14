@@ -1,163 +1,162 @@
-// Simple SPA Router for ImageNerd
-console.log('========== ROUTER.JS FILE IS LOADING ==========');
+// Navigo Router Implementation for ImageNerd
 (function() {
   'use strict';
-  console.log('========== ROUTER.JS IIFE EXECUTING ==========');
 
-  // Configuration: which routes are inline vs separate pages
-  const routeConfig = {
-    home: { inline: true },
-    compress: { inline: true },
-    resize: { inline: true },
-    crop: { inline: false, redirect: 'crop.html' },
-    convert: { inline: false, redirect: 'convert.html' },
-    about: { inline: true },
-    contact: { inline: true },
-    privacy: { inline: false, redirect: 'privacy.html' },
-    terms: { inline: false, redirect: 'terms.html' }
+  // Initialize Navigo router with hash routing for maximum compatibility
+  const router = new Navigo('/', { hash: true });
+
+  // View configurations
+  const viewConfig = {
+    home: { type: 'inline' },
+    compress: { type: 'inline', init: 'initCompressView' },
+    resize: { type: 'inline', init: 'initResizeView' },
+    crop: { type: 'external', file: 'crop.html' },
+    convert: { type: 'external', file: 'convert.html' },
+    about: { type: 'inline' },
+    contact: { type: 'inline' },
+    privacy: { type: 'external', file: 'privacy.html' },
+    terms: { type: 'external', file: 'terms.html' }
   };
 
-  const router = {
-    currentView: 'home',
+  let currentView = 'home';
 
-    navigate: function(view) {
-      console.log('Router: navigating to', view); // Debug log
-      
-      // Don't navigate if already on this view
-      if (this.currentView === view) {
-        console.log('Router: already on', view);
+  // Hide all views
+  function hideAllViews() {
+    document.querySelectorAll('.view').forEach(view => {
+      view.classList.remove('active');
+    });
+  }
+
+  // Show a specific view
+  function showView(viewName) {
+    const config = viewConfig[viewName];
+    const viewElement = document.getElementById('view-' + viewName);
+
+    if (!viewElement) {
+      console.error('View not found:', viewName);
+      return;
+    }
+
+    if (config.type === 'inline') {
+      viewElement.classList.add('active');
+
+      // Initialize if needed
+      if (config.init && !window[viewName + 'Initialized']) {
+        const initFunction = window[config.init];
+        if (typeof initFunction === 'function') {
+          initFunction();
+        }
+        window[viewName + 'Initialized'] = true;
+      }
+    } else if (config.type === 'external') {
+      if (!window[viewName + 'Initialized']) {
+        viewElement.innerHTML = `
+          <iframe
+            src="${config.file}"
+            style="width:100%;min-height:900px;border:none;display:block;"
+            title="${viewName} tool">
+          </iframe>
+        `;
+        window[viewName + 'Initialized'] = true;
+      }
+      viewElement.classList.add('active');
+    }
+  }
+
+  // Define routes
+  router.on('/', function() {
+    hideAllViews();
+    showView('home');
+    currentView = 'home';
+  });
+
+  router.on('/compress', function() {
+    hideAllViews();
+    showView('compress');
+    currentView = 'compress';
+  });
+
+  router.on('/resize', function() {
+    hideAllViews();
+    showView('resize');
+    currentView = 'resize';
+  });
+
+  router.on('/crop', function() {
+    hideAllViews();
+    showView('crop');
+    currentView = 'crop';
+  });
+
+  router.on('/convert', function() {
+    hideAllViews();
+    showView('convert');
+    currentView = 'convert';
+  });
+
+  router.on('/about', function() {
+    hideAllViews();
+    showView('about');
+    currentView = 'about';
+  });
+
+  router.on('/contact', function() {
+    hideAllViews();
+    showView('contact');
+    currentView = 'contact';
+  });
+
+  router.on('/privacy', function() {
+    hideAllViews();
+    showView('privacy');
+    currentView = 'privacy';
+  });
+
+  router.on('/terms', function() {
+    hideAllViews();
+    showView('terms');
+    currentView = 'terms';
+  });
+
+  // Handle initial load with clean URL support
+  function handleInitialLoad() {
+    const storedPath = sessionStorage.getItem('spa-path');
+    if (storedPath) {
+      sessionStorage.removeItem('spa-path');
+      const url = new URL(storedPath, window.location.origin);
+      const cleanRoute = url.pathname.substring(1);
+      if (cleanRoute && viewConfig[cleanRoute]) {
+        router.navigate('/' + cleanRoute);
         return;
       }
-      
-      // Hide all views
-      this.hideAllViews();
-      this.currentView = view;
-      
-      // Show the selected view (using 'view-' prefix to match HTML IDs)
-      const viewElement = document.getElementById('view-' + view);
-      if (viewElement) {
-        console.log('Router: showing view', 'view-' + view);
-        viewElement.classList.add('active');
-      } else {
-        console.error('Router: view not found', 'view-' + view);
-      }
-
-      // Initialize view if needed
-      if (view === 'compress' && !window.compressInitialized) {
-        console.log('Router: initializing compress view');
-        if (typeof initCompressView === 'function') {
-          initCompressView();
-        }
-      } else if (view === 'resize' && !window.resizeInitialized) {
-        console.log('Router: initializing resize view');
-        if (typeof initResizeView === 'function') {
-          initResizeView();
-        }
-      } else if (view === 'crop' && !window.cropInitialized) {
-        console.log('Router: loading crop page');
-        this.loadExternalPage(view, 'crop.html');
-      } else if (view === 'convert' && !window.convertInitialized) {
-        console.log('Router: loading convert page');
-        this.loadExternalPage(view, 'convert.html');
-      } else if (view === 'privacy' && !window.privacyInitialized) {
-        console.log('Router: loading privacy page');
-        this.loadExternalPage(view, 'privacy.html');
-      } else if (view === 'terms' && !window.termsInitialized) {
-        console.log('Router: loading terms page');
-        this.loadExternalPage(view, 'terms.html');
-      }
-    },
-
-    loadExternalPage: function(view, filename) {
-      const viewElement = document.getElementById('view-' + view);
-      if (!viewElement) return;
-      
-      // Show loading message
-      viewElement.innerHTML = '<div style="text-align:center;padding:60px;"><div class="spinner-border" role="status"></div><p style="margin-top:20px;">Loading...</p></div>';
-      
-      // Load the page in an iframe to keep clean URL
-      viewElement.innerHTML = `
-        <iframe 
-          src="${filename}" 
-          style="width:100%;min-height:900px;border:none;display:block;" 
-          title="${view} tool">
-        </iframe>
-      `;
-      
-      // Mark as initialized
-      window[view + 'Initialized'] = true;
-    },
-
-    hideAllViews: function() {
-      // Hide all views by removing 'active' class
-      document.querySelectorAll('.view').forEach(function(view) {
-        view.classList.remove('active');
-      });
-    },
-
-    init: function() {
-      const self = this;
-      console.log('Router: initializing');
-
-      // Use hash-based routing for reliable cross-platform compatibility
-      console.log('Router: using hash-based routing');
-
-      window.addEventListener('hashchange', function(event) {
-        const hash = window.location.hash.substring(1) || 'home';
-        console.log('Router: hashchange to', hash);
-        if (routeConfig[hash]) {
-          self.navigate(hash);
-        } else {
-          self.navigate('home');
-        }
-      });
-
-      // Handle initial route on page load
-      let initialRoute = 'home';
-
-      // Check if we have a stored clean URL from 404.html redirect (for clean URL support)
-      const storedPath = sessionStorage.getItem('spa-path');
-      if (storedPath) {
-        sessionStorage.removeItem('spa-path');
-        const url = new URL(storedPath, window.location.origin);
-        const cleanRoute = url.pathname.substring(1);
-        console.log('Router: stored clean URL', cleanRoute);
-
-        if (cleanRoute && routeConfig[cleanRoute]) {
-          // Convert clean URL to hash URL for internal routing
-          console.log('Router: converting', cleanRoute, 'to hash URL');
-          window.location.hash = cleanRoute;
-          initialRoute = cleanRoute;
-        }
-      } else {
-        // Check hash for initial route
-        const hash = window.location.hash.substring(1);
-        console.log('Router: initial hash', hash);
-        if (hash && routeConfig[hash]) {
-          initialRoute = hash;
-        }
-      }
-
-      console.log('Router: navigating to initial route', initialRoute);
-      self.navigate(initialRoute);
     }
-  };
+
+    router.resolve();
+  }
+
+  // Handle navigation clicks
+  function handleNavigationClick(e) {
+    const link = e.target.closest('a[data-route]');
+    if (link) {
+      e.preventDefault();
+      const route = link.getAttribute('data-route');
+      if (route) {
+        const path = route === 'home' ? '/' : '/' + route;
+        router.navigate(path);
+      }
+    }
+  }
+
+  // Initialize
+  document.addEventListener('click', handleNavigationClick);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleInitialLoad);
+  } else {
+    handleInitialLoad();
+  }
 
   // Expose router globally
   window.router = router;
-  console.log('Router: object created and assigned to window.router');
 
-  // Initialize router
-  console.log('Router: script loaded, readyState:', document.readyState);
-  router.init();
-  console.log('Router: init() called');
-  
-  // Add global click listener for debugging
-  document.addEventListener('click', function(e) {
-    const link = e.target.closest('a');
-    if (link) {
-      console.log('Router: link clicked', link.href);
-    }
-  });
 })();
-

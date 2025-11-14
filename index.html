@@ -18,6 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css?v=1.0.2" />
+
+    <!-- Navigo Router -->
+    <script src="https://unpkg.com/navigo@8"></script>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-94GM9PQBM1"></script>
     <script>
@@ -209,8 +212,8 @@
             <h1>Powerful image tools, zero friction</h1>
             <p class="subtitle">Compress, resize, crop, and convert images — right in your browser.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="/compress" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/compress';}else{window.location.hash='compress';} return false;">Compress image</a>
-              <a class="btn btn-ghost" href="/resize" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/resize';}else{window.location.hash='resize';} return false;">Resize image</a>
+              <a class="btn btn-primary" href="#compress" data-route="compress">Compress image</a>
+              <a class="btn btn-ghost" href="#resize" data-route="resize">Resize image</a>
             </div>
           </div>
         </section>
@@ -218,7 +221,7 @@
         <section class="features-grid container" aria-label="Popular tools">
           <!-- Remove background feature hidden -->
           
-          <a class="feature" href="/compress" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/compress';}else{window.location.hash='compress';} return false;">
+          <a class="feature" href="#compress" data-route="compress">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3v4M8 17v4" />
@@ -232,7 +235,7 @@
             </div>
           </a>
 
-          <a class="feature" href="/resize" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/resize';}else{window.location.hash='resize';} return false;">
+          <a class="feature" href="#resize" data-route="resize">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 10V3h7" />
@@ -246,7 +249,7 @@
             </div>
           </a>
 
-          <a class="feature" href="/crop" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/crop';}else{window.location.hash='crop';} return false;">
+          <a class="feature" href="#crop" data-route="crop">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M7 3v14a3 3 0 003 3h14" />
@@ -259,7 +262,7 @@
             </div>
           </a>
 
-          <a class="feature" href="/convert" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/convert';}else{window.location.hash='convert';} return false;">
+          <a class="feature" href="#convert" data-route="convert">
             <span class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3h8" />
@@ -931,10 +934,10 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
           <nav style="display: flex; gap: 16px; flex-wrap: wrap;">
-            <a href="/about" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/about';}else{window.location.hash='about';} return false;" style="color: var(--light-muted); text-decoration: none;">About Us</a>
-            <a href="/contact" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/contact';}else{window.location.hash='contact';} return false;" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
-            <a href="/privacy" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/privacy';}else{window.location.hash='privacy';} return false;" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
-            <a href="/terms" onclick="if(window.location.hostname!=='localhost'&&window.location.protocol!=='file:'){window.location.href='/terms';}else{window.location.hash='terms';} return false;" style="color: var(--light-muted); text-decoration: none;">Terms</a>
+            <a href="#about" data-route="about" style="color: var(--light-muted); text-decoration: none;">About Us</a>
+            <a href="#contact" data-route="contact" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
+            <a href="#privacy" data-route="privacy" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
+            <a href="#terms" data-route="terms" style="color: var(--light-muted); text-decoration: none;">Terms</a>
           </nav>
         </div>
       </div>
@@ -991,15 +994,7 @@
             console.log('Window.router exists:', !!window.router);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Use clean URLs that get converted to hash URLs internally
-              if (window.location.hostname !== 'localhost' && window.location.protocol !== 'file:') {
-                // Production: Use clean URLs (will be handled by 404.html)
-                const cleanUrl = route === 'home' ? '/' : `/${route}`;
-                window.location.href = cleanUrl;
-              } else {
-                // Development: Use hash URLs directly
-                window.location.hash = route;
-              }
+              // Simple routing: just navigate and let router handle URL
               window.router.navigate(route);
             } else {
               console.error('Navigation: router not available or invalid route', route, !!window.router);
