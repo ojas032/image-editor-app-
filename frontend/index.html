@@ -668,12 +668,19 @@
           console.log('Navigation: clicked link with route', route, 'href:', link.href);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Update URL using History API for clean URLs (only if not file:// protocol)
-              if (window.location.protocol !== 'file:') {
+              // Use clean URLs on production, hash URLs on localhost/file://
+              const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
+              if (isProduction) {
                 const newPath = route === 'home' ? '/' : `/${route}`;
                 history.pushState(null, '', newPath);
               } else {
-                console.log('Navigation: file:// protocol detected, skipping pushState');
+                // Use hash URLs for local development
+                const hashUrl = route === 'home' ? '/' : `#${route}`;
+                if (window.location.protocol !== 'file:') {
+                  history.pushState(null, '', hashUrl);
+                } else {
+                  window.location.hash = route;
+                }
               }
               window.router.navigate(route);
             } else {

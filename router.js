@@ -105,71 +105,63 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       const self = this;
       console.log('Router: initializing');
 
-      // Handle popstate events for clean URLs
-      window.addEventListener('popstate', function(event) {
-        const path = window.location.pathname.substring(1) || 'home';
-        console.log('Router: popstate to', path);
-        if (routeConfig[path]) {
-          self.navigate(path);
-        } else if (path === '' || path === 'index.html') {
-          self.navigate('home');
-        }
-      });
+      // Determine if we're in production (clean URLs) or development (hash URLs)
+      const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
+      console.log('Router: environment -', isProduction ? 'production (clean URLs)' : 'development (hash URLs)');
 
-      // Handle hashchange events as fallback (convert to clean URLs)
-      window.addEventListener('hashchange', function(event) {
-        const hash = window.location.hash.substring(1);
-        console.log('Router: hashchange to', hash);
-        if (routeConfig[hash]) {
-          // Convert hash URL to clean URL (only if not file:// protocol)
-          if (window.location.protocol !== 'file:') {
-            const cleanPath = hash === 'home' ? '/' : `/${hash}`;
-            history.replaceState(null, '', cleanPath);
+      if (isProduction) {
+        // Production: Use clean URLs with History API
+        window.addEventListener('popstate', function(event) {
+          const path = window.location.pathname.substring(1) || 'home';
+          console.log('Router: popstate to', path);
+          if (routeConfig[path]) {
+            self.navigate(path);
+          } else if (path === '' || path === 'index.html') {
+            self.navigate('home');
           }
-          self.navigate(hash);
-        }
-      });
+        });
+      } else {
+        // Development: Use hash URLs
+        window.addEventListener('hashchange', function(event) {
+          const hash = window.location.hash.substring(1) || 'home';
+          console.log('Router: hashchange to', hash);
+          if (routeConfig[hash]) {
+            self.navigate(hash);
+          } else {
+            self.navigate('home');
+          }
+        });
+      }
 
       // Handle initial route on page load
-      let initialPath = window.location.pathname.substring(1);
-      console.log('Router: initial path', initialPath);
+      let initialRoute = 'home';
 
-      // Check if we have a hash URL and convert it to clean URL
-      const initialHash = window.location.hash.substring(1);
-      if (initialHash && routeConfig[initialHash]) {
-        console.log('Router: converting hash URL to clean URL', initialHash);
-        if (window.location.protocol !== 'file:') {
-          const cleanPath = initialHash === 'home' ? '/' : `/${initialHash}`;
-          history.replaceState(null, '', cleanPath);
+      if (isProduction) {
+        // Production: Check pathname for initial route
+        const path = window.location.pathname.substring(1);
+        console.log('Router: initial path', path);
+
+        // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
+        const storedPath = sessionStorage.getItem('spa-path');
+        if (storedPath) {
+          sessionStorage.removeItem('spa-path');
+          const url = new URL(storedPath, window.location.origin);
+          initialRoute = url.pathname.substring(1);
+          console.log('Router: using stored path', initialRoute);
+        } else if (path && routeConfig[path]) {
+          initialRoute = path;
         }
-        initialPath = initialHash;
-      }
-
-      // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
-      const storedPath = sessionStorage.getItem('spa-path');
-      if (storedPath) {
-        sessionStorage.removeItem('spa-path');
-        // Extract path from stored URL
-        const url = new URL(storedPath, window.location.origin);
-        initialPath = url.pathname.substring(1);
-        console.log('Router: using stored path', initialPath);
-      }
-
-      if (initialPath && routeConfig[initialPath]) {
-        self.navigate(initialPath);
-      } else if (initialPath === '' || initialPath === 'index.html') {
-        // Update URL to clean format for home page (only if not file:// protocol)
-        if (window.location.protocol !== 'file:') {
-          history.replaceState(null, '', '/');
-        }
-        self.navigate('home');
       } else {
-        // If path doesn't exist, redirect to home
-        if (window.location.protocol !== 'file:') {
-          history.replaceState(null, '', '/');
+        // Development: Check hash for initial route
+        const hash = window.location.hash.substring(1);
+        console.log('Router: initial hash', hash);
+        if (hash && routeConfig[hash]) {
+          initialRoute = hash;
         }
-        self.navigate('home');
       }
+
+      console.log('Router: navigating to initial route', initialRoute);
+      self.navigate(initialRoute);
     }
   };
 
