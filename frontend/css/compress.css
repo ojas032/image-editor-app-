@@ -1,0 +1,134 @@
+/* Compress page specific styles */
+
+.compress-card, .resize-card, .crop-card, .convert-card {
+  border: 1px solid var(--light-border);
+  background: var(--light-card);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.compress-uploader, .resize-uploader, .crop-uploader {
+  border: 2px dashed var(--light-border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  background: rgba(15,23,42,0.02);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
+  border-color: var(--primary-500);
+  background: rgba(91, 140, 255, 0.03);
+}
+
+.compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
+  background: rgba(91,140,255,0.10);
+  border-color: #a5b4fc;
+}
+
+.compress-help, .resize-help, .crop-help {
+  margin-top: 10px;
+  color: var(--light-muted);
+  font-size: 14px;
+}
+
+.resize-settings, .compress-controls, .crop-settings {
+  background: rgba(15,23,42,0.02);
+  border: 1px solid var(--light-border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 24px;
+}
+
+.form-control, .form-select {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0b1220;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 0.2rem rgba(91,140,255,0.25);
+  outline: none;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--light-text);
+}
+
+.form-check-input {
+  margin-right: 8px;
+}
+
+.form-check-label {
+  font-weight: 600;
+}
+
+/* Animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Dark theme overrides */
+@media (prefers-color-scheme: dark) {
+  .compress-card, .resize-card, .crop-card, .convert-card {
+    border-color: var(--border-700);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  }
+
+  .compress-uploader, .resize-uploader, .crop-uploader {
+    border-color: var(--border-700);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
+    border-color: var(--primary-500);
+    background: rgba(91, 140, 255, 0.08);
+  }
+
+  .compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
+    background: rgba(91,140,255,0.15);
+    border-color: #5b8cff;
+  }
+
+  .compress-help, .resize-help, .crop-help {
+    color: var(--text-300);
+  }
+
+  .resize-settings, .compress-controls, .crop-settings {
+    background: rgba(255,255,255,0.02);
+    border-color: var(--border-700);
+  }
+
+  .form-control, .form-select {
+    background: rgba(255,255,255,0.05);
+    border-color: var(--border-700);
+    color: var(--text-100);
+  }
+
+  .form-control:focus, .form-select:focus {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--primary-500);
+    color: var(--text-100);
+  }
+
+  .form-label {
+    color: var(--text-100);
+  }
+
+  .form-check-label {
+    color: var(--text-100);
+  }
+
+  .compress-help, .resize-help, .crop-help {
+    border-color: var(--border-700);
+  }
+}
