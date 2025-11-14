@@ -5,15 +5,15 @@
   // Initialize Navigo router - use History API for clean URLs everywhere
   const router = new Navigo('/', { hash: false });
 
-  // View configurations
-  const viewConfig = {
-    home: { type: 'inline' },
-    compress: { type: 'inline', init: 'initCompressView' },
-    resize: { type: 'inline', init: 'initResizeView' },
-    about: { type: 'inline' },
-    contact: { type: 'inline' }
-    // External routes (crop, convert, privacy, terms) handled server-side
-  };
+// View configurations
+const viewConfig = {
+  home: { type: 'inline' },
+  compress: { type: 'inline', init: 'initCompressView' },
+  resize: { type: 'inline', init: 'initResizeView' },
+  about: { type: 'inline' },
+  contact: { type: 'inline' },
+  // Note: crop, convert, privacy, terms are external routes handled server-side
+};
 
   let currentView = 'home';
 
@@ -83,17 +83,7 @@
     currentView = 'resize';
   });
 
-  router.on('/crop', function() {
-    hideAllViews();
-    showView('crop');
-    currentView = 'crop';
-  });
-
-  router.on('/convert', function() {
-    hideAllViews();
-    showView('convert');
-    currentView = 'convert';
-  });
+  // crop and convert are external routes handled server-side
 
   router.on('/about', function() {
     hideAllViews();

@@ -93,10 +93,10 @@
         <a class="brand" href="index.html"><img class="brand-mark" src="icon_without_bg.png" alt="ImageNerd logo" /><span class="brand-name">ImageNerd</span></a>
         <nav class="main-nav">
           <!-- <a href="remove-background.html">Remove background</a> -->
-          <a href="compress">Compress</a>
-          <a href="resize">Resize</a>
-          <a href="crop">Crop</a>
-          <a href="convert" class="active">Format Converter</a>
+          <a href="/compress" data-route="compress">Compress</a>
+          <a href="/resize" data-route="resize">Resize</a>
+          <a href="/crop" data-route="crop">Crop</a>
+          <a href="/convert" data-route="convert" class="active">Format Converter</a>
         </nav>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
