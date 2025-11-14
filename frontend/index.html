@@ -627,6 +627,38 @@
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <script src="script.js?v=1.0.9"></script>
     
+    <!-- Theme toggle functionality -->
+    <script>
+      // Global theme toggle function
+      window.toggleTheme = function() {
+        const body = document.body;
+        const isDark = body.classList.toggle('theme-dark');
+        const newTheme = isDark ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+        }
+        return newTheme;
+      };
+
+      // Initialize theme on page load
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      document.body.classList.toggle('theme-dark', currentTheme === 'dark');
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        themeToggle.textContent = currentTheme === 'dark' ? 'Light mode' : 'Dark mode';
+        themeToggle.addEventListener('click', window.toggleTheme);
+      }
+
+      // Listen for theme toggle messages from iframes
+      window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'toggleTheme') {
+          window.toggleTheme();
+        }
+      });
+    </script>
+
     <script>
       // View initialization functions - must be defined before router.js loads
 
