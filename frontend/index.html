@@ -668,17 +668,18 @@
           console.log('Navigation: clicked link with route', route, 'href:', link.href);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Use clean URLs on production, hash URLs on localhost/file://
+              // Use clean URLs on production, /index.html/route URLs on localhost/file://
               const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
               if (isProduction) {
                 const newPath = route === 'home' ? '/' : `/${route}`;
                 history.pushState(null, '', newPath);
               } else {
-                // Use hash URLs for local development
-                const hashUrl = route === 'home' ? '/' : `#${route}`;
+                // Use /index.html/route URLs for local development (supports direct access)
+                const indexUrl = route === 'home' ? '/index.html' : `/index.html/${route}`;
                 if (window.location.protocol !== 'file:') {
-                  history.pushState(null, '', hashUrl);
+                  history.pushState(null, '', indexUrl);
                 } else {
+                  // For file:// protocol, still use hash as fallback
                   window.location.hash = route;
                 }
               }

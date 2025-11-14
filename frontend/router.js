@@ -112,11 +112,21 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       if (isProduction) {
         // Production: Use clean URLs with History API
         window.addEventListener('popstate', function(event) {
-          const path = window.location.pathname.substring(1) || 'home';
-          console.log('Router: popstate to', path);
-          if (routeConfig[path]) {
-            self.navigate(path);
-          } else if (path === '' || path === 'index.html') {
+          const fullPath = window.location.pathname;
+          let pathRoute = 'home';
+
+          if (fullPath.includes('/index.html/')) {
+            // Extract route from /index.html/crop -> crop
+            pathRoute = fullPath.split('/index.html/')[1] || 'home';
+          } else if (fullPath.length > 1 && fullPath !== '/index.html') {
+            // Extract route from /crop -> crop
+            pathRoute = fullPath.substring(1);
+          }
+
+          console.log('Router: popstate to', pathRoute);
+          if (routeConfig[pathRoute]) {
+            self.navigate(pathRoute);
+          } else {
             self.navigate('home');
           }
         });
@@ -136,23 +146,39 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       // Handle initial route on page load
       let initialRoute = 'home';
 
-      if (isProduction) {
-        // Production: Check pathname for initial route
-        const path = window.location.pathname.substring(1);
-        console.log('Router: initial path', path);
+      // Check pathname for initial route (works for both production and development)
+      const fullPath = window.location.pathname;
+      console.log('Router: full pathname', fullPath);
 
-        // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
-        const storedPath = sessionStorage.getItem('spa-path');
-        if (storedPath) {
-          sessionStorage.removeItem('spa-path');
-          const url = new URL(storedPath, window.location.origin);
-          initialRoute = url.pathname.substring(1);
-          console.log('Router: using stored path', initialRoute);
-        } else if (path && routeConfig[path]) {
-          initialRoute = path;
+      // Handle URLs like /index.html/crop or /crop
+      let pathRoute = '';
+      if (fullPath.includes('/index.html/')) {
+        // Extract route from /index.html/crop -> crop
+        pathRoute = fullPath.split('/index.html/')[1];
+        console.log('Router: extracted route from index.html URL:', pathRoute);
+      } else if (fullPath.length > 1) {
+        // Extract route from /crop -> crop
+        pathRoute = fullPath.substring(1);
+        console.log('Router: extracted route from clean URL:', pathRoute);
+      }
+
+      // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
+      const storedPath = sessionStorage.getItem('spa-path');
+      if (storedPath) {
+        sessionStorage.removeItem('spa-path');
+        const url = new URL(storedPath, window.location.origin);
+        const storedRoute = url.pathname.includes('/index.html/')
+          ? url.pathname.split('/index.html/')[1]
+          : url.pathname.substring(1);
+        if (storedRoute && routeConfig[storedRoute]) {
+          initialRoute = storedRoute;
+          console.log('Router: using stored path route', initialRoute);
         }
-      } else {
-        // Development: Check hash for initial route
+      } else if (pathRoute && routeConfig[pathRoute]) {
+        initialRoute = pathRoute;
+        console.log('Router: using pathname route', initialRoute);
+      } else if (!isProduction) {
+        // Development: Check hash for initial route as fallback
         const hash = window.location.hash.substring(1);
         console.log('Router: initial hash', hash);
         if (hash && routeConfig[hash]) {
