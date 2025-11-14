@@ -658,18 +658,24 @@
         }
       });
 
-      // Handle navigation clicks with data-route attributes
+      // Handle navigation clicks
       document.addEventListener('click', function(e) {
-        const link = e.target.closest('a[data-route]');
-        if (link) {
+        const link = e.target.closest('a[href^="/"]');
+        if (link && link.getAttribute('data-route')) {
           e.preventDefault();
+          e.stopPropagation();
           const route = link.getAttribute('data-route');
+          console.log('Navigation: clicked link with route', route, 'href:', link.href);
           if (route && window.router) {
+            console.log('Navigation: router available, navigating to', route);
             // Update URL using History API for clean URLs
             const newPath = route === 'home' ? '/' : `/${route}`;
             history.pushState(null, '', newPath);
             window.router.navigate(route);
+          } else {
+            console.error('Navigation: router not available or invalid route', route, window.router);
           }
+          return false;
         }
       });
     </script>
