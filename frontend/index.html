@@ -668,22 +668,8 @@
           console.log('Navigation: clicked link with route', route, 'href:', link.href);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Handle routing based on protocol
-              if (window.location.protocol === 'file:') {
-                // File protocol: use hash routing
-                window.location.hash = route;
-              } else {
-                // HTTP protocol: try to use URL-based routing
-                const isProduction = window.location.hostname !== 'localhost';
-                if (isProduction) {
-                  const newPath = route === 'home' ? '/' : `/${route}`;
-                  history.pushState(null, '', newPath);
-                } else {
-                  // Localhost: use /index.html/route format
-                  const indexUrl = route === 'home' ? '/index.html' : `/index.html/${route}`;
-                  history.pushState(null, '', indexUrl);
-                }
-              }
+              // Use hash-based routing for reliable cross-platform compatibility
+              window.location.hash = route;
               window.router.navigate(route);
             } else {
             console.error('Navigation: router not available or invalid route', route, window.router);

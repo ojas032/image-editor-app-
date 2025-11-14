@@ -105,87 +105,25 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       const self = this;
       console.log('Router: initializing');
 
-      // Determine routing strategy
-      const isFileProtocol = window.location.protocol === 'file:';
-      const isProduction = !isFileProtocol && window.location.hostname !== 'localhost';
-      console.log('Router: protocol -', isFileProtocol ? 'file://' : 'http://');
-      console.log('Router: environment -', isProduction ? 'production (clean URLs)' : isFileProtocol ? 'file protocol (hash URLs)' : 'localhost (index.html URLs)');
+      // Use hash-based routing for reliable cross-platform compatibility
+      console.log('Router: using hash-based routing');
 
-      if (isProduction) {
-        // Production: Use clean URLs with History API
-        window.addEventListener('popstate', function(event) {
-          const fullPath = window.location.pathname;
-          let pathRoute = 'home';
+      window.addEventListener('hashchange', function(event) {
+        const hash = window.location.hash.substring(1) || 'home';
+        console.log('Router: hashchange to', hash);
+        if (routeConfig[hash]) {
+          self.navigate(hash);
+        } else {
+          self.navigate('home');
+        }
+      });
 
-          if (fullPath.includes('/index.html/')) {
-            // Extract route from /index.html/crop -> crop
-            pathRoute = fullPath.split('/index.html/')[1] || 'home';
-          } else if (fullPath.length > 1 && fullPath !== '/index.html') {
-            // Extract route from /crop -> crop
-            pathRoute = fullPath.substring(1);
-          }
-
-          console.log('Router: popstate to', pathRoute);
-          if (routeConfig[pathRoute]) {
-            self.navigate(pathRoute);
-          } else {
-            self.navigate('home');
-          }
-        });
-      } else {
-        // Development: Use hash URLs
-        window.addEventListener('hashchange', function(event) {
-          const hash = window.location.hash.substring(1) || 'home';
-          console.log('Router: hashchange to', hash);
-          if (routeConfig[hash]) {
-            self.navigate(hash);
-          } else {
-            self.navigate('home');
-          }
-        });
-      }
-
-      // Handle initial route on page load
+      // Handle initial route on page load - check hash
+      const hash = window.location.hash.substring(1);
       let initialRoute = 'home';
-
-      // Check pathname for initial route (works for both production and development)
-      const fullPath = window.location.pathname;
-      console.log('Router: full pathname', fullPath);
-
-      // Handle URLs like /index.html/crop or /crop
-      let pathRoute = '';
-      if (fullPath.includes('/index.html/')) {
-        // Extract route from /index.html/crop -> crop
-        pathRoute = fullPath.split('/index.html/')[1];
-        console.log('Router: extracted route from index.html URL:', pathRoute);
-      } else if (fullPath.length > 1) {
-        // Extract route from /crop -> crop
-        pathRoute = fullPath.substring(1);
-        console.log('Router: extracted route from clean URL:', pathRoute);
-      }
-
-      // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
-      const storedPath = sessionStorage.getItem('spa-path');
-      if (storedPath) {
-        sessionStorage.removeItem('spa-path');
-        const url = new URL(storedPath, window.location.origin);
-        const storedRoute = url.pathname.includes('/index.html/')
-          ? url.pathname.split('/index.html/')[1]
-          : url.pathname.substring(1);
-        if (storedRoute && routeConfig[storedRoute]) {
-          initialRoute = storedRoute;
-          console.log('Router: using stored path route', initialRoute);
-        }
-      } else if (pathRoute && routeConfig[pathRoute] && !isFileProtocol) {
-        initialRoute = pathRoute;
-        console.log('Router: using pathname route', initialRoute);
-      } else {
-        // File protocol or development: Check hash for initial route
-        const hash = window.location.hash.substring(1);
-        console.log('Router: initial hash', hash);
-        if (hash && routeConfig[hash]) {
-          initialRoute = hash;
-        }
+      console.log('Router: initial hash', hash);
+      if (hash && routeConfig[hash]) {
+        initialRoute = hash;
       }
 
       console.log('Router: navigating to initial route', initialRoute);

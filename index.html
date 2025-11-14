@@ -991,20 +991,8 @@
             console.log('Window.router exists:', !!window.router);
             if (route && window.router) {
               console.log('Navigation: router available, navigating to', route);
-              // Use clean URLs on production, hash URLs on localhost/file://
-              const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
-              if (isProduction) {
-                const newPath = route === 'home' ? '/' : `/${route}`;
-                history.pushState(null, '', newPath);
-              } else {
-                // Use hash URLs for local development
-                const hashUrl = route === 'home' ? '/' : `#${route}`;
-                if (window.location.protocol !== 'file:') {
-                  history.pushState(null, '', hashUrl);
-                } else {
-                  window.location.hash = route;
-                }
-              }
+              // Use hash-based routing for reliable cross-platform compatibility
+              window.location.hash = route;
               window.router.navigate(route);
             } else {
               console.error('Navigation: router not available or invalid route', route, !!window.router);

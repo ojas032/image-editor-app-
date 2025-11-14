@@ -99,59 +99,25 @@ console.log('========== ROUTER.JS FILE IS LOADING ==========');
       const self = this;
       console.log('Router: initializing');
 
-      // Determine if we're in production (clean URLs) or development (hash URLs)
-      const isProduction = window.location.hostname !== 'localhost' && window.location.protocol !== 'file:';
-      console.log('Router: environment -', isProduction ? 'production (clean URLs)' : 'development (hash URLs)');
+      // Use hash-based routing for reliable cross-platform compatibility
+      console.log('Router: using hash-based routing');
 
-      if (isProduction) {
-        // Production: Use clean URLs with History API
-        window.addEventListener('popstate', function(event) {
-          const path = window.location.pathname.substring(1) || 'home';
-          console.log('Router: popstate to', path);
-          if (routeConfig[path]) {
-            self.navigate(path);
-          } else if (path === '' || path === 'index.html') {
-            self.navigate('home');
-          }
-        });
-      } else {
-        // Development: Use hash URLs
-        window.addEventListener('hashchange', function(event) {
-          const hash = window.location.hash.substring(1) || 'home';
-          console.log('Router: hashchange to', hash);
-          if (routeConfig[hash]) {
-            self.navigate(hash);
-          } else {
-            self.navigate('home');
-          }
-        });
-      }
+      window.addEventListener('hashchange', function(event) {
+        const hash = window.location.hash.substring(1) || 'home';
+        console.log('Router: hashchange to', hash);
+        if (routeConfig[hash]) {
+          self.navigate(hash);
+        } else {
+          self.navigate('home');
+        }
+      });
 
-      // Handle initial route on page load
+      // Handle initial route on page load - check hash
+      const hash = window.location.hash.substring(1);
       let initialRoute = 'home';
-
-      if (isProduction) {
-        // Production: Check pathname for initial route
-        const path = window.location.pathname.substring(1);
-        console.log('Router: initial path', path);
-
-        // Check if we have a stored path from 404.html redirect (for GitHub Pages SPA routing)
-        const storedPath = sessionStorage.getItem('spa-path');
-        if (storedPath) {
-          sessionStorage.removeItem('spa-path');
-          const url = new URL(storedPath, window.location.origin);
-          initialRoute = url.pathname.substring(1);
-          console.log('Router: using stored path', initialRoute);
-        } else if (path && routeConfig[path]) {
-          initialRoute = path;
-        }
-      } else {
-        // Development: Check hash for initial route
-        const hash = window.location.hash.substring(1);
-        console.log('Router: initial hash', hash);
-        if (hash && routeConfig[hash]) {
-          initialRoute = hash;
-        }
+      console.log('Router: initial hash', hash);
+      if (hash && routeConfig[hash]) {
+        initialRoute = hash;
       }
 
       console.log('Router: navigating to initial route', initialRoute);
