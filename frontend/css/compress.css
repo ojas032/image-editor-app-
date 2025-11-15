@@ -5,21 +5,30 @@
   background: var(--light-card);
   border-radius: 14px;
   padding: 28px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .compress-uploader, .resize-uploader, .crop-uploader {
-  border: 2px dashed #cbd5e1;
-  border-radius: 12px;
-  padding: 32px;
-  background: rgba(255, 255, 255, 0.6);
+  border: 3px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-height: 200px;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
@@ -37,14 +46,12 @@
 }
 
 .compress-help, .resize-help, .crop-help {
-  margin-top: 12px;
   color: #1e293b;
   font-size: 14px;
   font-weight: 500;
 }
 
 .file-limit {
-  margin-top: 8px;
   color: #64748b;
   font-size: 12px;
   font-weight: 500;
@@ -102,21 +109,21 @@
   }
 
   .compress-uploader, .resize-uploader, .crop-uploader {
-    border-color: rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 
   .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
     border-color: var(--primary-500);
-    background: rgba(91, 140, 255, 0.12);
-    box-shadow: 0 8px 25px rgba(91, 140, 255, 0.25);
+    background: rgba(91, 140, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(91, 140, 255, 0.3);
   }
 
   .compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
-    background: rgba(91, 140, 255, 0.18);
+    background: rgba(91, 140, 255, 0.2);
     border-color: var(--primary-500);
-    box-shadow: 0 8px 25px rgba(91, 140, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(91, 140, 255, 0.35);
   }
 
   .compress-help, .resize-help, .crop-help {
