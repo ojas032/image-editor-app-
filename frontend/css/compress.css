@@ -1,79 +1,36 @@
 /* Compress page specific styles */
 
-#compressSection, #resizeSection {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 400px;
-  padding: 20px;
-}
-
 .compress-card, .resize-card, .crop-card, .convert-card {
   border: 1px solid var(--light-border);
   background: var(--light-card);
-  border-radius: 16px;
-  padding: 32px;
-  max-width: 700px;
-  width: 100%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-  position: relative;
+  border-radius: 14px;
+  padding: 28px;
 }
 
 .compress-uploader, .resize-uploader, .crop-uploader {
-  border: 3px dashed #cbd5e1;
-  border-radius: 16px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
+  border: 2px dashed var(--light-border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  background: rgba(15,23,42,0.02);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 300px;
-  width: 100%;
-  max-width: 500px;
-}
-
-/* Centered content inside uploader */
-.compress-uploader .btn,
-.resize-uploader .btn,
-.crop-uploader .btn,
-.compress-uploader .compress-help,
-.resize-uploader .resize-help,
-.crop-uploader .crop-help,
-.compress-uploader .file-limit,
-.resize-uploader .file-limit,
-.crop-uploader .file-limit {
-  text-align: center;
-  margin: 8px 0;
+  transition: all 0.2s ease;
 }
 
 .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
   border-color: var(--primary-500);
-  background: rgba(91, 140, 255, 0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(91, 140, 255, 0.15);
+  background: rgba(91, 140, 255, 0.03);
 }
 
 .compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
-  background: rgba(91, 140, 255, 0.12);
-  border-color: var(--primary-500);
-  border-style: solid;
-  box-shadow: 0 8px 25px rgba(91, 140, 255, 0.2);
+  background: rgba(91,140,255,0.10);
+  border-color: #a5b4fc;
 }
 
 .compress-help, .resize-help, .crop-help {
-  color: #1e293b;
+  margin-top: 10px;
+  color: var(--light-muted);
   font-size: 14px;
-  font-weight: 500;
-}
-
-.file-limit {
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .resize-settings, .compress-controls, .crop-settings {
@@ -123,37 +80,28 @@
 /* Dark theme overrides */
 @media (prefers-color-scheme: dark) {
   .compress-card, .resize-card, .crop-card, .convert-card {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-700);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
   }
 
   .compress-uploader, .resize-uploader, .crop-uploader {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-700);
+    background: rgba(255,255,255,0.02);
   }
 
   .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
     border-color: var(--primary-500);
-    background: rgba(91, 140, 255, 0.15);
-    box-shadow: 0 8px 25px rgba(91, 140, 255, 0.3);
+    background: rgba(91, 140, 255, 0.08);
   }
 
   .compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
-    background: rgba(91, 140, 255, 0.2);
-    border-color: var(--primary-500);
-    box-shadow: 0 8px 25px rgba(91, 140, 255, 0.35);
+    background: rgba(91,140,255,0.15);
+    border-color: #5b8cff;
   }
 
   .compress-help, .resize-help, .crop-help {
-    color: #94a3b8;
+    color: var(--text-300);
   }
-
-  .file-limit {
-    color: #cbd5e1;
-  }
-
 
   .resize-settings, .compress-controls, .crop-settings {
     background: rgba(255,255,255,0.02);
@@ -372,4 +320,3 @@
     font-size: 16px;
   }
 }
-

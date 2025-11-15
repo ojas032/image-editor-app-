@@ -43,12 +43,11 @@
     // Create compress UI
     section.innerHTML = `
       <div class="compress-card" role="region" aria-live="polite">
-      <div class="compress-uploader" id="compress-dropZone">
-        <input id="compress-fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
-        <button class="btn btn-primary" id="compress-selectBtn" type="button">Select image</button>
-        <div class="compress-help">or drop image here</div>
-        <div class="file-limit">Max file size: 10 MB</div>
-      </div>
+        <div class="compress-uploader" id="compress-dropZone">
+          <input id="compress-fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
+          <button class="btn btn-primary" id="compress-selectBtn" type="button">Select image</button>
+          <div class="compress-help">or drop image here</div>
+        </div>
         <div id="compress-editorView" style="display:none;max-width:700px;margin:0 auto;text-align:center;">
           <div id="compress-processingOverlay" style="display:flex;flex-direction:column;align-items:center;padding:40px;">
             <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--primary-500);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px"></div>
