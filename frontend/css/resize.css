@@ -64,27 +64,27 @@
 }
 
 .social-card.instagram {
-  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
 .social-card.facebook {
-  background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .social-card.twitter {
-  background: linear-gradient(135deg, #000000 0%, #1da1f2 100%);
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
 .social-card.youtube {
-  background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
 }
 
 .social-card.linkedin {
-  background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
 }
 
 .social-card.pinterest {
-  background: linear-gradient(135deg, #e60023 0%, #c9002b 100%);
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
 }
 
 .social-title {

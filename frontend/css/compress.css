@@ -11,11 +11,15 @@
   border: 2px dashed #cbd5e1;
   border-radius: 12px;
   padding: 32px;
-  text-align: center;
   background: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
@@ -36,6 +40,13 @@
   margin-top: 12px;
   color: #1e293b;
   font-size: 14px;
+  font-weight: 500;
+}
+
+.file-limit {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 12px;
   font-weight: 500;
 }
 
@@ -110,6 +121,10 @@
 
   .compress-help, .resize-help, .crop-help {
     color: #94a3b8;
+  }
+
+  .file-limit {
+    color: #cbd5e1;
   }
 
   .resize-settings, .compress-controls, .crop-settings {

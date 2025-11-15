@@ -47,6 +47,7 @@
           <input id="compress-fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
           <button class="btn btn-primary" id="compress-selectBtn" type="button">Select image</button>
           <div class="compress-help">or drop image here</div>
+          <div class="file-limit">Max file size: 10 MB</div>
         </div>
         <div id="compress-editorView" style="display:none;max-width:700px;margin:0 auto;text-align:center;">
           <div id="compress-processingOverlay" style="display:flex;flex-direction:column;align-items:center;padding:40px;">
