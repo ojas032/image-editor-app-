@@ -1,47 +1,52 @@
-// Simple Router Implementation for ImageNerd (Frontend)
-// Handles navigation between separate HTML pages
+// Simple Router for ImageNerd - Clean URLs without .html extensions
+// All routes now serve separate HTML files
 (function() {
   'use strict';
 
-  // Route configurations - mapping routes to HTML files
-  const routeConfig = {
-    'home': 'index.html',
-    'compress': 'compress.html',
-    'resize': 'resize.html',
-    'about': 'about.html',
-    'contact': 'contact.html',
-    'privacy': 'privacy.html',
-    'terms': 'terms.html'
-  };
-
-  // Simple navigation function
+  // Simple navigation function - all routes are external pages now
   function navigate(route) {
-    const page = routeConfig[route];
-    if (page) {
-      window.location.href = page;
-    } else {
-      console.error('Route not found:', route);
-    }
+    // Navigate to the clean URL
+    window.location.href = route === 'home' ? '/' : '/' + route;
   }
 
-  // Handle navigation clicks
+  // Handle navigation clicks - allow normal browser navigation for all routes
   function handleNavigationClick(e) {
     const link = e.target.closest('a[data-route]');
     if (link) {
-      e.preventDefault();
-      e.stopPropagation();
       const route = link.getAttribute('data-route');
       if (route) {
-        navigate(route);
+        // For all routes, allow normal browser navigation to clean URLs
+        // The href attributes are already set to /route format
+        return true;
       }
-      return false;
     }
   }
 
-  // Initialize
-  document.addEventListener('click', handleNavigationClick);
+  // Update active navigation state
+  function updateActiveNav() {
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('a[data-route]').forEach(link => {
+      link.classList.remove('active');
+      const route = link.getAttribute('data-route');
+      const expectedPath = route === 'home' ? '/' : '/' + route;
+      if (currentPath === expectedPath) {
+        link.classList.add('active');
+      }
+    });
+  }
 
-  // Expose navigate function globally
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('click', handleNavigationClick);
+      updateActiveNav();
+    });
+  } else {
+    document.addEventListener('click', handleNavigationClick);
+    updateActiveNav();
+  }
+
+  // Expose router globally for backward compatibility
   window.router = {
     navigate: navigate
   };

@@ -33,6 +33,7 @@
   font-size: 14px;
 }
 
+
 .resize-settings, .compress-controls, .crop-settings {
   background: rgba(15,23,42,0.02);
   border: 1px solid var(--light-border);

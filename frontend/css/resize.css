@@ -235,6 +235,36 @@
   }
 }
 
+/* Resize uploader specific styling */
+.resize-uploader #resize-selectBtn {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #3f73ff !important;
+}
+
+.resize-help {
+  text-align: center;
+  margin-top: 10px;
+  color: var(--light-muted);
+  font-size: 14px;
+}
+
+/* Resize card border styling */
+.resize-card {
+  border: 2px solid var(--light-border);
+  background: var(--light-card);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+/* File limit styling */
+.file-limit {
+  margin-top: 12px;
+  color: var(--light-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
 /* Image preview */
 .image-preview {
   text-align: center;

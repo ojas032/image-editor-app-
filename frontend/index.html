@@ -34,7 +34,7 @@
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="#" onclick="router.navigate('home'); return false;" aria-label="ImageNerd Home">
+        <a class="brand" href="/" data-route="home" aria-label="ImageNerd Home">
           <img class="brand-mark" src="icon_without_bg.png" alt="ImageNerd logo" />
           <span class="brand-name">ImageNerd</span>
         </a>
@@ -42,8 +42,8 @@
           <!-- Remove background hidden -->
           <a href="/compress" data-route="compress">Compress</a>
           <a href="/resize" data-route="resize">Resize</a>
-          <a href="/crop">Crop</a>
-          <a href="/convert">Format Converter</a>
+          <a href="/crop" data-route="crop">Crop</a>
+          <a href="/convert" data-route="convert">Format Converter</a>
         </nav>
         <div class="header-cta">
         </div>
