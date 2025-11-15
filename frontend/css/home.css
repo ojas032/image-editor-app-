@@ -59,8 +59,8 @@
 
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
   margin-top: 20px;
 }
 
@@ -70,8 +70,8 @@
   color: inherit;
   background: var(--light-card);
   border: 2px solid transparent;
-  border-radius: 20px;
-  padding: 40px;
+  border-radius: 16px;
+  padding: 24px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -102,40 +102,40 @@
 }
 
 .tool-icon {
-  width: 80px;
-  height: 80px;
+  width: 56px;
+  height: 56px;
   background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-  border-radius: 20px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   transition: all 0.3s ease;
   position: relative;
 }
 
 .tool-card:hover .tool-icon {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 10px 30px rgba(91, 140, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(91, 140, 255, 0.3);
 }
 
 .tool-content h3 {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: var(--light-text);
 }
 
 .tool-content p {
   color: var(--light-muted);
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .tool-action {
-  margin-top: 24px;
+  margin-top: 16px;
   text-align: right;
 }
 
@@ -268,20 +268,24 @@
 
   .tools-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
   .tool-card {
-    padding: 32px;
+    padding: 20px;
   }
 
   .tool-icon {
-    width: 70px;
-    height: 70px;
+    width: 48px;
+    height: 48px;
   }
 
   .tool-content h3 {
-    font-size: 24px;
+    font-size: 18px;
+  }
+
+  .tool-content p {
+    font-size: 13px;
   }
 
   .stats-section {
@@ -331,16 +335,20 @@
   }
 
   .tool-card {
-    padding: 24px;
+    padding: 16px;
   }
 
   .tool-icon {
-    width: 60px;
-    height: 60px;
+    width: 44px;
+    height: 44px;
   }
 
   .tool-content h3 {
-    font-size: 20px;
+    font-size: 16px;
+  }
+
+  .tool-content p {
+    font-size: 12px;
   }
 
   .stats-grid {
