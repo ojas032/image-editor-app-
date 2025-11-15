@@ -53,75 +53,143 @@
 
     <main>
       <!-- HOME PAGE CONTENT -->
-        <section class="hero">
-          <div class="container hero-inner">
-            <h1>Powerful image tools, zero friction</h1>
-            <p class="subtitle">Compress, resize, crop, and convert images — right in your browser.</p>
-            <div class="hero-actions">
-            <a class="btn btn-primary" href="/compress">Compress image</a>
-            <a class="btn btn-ghost" href="/resize">Resize image</a>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-badge">
+            <span class="badge-text">✨ Free & Fast</span>
+          </div>
+          <h1>Powerful image tools,<br><span class="highlight">zero friction</span></h1>
+          <p class="subtitle">Compress, resize, crop, and convert images — right in your browser. No uploads, no registration, just instant results.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/compress">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
+                <path d="M8 3v4M8 17v4M5 8h6M5 16h6M16 8l3 4-3 4"></path>
+              </svg>
+              Compress image
+            </a>
+            <a class="btn btn-ghost btn-lg" href="/resize">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
+                <path d="M3 10V3h7M21 14v7h-7M3 3l8 8M13 13l8 8"></path>
+              </svg>
+              Resize image
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">10M+</span>
+              <span class="stat-label">Images processed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Free forever</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">90%</span>
+              <span class="stat-label">Avg compression</span>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="features-grid container" aria-label="Popular tools">
-        <a class="feature" href="/compress">
-            <span class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M8 3v4M8 17v4" />
-                <path d="M5 8h6M5 16h6" />
-                <path d="M16 8l3 4-3 4" />
-              </svg>
-            </span>
-            <div class="feature-copy">
-              <h3>Compress image</h3>
-              <p>Shrink file sizes without losing visible quality.</p>
+      <section class="features-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Everything you need for image editing</h2>
+            <p>Professional-grade tools designed for speed and simplicity</p>
+          </div>
+
+          <div class="features-grid">
+            <a class="feature-card" href="/compress">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 3v4M8 17v4" />
+                  <path d="M5 8h6M5 16h6" />
+                  <path d="M16 8l3 4-3 4" />
+                </svg>
+              </div>
+              <div class="feature-content">
+                <h3>Compress Images</h3>
+                <p>Reduce file sizes by up to 90% without losing quality. Perfect for web optimization and faster loading.</p>
+              </div>
+              <div class="feature-arrow">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+                </svg>
+              </div>
+            </a>
+
+            <a class="feature-card" href="/resize">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 10V3h7" />
+                  <path d="M21 14v7h-7" />
+                  <path d="M3 3l8 8M13 13l8 8" />
+                </svg>
+              </div>
+              <div class="feature-content">
+                <h3>Resize Images</h3>
+                <p>Exact dimensions for social media, web, and print. Social media presets for Instagram, Facebook, YouTube, and more.</p>
+              </div>
+              <div class="feature-arrow">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+                </svg>
+              </div>
+            </a>
+
+            <a class="feature-card" href="/crop">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 3v14a3 3 0 003 3h14" />
+                  <path d="M3 7h14a3 3 0 013 3v14" />
+                </svg>
+              </div>
+              <div class="feature-content">
+                <h3>Crop Images</h3>
+                <p>Frame your images perfectly with aspect ratio presets. Visual cropping with instant preview.</p>
+              </div>
+              <div class="feature-arrow">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+                </svg>
+              </div>
+            </a>
+
+            <a class="feature-card" href="/convert">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 3h8" />
+                  <path d="M16 3l-3 3 3 3" />
+                  <path d="M16 21H8" />
+                  <path d="M8 21l3-3-3-3" />
+                </svg>
+              </div>
+              <div class="feature-content">
+                <h3>Convert Formats</h3>
+                <p>JPG, PNG, WebP, HEIC, GIF, BMP, TIFF, SVG — convert between all popular image formats instantly.</p>
+              </div>
+              <div class="feature-arrow">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-content">
+            <h2>Ready to optimize your images?</h2>
+            <p>Join millions of users who trust ImageNerd for fast, reliable image processing.</p>
+            <div class="cta-actions">
+              <a class="btn btn-primary btn-lg" href="/compress">Get Started Free</a>
+              <a class="btn btn-ghost btn-lg" href="/about">Learn More</a>
             </div>
-          </a>
-
-        <a class="feature" href="/resize">
-            <span class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 10V3h7" />
-                <path d="M21 14v7h-7" />
-                <path d="M3 3l8 8M13 13l8 8" />
-              </svg>
-            </span>
-            <div class="feature-copy">
-              <h3>Resize image</h3>
-              <p>Exact dimensions for web, social, and print.</p>
-            </div>
-          </a>
-
-        <a class="feature" href="/crop">
-            <span class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 3v14a3 3 0 003 3h14" />
-                <path d="M3 7h14a3 3 0 013 3v14" />
-              </svg>
-            </span>
-            <div class="feature-copy">
-              <h3>Crop image</h3>
-              <p>Frame perfectly with aspect-ratio presets.</p>
-            </div>
-          </a>
-
-        <a class="feature" href="/convert">
-            <span class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M8 3h8" />
-                <path d="M16 3l-3 3 3 3" />
-                <path d="M16 21H8" />
-                <path d="M8 21l3-3-3-3" />
-              </svg>
-            </span>
-            <div class="feature-copy">
-              <h3>Convert format</h3>
-              <p>JPG, PNG, WEBP, SVG, and more in seconds.</p>
-            </div>
-          </a>
-        </section>
-
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -129,10 +197,10 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <p>© <span id="year"></span> ImageNerd. All rights reserved.</p>
           <nav style="display: flex; gap: 16px; flex-wrap: wrap;">
-            <a href="#about" onclick="router.navigate('about'); return false;" style="color: var(--light-muted); text-decoration: none;">About Us</a>
-            <a href="#contact" onclick="router.navigate('contact'); return false;" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
-            <a href="#privacy" onclick="router.navigate('privacy'); return false;" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
-            <a href="#terms" onclick="router.navigate('terms'); return false;" style="color: var(--light-muted); text-decoration: none;">Terms</a>
+            <a href="/about" onclick="router.navigate('about'); return false;" style="color: var(--light-muted); text-decoration: none;">About Us</a>
+            <a href="/contact" onclick="router.navigate('contact'); return false;" style="color: var(--light-muted); text-decoration: none;">Contact Us</a>
+            <a href="/privacy" onclick="router.navigate('privacy'); return false;" style="color: var(--light-muted); text-decoration: none;">Privacy Policy</a>
+            <a href="/terms" onclick="router.navigate('terms'); return false;" style="color: var(--light-muted); text-decoration: none;">Terms</a>
           </nav>
         </div>
       </div>
