@@ -1,6 +1,53 @@
 /* Resize page specific styles */
 
-/* Resize specific styles - extending compress styles */
+/* Tool page layout styles */
+.tool-page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.tool-page-header h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--light-text);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.tool-page-header .subtitle {
+  font-size: 18px;
+  color: var(--light-muted);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.tool-section {
+  margin-bottom: 48px;
+}
+
+/* SEO Content Styles */
+.seo-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.seo-section {
+  margin-bottom: 40px;
+}
+
+.seo-heading {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--light-text);
+}
+
+.seo-text {
+  line-height: 1.8;
+  color: var(--light-muted);
+  margin-bottom: 16px;
+}
 
 /* Social media presets grid */
 .social-media-grid {
@@ -10,34 +57,57 @@
   margin-bottom: 24px;
 }
 
-.social-media-card {
-  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+.social-card {
   color: white;
   border-radius: 8px;
   padding: 20px;
 }
 
-.social-media-card h3 {
+.social-card.instagram {
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+
+.social-card.facebook {
+  background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%);
+}
+
+.social-card.twitter {
+  background: linear-gradient(135deg, #000000 0%, #1da1f2 100%);
+}
+
+.social-card.youtube {
+  background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+}
+
+.social-card.linkedin {
+  background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
+}
+
+.social-card.pinterest {
+  background: linear-gradient(135deg, #e60023 0%, #c9002b 100%);
+}
+
+.social-title {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
 }
 
-.social-media-card ul {
+.social-list {
   line-height: 1.8;
   font-size: 14px;
   list-style: none;
   padding: 0;
 }
 
-/* Formats grid */
-.formats-grid {
+/* Format list */
+.format-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
 }
 
-.formats-grid li {
+.format-list li {
   padding: 12px 16px;
   background: var(--light-card);
   border: 1px solid var(--light-border);
@@ -45,11 +115,39 @@
   font-weight: 500;
 }
 
+/* Lists */
+.benefits-list, .steps-list {
+  line-height: 1.8;
+  color: var(--light-muted);
+}
+
+.benefits-list {
+  padding-left: 20px;
+}
+
+.benefits-list li {
+  margin-bottom: 12px;
+}
+
+.steps-list {
+  padding-left: 20px;
+}
+
+.steps-list li {
+  margin-bottom: 16px;
+}
+
+.nested-list {
+  margin-top: 8px;
+  margin-left: 20px;
+}
+
 /* Features grid */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
+  margin-top: 20px;
 }
 
 .feature-item {
@@ -59,17 +157,82 @@
   border-radius: 4px;
 }
 
-.feature-item h3 {
+.feature-title {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: var(--light-text);
 }
 
-.feature-item p {
+.feature-description {
   font-size: 14px;
   color: var(--light-muted);
   line-height: 1.6;
   margin: 0;
+}
+
+/* FAQ styles */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--light-border);
+  padding-bottom: 24px;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.faq-question {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--light-text);
+}
+
+.faq-answer {
+  line-height: 1.6;
+  color: var(--light-muted);
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tool-page-header h1 {
+    font-size: 28px;
+  }
+
+  .tool-page-header .subtitle {
+    font-size: 16px;
+  }
+
+  .seo-heading {
+    font-size: 24px;
+  }
+
+  .social-media-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .format-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .faq-question {
+    font-size: 16px;
+  }
 }
 
 /* Image preview */

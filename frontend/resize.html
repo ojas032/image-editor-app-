@@ -41,10 +41,8 @@
         <nav class="main-nav" aria-label="Primary">
           <a href="/compress" data-route="compress">Compress</a>
           <a href="/resize" data-route="resize">Resize</a>
-          <a href="/crop">Crop</a>
-          <a href="/convert">Format Converter</a>
-          <a href="/about" data-route="about">About</a>
-          <a href="/contact" data-route="contact">Contact</a>
+          <a href="/crop" data-route="crop">Crop</a>
+          <a href="/convert" data-route="convert">Convert</a>
         </nav>
         <div class="header-cta">
         </div>
@@ -53,79 +51,81 @@
     </header>
 
     <main>
-      <div class="container tool-page-container">
-        <h1>Resize Image Online - Free Image Resizer for Social Media & Web</h1>
-        <p class="subtitle">Resize images for YouTube thumbnails, Instagram posts, Instagram Reels, Facebook, Twitter, and all social media platforms. Free, fast, and easy. Perfect dimensions for web, social media, and print.</p>
-        <section id="resizeSection" aria-label="Image resizer" style="margin-top:24px;"></section>
+      <div class="container">
+        <div class="tool-page-header">
+          <h1>Resize Image Online - Free Image Resizer for Social Media & Web</h1>
+          <p class="subtitle">Resize images for YouTube thumbnails, Instagram posts, Instagram Reels, Facebook, Twitter, and all social media platforms. Free, fast, and easy. Perfect dimensions for web, social media, and print.</p>
+        </div>
+        <section id="resizeSection" aria-label="Image resizer" class="tool-section"></section>
 
         <!-- SEO Content Section -->
-        <div class="seo-content" style="margin-top:56px;max-width:900px;">
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Resize Images for Any Purpose</h2>
-            <p style="line-height:1.8;color:var(--light-muted);margin-bottom:16px;">
+        <div class="seo-content">
+          <section class="seo-section">
+            <h2 class="seo-heading">Resize Images for Any Purpose</h2>
+            <p class="seo-text">
               ImageNerd's free image resizer lets you resize images to exact dimensions in seconds. Perfect for social media posts, website optimization, email attachments, and more. Resize JPEG, PNG, WebP, HEIC, GIF, and other formats without losing quality.
             </p>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Social Media Image Sizes</h2>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:24px;">
-              <div style="background:linear-gradient(135deg,#833ab4 0%,#fd1d1d 50%,#fcb045 100%);color:white;border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">Instagram</h3>
-                <ul style="line-height:1.8;font-size:14px;list-style:none;padding:0;">
+          <section class="seo-section">
+            <h2 class="seo-heading">Social Media Image Sizes</h2>
+            <div class="social-media-grid">
+              <div class="social-card instagram">
+                <h3 class="social-title">Instagram</h3>
+                <ul class="social-list">
                   <li>• Post (Square): 1080 × 1080 px</li>
                   <li>• Post (Portrait): 1080 × 1350 px</li>
                   <li>• Story/Reels: 1080 × 1920 px</li>
                   <li>• Profile Photo: 320 × 320 px</li>
                 </ul>
               </div>
-              <div style="background:linear-gradient(135deg,#1877f2 0%,#42a5f5 100%);color:white;border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">Facebook</h3>
-                <ul style="line-height:1.8;font-size:14px;list-style:none;padding:0;">
+              <div class="social-card facebook">
+                <h3 class="social-title">Facebook</h3>
+                <ul class="social-list">
                   <li>• Post: 1200 × 630 px</li>
                   <li>• Story: 1080 × 1920 px</li>
                   <li>• Cover Photo: 820 × 312 px</li>
                   <li>• Profile Photo: 180 × 180 px</li>
                 </ul>
-                </div>
-              <div style="background:linear-gradient(135deg,#000000 0%,#1da1f2 100%);color:white;border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">Twitter/X</h3>
-                <ul style="line-height:1.8;font-size:14px;list-style:none;padding:0;">
+              </div>
+              <div class="social-card twitter">
+                <h3 class="social-title">Twitter/X</h3>
+                <ul class="social-list">
                   <li>• Post: 1200 × 675 px</li>
                   <li>• Header: 1500 × 500 px</li>
                   <li>• Profile Photo: 400 × 400 px</li>
                 </ul>
-                </div>
-              <div style="background:linear-gradient(135deg,#ff0000 0%,#cc0000 100%);color:white;border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">YouTube</h3>
-                <ul style="line-height:1.8;font-size:14px;list-style:none;padding:0;">
+              </div>
+              <div class="social-card youtube">
+                <h3 class="social-title">YouTube</h3>
+                <ul class="social-list">
                   <li>• Thumbnail: 1280 × 720 px</li>
                   <li>• Channel Art: 2560 × 1440 px</li>
                   <li>• Profile Picture: 800 × 800 px</li>
                 </ul>
               </div>
-              <div style="background:linear-gradient(135deg,#0077b5 0%,#00a0dc 100%);color:white;border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">LinkedIn</h3>
-                <ul style="line-height:1.8;font-size:14px;list-style:none;padding:0;">
+              <div class="social-card linkedin">
+                <h3 class="social-title">LinkedIn</h3>
+                <ul class="social-list">
                   <li>• Post: 1200 × 627 px</li>
                   <li>• Cover Photo: 1584 × 396 px</li>
                   <li>• Profile Photo: 400 × 400 px</li>
                 </ul>
-                  </div>
-              <div style="background:linear-gradient(135deg,#e60023 0%,#c9002b 100%);color:white;border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">Pinterest</h3>
-                <ul style="line-height:1.8;font-size:14px;list-style:none;padding:0;">
+              </div>
+              <div class="social-card pinterest">
+                <h3 class="social-title">Pinterest</h3>
+                <ul class="social-list">
                   <li>• Pin (Standard): 1000 × 1500 px</li>
                   <li>• Pin (Square): 1000 × 1000 px</li>
                   <li>• Profile Photo: 165 × 165 px</li>
                 </ul>
-                  </div>
-                </div>
+              </div>
+            </div>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Supported Image Formats</h2>
-            <ul style="line-height:1.8;color:var(--light-muted);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+          <section class="seo-section">
+            <h2 class="seo-heading">Supported Image Formats</h2>
+            <ul class="format-list">
               <li><strong>JPEG/JPG:</strong> Most common photo format</li>
               <li><strong>PNG:</strong> Graphics and images with transparency</li>
               <li><strong>WebP:</strong> Modern web-optimized format</li>
@@ -137,12 +137,12 @@
             </ul>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">How to Resize Images</h2>
-            <ol style="line-height:1.8;color:var(--light-muted);">
+          <section class="seo-section">
+            <h2 class="seo-heading">How to Resize Images</h2>
+            <ol class="steps-list">
               <li><strong>Upload Your Image:</strong> Click to upload or drag and drop your image file</li>
               <li><strong>Choose Dimensions:</strong>
-                <ul style="margin-top:8px;margin-left:20px;">
+                <ul class="nested-list">
                   <li>Select from social media presets (Instagram, Facebook, YouTube, etc.)</li>
                   <li>Enter custom width and height in pixels</li>
                   <li>Lock aspect ratio to maintain proportions</li>
@@ -153,9 +153,9 @@
             </ol>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Why Resize Images?</h2>
-            <ul style="line-height:1.8;color:var(--light-muted);">
+          <section class="seo-section">
+            <h2 class="seo-heading">Why Resize Images?</h2>
+            <ul class="benefits-list">
               <li><strong>Social Media Requirements:</strong> Each platform has specific image size requirements for optimal display</li>
               <li><strong>Website Optimization:</strong> Properly sized images load faster and improve SEO</li>
               <li><strong>Email Attachments:</strong> Reduce file size to meet email attachment limits</li>
@@ -165,58 +165,58 @@
             </ul>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Key Features</h2>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Social Media Presets</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">One-click resize for Instagram, Facebook, YouTube, Twitter, and more</p>
+          <section class="seo-section">
+            <h2 class="seo-heading">Key Features</h2>
+            <div class="features-grid">
+              <div class="feature-item">
+                <h3 class="feature-title">Social Media Presets</h3>
+                <p class="feature-description">One-click resize for Instagram, Facebook, YouTube, Twitter, and more</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Custom Dimensions</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">Enter exact width and height in pixels for precise control</p>
-                </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Aspect Ratio Lock</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">Maintain proportions to avoid distortion when resizing</p>
+              <div class="feature-item">
+                <h3 class="feature-title">Custom Dimensions</h3>
+                <p class="feature-description">Enter exact width and height in pixels for precise control</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">High-Quality Resizing</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">Advanced algorithms maintain image quality during resizing</p>
+              <div class="feature-item">
+                <h3 class="feature-title">Aspect Ratio Lock</h3>
+                <p class="feature-description">Maintain proportions to avoid distortion when resizing</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">HEIC Support</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">Resize iPhone photos directly without conversion</p>
+              <div class="feature-item">
+                <h3 class="feature-title">High-Quality Resizing</h3>
+                <p class="feature-description">Advanced algorithms maintain image quality during resizing</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Privacy First</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">All processing in your browser - images never uploaded</p>
+              <div class="feature-item">
+                <h3 class="feature-title">HEIC Support</h3>
+                <p class="feature-description">Resize iPhone photos directly without conversion</p>
+              </div>
+              <div class="feature-item">
+                <h3 class="feature-title">Privacy First</h3>
+                <p class="feature-description">All processing in your browser - images never uploaded</p>
               </div>
             </div>
           </section>
 
-            <section>
-              <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Frequently Asked Questions</h2>
-              <div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Will resizing reduce image quality?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">Our high-quality resizing algorithm maintains maximum quality. Upscaling (making images larger) may reduce quality, but downscaling (making smaller) preserves quality well.</p>
-            </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">What's the best Instagram image size?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">For Instagram posts, use 1080×1080 px (square), 1080×1350 px (portrait), or 1080×1920 px (portrait/story). For Stories and Reels, use 1080×1920 px.</p>
-                </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Can I resize multiple images at once?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">Currently, you can resize one image at a time. This ensures maximum quality and processing speed for each image.</p>
+          <section class="seo-section">
+            <h2 class="seo-heading">Frequently Asked Questions</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <h3 class="faq-question">Will resizing reduce image quality?</h3>
+                <p class="faq-answer">Our high-quality resizing algorithm maintains maximum quality. Upscaling (making images larger) may reduce quality, but downscaling (making smaller) preserves quality well.</p>
               </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Is the image resizer free?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">Yes! ImageNerd's image resizer is completely free with no limitations, watermarks, or registration required.</p>
+              <div class="faq-item">
+                <h3 class="faq-question">What's the best Instagram image size?</h3>
+                <p class="faq-answer">For Instagram posts, use 1080×1080 px (square), 1080×1350 px (portrait), or 1080×1920 px (portrait/story). For Stories and Reels, use 1080×1920 px.</p>
               </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">What if I don't know the exact dimensions I need?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">Use our social media presets for popular platforms, or experiment with custom dimensions. Our preview feature lets you see the result before downloading.</p>
+              <div class="faq-item">
+                <h3 class="faq-question">Can I resize multiple images at once?</h3>
+                <p class="faq-answer">Currently, you can resize one image at a time. This ensures maximum quality and processing speed for each image.</p>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">Is the image resizer free?</h3>
+                <p class="faq-answer">Yes! ImageNerd's image resizer is completely free with no limitations, watermarks, or registration required.</p>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">What if I don't know the exact dimensions I need?</h3>
+                <p class="faq-answer">Use our social media presets for popular platforms, or experiment with custom dimensions. Our preview feature lets you see the result before downloading.</p>
               </div>
             </div>
           </section>
