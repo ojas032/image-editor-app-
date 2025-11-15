@@ -44,11 +44,9 @@
     section.innerHTML = `<div class="resize-card" role="region" aria-live="polite">
       <div class="resize-uploader" id="resize-dropZone">
         <input id="resize-fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
-        <div class="upload-content">
-          <button class="btn btn-primary" id="resize-selectBtn" type="button">Select image</button>
-          <div class="resize-help">or drop image here</div>
-          <div class="file-limit">Max file size: 10 MB</div>
-        </div>
+        <button class="btn btn-primary" id="resize-selectBtn" type="button">Select image</button>
+        <div class="resize-help">or drop image here</div>
+        <div class="file-limit">Max file size: 10 MB</div>
       </div>
       <div id="resize-editorView" style="display:none;max-width:900px;margin:0 auto;">
         <div id="resize-previewSection" style="text-align:center;margin-bottom:32px;">
