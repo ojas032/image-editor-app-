@@ -41,10 +41,8 @@
         <nav class="main-nav" aria-label="Primary">
           <a href="/compress" data-route="compress">Compress</a>
           <a href="/resize" data-route="resize">Resize</a>
-          <a href="/crop">Crop</a>
-          <a href="/convert">Format Converter</a>
-          <a href="/about" data-route="about">About</a>
-          <a href="/contact" data-route="contact">Contact</a>
+          <a href="/crop" data-route="crop">Crop</a>
+          <a href="/convert" data-route="convert">Convert</a>
         </nav>
         <div class="header-cta">
         </div>
@@ -53,53 +51,55 @@
     </header>
 
     <main>
-      <div class="container tool-page-container">
-        <h1>Compress Image Online - Reduce File Size Without Losing Quality</h1>
-        <p class="subtitle">Free online image compressor. Reduce JPG, PNG, WebP, GIF, and HEIC file sizes by up to 90% while maintaining visual quality. Perfect for web optimization and faster page loading.</p>
-        <section id="compressSection" aria-label="Image compressor" style="margin-top:24px;"></section>
+      <div class="container">
+        <div class="tool-page-header">
+          <h1>Compress Image Online - Reduce File Size Without Losing Quality</h1>
+          <p class="subtitle">Free online image compressor. Reduce JPG, PNG, WebP, GIF, and HEIC file sizes by up to 90% while maintaining visual quality. Perfect for web optimization and faster page loading.</p>
+        </div>
+        <section id="compressSection" aria-label="Image compressor" class="tool-section"></section>
 
         <!-- SEO Content Section -->
-        <div class="seo-content" style="margin-top:56px;max-width:900px;">
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Compress Images Online for Free</h2>
-            <p style="line-height:1.8;color:var(--light-muted);margin-bottom:16px;">
+        <div class="seo-content">
+          <section class="seo-section">
+            <h2 class="seo-heading">Compress Images Online for Free</h2>
+            <p class="seo-text">
               ImageNerd's free image compressor reduces file sizes by up to 90% without visible quality loss. Perfect for optimizing images for websites, emails, and social media. Our intelligent compression algorithm maintains visual quality while significantly reducing file sizes.
             </p>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Supported Image Formats</h2>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
-              <div style="background:var(--light-card);border:1px solid var(--light-border);border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">JPEG / JPG Compression</h3>
-                <p style="line-height:1.6;color:var(--light-muted);font-size:14px;">Compress JPEG and JPG photos. Ideal for photographs, maintaining quality while reducing file size for faster web loading.</p>
+          <section class="seo-section">
+            <h2 class="seo-heading">Supported Image Formats</h2>
+            <div class="format-grid">
+              <div class="format-card">
+                <h3 class="format-title">JPEG / JPG Compression</h3>
+                <p class="format-description">Compress JPEG and JPG photos. Ideal for photographs, maintaining quality while reducing file size for faster web loading.</p>
               </div>
-              <div style="background:var(--light-card);border:1px solid var(--light-border);border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">PNG Compression</h3>
-                <p style="line-height:1.6;color:var(--light-muted);font-size:14px;">Compress PNG images with transparency. Perfect for logos, graphics, and images requiring lossless quality.</p>
+              <div class="format-card">
+                <h3 class="format-title">PNG Compression</h3>
+                <p class="format-description">Compress PNG images with transparency. Perfect for logos, graphics, and images requiring lossless quality.</p>
               </div>
-              <div style="background:var(--light-card);border:1px solid var(--light-border);border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">WebP Compression</h3>
-                <p style="line-height:1.6;color:var(--light-muted);font-size:14px;">Compress modern WebP format images. Excellent compression with superior quality for web optimization.</p>
+              <div class="format-card">
+                <h3 class="format-title">WebP Compression</h3>
+                <p class="format-description">Compress modern WebP format images. Excellent compression with superior quality for web optimization.</p>
               </div>
-              <div style="background:var(--light-card);border:1px solid var(--light-border);border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">HEIC Compression</h3>
-                <p style="line-height:1.6;color:var(--light-muted);font-size:14px;">Compress iPhone photos (HEIC format). Automatically converts and compresses for universal compatibility.</p>
+              <div class="format-card">
+                <h3 class="format-title">HEIC Compression</h3>
+                <p class="format-description">Compress iPhone photos (HEIC format). Automatically converts and compresses for universal compatibility.</p>
               </div>
-              <div style="background:var(--light-card);border:1px solid var(--light-border);border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">GIF Compression</h3>
-                <p style="line-height:1.6;color:var(--light-muted);font-size:14px;">Compress animated and static GIF files. Reduce size while preserving animation quality.</p>
+              <div class="format-card">
+                <h3 class="format-title">GIF Compression</h3>
+                <p class="format-description">Compress animated and static GIF files. Reduce size while preserving animation quality.</p>
               </div>
-              <div style="background:var(--light-card);border:1px solid var(--light-border);border-radius:8px;padding:20px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:12px;">Other Formats</h3>
-                <p style="line-height:1.6;color:var(--light-muted);font-size:14px;">Also supports BMP, TIFF, and more image formats for compression.</p>
+              <div class="format-card">
+                <h3 class="format-title">Other Formats</h3>
+                <p class="format-description">Also supports BMP, TIFF, and more image formats for compression.</p>
               </div>
             </div>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Why Compress Images?</h2>
-            <ul style="line-height:1.8;color:var(--light-muted);">
+          <section class="seo-section">
+            <h2 class="seo-heading">Why Compress Images?</h2>
+            <ul class="benefits-list">
               <li><strong>Faster Website Loading:</strong> Compressed images load up to 10x faster, improving user experience and SEO rankings</li>
               <li><strong>Save Storage Space:</strong> Reduce cloud storage costs and save disk space on your devices</li>
               <li><strong>Better Email Delivery:</strong> Compressed images are easier to send via email and less likely to be rejected for size</li>
@@ -109,9 +109,9 @@
             </ul>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">How to Compress Images</h2>
-            <ol style="line-height:1.8;color:var(--light-muted);">
+          <section class="seo-section">
+            <h2 class="seo-heading">How to Compress Images</h2>
+            <ol class="steps-list">
               <li><strong>Upload Your Image:</strong> Click to upload or drag and drop your JPEG, PNG, WebP, HEIC, GIF, BMP, or TIFF image</li>
               <li><strong>Adjust Quality:</strong> Use the quality slider (0-100) to control compression. Higher = better quality, larger file. Lower = more compression, smaller file</li>
               <li><strong>Preview Results:</strong> Compare original vs compressed image side-by-side to ensure quality meets your needs</li>
@@ -119,58 +119,58 @@
             </ol>
           </section>
 
-          <section style="margin-bottom:40px;">
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Features</h2>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Visual Quality Comparison</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">See before/after comparison to ensure quality meets your standards</p>
+          <section class="seo-section">
+            <h2 class="seo-heading">Features</h2>
+            <div class="features-grid">
+              <div class="feature-item">
+                <h3 class="feature-title">Visual Quality Comparison</h3>
+                <p class="feature-description">See before/after comparison to ensure quality meets your standards</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Adjustable Quality Slider</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">Fine-tune compression level from 0-100 for perfect balance</p>
+              <div class="feature-item">
+                <h3 class="feature-title">Adjustable Quality Slider</h3>
+                <p class="feature-description">Fine-tune compression level from 0-100 for perfect balance</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Real-time File Size Display</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">See exact file size reduction and compression percentage instantly</p>
+              <div class="feature-item">
+                <h3 class="feature-title">Real-time File Size Display</h3>
+                <p class="feature-description">See exact file size reduction and compression percentage instantly</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">No Upload Required</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">All processing happens in your browser - your images never leave your device</p>
+              <div class="feature-item">
+                <h3 class="feature-title">No Upload Required</h3>
+                <p class="feature-description">All processing happens in your browser - your images never leave your device</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">HEIC Support</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">Automatic HEIC to JPEG conversion and compression for iPhone photos</p>
+              <div class="feature-item">
+                <h3 class="feature-title">HEIC Support</h3>
+                <p class="feature-description">Automatic HEIC to JPEG conversion and compression for iPhone photos</p>
               </div>
-              <div style="padding:16px;background:rgba(91,140,255,0.05);border-left:3px solid var(--primary-500);border-radius:4px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Completely Free</h3>
-                <p style="font-size:14px;color:var(--light-muted);line-height:1.6;">No registration, no watermarks, no limits. Free forever</p>
+              <div class="feature-item">
+                <h3 class="feature-title">Completely Free</h3>
+                <p class="feature-description">No registration, no watermarks, no limits. Free forever</p>
               </div>
             </div>
           </section>
 
-          <section>
-            <h2 style="font-size:28px;font-weight:700;margin-bottom:20px;">Frequently Asked Questions</h2>
-            <div style="space-y:16px;">
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">What quality level should I use?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">For web use, quality 75-85 provides excellent visual quality with significant file size reduction. For print, use 90-95 for maximum quality.</p>
+          <section class="seo-section">
+            <h2 class="seo-heading">Frequently Asked Questions</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <h3 class="faq-question">What quality level should I use?</h3>
+                <p class="faq-answer">For web use, quality 75-85 provides excellent visual quality with significant file size reduction. For print, use 90-95 for maximum quality.</p>
               </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Is image compression really free?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">Yes! ImageNerd's image compressor is completely free with no limits, watermarks, or registration required.</p>
+              <div class="faq-item">
+                <h3 class="faq-question">Is image compression really free?</h3>
+                <p class="faq-answer">Yes! ImageNerd's image compressor is completely free with no limits, watermarks, or registration required.</p>
               </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Are my images uploaded to a server?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">No. All compression happens locally in your browser. Your images never leave your device, ensuring complete privacy and security.</p>
+              <div class="faq-item">
+                <h3 class="faq-question">Are my images uploaded to a server?</h3>
+                <p class="faq-answer">No. All compression happens locally in your browser. Your images never leave your device, ensuring complete privacy and security.</p>
               </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Can I compress multiple images at once?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">Currently, you can compress one image at a time. Upload, compress, download, then repeat for additional images.</p>
+              <div class="faq-item">
+                <h3 class="faq-question">Can I compress multiple images at once?</h3>
+                <p class="faq-answer">Currently, you can compress one image at a time. Upload, compress, download, then repeat for additional images.</p>
               </div>
-              <div style="margin-bottom:24px;">
-                <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;">Will compressed images work for print?</h3>
-                <p style="line-height:1.6;color:var(--light-muted);">For print, use quality settings above 90 to maintain high resolution. Lower quality settings are better suited for web and digital use.</p>
+              <div class="faq-item">
+                <h3 class="faq-question">Will compressed images work for print?</h3>
+                <p class="faq-answer">For print, use quality settings above 90 to maintain high resolution. Lower quality settings are better suited for web and digital use.</p>
               </div>
             </div>
           </section>
