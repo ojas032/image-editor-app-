@@ -34,7 +34,7 @@
 
 .compress-help, .resize-help, .crop-help {
   margin-top: 12px;
-  color: #334155;
+  color: #1e293b;
   font-size: 14px;
   font-weight: 500;
 }
@@ -109,7 +109,7 @@
   }
 
   .compress-help, .resize-help, .crop-help {
-    color: #e2e8f0;
+    color: #94a3b8;
   }
 
   .resize-settings, .compress-controls, .crop-settings {
