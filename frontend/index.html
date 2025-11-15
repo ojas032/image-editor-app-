@@ -52,128 +52,111 @@
     </header>
 
     <main>
-      <!-- HOME PAGE CONTENT -->
-      <section class="hero">
-        <div class="container hero-inner">
-          <div class="hero-badge">
-            <span class="badge-text">✨ Free & Fast</span>
-          </div>
-          <h1>Powerful image tools,<br><span class="highlight">zero friction</span></h1>
-          <p class="subtitle">Compress, resize, crop, and convert images — right in your browser. No uploads, no registration, just instant results.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" href="/compress">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
-                <path d="M8 3v4M8 17v4M5 8h6M5 16h6M16 8l3 4-3 4"></path>
-              </svg>
-              Compress image
-            </a>
-            <a class="btn btn-ghost btn-lg" href="/resize">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
-                <path d="M3 10V3h7M21 14v7h-7M3 3l8 8M13 13l8 8"></path>
-              </svg>
-              Resize image
-            </a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <span class="stat-number">10M+</span>
-              <span class="stat-label">Images processed</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">100%</span>
-              <span class="stat-label">Free forever</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">90%</span>
-              <span class="stat-label">Avg compression</span>
-            </div>
+      <!-- COMPACT HERO SECTION -->
+      <section class="hero-compact">
+        <div class="container">
+          <div class="hero-compact-content">
+            <h1>Powerful image tools,<br><span class="highlight">zero friction</span></h1>
+            <p>Compress, resize, crop, and convert images — right in your browser. No uploads, no registration, just instant results.</p>
           </div>
         </div>
       </section>
 
-      <section class="features-section">
+      <!-- MAIN TOOLS SECTION - PROMINENT -->
+      <section class="tools-section">
         <div class="container">
-          <div class="section-header">
-            <h2>Everything you need for image editing</h2>
-            <p>Professional-grade tools designed for speed and simplicity</p>
-          </div>
-
-          <div class="features-grid">
-            <a class="feature-card" href="/compress">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <div class="tools-grid">
+            <a class="tool-card tool-compress" href="/compress">
+              <div class="tool-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M8 3v4M8 17v4" />
                   <path d="M5 8h6M5 16h6" />
                   <path d="M16 8l3 4-3 4" />
                 </svg>
               </div>
-              <div class="feature-content">
+              <div class="tool-content">
                 <h3>Compress Images</h3>
                 <p>Reduce file sizes by up to 90% without losing quality. Perfect for web optimization and faster loading.</p>
               </div>
-              <div class="feature-arrow">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
-                </svg>
+              <div class="tool-action">
+                <span class="action-text">Compress →</span>
               </div>
             </a>
 
-            <a class="feature-card" href="/resize">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <a class="tool-card tool-resize" href="/resize">
+              <div class="tool-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M3 10V3h7" />
                   <path d="M21 14v7h-7" />
                   <path d="M3 3l8 8M13 13l8 8" />
                 </svg>
               </div>
-              <div class="feature-content">
+              <div class="tool-content">
                 <h3>Resize Images</h3>
                 <p>Exact dimensions for social media, web, and print. Social media presets for Instagram, Facebook, YouTube, and more.</p>
               </div>
-              <div class="feature-arrow">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
-                </svg>
+              <div class="tool-action">
+                <span class="action-text">Resize →</span>
               </div>
             </a>
 
-            <a class="feature-card" href="/crop">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <a class="tool-card tool-crop" href="/crop">
+              <div class="tool-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M7 3v14a3 3 0 003 3h14" />
                   <path d="M3 7h14a3 3 0 013 3v14" />
                 </svg>
               </div>
-              <div class="feature-content">
+              <div class="tool-content">
                 <h3>Crop Images</h3>
                 <p>Frame your images perfectly with aspect ratio presets. Visual cropping with instant preview.</p>
               </div>
-              <div class="feature-arrow">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
-                </svg>
+              <div class="tool-action">
+                <span class="action-text">Crop →</span>
               </div>
             </a>
 
-            <a class="feature-card" href="/convert">
-              <div class="feature-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <a class="tool-card tool-convert" href="/convert">
+              <div class="tool-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M8 3h8" />
                   <path d="M16 3l-3 3 3 3" />
                   <path d="M16 21H8" />
                   <path d="M8 21l3-3-3-3" />
                 </svg>
               </div>
-              <div class="feature-content">
+              <div class="tool-content">
                 <h3>Convert Formats</h3>
                 <p>JPG, PNG, WebP, HEIC, GIF, BMP, TIFF, SVG — convert between all popular image formats instantly.</p>
               </div>
-              <div class="feature-arrow">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
-                </svg>
+              <div class="tool-action">
+                <span class="action-text">Convert →</span>
               </div>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATS SECTION -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">10M+</div>
+              <div class="stat-label">Images processed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Free forever</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">90%</div>
+              <div class="stat-label">Avg compression</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">Countries served</div>
+            </div>
           </div>
         </div>
       </section>
