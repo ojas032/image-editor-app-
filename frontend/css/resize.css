@@ -8,10 +8,11 @@
 
 .tool-page-header h1 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--light-text);
   margin-bottom: 16px;
   line-height: 1.2;
+  padding-top: 30px;
 }
 
 .tool-page-header .subtitle {
@@ -20,6 +21,7 @@
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
+  padding-top: 16px;
 }
 
 .tool-section {
@@ -38,8 +40,8 @@
 
 .seo-heading {
   font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
+  font-weight: 500;
+  margin-bottom: 0px;
   color: var(--light-text);
 }
 
@@ -89,7 +91,7 @@
 
 .social-title {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 12px;
 }
 
@@ -201,6 +203,19 @@
   margin: 0;
 }
 
+/* Upload icon styles */
+.upload-icon {
+  color: var(--primary-500);
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.resize-uploader:hover .upload-icon {
+  color: var(--primary-500);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .tool-page-header h1 {
@@ -255,6 +270,12 @@
   background: var(--light-card);
   border-radius: 14px;
   padding: 28px;
+  transition: all 0.2s ease;
+}
+
+.resize-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 /* File limit styling */

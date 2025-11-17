@@ -45,8 +45,25 @@
       <div class="compress-card" role="region" aria-live="polite">
         <div class="compress-uploader" id="compress-dropZone">
           <input id="compress-fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
-          <button class="btn btn-primary" id="compress-selectBtn" type="button">Select image</button>
-          <div class="compress-help">or drop image here</div>
+          <div class="upload-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+              <circle cx="9" cy="9" r="2"/>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+            </svg>
+          </div>
+          <div class="upload-content">
+            <h3 class="upload-title">Select an image to compress</h3>
+            <p class="upload-subtitle">Choose a JPG, PNG, WebP, GIF, or HEIC file up to 10MB</p>
+            <button class="btn btn-primary btn-lg" id="compress-selectBtn" type="button">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14,2 14,8 20,8"/>
+              </svg>
+              Choose File
+            </button>
+          </div>
+          <div class="compress-help">or drag and drop your image here</div>
         </div>
         <div id="compress-editorView" style="display:none;max-width:700px;margin:0 auto;text-align:center;">
           <div id="compress-processingOverlay" style="display:flex;flex-direction:column;align-items:center;padding:40px;">

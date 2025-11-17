@@ -1,36 +1,81 @@
 /* Compress page specific styles */
 
 .compress-card, .resize-card, .crop-card, .convert-card {
-  border: 1px solid var(--light-border);
+  border: none;
   background: var(--light-card);
   border-radius: 14px;
   padding: 28px;
 }
 
 .compress-uploader, .resize-uploader, .crop-uploader {
-  border: 2px dashed var(--light-border);
-  border-radius: 12px;
-  padding: 32px;
+  border: none;
+  border-radius: 16px;
+  padding: 24px 20px;
   text-align: center;
-  background: rgba(15,23,42,0.02);
+  background: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
-  border-color: var(--primary-500);
-  background: rgba(91, 140, 255, 0.03);
+  background: #f8fafc;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
 }
 
 .compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
-  background: rgba(91,140,255,0.10);
-  border-color: #a5b4fc;
+  background: #e0f2fe;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+.upload-icon {
+  color: var(--primary-500);
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.compress-uploader:hover .upload-icon {
+  color: var(--primary-500);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.upload-subtitle {
+  font-size: 14px;
+  color: #111827;
+  margin: 0;
+  max-width: 280px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .compress-help, .resize-help, .crop-help {
-  margin-top: 10px;
-  color: var(--light-muted);
+  margin-top: 16px;
+  color: #000000;
   font-size: 14px;
+  opacity: 1;
+  text-align: center;
 }
 
 
@@ -81,28 +126,26 @@
 /* Dark theme overrides */
 @media (prefers-color-scheme: dark) {
   .compress-card, .resize-card, .crop-card, .convert-card {
-    border-color: var(--border-700);
     background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
   }
 
   .compress-uploader, .resize-uploader, .crop-uploader {
-    border-color: var(--border-700);
-    background: rgba(255,255,255,0.02);
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   }
 
   .compress-uploader:hover, .resize-uploader:hover, .crop-uploader:hover {
-    border-color: var(--primary-500);
-    background: rgba(91, 140, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
   }
 
   .compress-uploader.drag, .resize-uploader.drag, .crop-uploader.drag {
-    background: rgba(91,140,255,0.15);
-    border-color: #5b8cff;
+    background: linear-gradient(180deg, rgba(91,140,255,0.15), rgba(91,140,255,0.08));
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   }
 
-  .compress-help, .resize-help, .crop-help {
-    color: var(--text-300);
-  }
+
+
 
   .resize-settings, .compress-controls, .crop-settings {
     background: rgba(255,255,255,0.02);
@@ -129,9 +172,6 @@
     color: var(--text-100);
   }
 
-  .compress-help, .resize-help, .crop-help {
-    border-color: var(--border-700);
-  }
 }
 
 /* Tool page layout styles */
@@ -142,7 +182,7 @@
 
 .tool-page-header h1 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--light-text);
   margin-bottom: 16px;
   line-height: 1.2;
@@ -301,6 +341,25 @@
 
   .tool-page-header .subtitle {
     font-size: 16px;
+  }
+
+  .compress-uploader, .resize-uploader, .crop-uploader {
+    padding: 20px 12px;
+    gap: 12px;
+  }
+
+  .upload-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .upload-title {
+    font-size: 18px;
+  }
+
+  .upload-subtitle {
+    font-size: 13px;
+    max-width: 260px;
   }
 
   .seo-heading {

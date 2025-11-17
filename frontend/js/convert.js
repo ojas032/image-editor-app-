@@ -11,31 +11,29 @@
     // Get DOM elements
     const fileInput = document.getElementById('fileInput');
     const selectBtn = document.getElementById('selectBtn');
-    const dropZone = document.getElementById('dropZone');
     const editorView = document.getElementById('editorView');
-    const previewSection = document.getElementById('previewSection');
-    const formatSection = document.getElementById('formatSection');
-    const qualitySection = document.getElementById('qualitySection');
-    const actionSection = document.getElementById('actionSection');
-    const resultsSection = document.getElementById('resultsSection');
+    const heroSection = document.querySelector('.hero-section');
+    const pageHeader = document.getElementById('pageHeader');
 
     const originalImage = document.getElementById('originalImage');
-    const originalFormat = document.getElementById('originalFormat');
-    const originalSize = document.getElementById('originalSize');
-    const originalDimensions = document.getElementById('originalDimensions');
+    const convertedImage = document.getElementById('convertedImage');
+
+    // Single image info element (replaces separate original/converted info)
+    const currentFormat = document.getElementById('currentFormat');
+    const currentSize = document.getElementById('currentSize');
+    const currentDimensions = document.getElementById('currentDimensions');
 
     const outputFormatRadios = document.getElementsByName('outputFormat');
-    const qualitySlider = document.getElementById('qualitySlider');
-    const qualityValue = document.getElementById('qualityValue');
 
     const convertBtn = document.getElementById('convertBtn');
     const resetBtn = document.getElementById('resetBtn');
-
-    const convertedImage = document.getElementById('convertedImage');
-    const convertedFormat = document.getElementById('convertedFormat');
-    const convertedSize = document.getElementById('convertedSize');
-    const convertedDimensions = document.getElementById('convertedDimensions');
     const downloadBtn = document.getElementById('downloadBtn');
+
+    // Tab elements
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const originalWrapper = document.getElementById('originalWrapper');
+    const convertedWrapper = document.getElementById('convertedWrapper');
+    const convertedPlaceholder = document.getElementById('convertedPlaceholder');
 
     // Event listeners
     selectBtn.addEventListener('click', () => fileInput.click());
@@ -47,33 +45,56 @@
       }
     });
 
-    // Drag and drop
-    dropZone.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      dropZone.classList.add('drag');
+    // Store image info for both tabs
+    let originalImageInfo = { format: '', size: '', dimensions: '' };
+    let convertedImageInfo = { format: '', size: '', dimensions: '' };
+
+    // Tab switching
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+
+        // Update tab states
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Switch image display
+        if (tab === 'original') {
+          originalWrapper.classList.remove('hidden');
+          convertedWrapper.classList.add('hidden');
+          updateImageInfo(originalImageInfo.format, originalImageInfo.size, originalImageInfo.dimensions);
+        } else {
+          originalWrapper.classList.add('hidden');
+          convertedWrapper.classList.remove('hidden');
+          updateImageInfo(convertedImageInfo.format, convertedImageInfo.size, convertedImageInfo.dimensions);
+        }
+      });
     });
 
-    dropZone.addEventListener('dragleave', () => {
-      dropZone.classList.remove('drag');
-    });
+    function updateImageInfo(format, size, dimensions) {
+      currentFormat.textContent = format;
+      currentSize.textContent = size;
+      currentDimensions.textContent = dimensions;
 
-    dropZone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      dropZone.classList.remove('drag');
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        handleFile(files[0]);
+      // Store current values for the active tab
+      const activeTab = document.querySelector('.tab-btn.active');
+      if (activeTab && activeTab.dataset.tab === 'original') {
+        originalImageInfo = { format, size, dimensions };
+      } else if (activeTab && activeTab.dataset.tab === 'converted') {
+        convertedImageInfo = { format, size, dimensions };
       }
-    });
+    }
+
 
     // Format selection
     outputFormatRadios.forEach(radio => {
-      radio.addEventListener('change', updateQualitySection);
-    });
-
-    // Quality slider
-    qualitySlider.addEventListener('input', (e) => {
-      qualityValue.textContent = e.target.value;
+      radio.addEventListener('change', () => {
+        // Update visual selection state
+        document.querySelectorAll('.format-option-compact').forEach(option => {
+          option.classList.remove('selected');
+        });
+        radio.closest('.format-option-compact').classList.add('selected');
+      });
     });
 
     // Convert button
@@ -82,8 +103,8 @@
     // Reset button
     resetBtn.addEventListener('click', resetForm);
 
-    // Download button
-    downloadBtn.addEventListener('click', downloadImage);
+    // Download button (anchor tag handles download automatically)
+    // No click handler needed - anchor with download attribute handles it
 
     function handleFile(file) {
       // Validate file type
@@ -108,19 +129,16 @@
         img.onload = () => {
           currentImage = img;
           originalImage.src = e.target.result;
-          originalFormat.textContent = getFileFormat(file);
-          originalSize.textContent = formatFileSize(file.size);
-          originalDimensions.textContent = `${img.width} × ${img.height}`;
+          // Update current image info (shows original by default)
+          updateImageInfo(getFileFormat(file), formatFileSize(file.size), `${img.width} × ${img.height}`);
 
-          // Show editor, hide uploader
-          dropZone.style.display = 'none';
+          // Show editor and page header, hide hero section
           editorView.style.display = 'block';
+          pageHeader.style.display = 'block';
+          heroSection.style.display = 'none';
 
           // Update format options based on input format
           updateFormatOptions(file.type);
-
-          // Show quality section for formats that support it
-          updateQualitySection();
         };
         img.src = e.target.result;
       };
@@ -155,16 +173,6 @@
       // For now, keep all options enabled
     }
 
-    function updateQualitySection() {
-      const selectedFormat = document.querySelector('input[name="outputFormat"]:checked').value;
-      const qualityContainer = document.getElementById('qualitySection');
-
-      if (selectedFormat === 'jpg' || selectedFormat === 'webp') {
-        qualityContainer.style.display = 'block';
-      } else {
-        qualityContainer.style.display = 'none';
-      }
-    }
 
     async function convertImage() {
       if (!currentImage || !currentFile) {
@@ -173,7 +181,6 @@
       }
 
       const selectedFormat = document.querySelector('input[name="outputFormat"]:checked').value;
-      const quality = qualitySlider.value / 100;
 
       try {
         // Show processing state
@@ -191,43 +198,54 @@
         ctx.drawImage(currentImage, 0, 0);
 
         // Convert to selected format
-        let mimeType, fileExtension;
+        let mimeType, fileExtension, quality = 0.85;
         switch (selectedFormat) {
           case 'png':
             mimeType = 'image/png';
             fileExtension = 'png';
+            quality = undefined; // PNG doesn't use quality
             break;
           case 'jpg':
             mimeType = 'image/jpeg';
             fileExtension = 'jpg';
+            quality = 0.85; // Default quality for JPEG
             break;
           case 'webp':
             mimeType = 'image/webp';
             fileExtension = 'webp';
+            quality = 0.85; // Default quality for WebP
             break;
           case 'gif':
             // For GIF, we'll use PNG as intermediate format
             mimeType = 'image/png';
             fileExtension = 'gif';
+            quality = undefined;
             break;
           case 'bmp':
             // For BMP, we'll use PNG as intermediate format
             mimeType = 'image/png';
             fileExtension = 'bmp';
+            quality = undefined;
             break;
           case 'tiff':
             // For TIFF, we'll use PNG as intermediate format
             mimeType = 'image/png';
             fileExtension = 'tiff';
+            quality = undefined;
             break;
           default:
             mimeType = 'image/png';
             fileExtension = 'png';
+            quality = undefined;
         }
 
         // Convert canvas to blob
         const convertedBlob = await new Promise(resolve => {
-          canvas.toBlob(resolve, mimeType, quality);
+          if (quality !== undefined) {
+            canvas.toBlob(resolve, mimeType, quality);
+          } else {
+            canvas.toBlob(resolve, mimeType);
+          }
         });
 
         if (!convertedBlob) {
@@ -239,20 +257,26 @@
 
         // Update results
         convertedImage.src = convertedUrl;
-        convertedFormat.textContent = selectedFormat.toUpperCase();
-        convertedSize.textContent = formatFileSize(convertedBlob.size);
-        convertedDimensions.textContent = `${canvas.width} × ${canvas.height}`;
+        const convertedFormatText = selectedFormat.toUpperCase();
+        const convertedSizeText = formatFileSize(convertedBlob.size);
+        const convertedDimensionsText = `${canvas.width} × ${canvas.height}`;
+
+        // Update converted image info
+        updateImageInfo(convertedFormatText, convertedSizeText, convertedDimensionsText);
 
         // Set download attributes
         const originalName = currentFile.name.replace(/\.[^/.]+$/, '');
         downloadBtn.download = `${originalName}_converted.${fileExtension}`;
         downloadBtn.href = convertedUrl;
 
-        // Show results, hide editor
-        formatSection.style.display = 'none';
-        qualitySection.style.display = 'none';
-        actionSection.style.display = 'none';
-        resultsSection.style.display = 'block';
+        // Hide placeholder and switch to converted tab, show download button
+        convertedPlaceholder.style.display = 'none';
+        tabBtns.forEach(btn => {
+          if (btn.dataset.tab === 'converted') {
+            btn.click();
+          }
+        });
+        downloadBtn.classList.remove('hidden');
 
       } catch (error) {
         console.error('Conversion error:', error);
@@ -269,19 +293,34 @@
       currentImage = null;
 
       fileInput.value = '';
-      dropZone.style.display = 'block';
+
+      // Hide editor and page header, show hero section
       editorView.style.display = 'none';
-      formatSection.style.display = 'block';
-      updateQualitySection();
-      actionSection.style.display = 'block';
-      resultsSection.style.display = 'none';
+      pageHeader.style.display = 'none';
+      heroSection.style.display = 'block';
+
+      // Reset tab to original
+      tabBtns.forEach(btn => {
+        if (btn.dataset.tab === 'original') {
+          btn.click();
+        }
+      });
+
+      // Hide download button and show placeholder
+      downloadBtn.classList.add('hidden');
+      convertedPlaceholder.style.display = 'block';
 
       // Reset format selection to JPEG
-      document.querySelector('input[name="outputFormat"][value="jpg"]').checked = true;
+      const jpegRadio = document.querySelector('input[name="outputFormat"][value="jpg"]');
+      jpegRadio.checked = true;
+      // Trigger change event to update visual state
+      jpegRadio.dispatchEvent(new Event('change'));
 
-      // Reset quality
-      qualitySlider.value = 85;
-      qualityValue.textContent = '85';
+      // Clear converted image and reset info
+      convertedImage.src = '';
+      originalImageInfo = { format: '', size: '', dimensions: '' };
+      convertedImageInfo = { format: '', size: '', dimensions: '' };
+      updateImageInfo('', '', '');
     }
 
     function downloadImage() {
