@@ -25,14 +25,15 @@ class SimpleStaticServer(http.server.SimpleHTTPRequestHandler):
 
         # Static mapping: clean URLs to files
         static_routes = {
-            'crop': 'crop',
-            'convert': 'convert',
-            'privacy': 'privacy',
-            'terms': 'terms',
-            'about': 'about.html',  # Keep as .html since it's inline route
-            'contact': 'contact.html',  # Keep as .html since it's inline route
-            'compress': 'index.html',  # SPA routes serve index.html
-            'resize': 'index.html',   # SPA routes serve index.html
+            'home': 'index.html',
+            'compress': 'compress.html',
+            'resize': 'resize.html',
+            'crop': 'crop.html',
+            'convert': 'convert.html',
+            'about': 'about.html',
+            'contact': 'contact.html',
+            'privacy': 'privacy.html',
+            'terms': 'terms.html'
         }
 
         # Check if we have a static route mapping
@@ -112,19 +113,21 @@ def main():
             print()
             print("✨ Clean URL mappings:")
             print("  / → index.html")
-            print("  /crop → crop")
-            print("  /convert → convert")
-            print("  /privacy → privacy")
-            print("  /terms → terms")
-            print("  /compress → index.html (SPA)")
-            print("  /resize → index.html (SPA)")
+            print("  /compress → compress.html")
+            print("  /resize → resize.html")
+            print("  /crop → crop.html")
+            print("  /convert → convert.html")
             print("  /about → about.html")
             print("  /contact → contact.html")
+            print("  /privacy → privacy.html")
+            print("  /terms → terms.html")
             print()
             print("🌐 Test URLs:")
             print(f"  http://localhost:{port}/ (home)")
-            print(f"  http://localhost:{port}/crop (static file)")
-            print(f"  http://localhost:{port}/compress (SPA route)")
+            print(f"  http://localhost:{port}/compress (compress tool)")
+            print(f"  http://localhost:{port}/resize (resize tool)")
+            print(f"  http://localhost:{port}/crop (crop tool)")
+            print(f"  http://localhost:{port}/convert (convert tool)")
             print()
             print("Press Ctrl+C to stop")
             httpd.serve_forever()

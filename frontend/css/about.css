@@ -1,0 +1,191 @@
+/* About page specific styles */
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.about-hero h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.about-hero p {
+  font-size: 18px;
+  color: var(--light-muted);
+  line-height: 1.6;
+}
+
+/* Mission section */
+.mission-card {
+  background: var(--light-card);
+  border: 1px solid var(--light-border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.mission-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.mission-card p {
+  line-height: 1.8;
+  color: var(--light-text);
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Features grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.feature-card {
+  background: var(--light-card);
+  border: 1px solid var(--light-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.feature-card .icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--light-muted);
+  line-height: 1.6;
+}
+
+/* What we offer section */
+.offerings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.offering-item {
+  background: rgba(91, 140, 255, 0.05);
+  border-left: 3px solid var(--primary-500);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.offering-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.offering-item p {
+  font-size: 14px;
+  color: var(--light-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Why choose section */
+.why-choose-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.why-choose-item {
+  background: var(--light-card);
+  border: 1px solid var(--light-border);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.why-choose-item h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.why-choose-item p {
+  line-height: 1.6;
+  color: var(--light-muted);
+  margin: 0;
+}
+
+/* CTA section */
+.cta-section {
+  text-align: center;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(91, 140, 255, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: 12px;
+}
+
+.cta-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.cta-section p {
+  color: var(--light-muted);
+  margin-bottom: 24px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero h1 {
+    font-size: 28px;
+  }
+
+  .about-hero p {
+    font-size: 16px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offerings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .mission-card {
+    padding: 24px;
+  }
+
+  .mission-card h2 {
+    font-size: 24px;
+  }
+}
