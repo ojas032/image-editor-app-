@@ -19,7 +19,7 @@
   
   <!-- Resize Image Tool -->
   <url>
-    <loc>https://www.imagenerd.in/resize.html</loc>
+    <loc>https://www.imagenerd.in/resize</loc>
     <lastmod>2025-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -27,7 +27,7 @@
   
   <!-- Crop Image Tool -->
   <url>
-    <loc>https://www.imagenerd.in/crop.html</loc>
+    <loc>https://www.imagenerd.in/crop</loc>
     <lastmod>2025-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -35,7 +35,7 @@
   
   <!-- Format Converter Tool -->
   <url>
-    <loc>https://www.imagenerd.in/convert.html</loc>
+    <loc>https://www.imagenerd.in/convert</loc>
     <lastmod>2025-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -43,7 +43,7 @@
   
   <!-- Remove Background Tool -->
   <url>
-    <loc>https://www.imagenerd.in/remove-background.html</loc>
+    <loc>https://www.imagenerd.in/remove-background</loc>
     <lastmod>2025-11-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -51,7 +51,7 @@
 
   <!-- About Us Page -->
   <url>
-    <loc>https://www.imagenerd.in/about.html</loc>
+    <loc>https://www.imagenerd.in/about</loc>
     <lastmod>2025-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -59,7 +59,7 @@
 
   <!-- Contact Us Page -->
   <url>
-    <loc>https://www.imagenerd.in/contact.html</loc>
+    <loc>https://www.imagenerd.in/contact</loc>
     <lastmod>2025-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -67,7 +67,7 @@
 
   <!-- Privacy Policy Page -->
   <url>
-    <loc>https://www.imagenerd.in/privacy.html</loc>
+    <loc>https://www.imagenerd.in/privacy</loc>
     <lastmod>2025-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -75,7 +75,7 @@
 
   <!-- Terms of Service Page -->
   <url>
-    <loc>https://www.imagenerd.in/terms.html</loc>
+    <loc>https://www.imagenerd.in/terms</loc>
     <lastmod>2025-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
