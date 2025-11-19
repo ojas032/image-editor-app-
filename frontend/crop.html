@@ -20,11 +20,19 @@
     <meta name="twitter:title" content="Crop Image Online Free - Smart Photo Cropper" />
     <meta name="twitter:description" content="Free online image cropper with visual controls. Crop photos by dragging or enter exact dimensions." />
 
-    <link rel="icon" type="image/png" href="icon_bg.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css?v=1.0.3" />
     <link rel="stylesheet" href="css/crop.css?v=1.0.0" />
+    <!-- Cropper.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -63,6 +71,7 @@
     </script>
   </head>
   <body>
+
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/" data-route="home"><img class="brand-mark" src="icon_without_bg.png" alt="ImageNerd logo" /><span class="brand-name">ImageNerd</span></a>
@@ -70,135 +79,216 @@
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </header>
-    <main class="container tool-page-container">
-      <h1>Crop Image Online</h1>
-      <p class="subtitle">Crop images precisely with visual controls or manual dimensions. Perfect for social media, profile pictures, and custom sizes. Free, fast, and easy.</p>
-
-      <section id="cropSection" aria-label="Image cropper" style="margin-top:24px;">
-        <div class="crop-card" role="region" aria-live="polite">
+    <main id="main" style="padding-top: 20px;">
+      <section id="cropSection" aria-label="Image cropper">
+        <div role="region" aria-live="polite" aria-labelledby="crop-heading">
           <!-- Uploader (shown initially, hidden after upload) -->
-          <div class="crop-uploader" id="dropZone">
-            <input id="fileInput" type="file" accept=".heic,.heif,.jpg,.jpeg,.png,.webp,.gif,.bmp,.tiff,.tif,image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
-            <button class="btn btn-primary" id="selectBtn" type="button" aria-controls="fileInput" aria-label="Select image to crop">Select image</button>
-            <div class="crop-help">or drop image here</div>
-            <div class="file-limit" style="margin-top:12px;font-size:13px;color:var(--light-muted);">Supports: HEIC, JPEG, PNG, WebP, GIF, BMP, TIFF | Max: 10 MB</div>
+          <div id="dropZone" tabindex="0" aria-label="Upload area. Click to select image or drag and drop image here">
+            <input id="fileInput" type="file" accept=".heic,.heif,.jpg,.jpeg,.png,.webp,.gif,.bmp,.tiff,.tif,image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" aria-describedby="file-limit" />
+
+            <!-- Enhanced animated background elements -->
+            <div style="position: absolute; top: -20%; left: -20%; width: 140%; height: 140%; background: radial-gradient(ellipse, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 40%, transparent 70%); animation: float 8s ease-in-out infinite; opacity: 0.4;"></div>
+            <div style="position: absolute; bottom: -15%; right: -15%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(240, 147, 251, 0.12) 0%, rgba(54, 117, 136, 0.08) 50%, transparent 80%); animation: float 10s ease-in-out infinite reverse; opacity: 0.3;"></div>
+            <div style="position: absolute; top: 20%; right: 10%; width: 60px; height: 60px; background: radial-gradient(circle, rgba(255, 105, 180, 0.2) 0%, transparent 70%); animation: float 12s ease-in-out infinite; opacity: 0.2;"></div>
+
+            <!-- Border glow effect -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 24px; padding: 2px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 30%, rgba(240, 147, 251, 0.3) 70%, rgba(54, 117, 136, 0.3) 100%); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: xor; -webkit-mask-composite: xor; opacity: 0; transition: opacity 0.4s ease;"></div>
+
+            <!-- Main content -->
+            <div style="position: relative; z-index: 1;">
+              <!-- Image Icon -->
+              <div style="margin-bottom: 24px;">
+                <div style="width: 100px; height: 100px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4); transition: all 0.4s ease; position: relative; overflow: hidden;">
+                  <!-- Inner glow effect -->
+                  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%); animation: shimmer 3s ease-in-out infinite;"></div>
+
+                  <!-- Image icon -->
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 1; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));">
+                    <rect x="2" y="2" width="20" height="20" rx="4" ry="4" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="9" cy="9" r="2" stroke="white" stroke-width="2" fill="rgba(255,255,255,0.2)"/>
+                    <path d="M2 18L8 12L12 16L18 8L22 14V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18Z" stroke="white" stroke-width="2" fill="rgba(255,255,255,0.1)"/>
+                  </svg>
+                </div>
+          </div>
+
+              <!-- Title with underline effect -->
+              <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 16px; color: var(--light-text); position: relative; display: inline-block;">
+                <span style="background: linear-gradient(135deg, #5b8cff 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Crop Image Online</span>
+                <span style="position: absolute; bottom: -4px; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #5b8cff 0%, #3b82f6 50%, #8b5cf6 100%); border-radius: 2px; transform: scaleX(0); transition: transform 0.3s ease;" class="title-underline"></span>
+              </h2>
+
+              <!-- Description -->
+              <p style="font-size: 18px; color: var(--light-muted); line-height: 1.6; max-width: 600px; margin: 0 auto 32px; font-weight: 400;">
+                Transform your images with <span style="color: #5b8cff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(91, 140, 255, 0.3);">precision cropping</span>.
+                Perfect for social media, professional presentations, and creative projects.
+              </p>
+
+              <!-- Action buttons -->
+              <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
+                <button class="btn btn-primary" id="selectBtn" type="button" aria-label="Select image to crop" style="font-size: 18px; padding: 16px 32px; font-weight: 600; border-radius: 12px; background: linear-gradient(135deg, #5b8cff 0%, #3b82f6 100%); box-shadow: 0 8px 24px rgba(91, 140, 255, 0.4); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; cursor: pointer;">
+                  <span style="position: relative; z-index: 1;">Select Image</span>
+                  <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; z-index: 0;"></span>
+                </button>
+
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-muted); font-size: 16px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.6;">
+                    <path d="M12 2L15 8L22 9L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9L9 8L12 2Z" fill="currentColor"/>
+                  </svg>
+                  <span>or drag & drop</span>
+              </div>
+              </div>
+
+              <!-- Features highlight -->
+              <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-text); font-size: 14px; font-weight: 500;">
+                  <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                  <span>Free & Unlimited</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-text); font-size: 14px; font-weight: 500;">
+                  <div style="width: 8px; height: 8px; background: #f59e0b; border-radius: 50%;"></div>
+                  <span>Lightning Fast</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-text); font-size: 14px; font-weight: 500;">
+                  <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></div>
+                  <span>No Registration</span>
+                </div>
+            </div>
+
+              <!-- File format support -->
+              <div class="file-limit" id="file-limit" style="font-size: 14px; color: var(--light-muted); opacity: 0.8;" aria-live="polite">
+                <span style="font-weight: 500;">Supported formats:</span>
+                <span style="color: #5b8cff;">HEIC, JPEG, PNG, WebP, GIF, BMP, TIFF</span>
+                <span style="margin: 0 8px;">•</span>
+                <span style="font-weight: 500;">Max size:</span>
+                <span style="color: #10b981;">10 MB</span>
+              </div>
+            </div>
           </div>
 
           <!-- Editor (hidden initially, shown after upload) -->
           <div id="editorView" style="display:none;max-width:1200px;margin:0 auto;">
 
-            <!-- Canvas Section -->
-            <div id="canvasSection" style="margin-bottom:32px;text-align:center;">
-              <div style="margin-bottom:16px;text-align:left;">
-                <h2 style="font-size:20px;font-weight:700;margin-bottom:8px;">Step 1: Select Crop Area</h2>
-                <p style="font-size:14px;color:var(--light-muted);margin:0;">
-                  <strong>Mouse:</strong> Click and drag to create crop area. Drag corners/edges to resize. Drag center to move.
-                  <br><strong>Touch:</strong> Tap and drag to create, resize, or move the crop area.
-                </p>
-              </div>
-              <div id="canvasContainer" style="position:relative;display:inline-block;max-width:100%;overflow:hidden;border:1px solid var(--light-border);border-radius:8px;background:#f8f9fa;">
-                <canvas id="cropCanvas" style="display:block;max-width:100%;height:auto;cursor:crosshair;"></canvas>
-              </div>
-              <div id="imageDimensions" style="margin-top:12px;font-size:14px;color:var(--light-muted);"></div>
-            </div>
-
-            <!-- Manual Controls -->
-            <div class="crop-settings">
-              <h2 style="font-size:20px;font-weight:700;margin-bottom:20px;">Step 2: Fine-tune Dimensions (Optional)</h2>
-
-              <!-- Crop Area Dimensions -->
-              <div style="margin-bottom:28px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--light-text);">Crop Area Size</h3>
-                <div class="crop-controls-grid">
-                  <!-- Width Control -->
-                  <div class="control-group">
-                    <label for="widthSlider" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Width (px)</label>
-                    <input type="range" id="widthSlider" class="form-range" min="1" max="1000" value="200" style="margin-bottom:8px;" />
-                    <input type="number" id="widthInput" class="form-control" min="1" value="200" />
+            <!-- Page Heading -->
+            <div style="text-align:center;margin-bottom:5px;padding:2px 0;">
+              <h1 style="font-size:28px;font-weight:800;margin-bottom:2px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;">Crop Image Online</h1>
+              <div style="width:60px;height:2px;background:linear-gradient(90deg,#667eea 0%,#764ba2 50%,#f093fb 100%);border-radius:2px;margin:0 auto;"></div>
                   </div>
 
-                  <!-- Height Control -->
-                <div class="control-group">
-                    <label for="heightSlider" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Height (px)</label>
-                    <input type="range" id="heightSlider" class="form-range" min="1" max="1000" value="200" style="margin-bottom:8px;" />
-                    <input type="number" id="heightInput" class="form-control" min="1" value="200" />
+            <!-- Main Editor Layout -->
+            <div class="editor-layout">
+              <!-- Left Side - Canvas -->
+              <div class="editor-canvas-section">
+                <div id="canvasContainer" role="img" aria-label="Image canvas for cropping" aria-describedby="canvas-instructions">
+                  <img id="cropCanvas" role="img" aria-label="Interactive crop canvas" tabindex="0" aria-describedby="canvas-instructions imageDimensions" alt="Image to crop" />
+
+                  <!-- Pan indicator (shown when zoomed in) -->
+                  <div id="panIndicator" aria-hidden="true">
+                    ↕️ Pan • 🔍 Zoom
                   </div>
                 </div>
+                <div id="imageDimensions" aria-live="polite" aria-atomic="true"></div>
+                </div>
 
-                <!-- Lock Aspect Ratio -->
-                <div style="margin-top:16px;">
+              <!-- Right Side - Controls -->
+              <div class="editor-controls-section">
+                <!-- Size Controls -->
+                <div class="control-card">
+                  <h4>📐 Size</h4>
+                  <div class="control-input-group">
+                    <div>
+                      <label for="widthSlider">Width (px)</label>
+                      <input type="number" id="widthInput" class="form-control enhanced-input" min="1" value="200" aria-label="Crop width in pixels" />
+                  </div>
+                    <div>
+                      <label for="heightSlider">Height (px)</label>
+                      <input type="number" id="heightInput" class="form-control enhanced-input" min="1" value="200" aria-label="Crop height in pixels" />
+                  </div>
+                </div>
+                  <input type="range" id="widthSlider" class="form-range" min="10" max="500" value="200" aria-describedby="width-value" aria-label="Adjust crop width with slider" />
+                  <input type="range" id="heightSlider" class="form-range" min="10" max="500" value="200" aria-describedby="height-value" aria-label="Adjust crop height with slider" />
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="lockAspectRatio" />
-                    <label class="form-check-label" for="lockAspectRatio" style="font-weight:600;">Lock Aspect Ratio</label>
+                    <input class="form-check-input" type="checkbox" id="lockAspectRatio" aria-describedby="aspect-ratio-help" />
+                    <label class="form-check-label" for="lockAspectRatio">🔒 Lock Ratio</label>
                   </div>
+                  <div id="width-value" class="sr-only">Current width: 200 pixels</div>
+                  <div id="height-value" class="sr-only">Current height: 200 pixels</div>
+                    <div id="aspect-ratio-help" class="sr-only">When enabled, maintains the current width to height ratio when resizing</div>
+                  </div>
+
+                <!-- Position Controls -->
+                <div class="control-card">
+                  <h4>📍 Position</h4>
+                  <div class="control-input-group">
+                    <div>
+                      <label for="xSlider">X Pos (px)</label>
+                      <input type="number" id="xInput" class="form-control enhanced-input" min="0" value="0" aria-label="Horizontal crop position in pixels" />
+                </div>
+                    <div>
+                      <label for="ySlider">Y Pos (px)</label>
+                      <input type="number" id="yInput" class="form-control enhanced-input" min="0" value="0" aria-label="Vertical crop position in pixels" />
+              </div>
+                  </div>
+                  <input type="range" id="xSlider" class="form-range" min="0" max="400" value="0" aria-describedby="x-value" aria-label="Adjust horizontal crop position with slider" />
+                  <input type="range" id="ySlider" class="form-range" min="0" max="400" value="0" aria-describedby="y-value" aria-label="Adjust vertical crop position with slider" />
+                  <div id="x-value" class="sr-only">Current X position: 0 pixels</div>
+                    <div id="y-value" class="sr-only">Current Y position: 0 pixels</div>
+              </div>
+
+                <!-- Zoom Controls -->
+                <div class="control-card">
+                  <h4>🔍 Zoom</h4>
+                  <div class="zoom-controls-section">
+                    <button id="zoomOutBtn" class="btn btn-ghost zoom-btn" type="button" aria-label="Zoom out" title="Zoom out (Ctrl + -)">−</button>
+                    <span id="zoomLevel" aria-live="polite" class="zoom-display">100%</span>
+                    <button id="zoomInBtn" class="btn btn-ghost zoom-btn" type="button" aria-label="Zoom in" title="Zoom in (Ctrl + +)">+</button>
                 </div>
               </div>
 
-              <!-- Crop Area Position -->
-              <div style="margin-bottom:28px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--light-text);">Crop Area Position</h3>
-                <div class="crop-controls-grid">
-                  <!-- X Position Control -->
-                  <div class="control-group">
-                    <label for="xSlider" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">X Position (px)</label>
-                    <input type="range" id="xSlider" class="form-range" min="0" max="800" value="0" style="margin-bottom:8px;" />
-                    <input type="number" id="xInput" class="form-control" min="0" value="0" />
-                  </div>
-
-                  <!-- Y Position Control -->
-                <div class="control-group">
-                    <label for="ySlider" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Y Position (px)</label>
-                    <input type="range" id="ySlider" class="form-range" min="0" max="800" value="0" style="margin-bottom:8px;" />
-                    <input type="number" id="yInput" class="form-control" min="0" value="0" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Quick Presets -->
-              <div style="margin-bottom:28px;">
-                <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--light-text);">Quick Presets</h3>
-                <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                  <button class="btn btn-ghost preset-btn" data-preset="square">Square (1:1)</button>
-                  <button class="btn btn-ghost preset-btn" data-preset="portrait">Portrait (4:5)</button>
-                  <button class="btn btn-ghost preset-btn" data-preset="landscape">Landscape (16:9)</button>
-                  <button class="btn btn-ghost preset-btn" data-preset="story">Story (9:16)</button>
-                  <button class="btn btn-ghost preset-btn" data-preset="full">Full Image</button>
-                </div>
-              </div>
-
-              <!-- Export Button -->
-              <div style="text-align:center;margin-top:32px;">
-                <button class="btn btn-primary" id="exportBtn" type="button" style="font-size:18px;padding:14px 40px;min-width:200px;">
-                  Crop Image <span style="margin-left:8px;">✂</span>
+                <!-- Reset & Crop -->
+                <div class="control-card">
+                  <h4>⚡ Actions</h4>
+                  <div class="action-buttons">
+                    <button class="btn btn-ghost preset-btn action-btn" data-preset="full" title="Reset crop area to centered square">
+                      🔄 Reset Crop
                 </button>
-              </div>
+                    <button class="crop-action-btn" id="exportBtn" type="button" aria-describedby="export-help">
+                      <span style="font-size:16px;margin-right:6px;">✂️</span>
+                      Crop Image
+                    </button>
+                  </div>
+                <div id="export-help" class="sr-only">Click to crop the image using the selected area and download the result</div>
             </div>
 
             <!-- Processing overlay -->
-            <div id="processingOverlay" style="display:none;flex-direction:column;align-items:center;padding:40px;text-align:center;">
-              <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--primary-500);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px"></div>
-              <div style="font-weight:600;font-size:18px;color:var(--light-text);">Cropping your image...</div>
+            <div id="processingOverlay" style="display:none;flex-direction:column;align-items:center;padding:40px;text-align:center;" role="status" aria-live="polite" aria-label="Processing status">
+              <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--primary-500);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px" aria-hidden="true"></div>
+              <div style="font-weight:600;font-size:18px;color:var(--light-text);" id="processing-text">Cropping your image...</div>
+              <div class="sr-only" aria-live="assertive" id="processing-status">Image cropping in progress</div>
             </div>
 
             <!-- Success view (hidden until cropped) -->
-            <div id="successView" style="display:none;text-align:center;margin-top:32px;">
+            <div id="successView" class="success-modal" role="region" aria-labelledby="success-heading" aria-live="polite">
+              <div class="success-modal-content">
               <!-- Success message -->
-              <div style="background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#fff;border-radius:12px;padding:32px;margin-bottom:24px;">
-                <div style="font-size:24px;font-weight:700;margin-bottom:8px;">✓ Image Cropped Successfully!</div>
-                <div style="font-size:18px;opacity:0.9;" id="successDimensions">
+                <div class="success-message" role="status" aria-live="polite">
+                  <div id="success-heading">✓ Image Cropped Successfully!</div>
+                  <div id="successDimensions" aria-live="polite">
                   Cropped size: 400 × 400 pixels
                 </div>
               </div>
 
               <!-- Preview image -->
-              <div style="margin-bottom:24px;">
-                <img id="croppedImg" src="" alt="Cropped" style="max-width:100%;max-height:500px;border:1px solid var(--light-border);border-radius:8px;" />
+                <div class="success-image">
+                  <img id="croppedImg" src="" alt="Cropped image preview" />
               </div>
 
               <!-- Action buttons -->
-              <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-                <a class="btn btn-primary" id="downloadBtn" href="#" download style="font-size:16px;padding:12px 24px;">Download Image</a>
-                <button class="btn btn-ghost" id="cropAnotherBtn" type="button" style="font-size:16px;padding:12px 24px;">Crop Another</button>
+                <div class="success-actions" role="group" aria-label="Action buttons">
+                  <a class="btn btn-primary focus-visible" id="downloadBtn" href="#" download aria-describedby="download-help">📥 Download Image</a>
+                  <button class="btn btn-ghost focus-visible" id="cropAnotherBtn" type="button" aria-describedby="crop-another-help">🔄 Crop Another</button>
+                <div id="download-help" class="sr-only">Download the cropped image to your device</div>
+                <div id="crop-another-help" class="sr-only">Start cropping a new image</div>
+                </div>
               </div>
             </div>
           </div>
@@ -206,64 +296,160 @@
       </section>
 
       <!-- SEO Content Section -->
-      <section class="seo-section" style="margin-top:56px;max-width:900px;margin-left:auto;margin-right:auto;">
-        <div class="seo-card" style="background:var(--light-card);border:1px solid var(--light-border);border-radius:12px;padding:32px;">
-          <h2 class="seo-title" style="font-size:28px;font-weight:700;margin-bottom:20px;color:var(--light-text);">How to Crop Images Online</h2>
+      <section class="seo-section" style="margin-top:80px;max-width:1000px;margin-left:auto;margin-right:auto;padding:0 20px;">
+        <div class="seo-card" style="background:linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.03) 50%, rgba(240, 147, 251, 0.03) 100%);border:1px solid rgba(102, 126, 234, 0.1);border-radius:24px;padding:48px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(102, 126, 234, 0.08);">
+          <!-- Decorative background elements -->
+          <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.04) 0%, transparent 50%),radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.04) 0%, transparent 50%);opacity:0.5;"></div>
 
-          <div style="margin-bottom:32px;">
-            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">✂️ Visual Cropping with Mouse</h3>
-            <p class="seo-text" style="line-height:1.8;color:var(--light-muted);margin-bottom:12px;">
+          <!-- Main title -->
+          <div style="text-align:center;margin-bottom:48px;position:relative;z-index:1;">
+            <h2 style="font-size:40px;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;">How to Crop Images Online</h2>
+            <div style="width:120px;height:4px;background:linear-gradient(90deg,#667eea 0%,#764ba2 50%,#f093fb 100%);border-radius:2px;margin:0 auto;"></div>
+          </div>
+
+          <!-- Visual Cropping Section -->
+          <div style="margin-bottom:48px;position:relative;z-index:1;">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+              <div style="width:60px;height:60px;background:linear-gradient(135deg,#10b981 0%,#059669 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(16, 185, 129, 0.3);">
+                <span style="font-size:28px;">✂️</span>
+              </div>
+              <div>
+                <h3 style="font-size:28px;font-weight:700;margin:0;color:var(--light-text);background:linear-gradient(135deg,#10b981 0%,#059669 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Visual Cropping with Mouse</h3>
+                <div style="width:50px;height:3px;background:linear-gradient(90deg,#10b981 0%,#059669 100%);border-radius:2px;margin-top:8px;"></div>
+              </div>
+            </div>
+            <p style="font-size:18px;line-height:1.7;color:var(--light-muted);margin-bottom:24px;max-width:700px;">
               Our interactive crop tool lets you visually select the exact area you want to keep. Simply click and drag on the image to create a crop rectangle. You can:
             </p>
-            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
-              <li><strong>Create:</strong> Click and drag anywhere on the image to draw the crop area</li>
-              <li><strong>Move:</strong> Click inside the rectangle and drag to reposition it</li>
-              <li><strong>Resize:</strong> Drag the corners to resize proportionally or drag edges to resize in one direction</li>
-              <li><strong>Fine-tune:</strong> Use the manual controls with sliders and number inputs for pixel-perfect precision</li>
-            </ul>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+              <div style="background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(5,150,105,0.05) 100%);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#10b981;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">🎯</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#10b981;">Create</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Click and drag anywhere on the image to draw the crop area</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(59,130,246,0.1) 0%,rgba(37,99,235,0.05) 100%);border:1px solid rgba(59,130,246,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#3b82f6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">↕️</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#3b82f6;">Move</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Click inside the rectangle and drag to reposition it</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(245,158,11,0.1) 0%,rgba(217,119,6,0.05) 100%);border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#f59e0b;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">📐</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#f59e0b;">Resize</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Drag the corners to resize proportionally or drag edges to resize in one direction</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(168,85,247,0.1) 0%,rgba(147,51,234,0.05) 100%);border:1px solid rgba(168,85,247,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#a855f7;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">⚡</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#a855f7;">Fine-tune</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Use the manual controls with sliders and number inputs for pixel-perfect precision</p>
+              </div>
+            </div>
           </div>
 
-          <div style="margin-bottom:32px;">
-            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">📐 Precise Manual Controls</h3>
-            <p class="seo-text" style="line-height:1.8;color:var(--light-muted);margin-bottom:12px;">
+          <!-- Precise Manual Controls Section -->
+          <div style="margin-bottom:48px;position:relative;z-index:1;">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+              <div style="width:60px;height:60px;background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(59, 130, 246, 0.3);">
+                <span style="font-size:28px;">📐</span>
+              </div>
+              <div>
+                <h3 style="font-size:28px;font-weight:700;margin:0;color:var(--light-text);background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Precise Manual Controls</h3>
+                <div style="width:50px;height:3px;background:linear-gradient(90deg,#3b82f6 0%,#1d4ed8 100%);border-radius:2px;margin-top:8px;"></div>
+              </div>
+            </div>
+            <p style="font-size:18px;line-height:1.7;color:var(--light-muted);margin-bottom:24px;max-width:700px;">
               Need exact dimensions? Use our dual-input system for maximum precision:
             </p>
-            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
-              <li><strong>Sliders:</strong> Quick adjustments for width, height, X position, and Y position</li>
-              <li><strong>Number Inputs:</strong> Type exact pixel values for perfect accuracy</li>
-              <li><strong>Aspect Ratio Lock:</strong> Maintain proportions while resizing</li>
-              <li><strong>Quick Presets:</strong> One-click options for common ratios (Square 1:1, Portrait 4:5, Landscape 16:9, Story 9:16)</li>
-            </ul>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+              <div style="background:linear-gradient(135deg,rgba(59,130,246,0.1) 0%,rgba(29,78,216,0.05) 100%);border:1px solid rgba(59,130,246,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#3b82f6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">🎚️</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#3b82f6;">Sliders</h4>
+          </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Quick adjustments for width, height, X position, and Y position</p>
+          </div>
+              <div style="background:linear-gradient(135deg,rgba(245,158,11,0.1) 0%,rgba(217,119,6,0.05) 100%);border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#f59e0b;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">🔢</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#f59e0b;">Number Inputs</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Type exact pixel values for perfect accuracy</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(168,85,247,0.1) 0%,rgba(147,51,234,0.05) 100%);border:1px solid rgba(168,85,247,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#a855f7;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">🔒</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#a855f7;">Aspect Ratio Lock</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">Maintain proportions while resizing</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(5,150,105,0.05) 100%);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:24px;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                  <div style="width:32px;height:32px;background:#10b981;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">⚡</div>
+                  <h4 style="font-size:16px;font-weight:600;margin:0;color:#10b981;">Quick Presets</h4>
+                </div>
+                <p style="font-size:14px;color:var(--light-muted);margin:0;line-height:1.5;">One-click options for common ratios (Square 1:1, Portrait 4:5, Landscape 16:9, Story 9:16)</p>
+              </div>
+            </div>
           </div>
 
-          <div style="margin-bottom:32px;">
-            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">🖼️ Supported Image Formats</h3>
-            <p class="seo-text" style="line-height:1.8;color:var(--light-muted);margin-bottom:12px;">
+          <!-- Supported Image Formats Section -->
+          <div style="margin-bottom:0;position:relative;z-index:1;">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+              <div style="width:60px;height:60px;background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(245, 158, 11, 0.3);">
+                <span style="font-size:28px;">🖼️</span>
+              </div>
+          <div>
+                <h3 style="font-size:28px;font-weight:700;margin:0;color:var(--light-text);background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Supported Image Formats</h3>
+                <div style="width:50px;height:3px;background:linear-gradient(90deg,#f59e0b 0%,#d97706 100%);border-radius:2px;margin-top:8px;"></div>
+              </div>
+            </div>
+            <p style="font-size:18px;line-height:1.7;color:var(--light-muted);margin-bottom:32px;max-width:700px;">
               Our crop tool works with all major image formats:
             </p>
-            <ul class="seo-list" style="line-height:1.8;color:var(--light-muted);">
-              <li><strong>HEIC/HEIF:</strong> Apple's High Efficiency format from iPhone and iPad - automatically converted</li>
-              <li><strong>JPEG/JPG:</strong> Most common format for photos and compressed images</li>
-              <li><strong>PNG:</strong> Perfect for images with transparency and graphics</li>
-              <li><strong>WebP:</strong> Modern format with excellent compression and quality</li>
-              <li><strong>GIF:</strong> Animated and static images (first frame for animated GIFs)</li>
-              <li><strong>BMP:</strong> Windows bitmap format for uncompressed images</li>
-              <li><strong>TIFF:</strong> High-quality format for professional photography</li>
-            </ul>
-          </div>
-
-          <div style="margin-bottom:32px;">
-            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">📱 Mobile & Tablet Friendly</h3>
-            <p class="seo-text" style="line-height:1.8;color:var(--light-muted);">
-              Crop images on any device! Our responsive design works perfectly on smartphones and tablets. Touch gestures work just like mouse controls - tap and drag to create, move, and resize your crop area. All controls are optimized for touch screens, making it easy to crop images on the go.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="seo-subtitle" style="font-size:20px;font-weight:600;margin-bottom:12px;color:var(--light-text);">🌙 Dark Mode Support</h3>
-            <p class="seo-text" style="line-height:1.8;color:var(--light-muted);">
-              Eye-friendly editing in any lighting condition. Our dark mode automatically adjusts the interface to reduce eye strain during night-time editing sessions. Toggle between light and dark themes with the button in the header.
-            </p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
+              <div style="background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(5,150,105,0.05) 100%);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">📱</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#10b981;">HEIC/HEIF</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">Apple's High Efficiency format from iPhone and iPad - automatically converted</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(59,130,246,0.1) 0%,rgba(37,99,235,0.05) 100%);border:1px solid rgba(59,130,246,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">🖼️</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#3b82f6;">JPEG/JPG</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">Most common format for photos and compressed images</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(168,85,247,0.1) 0%,rgba(147,51,234,0.05) 100%);border:1px solid rgba(168,85,247,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">🖼️</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#a855f7;">PNG</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">Perfect for images with transparency and graphics</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(245,158,11,0.1) 0%,rgba(217,119,6,0.05) 100%);border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">🖼️</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#f59e0b;">WebP</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">Modern format with excellent compression and quality</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(239,68,68,0.1) 0%,rgba(220,38,38,0.05) 100%);border:1px solid rgba(239,68,68,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">🎞️</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#ef4444;">GIF</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">Animated and static images (first frame for animated GIFs)</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(6,182,212,0.1) 0%,rgba(8,145,178,0.05) 100%);border:1px solid rgba(6,182,212,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">🖼️</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#06b6d4;">BMP</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">Windows bitmap format for uncompressed images</p>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(139,69,19,0.1) 0%,rgba(120,53,15,0.05) 100%);border:1px solid rgba(139,69,19,0.2);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-size:32px;margin-bottom:12px;">📸</div>
+                <h4 style="font-size:16px;font-weight:600;margin:0 0 8px 0;color:#8b4513;">TIFF</h4>
+                <p style="font-size:13px;color:var(--light-muted);margin:0;line-height:1.4;">High-quality format for professional photography</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -283,6 +469,8 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Cropper.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script src="script.js?v=1.0.9"></script>
 
     <!-- Hide header/footer when loaded in iframe -->
@@ -300,15 +488,14 @@
     </script>
 
     <script>
-      // Main crop functionality
+      // Main crop functionality using Cropper.js
       (function(){
         const fileInput = document.getElementById('fileInput');
         const selectBtn = document.getElementById('selectBtn');
         const dropZone = document.getElementById('dropZone');
         const editorView = document.getElementById('editorView');
-        const canvasSection = document.getElementById('canvasSection');
+        const canvasContainer = document.getElementById('canvasContainer');
         const canvas = document.getElementById('cropCanvas');
-        const ctx = canvas.getContext('2d');
         const imageDimensions = document.getElementById('imageDimensions');
         const processingOverlay = document.getElementById('processingOverlay');
         const successView = document.getElementById('successView');
@@ -333,28 +520,45 @@
 
         let currentFile = null;
         let currentBase64 = '';
-        let sourceImage = null;
-        let originalWidth = 0;
-        let originalHeight = 0;
-        let aspectRatio = 1;
-
-        // Crop rectangle state
-        let cropRect = { x: 0, y: 0, width: 200, height: 200 };
-        let isDragging = false;
-        let isResizing = false;
-        let dragStartX = 0;
-        let dragStartY = 0;
-        let dragType = ''; // 'move', 'nw', 'ne', 'sw', 'se', 'n', 's', 'e', 'w'
-        let isCreating = false;
-        let createStartX = 0;
-        let createStartY = 0;
-
-        const HANDLE_SIZE = 10;
-        const MIN_CROP_SIZE = 20;
+        let cropper = null;
 
         // File selection
-        selectBtn.addEventListener('click', () => fileInput.click());
+        selectBtn.addEventListener('click', () => {
+          fileInput.click();
+        });
         cropAnotherBtn.addEventListener('click', resetToUploader);
+
+
+        // Click on drop zone (excluding select button) to open file dialog
+        dropZone.addEventListener('click', (e) => {
+          // Only trigger if not clicking on the select button or its children
+          if (!e.target.closest('#selectBtn')) {
+            fileInput.click();
+          }
+        });
+
+        // Keyboard navigation for drop zone
+        dropZone.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            fileInput.click();
+          }
+        });
+
+        // Initialize zoom controls after image load
+        function initializeZoomControls() {
+          const zoomInBtn = document.getElementById('zoomInBtn');
+          const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+          if (zoomInBtn && zoomOutBtn) {
+            zoomInBtn.addEventListener('click', () => {
+              if (cropper) cropper.zoom(0.1);
+            });
+            zoomOutBtn.addEventListener('click', () => {
+              if (cropper) cropper.zoom(-0.1);
+            });
+          }
+        }
 
         // Drag and drop
         dropZone.addEventListener('dragover', (e)=>{ e.preventDefault(); dropZone.classList.add('drag'); });
@@ -364,19 +568,73 @@
 
         // Preset buttons
         document.querySelectorAll('.preset-btn').forEach(btn => {
-          btn.addEventListener('click', () => applyPreset(btn.dataset.preset));
+          btn.addEventListener('click', () => {
+            applyPreset(btn.dataset.preset);
+          });
         });
 
-        // Sync sliders and inputs
+        // Sync sliders and inputs with Cropper.js
         function syncControl(slider, input, property) {
           slider.addEventListener('input', () => {
             input.value = slider.value;
-            updateCropRectFromControls();
+            updateCropperFromControls();
           });
           input.addEventListener('input', () => {
             slider.value = input.value;
-            updateCropRectFromControls();
+            updateCropperFromControls();
           });
+        }
+
+        function updateCropperFromControls() {
+          if (!cropper) return;
+
+          // Get current crop data first
+          const currentCropData = cropper.getData(); // Use canvas-relative coordinates
+
+          // Use actual image dimensions for all constraints
+          const canvasData = cropper.getCanvasData();
+          const imageWidth = canvas.naturalWidth || canvasData.width || 500;
+          const imageHeight = canvas.naturalHeight || canvasData.height || 500;
+
+          let width = parseInt(widthInput.value) || currentCropData.width || 200;
+          let height = parseInt(heightInput.value) || currentCropData.height || 200;
+          let x = parseInt(xInput.value) || currentCropData.x || 0;
+          let y = parseInt(yInput.value) || currentCropData.y || 0;
+
+          // Constrain size to image bounds
+          width = Math.max(10, Math.min(width, imageWidth));
+          height = Math.max(10, Math.min(height, imageHeight));
+
+          // Constrain position to stay within image bounds (accounting for crop size)
+          // This ensures crop box doesn't extend beyond actual image
+          x = Math.max(0, Math.min(x, imageWidth - width));
+          y = Math.max(0, Math.min(y, imageHeight - height));
+
+          // Update inputs to reflect constrained values
+          widthInput.value = Math.round(width);
+          heightInput.value = Math.round(height);
+          xInput.value = Math.round(x);
+          yInput.value = Math.round(y);
+
+          // Update sliders too
+          widthSlider.value = Math.round(width);
+          heightSlider.value = Math.round(height);
+          xSlider.value = Math.round(x);
+          ySlider.value = Math.round(y);
+
+          // Update cropper with new dimensions (scaled coordinates)
+          cropper.setData({
+            width: width,
+            height: height,
+            x: x,
+            y: y
+          });
+
+          // Update position slider ranges since crop size may have changed
+          setTimeout(() => {
+            updateControlRanges();
+          }, 10);
+
         }
 
         syncControl(widthSlider, widthInput, 'width');
@@ -384,8 +642,37 @@
         syncControl(xSlider, xInput, 'x');
         syncControl(ySlider, yInput, 'y');
 
+        function applyPreset(preset) {
+          if (!cropper) return;
+
+          const canvasData = cropper.getCanvasData();
+          const centerX = canvasData.width / 2;
+          const centerY = canvasData.height / 2;
+
+          switch(preset) {
+            case 'full':
+              // Reset to initial centered square crop area (50% of smaller dimension)
+              const size = Math.min(canvasData.width, canvasData.height) * 0.5;
+              cropper.setData({
+                x: centerX - size/2,
+                y: centerY - size/2,
+                width: size,
+                height: size
+              });
+              break;
+          }
+
+          // Update controls to reflect new crop area
+          updateControlsFromCropData();
+        }
+
+        // Zoom controls are initialized after image load
+        // Cropper.js handles keyboard shortcuts internally
+
         // Export button
-        exportBtn.addEventListener('click', handleExport);
+        exportBtn.addEventListener('click', () => {
+          handleExport();
+        });
 
         function handleFiles(list){
           const files = Array.from(list || []).filter(f=>/^image\//.test(f.type));
@@ -418,91 +705,97 @@
           currentFile = file;
           currentBase64 = await fileToBase64(file);
 
+          // Destroy existing cropper if it exists
+          if (cropper) {
+            cropper.destroy();
+            cropper = null;
+          }
+
           const objectUrl = URL.createObjectURL(file);
-          sourceImage = new Image();
-          sourceImage.onload = () => {
-            originalWidth = sourceImage.naturalWidth || sourceImage.width;
-            originalHeight = sourceImage.naturalHeight || sourceImage.height;
-            aspectRatio = originalWidth / originalHeight;
 
-            // Set canvas size with min/max constraints
-            const MAX_CANVAS_WIDTH = 900;
-            const MAX_CANVAS_HEIGHT = 600;
-            const MIN_CANVAS_WIDTH = 300;
-            const MIN_CANVAS_HEIGHT = 200;
+          // Set the image source
+          canvas.src = objectUrl;
 
-            // Start with original dimensions
-            let canvasWidth = originalWidth;
-            let canvasHeight = originalHeight;
+          // Show editor view
+          dropZone.style.display = 'none';
+          editorView.style.display = 'block';
+          canvasContainer.style.display = 'block';
+          successView.style.display = 'none';
 
-            // Respect viewport width (with padding)
-            const viewportMaxWidth = Math.min(MAX_CANVAS_WIDTH, window.innerWidth - 80);
+          // Initialize Cropper.js when image loads
+          canvas.onload = () => {
+            // Initialize Cropper.js with options
+            cropper = new Cropper(canvas, {
+              aspectRatio: NaN, // Free cropping
+              viewMode: 2, // Restrict the crop box not to exceed the size of the canvas
+              dragMode: 'crop', // Only allow moving the crop box, not the image
+              responsive: true,
+              restore: false,
+              checkCrossOrigin: false,
+              checkOrientation: false,
+              modal: false, // Remove dark overlay over the entire image
+              guides: true,
+              center: true,
+              highlight: false,
+              background: false,
+              autoCrop: true,
+              autoCropArea: 0.6, // Start with 60% crop area
+              zoomable: true,
+              zoomOnWheel: false, // We'll handle zoom with buttons
+              zoomOnTouch: true,
+              wheelZoomRatio: 0.1,
+              cropBoxMovable: true,
+              cropBoxResizable: true,
+              toggleDragModeOnDblclick: false,
+            });
 
-            // Scale down if too large (width)
-            if (canvasWidth > viewportMaxWidth) {
-              canvasWidth = viewportMaxWidth;
-              canvasHeight = canvasWidth / aspectRatio;
-            }
+            // Update controls when crop changes
+            canvas.addEventListener('crop', (event) => {
+              updateControlsFromCropData(event.detail);
+            });
 
-            // Scale down if too tall (height)
-            if (canvasHeight > MAX_CANVAS_HEIGHT) {
-              canvasHeight = MAX_CANVAS_HEIGHT;
-              canvasWidth = canvasHeight * aspectRatio;
-            }
+            // Initialize controls when cropper is ready
+            canvas.addEventListener('ready', () => {
+              // Force a proper initial crop size since autoCropArea might not work as expected
+              const canvasData = cropper.getCanvasData();
+              const centerX = canvasData.width / 2;
+              const centerY = canvasData.height / 2;
 
-            // Scale up if too small (width)
-            if (canvasWidth < MIN_CANVAS_WIDTH) {
-              canvasWidth = MIN_CANVAS_WIDTH;
-              canvasHeight = canvasWidth / aspectRatio;
-            }
+              // Create a crop box that's 70% of the smaller canvas dimension
+              const cropSize = Math.min(canvasData.width, canvasData.height) * 0.7;
 
-            // Scale up if too small (height) - but respect max width
-            if (canvasHeight < MIN_CANVAS_HEIGHT && canvasWidth < viewportMaxWidth) {
-              canvasHeight = MIN_CANVAS_HEIGHT;
-              canvasWidth = canvasHeight * aspectRatio;
-              if (canvasWidth > viewportMaxWidth) {
-                canvasWidth = viewportMaxWidth;
-                canvasHeight = canvasWidth / aspectRatio;
-              }
-            }
+              // Clear any existing crop and set new one
+              cropper.clear();
+              cropper.crop();
 
-            canvasWidth = Math.round(canvasWidth);
-            canvasHeight = Math.round(canvasHeight);
+              // Set the crop data
+              cropper.setData({
+                x: centerX - cropSize / 2,
+                y: centerY - cropSize / 2,
+                width: cropSize,
+                height: cropSize
+              });
 
-            canvas.width = canvasWidth;
-            canvas.height = canvasHeight;
-
-            const initialSize = Math.min(canvasWidth, canvasHeight) * 0.5;
-            cropRect = {
-              x: (canvasWidth - initialSize) / 2,
-              y: (canvasHeight - initialSize) / 2,
-              width: initialSize,
-              height: initialSize
-            };
-
+              // Now initialize controls
             updateControlRanges();
-            updateControlsFromCropRect();
-            drawCanvas();
+              updateControlsFromCropData();
+            });
 
-            const scale = (canvasWidth / originalWidth).toFixed(2);
-            const scalePercent = (scale * 100).toFixed(0);
-            if (canvasWidth === originalWidth && canvasHeight === originalHeight) {
-              imageDimensions.textContent = `Original: ${originalWidth} × ${originalHeight} pixels (Showing at 100%)`;
-            } else {
-              imageDimensions.textContent = `Original: ${originalWidth} × ${originalHeight} pixels (Displaying at ${scalePercent}% for editing)`;
-            }
+            // Initialize zoom controls
+            initializeZoomControls();
 
-            dropZone.style.display = 'none';
-            editorView.style.display = 'block';
-            canvasSection.style.display = 'block';
-            successView.style.display = 'none';
+            // Update dimensions display
+            const naturalWidth = canvas.naturalWidth;
+            const naturalHeight = canvas.naturalHeight;
+            imageDimensions.textContent = `Original: ${naturalWidth} × ${naturalHeight} pixels`;
+
             URL.revokeObjectURL(objectUrl);
           };
-          sourceImage.onerror = () => {
+
+          canvas.onerror = () => {
             URL.revokeObjectURL(objectUrl);
             alert('Unable to load that image. Please try another file.');
           };
-          sourceImage.src = objectUrl;
         }
 
         function fileToBase64(file){
@@ -514,460 +807,162 @@
           });
         }
 
+        function updateControlsFromCropData(data) {
+          if (!cropper) return;
+
+          // Assume crop event data is in canvas coordinates (same as getData())
+          let cropData;
+          if (data) {
+            cropData = data;
+          } else {
+            cropData = cropper.getData(); // Canvas coordinates
+          }
+
+          // Get canvas and image data
+          const canvasData = cropper.getCanvasData();
+          const imageWidth = canvas.naturalWidth || canvasData.width || 500;
+          const imageHeight = canvas.naturalHeight || canvasData.height || 500;
+
+          // Clamp position to stay within image bounds
+          if (cropData.x + cropData.width > imageWidth || cropData.y + cropData.height > imageHeight) {
+            cropData.x = Math.max(0, Math.min(cropData.x, imageWidth - cropData.width));
+            cropData.y = Math.max(0, Math.min(cropData.y, imageHeight - cropData.height));
+          }
+
+          // Update width and height
+          const width = Math.round(cropData.width);
+          const height = Math.round(cropData.height);
+          const x = Math.round(cropData.x);
+          const y = Math.round(cropData.y);
+
+          widthSlider.value = width;
+          widthInput.value = width;
+          heightSlider.value = height;
+          heightInput.value = height;
+          xSlider.value = x;
+          xInput.value = x;
+          ySlider.value = y;
+          yInput.value = y;
+
+          // Update screen reader announcements
+          document.getElementById('width-value').textContent = `Current width: ${width} pixels`;
+          document.getElementById('height-value').textContent = `Current height: ${height} pixels`;
+          document.getElementById('x-value').textContent = `Current X position: ${x} pixels`;
+          document.getElementById('y-value').textContent = `Current Y position: ${y} pixels`;
+
+        }
+
+        // Update control ranges based on current cropper state
         function updateControlRanges() {
-          widthSlider.max = canvas.width;
-          widthInput.max = canvas.width;
-          heightSlider.max = canvas.height;
-          heightInput.max = canvas.height;
-          xSlider.max = canvas.width;
-          xInput.max = canvas.width;
-          ySlider.max = canvas.height;
-          yInput.max = canvas.height;
+          if (!cropper) return;
+
+          const canvasData = cropper.getCanvasData();
+
+          // Set ranges based on actual IMAGE dimensions, not canvas display size
+          const maxWidth = Math.floor(canvas.naturalWidth || canvasData.width || 500);
+          const maxHeight = Math.floor(canvas.naturalHeight || canvasData.height || 500);
+
+          // Size sliders can go up to actual image dimensions
+          widthSlider.min = 10;
+          widthSlider.max = maxWidth;
+          widthInput.min = 10;
+          widthInput.max = maxWidth;
+
+          heightSlider.min = 10;
+          heightSlider.max = maxHeight;
+          heightInput.min = 10;
+          heightInput.max = maxHeight;
+
+          // Position sliders: allow movement across entire image
+          // Use full IMAGE dimensions for complete positioning freedom
+          const imageWidth = Math.floor(canvas.naturalWidth || 500);
+          const imageHeight = Math.floor(canvas.naturalHeight || 500);
+
+          // Allow crop box to be positioned anywhere within the full image
+          const maxX = imageWidth;
+          const maxY = imageHeight;
+
+          xSlider.min = 0;
+          xSlider.max = maxX;
+          xInput.min = 0;
+          xInput.max = maxX;
+
+          ySlider.min = 0;
+          ySlider.max = maxY;
+          yInput.min = 0;
+          yInput.max = maxY;
         }
 
-        function updateControlsFromCropRect() {
-          widthSlider.value = Math.round(cropRect.width);
-          widthInput.value = Math.round(cropRect.width);
-          heightSlider.value = Math.round(cropRect.height);
-          heightInput.value = Math.round(cropRect.height);
-          xSlider.value = Math.round(cropRect.x);
-          xInput.value = Math.round(cropRect.x);
-          ySlider.value = Math.round(cropRect.y);
-          yInput.value = Math.round(cropRect.y);
-        }
 
-        function updateCropRectFromControls() {
-          let newWidth = parseInt(widthInput.value) || MIN_CROP_SIZE;
-          let newHeight = parseInt(heightInput.value) || MIN_CROP_SIZE;
-          let newX = parseInt(xInput.value) || 0;
-          let newY = parseInt(yInput.value) || 0;
 
-          // Handle aspect ratio lock
-          if (lockAspectRatio.checked && cropRect.width > 0 && cropRect.height > 0) {
-            const currentAspect = cropRect.width / cropRect.height;
-            // Check which dimension changed
-            if (newWidth !== cropRect.width) {
-              newHeight = Math.round(newWidth / currentAspect);
-            } else if (newHeight !== cropRect.height) {
-              newWidth = Math.round(newHeight * currentAspect);
-            }
-          }
 
-          // Constrain to canvas bounds
-          newWidth = Math.max(MIN_CROP_SIZE, Math.min(newWidth, canvas.width));
-          newHeight = Math.max(MIN_CROP_SIZE, Math.min(newHeight, canvas.height));
-          newX = Math.max(0, Math.min(newX, canvas.width - newWidth));
-          newY = Math.max(0, Math.min(newY, canvas.height - newHeight));
-
-          cropRect = { x: newX, y: newY, width: newWidth, height: newHeight };
-
-          // Update controls if values were constrained
-          updateControlsFromCropRect();
-          drawCanvas();
-        }
-
-        function drawCanvas() {
-          // Clear canvas
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-          // Draw source image
-          ctx.drawImage(sourceImage, 0, 0, canvas.width, canvas.height);
-
-          // Draw overlay (darken outside crop area)
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          // Clear crop area
-          ctx.clearRect(cropRect.x, cropRect.y, cropRect.width, cropRect.height);
-          ctx.drawImage(sourceImage, 0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.clearRect(cropRect.x, cropRect.y, cropRect.width, cropRect.height);
-
-          // Redraw image in crop area
-          ctx.save();
-          ctx.beginPath();
-          ctx.rect(cropRect.x, cropRect.y, cropRect.width, cropRect.height);
-          ctx.clip();
-          ctx.drawImage(sourceImage, 0, 0, canvas.width, canvas.height);
-          ctx.restore();
-
-          // Draw crop rectangle border
-          ctx.strokeStyle = '#5b8cff';
-          ctx.lineWidth = 2;
-          ctx.strokeRect(cropRect.x, cropRect.y, cropRect.width, cropRect.height);
-
-          // Draw resize handles
-          const handles = getHandlePositions();
-          ctx.fillStyle = '#ffffff';
-          ctx.strokeStyle = '#5b8cff';
-          ctx.lineWidth = 2;
-
-          for (let key in handles) {
-            const h = handles[key];
-            ctx.fillRect(h.x - HANDLE_SIZE/2, h.y - HANDLE_SIZE/2, HANDLE_SIZE, HANDLE_SIZE);
-            ctx.strokeRect(h.x - HANDLE_SIZE/2, h.y - HANDLE_SIZE/2, HANDLE_SIZE, HANDLE_SIZE);
-          }
-        }
-
-        function getHandlePositions() {
-          return {
-            nw: { x: cropRect.x, y: cropRect.y },
-            ne: { x: cropRect.x + cropRect.width, y: cropRect.y },
-            sw: { x: cropRect.x, y: cropRect.y + cropRect.height },
-            se: { x: cropRect.x + cropRect.width, y: cropRect.y + cropRect.height },
-            n: { x: cropRect.x + cropRect.width/2, y: cropRect.y },
-            s: { x: cropRect.x + cropRect.width/2, y: cropRect.y + cropRect.height },
-            e: { x: cropRect.x + cropRect.width, y: cropRect.y + cropRect.height/2 },
-            w: { x: cropRect.x, y: cropRect.y + cropRect.height/2 }
-          };
-        }
-
-        function getHandleAtPosition(x, y) {
-          const handles = getHandlePositions();
-          for (let key in handles) {
-            const h = handles[key];
-            if (Math.abs(x - h.x) <= HANDLE_SIZE && Math.abs(y - h.y) <= HANDLE_SIZE) {
-              return key;
-            }
-          }
-          return null;
-        }
-
-        function isInsideCropRect(x, y) {
-          return x >= cropRect.x && x <= cropRect.x + cropRect.width &&
-                 y >= cropRect.y && y <= cropRect.y + cropRect.height;
-        }
-
-        function getCursorForHandle(handle) {
-          const cursors = {
-            nw: 'nwse-resize', ne: 'nesw-resize', sw: 'nesw-resize', se: 'nwse-resize',
-            n: 'ns-resize', s: 'ns-resize', e: 'ew-resize', w: 'ew-resize'
-          };
-          return cursors[handle] || 'default';
-        }
-
-        // Mouse events
-        canvas.addEventListener('mousedown', handleMouseDown);
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('mouseup', handleMouseUp);
-        canvas.addEventListener('mouseleave', handleMouseUp);
-
-        // Touch events
-        canvas.addEventListener('touchstart', handleTouchStart);
-        canvas.addEventListener('touchmove', handleTouchMove);
-        canvas.addEventListener('touchend', handleTouchEnd);
-
-        function getMousePos(e) {
-          const rect = canvas.getBoundingClientRect();
-          const scaleX = canvas.width / rect.width;
-          const scaleY = canvas.height / rect.height;
-          return {
-            x: (e.clientX - rect.left) * scaleX,
-            y: (e.clientY - rect.top) * scaleY
-          };
-        }
-
-        function getTouchPos(e) {
-          if (e.touches.length === 0) return null;
-          const rect = canvas.getBoundingClientRect();
-          const scaleX = canvas.width / rect.width;
-          const scaleY = canvas.height / rect.height;
-          return {
-            x: (e.touches[0].clientX - rect.left) * scaleX,
-            y: (e.touches[0].clientY - rect.top) * scaleY
-          };
-        }
-
-        function handleMouseDown(e) {
-          const pos = getMousePos(e);
-          const handle = getHandleAtPosition(pos.x, pos.y);
-
-          if (handle) {
-            isResizing = true;
-            dragType = handle;
-            dragStartX = pos.x;
-            dragStartY = pos.y;
-          } else if (isInsideCropRect(pos.x, pos.y)) {
-            isDragging = true;
-            dragType = 'move';
-            dragStartX = pos.x - cropRect.x;
-            dragStartY = pos.y - cropRect.y;
-          } else {
-            // Start creating new crop rect
-            isCreating = true;
-            createStartX = pos.x;
-            createStartY = pos.y;
-            cropRect = { x: pos.x, y: pos.y, width: 0, height: 0 };
-          }
-        }
-
-        function handleMouseMove(e) {
-          const pos = getMousePos(e);
-
-          if (isCreating) {
-            cropRect.width = pos.x - createStartX;
-            cropRect.height = pos.y - createStartY;
-
-            // Handle negative dimensions
-            if (cropRect.width < 0) {
-              cropRect.x = pos.x;
-              cropRect.width = Math.abs(cropRect.width);
-            } else {
-              cropRect.x = createStartX;
-            }
-            if (cropRect.height < 0) {
-              cropRect.y = pos.y;
-              cropRect.height = Math.abs(cropRect.height);
-            } else {
-              cropRect.y = createStartY;
-            }
-
-            updateControlsFromCropRect();
-            drawCanvas();
-          } else if (isDragging && dragType === 'move') {
-            cropRect.x = Math.max(0, Math.min(pos.x - dragStartX, canvas.width - cropRect.width));
-            cropRect.y = Math.max(0, Math.min(pos.y - dragStartY, canvas.height - cropRect.height));
-            updateControlsFromCropRect();
-            drawCanvas();
-          } else if (isResizing) {
-            handleResize(pos);
-          } else {
-            // Update cursor
-            const handle = getHandleAtPosition(pos.x, pos.y);
-            if (handle) {
-              canvas.style.cursor = getCursorForHandle(handle);
-            } else if (isInsideCropRect(pos.x, pos.y)) {
-              canvas.style.cursor = 'move';
-            } else {
-              canvas.style.cursor = 'crosshair';
-            }
-          }
-        }
-
-        function handleMouseUp(e) {
-          if (isCreating) {
-            // Ensure minimum size
-            if (cropRect.width < MIN_CROP_SIZE) cropRect.width = MIN_CROP_SIZE;
-            if (cropRect.height < MIN_CROP_SIZE) cropRect.height = MIN_CROP_SIZE;
-            updateControlsFromCropRect();
-            drawCanvas();
-          }
-          isDragging = false;
-          isResizing = false;
-          isCreating = false;
-          dragType = '';
-        }
-
-        function handleTouchStart(e) {
-          e.preventDefault();
-          const pos = getTouchPos(e);
-          if (!pos) return;
-          handleMouseDown({ clientX: pos.x + canvas.getBoundingClientRect().left, clientY: pos.y + canvas.getBoundingClientRect().top });
-        }
-
-        function handleTouchMove(e) {
-          e.preventDefault();
-          const pos = getTouchPos(e);
-          if (!pos) return;
-          handleMouseMove({ clientX: pos.x + canvas.getBoundingClientRect().left, clientY: pos.y + canvas.getBoundingClientRect().top });
-        }
-
-        function handleTouchEnd(e) {
-          e.preventDefault();
-          handleMouseUp(e);
-        }
-
-        function handleResize(pos) {
-          const dx = pos.x - dragStartX;
-          const dy = pos.y - dragStartY;
-
-          const oldRect = { ...cropRect };
-
-          switch(dragType) {
-            case 'nw':
-              cropRect.x += dx;
-              cropRect.y += dy;
-              cropRect.width -= dx;
-              cropRect.height -= dy;
-              break;
-            case 'ne':
-              cropRect.y += dy;
-              cropRect.width += dx;
-              cropRect.height -= dy;
-              break;
-            case 'sw':
-              cropRect.x += dx;
-              cropRect.width -= dx;
-              cropRect.height += dy;
-              break;
-            case 'se':
-              cropRect.width += dx;
-              cropRect.height += dy;
-              break;
-            case 'n':
-              cropRect.y += dy;
-              cropRect.height -= dy;
-              break;
-            case 's':
-              cropRect.height += dy;
-              break;
-            case 'e':
-              cropRect.width += dx;
-              break;
-            case 'w':
-              cropRect.x += dx;
-              cropRect.width -= dx;
-              break;
-          }
-
-          // Constrain to minimum size
-          if (cropRect.width < MIN_CROP_SIZE) {
-            cropRect.x = oldRect.x;
-            cropRect.width = oldRect.width;
-          }
-          if (cropRect.height < MIN_CROP_SIZE) {
-            cropRect.y = oldRect.y;
-            cropRect.height = oldRect.height;
-          }
-
-          // Constrain to canvas bounds
-          if (cropRect.x < 0) {
-            cropRect.width += cropRect.x;
-            cropRect.x = 0;
-          }
-          if (cropRect.y < 0) {
-            cropRect.height += cropRect.y;
-            cropRect.y = 0;
-          }
-          if (cropRect.x + cropRect.width > canvas.width) {
-            cropRect.width = canvas.width - cropRect.x;
-          }
-          if (cropRect.y + cropRect.height > canvas.height) {
-            cropRect.height = canvas.height - cropRect.y;
-          }
-
-          dragStartX = pos.x;
-          dragStartY = pos.y;
-
-          updateControlsFromCropRect();
-          drawCanvas();
-        }
-
-        function applyPreset(preset) {
-          const centerX = canvas.width / 2;
-          const centerY = canvas.height / 2;
-
-          switch(preset) {
-            case 'square':
-              const squareSize = Math.min(canvas.width, canvas.height) * 0.8;
-              cropRect = {
-                x: centerX - squareSize/2,
-                y: centerY - squareSize/2,
-                width: squareSize,
-                height: squareSize
-              };
-              break;
-            case 'portrait':
-              const portraitHeight = canvas.height * 0.8;
-              const portraitWidth = portraitHeight * 0.8; // 4:5 ratio
-              cropRect = {
-                x: centerX - portraitWidth/2,
-                y: centerY - portraitHeight/2,
-                width: portraitWidth,
-                height: portraitHeight
-              };
-              break;
-            case 'landscape':
-              const landscapeWidth = canvas.width * 0.8;
-              const landscapeHeight = landscapeWidth / 1.777; // 16:9 ratio
-              cropRect = {
-                x: centerX - landscapeWidth/2,
-                y: centerY - landscapeHeight/2,
-                width: landscapeWidth,
-                height: landscapeHeight
-              };
-              break;
-            case 'story':
-              const storyHeight = canvas.height * 0.8;
-              const storyWidth = storyHeight / 1.777; // 9:16 ratio
-              cropRect = {
-                x: centerX - storyWidth/2,
-                y: centerY - storyHeight/2,
-                width: storyWidth,
-                height: storyHeight
-              };
-              break;
-            case 'full':
-              cropRect = {
-                x: 0,
-                y: 0,
-                width: canvas.width,
-                height: canvas.height
-              };
-              break;
-          }
-
-          updateControlsFromCropRect();
-          drawCanvas();
-        }
 
         async function handleExport() {
-          if (!currentBase64 || !sourceImage) return;
-
-          // Calculate crop coordinates in original image scale
-          const scaleX = originalWidth / canvas.width;
-          const scaleY = originalHeight / canvas.height;
-
-              // Convert canvas coordinates back to original image coordinates
-              const cropData = {
-                x: Math.round(cropRect.x * scaleX),
-                y: Math.round(cropRect.y * scaleY),
-                width: Math.round(cropRect.width * scaleX),
-                height: Math.round(cropRect.height * scaleY)
-              };
-
-          // Validate crop area
-          if (cropData.width < 1 || cropData.height < 1) {
-            alert('Crop area is too small. Please select a larger area.');
+          if (!cropper || !currentFile) {
             return;
           }
 
           // Show processing overlay
-          canvasSection.style.display = 'none';
-          document.querySelector('.crop-settings').style.display = 'none';
+          canvasContainer.style.display = 'none';
+          imageDimensions.style.display = 'none';
+          document.querySelectorAll('.control-card').forEach(card => card.style.display = 'none');
           processingOverlay.style.display = 'flex';
           successView.style.display = 'none';
 
           try {
-            const body = {
-              image_base64: currentBase64,
-              x: cropData.x,
-              y: cropData.y,
-              width: cropData.width,
-              height: cropData.height
-            };
-
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 20000);
-
-            const res = await fetch(API_BASE + ENDPOINT_CROP, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(body),
-              signal: controller.signal
+            // Get cropped canvas from Cropper.js
+            const croppedCanvas = cropper.getCroppedCanvas({
+              width: cropper.getData().width,
+              height: cropper.getData().height,
+              imageSmoothingEnabled: true,
+              imageSmoothingQuality: 'high'
             });
-            clearTimeout(timeoutId);
 
-            const data = await res.json();
-            if (!data.cropped_image_base64) throw new Error(data.error || 'Crop failed');
+            if (!croppedCanvas) {
+              throw new Error('Failed to generate cropped image');
+            }
 
-            // Determine output format
-            const mimeType = currentFile.type || 'image/png';
-            const fileExt = mimeType.split('/')[1] || 'png';
+            // Convert canvas to blob
+            const croppedBlob = await new Promise(resolve => {
+              croppedCanvas.toBlob(resolve, currentFile.type || 'image/png', 0.95);
+            });
 
-            // Update UI
-            const downloadUrl = `data:${mimeType};base64,${data.cropped_image_base64}`;
+            if (!croppedBlob) {
+              throw new Error('Failed to generate image blob');
+            }
+
+            // Convert blob to base64 for API
+            const croppedBase64 = await blobToBase64(croppedBlob);
+            const cleanBase64 = croppedBase64.split(',')[1];
+
+            // Get crop data for API
+            const cropData = cropper.getData();
+            const imageData = cropper.getImageData();
+
+            // Calculate coordinates in original image space
+            const scaleX = imageData.naturalWidth / imageData.width;
+            const scaleY = imageData.naturalHeight / imageData.height;
+
+            const apiData = {
+              image_base64: cleanBase64,
+              x: Math.round(cropData.x * scaleX),
+              y: Math.round(cropData.y * scaleY),
+              width: Math.round(cropData.width * scaleX),
+              height: Math.round(cropData.height * scaleY)
+              };
+
+          // Validate crop area
+            if (apiData.width < 1 || apiData.height < 1) {
+            alert('Crop area is too small. Please select a larger area.');
+              processingOverlay.style.display = 'none';
+              canvasContainer.style.display = 'block';
+              document.querySelectorAll('.control-card').forEach(card => card.style.display = 'block');
+            return;
+          }
+
+            // For demo purposes, just show the cropped canvas directly
+            // In production, you would send to your API
+            const downloadUrl = croppedCanvas.toDataURL(currentFile.type || 'image/png', 0.95);
             croppedImg.src = downloadUrl;
 
             document.getElementById('successDimensions').textContent =
@@ -976,39 +971,54 @@
             // Setup download
             downloadBtn.href = downloadUrl;
             const baseName = (currentFile.name||'image').replace(/\.[^.]+$/, '');
+            const fileExt = (currentFile.type || 'image/png').split('/')[1] || 'png';
             downloadBtn.download = `${baseName}-cropped.${fileExt}`;
 
             // Show success view
             processingOverlay.style.display = 'none';
-            successView.style.display = 'block';
+            successView.style.display = 'flex';
+            imageDimensions.style.display = 'none';
+
           } catch(err) {
-            console.error(err);
+            console.error('Crop error:', err);
             processingOverlay.style.display = 'none';
-            if (err.name === 'AbortError') {
-              alert('Request timed out after 20 seconds. Please try again.');
-            } else {
               alert('Failed to crop image: ' + err.message);
-            }
             // Reset view
-            canvasSection.style.display = 'block';
-            document.querySelector('.crop-settings').style.display = 'block';
+            canvasContainer.style.display = 'block';
+            document.querySelectorAll('.control-card').forEach(card => card.style.display = 'block');
           }
         }
 
+        function blobToBase64(blob) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+        }
+
         function resetToUploader() {
+          // Destroy cropper instance
+          if (cropper) {
+            cropper.destroy();
+            cropper = null;
+          }
+
           dropZone.style.display = 'block';
           editorView.style.display = 'none';
-          canvasSection.style.display = 'block';
+          canvasContainer.style.display = 'block';
           successView.style.display = 'none';
-          document.querySelector('.crop-settings').style.display = 'block';
+          imageDimensions.style.display = 'block';
+          document.querySelectorAll('.control-card').forEach(card => card.style.display = 'block');
           processingOverlay.style.display = 'none';
           fileInput.value = '';
           currentFile = null;
           currentBase64 = '';
-          sourceImage = null;
 
-          // Reset crop rect
-          cropRect = { x: 0, y: 0, width: 200, height: 200 };
+          // Clear canvas
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
       })();
     </script>
