@@ -53,11 +53,17 @@ class SimpleStaticServer(http.server.SimpleHTTPRequestHandler):
         if os.path.isfile(full_path):
             self.serve_file(full_path)
         else:
-            # For SPA fallback, serve index.html for unknown routes
-            index_path = os.path.join(os.getcwd(), 'index.html')
-            if os.path.exists(index_path):
-                self.serve_file(index_path)
+            # Only do SPA fallback for routes without file extensions (clean URLs)
+            # Static files like .js, .css, .png should return 404 if not found
+            if '.' not in file_path:
+                # For SPA fallback, serve index.html for unknown routes
+                index_path = os.path.join(os.getcwd(), 'index.html')
+                if os.path.exists(index_path):
+                    self.serve_file(index_path)
+                else:
+                    self.send_error(404, f"File not found: {file_path}")
             else:
+                # For static files, return proper 404
                 self.send_error(404, f"File not found: {file_path}")
 
     def serve_file(self, file_path):
