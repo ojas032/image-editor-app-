@@ -49,12 +49,6 @@
 
     convertAnotherBtn.addEventListener('click', resetToUploader);
 
-    // Reset button (only exists in main convert.html, not individual pages)
-    const resetBtn = document.getElementById('resetBtn');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', resetToUploader);
-    }
-
     // Click on drop zone (excluding select button) to open file dialog
     dropZone.addEventListener('click', (e) => {
       // Only trigger if not clicking on the select button or its children
@@ -85,26 +79,57 @@
     });
     fileInput.addEventListener('change', () => handleFiles(fileInput.files));
 
-    // Format selection
+    // Format selection - handle both dropdown and radio buttons
     const formatRadios = document.querySelectorAll('input[name="outputFormat"]');
+    const formatSelect = document.getElementById('formatSelect');
+
+    // Handle radio button changes (desktop)
     formatRadios.forEach(radio => {
       radio.addEventListener('change', () => {
-        // Remove selected class from all cards
+        const selectedValue = radio.value;
+        window.selectedFormat = selectedValue; // Set the global selected format
+
+        // Update dropdown to match
+        if (formatSelect) {
+          formatSelect.value = selectedValue;
+        }
+
+        // Update visual selection for cards
         document.querySelectorAll('.format-option-card').forEach(card => {
           card.classList.remove('selected');
         });
-        // Add selected class to the checked card's parent
         if (radio.checked) {
           radio.closest('.format-option-card').classList.add('selected');
         }
       });
     });
 
+    // Handle dropdown changes (mobile/tablet)
+    if (formatSelect) {
+      formatSelect.addEventListener('change', () => {
+        const selectedValue = formatSelect.value;
+        window.selectedFormat = selectedValue; // Set the global selected format
+
+        // Update radio buttons to match
+        const correspondingRadio = document.querySelector(`input[name="outputFormat"][value="${selectedValue}"]`);
+        if (correspondingRadio) {
+          correspondingRadio.checked = true;
+          // Trigger the change event to update visual selection
+          correspondingRadio.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+
     // Set initial selected state for JPEG (default)
     setTimeout(() => {
+      window.selectedFormat = 'jpg'; // Set initial format
       const defaultRadio = document.querySelector('input[name="outputFormat"][value="jpg"]');
       if (defaultRadio) {
         defaultRadio.closest('.format-option-card').classList.add('selected');
+      }
+      // Also set dropdown to match
+      if (formatSelect) {
+        formatSelect.value = 'jpg';
       }
     }, 100);
 
@@ -202,6 +227,7 @@
 
         successView.style.display = 'none';
         editorProcessingOverlay.style.display = 'none';
+        document.body.classList.remove('has-processing-overlay');
         return; // Exit early for TIFF files
       }
 
@@ -316,20 +342,20 @@
         return;
       }
 
-      const selectedFormat = document.querySelector('input[name="outputFormat"]:checked').value;
+      if (!window.selectedFormat) {
+        throw new Error('Conversion format not specified');
+      }
 
-      // Show processing overlay
-      canvasContainer.style.display = 'none';
-      imageDimensions.style.display = 'none';
-      document.querySelectorAll('.control-card').forEach(card => card.style.display = 'none');
-      editorProcessingOverlay.style.display = 'flex';
+      // Show processing overlay (elements are already hidden by button click handler)
+      editorProcessingOverlay.style.display = 'block';
+      document.body.classList.add('has-processing-overlay');
       successView.style.display = 'none';
 
       try {
         // Prepare the request data
         const requestData = {
           image_base64: currentImage,
-          format: selectedFormat
+          format: window.selectedFormat
         };
 
         // Call the backend API
@@ -353,7 +379,7 @@
         }
 
         // Convert the base64 response back to a blob
-        const convertedBlob = base64ToBlob(result.converted_image_base64, selectedFormat);
+        const convertedBlob = base64ToBlob(result.converted_image_base64, window.selectedFormat);
 
         if (!convertedBlob || !convertedBlob.type) {
           throw new Error('Failed to create blob from server response');
@@ -378,7 +404,7 @@
 
         // Determine file extension based on format
         let fileExtension;
-        switch (selectedFormat) {
+        switch (window.selectedFormat) {
           case 'png':
             fileExtension = 'png';
             break;
@@ -408,6 +434,7 @@
 
         // Show success view
         editorProcessingOverlay.style.display = 'none';
+        document.body.classList.remove('has-processing-overlay');
         successView.style.display = 'flex';
 
       } catch (error) {
@@ -415,6 +442,7 @@
         alert('Failed to convert image: ' + error.message);
         // Reset view
         editorProcessingOverlay.style.display = 'none';
+        document.body.classList.remove('has-processing-overlay');
         canvasContainer.style.display = 'block';
         document.querySelectorAll('.control-card').forEach(card => card.style.display = 'block');
       }

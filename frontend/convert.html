@@ -209,12 +209,20 @@
               <div style="width:60px;height:2px;background:linear-gradient(90deg,#667eea 0%,#764ba2 50%,#f093fb 100%);border-radius:2px;margin:0 auto;"></div>
                   </div>
 
-            <!-- Processing overlay for entire editor -->
-            <div id="editorProcessingOverlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(4px);z-index:20;display:flex;align-items:center;justify-content:center;border-radius:12px;" role="status" aria-live="polite" aria-label="Processing status">
-              <div style="text-align:center;">
+            <!-- Processing overlay - mobile-friendly -->
+            <div id="editorProcessingOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;pointer-events:none;background:rgba(0,0,0,0.1);" role="status" aria-live="polite" aria-label="Processing status">
+              <!-- Mobile: compact overlay -->
+              <div class="processing-mobile" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-radius:16px;padding:24px;min-width:280px;max-width:90vw;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.1);pointer-events:auto;">
+                <div style="width:48px;height:48px;border:4px solid rgba(91, 140, 255, 0.2);border-radius:50%;border-top:4px solid #5b8cff;margin:0 auto 16px;animation:spin 1s linear infinite;"></div>
+                <div style="font-size:16px;color:#374151;font-weight:600;margin-bottom:4px;">Converting your image...</div>
+                <div style="font-size:14px;color:#6b7280;">This may take a few seconds</div>
+              </div>
+
+              <!-- Desktop: centered overlay -->
+              <div class="processing-desktop" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-radius:16px;padding:24px;min-width:280px;max-width:90vw;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.1);pointer-events:auto;">
                 <div style="width:50px;height:50px;border:4px solid rgba(91, 140, 255, 0.2);border-radius:50%;border-top:4px solid #5b8cff;margin:0 auto 16px;animation:spin 1s linear infinite;"></div>
-                <div style="font-size:16px;color:#374151;font-weight:600;">Converting your image...</div>
-                <div style="font-size:14px;color:#6b7280;margin-top:4px;">This may take a few seconds</div>
+                <div style="font-size:16px;color:#374151;font-weight:600;margin-bottom:4px;">Converting your image...</div>
+                <div style="font-size:14px;color:#6b7280;">This may take a few seconds</div>
               </div>
             </div>
 
@@ -239,6 +247,20 @@
                 <!-- Format Controls -->
                 <div class="control-card">
                   <h4>Select Image Format</h4>
+
+                  <!-- Mobile/Tablet Dropdown -->
+                  <div class="format-dropdown-container">
+                    <select id="formatSelect" class="format-dropdown">
+                      <option value="jpg" selected>JPEG - Small size, Universal</option>
+                      <option value="png">PNG - Lossless, Transparency</option>
+                      <option value="webp">WebP - Modern, Better compression</option>
+                      <option value="gif">GIF - Animation support</option>
+                      <option value="bmp">BMP - Uncompressed</option>
+                      <option value="tiff">TIFF - Professional</option>
+                    </select>
+                  </div>
+
+                  <!-- Desktop Grid -->
                   <div class="format-options-grid">
                     <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="png" />
@@ -273,21 +295,16 @@
                   </div>
                 </div>
 
-                <!-- Convert & Reset -->
+                <!-- Convert -->
                 <div class="control-card">
-                  <h4>⚡ Actions</h4>
+                  <h4>⚡ Convert</h4>
                   <div class="action-buttons">
                     <button class="convert-action-btn" id="convertBtn" type="button" aria-describedby="convert-help">
                       <span style="font-size:16px;margin-right:6px;">🔄</span>
                       Convert Format
                     </button>
-                    <button class="btn btn-secondary" id="resetBtn" type="button" aria-describedby="reset-help">
-                      <span style="font-size:16px;margin-right:6px;">↺</span>
-                      Reset
-                    </button>
                   </div>
                   <div id="convert-help" class="sr-only">Convert the image to the selected format</div>
-                  <div id="reset-help" class="sr-only">Reset and upload a new image</div>
                 </div>
 
             <!-- Processing overlay -->

@@ -196,75 +196,9 @@
                 <div id="imageDimensions" aria-live="polite" aria-atomic="true"></div>
                 </div>
 
-              <!-- Right Side - Controls -->
-              <div class="editor-controls-section">
-                <!-- Format Controls -->
-                <div class="control-card">
-                  <h4>🎨 Output Format</h4>
-                  <div class="format-options-grid">
-                    <label class="format-option-card">
-                      <input type="radio" name="outputFormat" value="png" />
-                      <span>PNG</span>
-                      <small>Lossless, Transparency</small>
-                    </label>
-                    <label class="format-option-card">
-                      <input type="radio" name="outputFormat" value="jpg" checked />
-                      <span>JPEG</span>
-                      <small>Small size, Universal</small>
-                    </label>
-                    <label class="format-option-card">
-                      <input type="radio" name="outputFormat" value="webp" />
-                      <span>WebP</span>
-                      <small>Modern, Better compression</small>
-                    </label>
-                    <label class="format-option-card">
-                      <input type="radio" name="outputFormat" value="gif" />
-                      <span>GIF</span>
-                      <small>Animation support</small>
-                    </label>
-                    <label class="format-option-card">
-                      <input class="format-option-card">
-                      <input type="radio" name="outputFormat" value="bmp" />
-                      <span>BMP</span>
-                      <small>Uncompressed</small>
-                    </label>
-                    <label class="format-option-card">
-                      <input type="radio" name="outputFormat" value="tiff" />
-                      <span>TIFF</span>
-                      <small>Professional</small>
-                    </label>
-                  </div>
-                </div>
-
-                <!-- Quality Control (for JPEG/WebP) -->
-                <div class="control-card" id="qualityCard" style="display: none;">
-                  <h4>⚙️ Quality Settings</h4>
-                  <div class="control-input-group">
-                    <div>
-                      <label for="qualitySlider">Quality (%)</label>
-                      <input type="number" id="qualityInput" class="form-control enhanced-input" min="1" max="100" value="85" aria-label="Image quality percentage" />
-                  </div>
-                  </div>
-                  <input type="range" id="qualitySlider" class="form-range" min="1" max="100" value="85" aria-describedby="quality-value" aria-label="Adjust image quality with slider" />
-                  <div id="quality-value" class="sr-only">Current quality: 85 percent</div>
-                </div>
-
-                <!-- Convert & Reset -->
-                <div class="control-card">
-                  <h4>⚡ Actions</h4>
-                  <div class="action-buttons">
-                    <button class="convert-action-btn" id="convertBtn" type="button" aria-describedby="convert-help">
-                      <span style="font-size:16px;margin-right:6px;">🔄</span>
-                      Convert Format
-                    </button>
-                  </div>
-                <div id="convert-help" class="sr-only">Convert the image to the selected format</div>
-            </div>
-
             <!-- Processing overlay -->
             <div id="processingOverlay" style="display:none;flex-direction:column;align-items:center;padding:40px;text-align:center;" role="status" aria-live="polite" aria-label="Processing status">
               <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--primary-500);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px" aria-hidden="true"></div>
-              <div style="font-weight:600;font-size:18px;color:var(--light-text);" id="processing-text">Converting your image...</div>
               <div class="sr-only" aria-live="assertive" id="processing-status">Image conversion in progress</div>
             </div>
 
