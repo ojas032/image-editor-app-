@@ -40,6 +40,70 @@
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- JPEG to PNG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpeg-to-png</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- PNG to JPEG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/png-to-jpeg</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- JPEG to WebP Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpeg-to-webp</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- WebP to JPEG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/webp-to-jpeg</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- PNG to WebP Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/png-to-webp</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- WebP to PNG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/webp-to-png</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- HEIC to JPEG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/heic-to-jpeg</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- HEIC to PNG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/heic-to-png</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
   
   <!-- Remove Background Tool -->
   <url>

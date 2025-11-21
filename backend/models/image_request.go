@@ -38,8 +38,8 @@ type Point struct {
 // BlurRequest defines the structure for an image blur request with a path.
 type BlurRequest struct {
 	ImageBase64 string  `json:"image_base64" binding:"required"`
-	Path        []Point `json:"path" binding:"required"` // List of points defining the blur path
-	Radius      float64 `json:"radius" binding:"required"`  // Blur radius
+	Path        []Point `json:"path" binding:"required"`   // List of points defining the blur path
+	Radius      float64 `json:"radius" binding:"required"` // Blur radius
 }
 
 // RemoveBackgroundRequest defines the structure for a background removal request.
@@ -52,14 +52,14 @@ type ChangeBackgroundRequest struct {
 	ImageBase64        string `json:"image_base64" binding:"required"`
 	NewBackgroundImage string `json:"new_background_image_base64"` // Optional: base64 encoded image
 	SolidColor         string `json:"solid_color"`                 // Optional: Solid color in "R,G,B" format (e.g., "255,0,0" for red)
-    Transparent        bool   `json:"transparent"`                 // Optional: If true, return transparent PNG (no background)
+	Transparent        bool   `json:"transparent"`                 // Optional: If true, return transparent PNG (no background)
 }
 
 // CompressRequest defines the structure for an image compression request.
 type CompressRequest struct {
 	ImageBase64 string  `json:"image_base64" binding:"required"`
-	Quality     *int    `json:"quality"`     // Optional: JPEG/WebP quality (1-100), default varies by format
-	Format      *string `json:"format"`      // Optional: Force output format (jpeg, png, webp, etc.)
-	MaxWidth    *int    `json:"max_width"`   // Optional: Resize if width exceeds this
-	MaxHeight   *int    `json:"max_height"`  // Optional: Resize if height exceeds this
+	Quality     *int    `json:"quality"`    // Optional: JPEG/WebP quality (1-100), default varies by format
+	Format      *string `json:"format"`     // Optional: Force output format (jpeg, png, webp, etc.)
+	MaxWidth    *int    `json:"max_width"`  // Optional: Resize if width exceeds this
+	MaxHeight   *int    `json:"max_height"` // Optional: Resize if height exceeds this
 }

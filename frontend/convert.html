@@ -82,44 +82,97 @@
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </header>
-    <main class="container tool-page-container">
-      <section class="hero-section">
-        <h1 class="hero-title">Convert Image Formats</h1>
-        <p class="hero-subtitle">Convert between JPG, PNG, WebP, HEIC, GIF, BMP, and TIFF formats instantly. No uploads, no registration — works right in your browser.</p>
+    <main id="main" style="padding-top: 20px;">
+      <section id="convertSection" aria-label="Image format converter">
+        <div role="region" aria-live="polite" aria-labelledby="convert-heading">
+          <!-- Uploader (shown initially, hidden after upload) -->
+          <div id="dropZone" tabindex="0" aria-label="Upload area. Click to select image or drag and drop image here">
+            <input id="fileInput" type="file" accept=".heic,.heif,.jpg,.jpeg,.png,.webp,.gif,.bmp,.tiff,.tif,image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" aria-describedby="file-limit" />
 
-        <div class="hero-cta">
-          <input id="fileInput" type="file" accept=".heic,.heif,.jpg,.jpeg,.png,.webp,.gif,.bmp,.tiff,.tif,image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
-          <button class="btn btn-primary hero-btn" id="selectBtn" type="button" aria-controls="fileInput" aria-label="Select image to convert">
-            <svg class="hero-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            <!-- Enhanced animated background elements -->
+            <div style="position: absolute; top: -20%; left: -20%; width: 140%; height: 140%; background: radial-gradient(ellipse, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 40%, transparent 70%); animation: float 8s ease-in-out infinite; opacity: 0.4;"></div>
+            <div style="position: absolute; bottom: -15%; right: -15%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(240, 147, 251, 0.12) 0%, rgba(54, 117, 136, 0.08) 50%, transparent 80%); animation: float 10s ease-in-out infinite reverse; opacity: 0.3;"></div>
+            <div style="position: absolute; top: 20%; right: 10%; width: 60px; height: 60px; background: radial-gradient(circle, rgba(255, 105, 180, 0.2) 0%, transparent 70%); animation: float 12s ease-in-out infinite; opacity: 0.2;"></div>
+
+            <!-- Continuously rotating block -->
+            <div style="position: absolute; top: 35%; left: 8%; width: 14px; height: 14px; background: linear-gradient(45deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.3)); border-radius: 2px; animation: spin 3s linear infinite; opacity: 0.3;"></div>
+
+            <!-- Border glow effect -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 24px; padding: 2px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 30%, rgba(240, 147, 251, 0.3) 70%, rgba(54, 117, 136, 0.3) 100%); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: xor; -webkit-mask-composite: xor; opacity: 0; transition: opacity 0.4s ease;"></div>
+
+            <!-- Main content -->
+            <div style="position: relative; z-index: 1;">
+              <!-- Image Icon -->
+              <div style="margin-bottom: 24px;">
+                <div style="width: 100px; height: 100px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4); transition: all 0.4s ease; position: relative; overflow: hidden;">
+                  <!-- Inner glow effect -->
+                  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%); animation: shimmer 3s ease-in-out infinite;"></div>
+
+                  <!-- Image icon -->
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 1; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));">
+                    <rect x="2" y="2" width="20" height="20" rx="4" ry="4" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="9" cy="9" r="2" stroke="white" stroke-width="2" fill="rgba(255,255,255,0.2)"/>
+                    <path d="M2 18L8 12L12 16L18 8L22 14V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18Z" stroke="white" stroke-width="2" fill="rgba(255,255,255,0.1)"/>
             </svg>
-            Select Image to Convert
+                </div>
+          </div>
+
+              <!-- Title with underline effect -->
+              <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 16px; color: var(--light-text); position: relative; display: inline-block;" onmouseover="this.querySelector('.title-underline').style.transform='scaleX(1)'" onmouseout="this.querySelector('.title-underline').style.transform='scaleX(0)'">
+                <span style="background: linear-gradient(135deg, #5b8cff 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Convert Image Formats</span>
+                <span style="position: absolute; bottom: -4px; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #5b8cff 0%, #3b82f6 50%, #8b5cf6 100%); border-radius: 2px; transform: scaleX(0); transition: transform 0.3s ease;" class="title-underline"></span>
+              </h2>
+
+              <!-- Description -->
+              <p style="font-size: 18px; color: var(--light-muted); line-height: 1.6; max-width: 600px; margin: 0 auto 32px; font-weight: 400;">
+                Transform your images between <span style="color: #5b8cff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(91, 140, 255, 0.3);">different formats</span> instantly.
+                Supports JPG, PNG, WebP, HEIC, GIF, BMP, and TIFF.
+              </p>
+
+              <!-- Action buttons -->
+              <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
+                <button class="btn btn-primary" id="selectBtn" type="button" aria-label="Select image to convert" style="font-size: 18px; padding: 16px 32px; font-weight: 600; border-radius: 12px; background: linear-gradient(135deg, #5b8cff 0%, #3b82f6 100%); box-shadow: 0 8px 24px rgba(91, 140, 255, 0.4); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.querySelector('span:last-child').style.left='100%'" onmouseout="this.querySelector('span:last-child').style.left='-100%'">
+                  <span style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;">Select Image</span>
+                  <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; z-index: 0;"></span>
           </button>
+
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-muted); font-size: 16px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.6;">
+                    <path d="M12 2L15 8L22 9L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9L9 8L12 2Z" fill="currentColor"/>
+                  </svg>
+                  <span>or drag & drop</span>
+                </div>
         </div>
 
-        <div class="hero-features">
-          <div class="hero-feature">
-            <svg class="hero-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
+              <!-- Features highlight -->
+              <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-text); font-size: 14px; font-weight: 500;">
+                  <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                  <span>Free & Unlimited</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-text); font-size: 14px; font-weight: 500;">
+                  <div style="width: 8px; height: 8px; background: #f59e0b; border-radius: 50%;"></div>
             <span>Lightning Fast</span>
           </div>
-          <div class="hero-feature">
-            <svg class="hero-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-            </svg>
-            <span>100% Private</span>
-          </div>
-          <div class="hero-feature">
-            <svg class="hero-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>No Registration</span>
-          </div>
-        </div>
-      </section>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--light-text); font-size: 14px; font-weight: 500;">
+                  <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></div>
+                  <span>No Registration</span>
+                </div>
+            </div>
 
-      <section id="convertSection" aria-label="Image format converter">
+              <!-- File format support -->
+              <div class="file-limit" id="file-limit" style="font-size: 14px; color: var(--light-muted); opacity: 0.8;" aria-live="polite">
+                <span style="font-weight: 500;">Supported formats:</span>
+                <span style="color: #5b8cff;">HEIC, JPEG, PNG, WebP, GIF, BMP, TIFF</span>
+                <span style="margin: 0 8px;">•</span>
+                <span style="font-weight: 500;">Max size:</span>
+                <span style="color: #10b981;">10 MB</span>
+              </div>
+            </div>
+          </div>
+
+
+      <section id="editorSection" aria-label="Image format converter">
         <div role="region" aria-live="polite">
           <!-- Page Header (shown when editing) -->
           <div id="pageHeader" class="page-header" style="display: none;">
@@ -147,105 +200,120 @@
             </div>
           </div>
 
-          <!-- Editor (visible after upload) -->
-          <div id="editorView" class="editor-container">
+          <!-- Editor (hidden initially, shown after upload) -->
+          <div id="editorView" style="display:none;max-width:1200px;margin:0 auto;position:relative;">
+
+            <!-- Page Heading -->
+            <div style="text-align:center;margin-bottom:5px;padding:2px 0;">
+              <h1 style="font-size:28px;font-weight:800;margin-bottom:2px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;">Convert Image Formats</h1>
+              <div style="width:60px;height:2px;background:linear-gradient(90deg,#667eea 0%,#764ba2 50%,#f093fb 100%);border-radius:2px;margin:0 auto;"></div>
+                  </div>
+
+            <!-- Processing overlay for entire editor -->
+            <div id="editorProcessingOverlay" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(4px);z-index:20;display:flex;align-items:center;justify-content:center;border-radius:12px;" role="status" aria-live="polite" aria-label="Processing status">
+              <div style="text-align:center;">
+                <div style="width:50px;height:50px;border:4px solid rgba(91, 140, 255, 0.2);border-radius:50%;border-top:4px solid #5b8cff;margin:0 auto 16px;animation:spin 1s linear infinite;"></div>
+                <div style="font-size:16px;color:#374151;font-weight:600;">Converting your image...</div>
+                <div style="font-size:14px;color:#6b7280;margin-top:4px;">This may take a few seconds</div>
+              </div>
+            </div>
+
+            <!-- Main Editor Layout -->
             <div class="editor-layout">
-              <!-- Image Preview Panel -->
-              <div class="preview-panel">
-                <div class="image-container">
-                  <div class="image-header">
-                    <div class="image-tabs">
-                      <button class="tab-btn active" data-tab="original">
-                        <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        Original
-                      </button>
-                      <button class="tab-btn" data-tab="converted">
-                        <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        Converted
-                      </button>
-                    </div>
+              <!-- Left Side - Canvas -->
+              <div class="editor-canvas-section" style="position:relative;">
+                <div id="canvasContainer" role="img" aria-label="Image canvas for conversion" aria-describedby="canvas-instructions" style="position:relative;">
+                  <img id="cropCanvas" role="img" aria-label="Interactive image canvas" tabindex="0" aria-describedby="canvas-instructions imageDimensions" alt="Image to convert" />
+
+                  <!-- Pan indicator (shown when zoomed in) -->
+                  <div id="panIndicator" aria-hidden="true">
+                    ↕️ Pan • 🔍 Zoom
                   </div>
-                  <div class="image-display">
-                    <div class="image-wrapper" id="originalWrapper">
-                      <img id="originalImage" alt="Original image preview" />
-                    </div>
-                    <div class="image-wrapper hidden" id="convertedWrapper">
-                      <div class="converted-placeholder" id="convertedPlaceholder">
-                        <svg class="placeholder-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                      </div>
-                      <img id="convertedImage"/>
-                    </div>
-                  </div>
-                  <div class="image-details">
-                    <div class="image-info" id="currentImageInfo">
-                      <span id="currentFormat"></span> • <span id="currentSize"></span> • <span id="currentDimensions"></span>
-                    </div>
-                  </div>
+
                 </div>
+                <div id="imageDimensions" aria-live="polite" aria-atomic="true"></div>
               </div>
 
-              <!-- Controls Panel -->
-              <div class="controls-panel">
-                <!-- Format Selection -->
-                <div class="control-section">
-                  <h3 class="control-title">Choose Output Format</h3>
-                  <div class="format-options-compact">
-                    <label class="format-option-compact">
+              <!-- Right Side - Controls -->
+              <div class="editor-controls-section">
+                <!-- Format Controls -->
+                <div class="control-card">
+                  <h4>Select Image Format</h4>
+                  <div class="format-options-grid">
+                    <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="png" />
                       <span>PNG</span>
+                      <small>Lossless, Transparency</small>
                     </label>
-                    <label class="format-option-compact">
+                    <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="jpg" checked />
                       <span>JPEG</span>
+                      <small>Small size, Universal</small>
                     </label>
-                    <label class="format-option-compact">
+                    <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="webp" />
                       <span>WebP</span>
+                      <small>Modern, Better compression</small>
                     </label>
-                    <label class="format-option-compact">
+                    <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="gif" />
                       <span>GIF</span>
+                      <small>Animation support</small>
                     </label>
-                    <label class="format-option-compact">
+                    <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="bmp" />
                       <span>BMP</span>
+                      <small>Uncompressed</small>
                     </label>
-                    <label class="format-option-compact">
+                    <label class="format-option-card">
                       <input type="radio" name="outputFormat" value="tiff" />
                       <span>TIFF</span>
+                      <small>Professional</small>
                     </label>
                   </div>
                 </div>
 
-
-                <!-- Action Buttons -->
-                <div class="control-section">
+                <!-- Convert & Reset -->
+                <div class="control-card">
+                  <h4>⚡ Actions</h4>
                   <div class="action-buttons">
-                    <button class="btn btn-primary" id="convertBtn">
-                      <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                      </svg>
-                      Convert Image
+                    <button class="convert-action-btn" id="convertBtn" type="button" aria-describedby="convert-help">
+                      <span style="font-size:16px;margin-right:6px;">🔄</span>
+                      Convert Format
                     </button>
-                    <button class="btn btn-secondary" id="resetBtn">
-                      <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                      </svg>
+                    <button class="btn btn-secondary" id="resetBtn" type="button" aria-describedby="reset-help">
+                      <span style="font-size:16px;margin-right:6px;">↺</span>
                       Reset
                     </button>
                   </div>
-                  <a class="btn btn-success download-btn hidden" id="downloadBtn">
-                    <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    Download Converted Image
-                  </a>
+                  <div id="convert-help" class="sr-only">Convert the image to the selected format</div>
+                  <div id="reset-help" class="sr-only">Reset and upload a new image</div>
+                </div>
+
+            <!-- Processing overlay -->
+
+            <!-- Success view (hidden until converted) -->
+            <div id="successView" class="success-modal" role="region" aria-labelledby="success-heading" aria-live="polite">
+              <div class="success-modal-content">
+              <!-- Success message -->
+                <div class="success-message" role="status" aria-live="polite">
+                  <div id="success-heading">✓ Image Converted Successfully!</div>
+                  <div id="successDimensions" aria-live="polite">
+                  Converted to PNG • 400 × 400 pixels • 245 KB
+                </div>
+              </div>
+
+              <!-- Preview image -->
+                <div class="success-image">
+                  <img id="convertedImage" src="" alt="Converted image preview" />
+              </div>
+
+              <!-- Action buttons -->
+                <div class="success-actions" role="group" aria-label="Action buttons">
+                  <a class="btn btn-primary focus-visible" id="downloadBtn" href="#" download aria-describedby="download-help">📥 Download Image</a>
+                  <button class="btn btn-ghost focus-visible" id="convertAnotherBtn" type="button" aria-describedby="convert-another-help">🔄 Convert Another</button>
+                <div id="download-help" class="sr-only">Download the converted image to your device</div>
+                <div id="convert-another-help" class="sr-only">Start converting a new image</div>
                 </div>
               </div>
             </div>
@@ -253,36 +321,181 @@
         </div>
       </section>
 
+      <section class="popular-conversions">
+        <h2 class="popular-heading">Popular Conversions</h2>
+        <div class="conversions-grid">
+          <a href="/convert/jpeg-to-png" class="conversion-link" data-route="convert/jpeg-to-png">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">JPG</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                <span class="format-badge to">PNG</span>
+              </div>
+              <h3>JPEG to PNG</h3>
+              <p>Add transparency support</p>
+            </div>
+          </a>
+          <a href="/convert/png-to-jpeg" class="conversion-link" data-route="convert/png-to-jpeg">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">PNG</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                <span class="format-badge to">JPG</span>
+              </div>
+              <h3>PNG to JPEG</h3>
+              <p>Reduce file size</p>
+            </div>
+          </a>
+          <a href="/convert/jpeg-to-webp" class="conversion-link" data-route="convert/jpeg-to-webp">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">JPG</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                <span class="format-badge to">WebP</span>
+              </div>
+              <h3>JPEG to WebP</h3>
+              <p>Modern compression</p>
+            </div>
+          </a>
+          <a href="/convert/webp-to-jpeg" class="conversion-link" data-route="convert/webp-to-jpeg">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">WebP</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                <span class="format-badge to">JPG</span>
+              </div>
+              <h3>WebP to JPEG</h3>
+              <p>Maximum compatibility</p>
+            </div>
+          </a>
+          <a href="/convert/heic-to-jpeg" class="conversion-link" data-route="convert/heic-to-jpeg">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">HEIC</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                <span class="format-badge to">JPG</span>
+              </div>
+              <h3>HEIC to JPEG</h3>
+              <p>iPhone photos</p>
+            </div>
+          </a>
+          <a href="/convert/png-to-webp" class="conversion-link" data-route="convert/png-to-webp">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">PNG</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+                <span class="format-badge to">WebP</span>
+              </div>
+              <h3>PNG to WebP</h3>
+              <p>Better compression</p>
+          </div>
+          </a>
+        </div>
+      </section>
+
       <section class="seo-section">
-        <h2 class="seo-heading">Supported Formats</h2>
-        <div class="format-grid">
-          <div class="format-item">
-            <h3>JPEG/JPG</h3>
-            <p>Most common photo format. Excellent compression with adjustable quality. Universal support across all platforms and applications.</p>
+        <h2 class="seo-heading">Supported Image Formats</h2>
+        <div class="supported-formats-grid">
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(217,119,6,0.05) 100%); border: 1px solid rgba(245,158,11,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">📸</div>
+              <h3 style="color: #f59e0b;">JPEG/JPG</h3>
+            </div>
+            <p class="format-description">Most common photo format. Excellent compression with universal support across all platforms and applications.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(245,158,11,0.2); color: #f59e0b;">Lossy Compression</span>
+              <span class="feature-tag" style="background: rgba(245,158,11,0.2); color: #f59e0b;">Universal Support</span>
+            </div>
           </div>
-          <div class="format-item">
-            <h3>PNG</h3>
-            <p>Lossless compression with transparency support. Perfect for graphics, logos, and images that need to maintain quality. Larger file sizes than JPEG.</p>
+
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(5,150,105,0.05) 100%); border: 1px solid rgba(16,185,129,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">🖼️</div>
+              <h3 style="color: #10b981;">PNG</h3>
+            </div>
+            <p class="format-description">Lossless compression with transparency support. Perfect for graphics, logos, and images that need to maintain quality. Larger file sizes than JPEG.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(16,185,129,0.2); color: #10b981;">Lossless Compression</span>
+              <span class="feature-tag" style="background: rgba(16,185,129,0.2); color: #10b981;">Transparency Support</span>
+              <span class="feature-tag" style="background: rgba(16,185,129,0.2); color: #10b981;">High Quality</span>
+            </div>
           </div>
-          <div class="format-item">
-            <h3>WebP</h3>
-            <p>Modern format by Google. Superior compression (smaller files) while maintaining quality. Growing support across browsers and platforms.</p>
+
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(124,58,237,0.05) 100%); border: 1px solid rgba(139,92,246,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">🚀</div>
+              <h3 style="color: #8b5cf6;">WebP</h3>
+            </div>
+            <p class="format-description">Modern format by Google. Superior compression (smaller files) while maintaining quality. Growing support across browsers and platforms.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(139,92,246,0.2); color: #8b5cf6;">Superior Compression</span>
+              <span class="feature-tag" style="background: rgba(139,92,246,0.2); color: #8b5cf6;">Modern Format</span>
+              <span class="feature-tag" style="background: rgba(139,92,246,0.2); color: #8b5cf6;">Smaller Files</span>
+            </div>
           </div>
-          <div class="format-item">
-            <h3>HEIC</h3>
-            <p>Apple's format for iPhone photos. Excellent compression and quality. Convert to more widely supported formats for sharing.</p>
+
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(234,88,12,0.05) 100%); border: 1px solid rgba(249,115,22,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">📱</div>
+              <h3 style="color: #f97316;">HEIC</h3>
+            </div>
+            <p class="format-description">Apple's format for iPhone photos. Excellent compression and quality. Convert to more widely supported formats for sharing.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(249,115,22,0.2); color: #f97316;">Apple Ecosystem</span>
+              <span class="feature-tag" style="background: rgba(249,115,22,0.2); color: #f97316;">High Quality</span>
+              <span class="feature-tag" style="background: rgba(249,115,22,0.2); color: #f97316;">Excellent Compression</span>
+            </div>
           </div>
-          <div class="format-item">
-            <h3>GIF</h3>
-            <p>Supports animation and transparency. Limited to 256 colors. Good for simple animations and small graphics.</p>
+
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(220,38,38,0.05) 100%); border: 1px solid rgba(239,68,68,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">🎞️</div>
+              <h3 style="color: #ef4444;">GIF</h3>
+            </div>
+            <p class="format-description">Supports animation and transparency. Limited to 256 colors. Good for simple animations and small graphics.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(239,68,68,0.2); color: #ef4444;">Animation Support</span>
+              <span class="feature-tag" style="background: rgba(239,68,68,0.2); color: #ef4444;">Transparency</span>
+              <span class="feature-tag" style="background: rgba(239,68,68,0.2); color: #ef4444;">256 Colors</span>
+            </div>
           </div>
-          <div class="format-item">
-            <h3>BMP</h3>
-            <p>Uncompressed format. Highest quality but very large file sizes. Used in professional printing and graphics work.</p>
+
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(8,145,178,0.05) 100%); border: 1px solid rgba(6,182,212,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">🖼️</div>
+              <h3 style="color: #06b6d4;">BMP</h3>
+            </div>
+            <p class="format-description">Uncompressed format. Highest quality but very large file sizes. Used in professional printing and graphics work.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(6,182,212,0.2); color: #06b6d4;">Uncompressed</span>
+              <span class="feature-tag" style="background: rgba(6,182,212,0.2); color: #06b6d4;">Highest Quality</span>
+              <span class="feature-tag" style="background: rgba(6,182,212,0.2); color: #06b6d4;">Large Files</span>
+            </div>
           </div>
-          <div class="format-item">
-            <h3>TIFF</h3>
-            <p>Professional format supporting layers and metadata. Lossless compression option. Used in photography and printing industries.</p>
+
+          <div class="format-card" style="background: linear-gradient(135deg, rgba(139,69,19,0.1) 0%, rgba(120,53,15,0.05) 100%); border: 1px solid rgba(139,69,19,0.2);">
+            <div class="format-header">
+              <div class="format-icon" style="background: linear-gradient(135deg, #8b4513 0%, #78350f 100%);">📷</div>
+              <h3 style="color: #8b4513;">TIFF</h3>
+            </div>
+            <p class="format-description">Professional format supporting layers and metadata. Lossless compression option. Used in photography and printing industries.</p>
+            <div class="format-features">
+              <span class="feature-tag" style="background: rgba(139,69,19,0.2); color: #8b4513;">Professional</span>
+              <span class="feature-tag" style="background: rgba(139,69,19,0.2); color: #8b4513;">Layers Support</span>
+              <span class="feature-tag" style="background: rgba(139,69,19,0.2); color: #8b4513;">Lossless Option</span>
+            </div>
           </div>
         </div>
 
@@ -290,11 +503,7 @@
         <div class="faq-list">
           <div class="faq-item">
             <h3 class="faq-question">How do I convert image formats?</h3>
-            <p class="faq-answer">Upload your image, select the desired output format from the options, adjust quality if needed, then click "Convert Image". Your converted image will be ready for download instantly.</p>
-          </div>
-          <div class="faq-item">
-            <h3 class="faq-question">What quality setting should I use?</h3>
-            <p class="faq-answer">For web use, 75-85% quality provides excellent results with significant file size reduction. For print or professional use, use 90-95% quality.</p>
+            <p class="faq-answer">Upload your image, select the desired output format from the options, then click "Convert Image". Your converted image will be ready for download instantly.</p>
           </div>
           <div class="faq-item">
             <h3 class="faq-question">Is format conversion free?</h3>
@@ -305,6 +514,29 @@
             <p class="faq-answer">No. All format conversion happens locally in your browser. Your images never leave your device, ensuring complete privacy and security.</p>
           </div>
           <div class="faq-item">
+            <h3 class="faq-question">Can I convert multiple images at once?</h3>
+            <p class="faq-answer">Currently, you can convert one image at a time. Upload, convert, download, then repeat for additional images.</p>
+          </div>
+        </div>
+
+        <h2 class="seo-heading">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-card">
+            <h3 class="faq-question">How do I convert image formats?</h3>
+            <p class="faq-answer">Upload your image, select the desired output format from the options, then click "Convert Image". Your converted image will be ready for download instantly.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">Is format conversion free?</h3>
+            <p class="faq-answer">Yes! ImageNerd's format converter is completely free with no limits, watermarks, or registration required.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">Are my images uploaded to a server?</h3>
+            <p class="faq-answer">No. All format conversion happens locally in your browser. Your images never leave your device, ensuring complete privacy and security.</p>
+          </div>
+
+          <div class="faq-card">
             <h3 class="faq-question">Can I convert multiple images at once?</h3>
             <p class="faq-answer">Currently, you can convert one image at a time. Upload, convert, download, then repeat for additional images.</p>
           </div>
@@ -341,6 +573,37 @@
     <script src="js/terms.js?v=1.0.0"></script>
 
     <!-- Load router.js last -->
-    <script src="router.js?v=1.0.1"></script>
+    <script src="../../router.js?v=1.0.1"></script>
+
+    <script>
+      // Add some entrance animations
+      document.addEventListener('DOMContentLoaded', function() {
+        // Trigger title animation after a delay
+        setTimeout(function() {
+          const titleUnderline = document.querySelector('.title-underline');
+          if (titleUnderline) {
+            titleUnderline.style.transform = 'scaleX(1)';
+            setTimeout(function() {
+              titleUnderline.style.transform = 'scaleX(0)';
+            }, 2000);
+          }
+        }, 1000);
+
+        // Add hover effect to feature items
+        const featureItems = document.querySelectorAll('.hero-features .hero-feature');
+        featureItems.forEach(function(item, index) {
+          item.style.animationDelay = (index * 0.1) + 's';
+          item.style.animation = 'slideInUp 0.6s ease-out forwards';
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(20px)';
+        });
+
+        // Add entrance animation to the main content
+        const mainContent = document.querySelector('#dropZone > div');
+        if (mainContent) {
+          mainContent.style.animation = 'fadeIn 1s ease-out';
+        }
+      });
+    </script>
   </body>
 </html>
