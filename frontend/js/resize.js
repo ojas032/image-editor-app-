@@ -33,109 +33,32 @@
   function initResizePage() {
     console.log('Resize page initialized');
 
-    // Get DOM elements
-    const section = document.getElementById('resizeSection');
-    if (!section) {
-      console.error('Resize section not found');
-      return;
+    // Add title underline animation
+    const titleSpan = document.querySelector('#resizeDropZone h2 span:first-child');
+    if (titleSpan) {
+      const underline = document.querySelector('.title-underline');
+      if (underline) {
+        titleSpan.addEventListener('mouseenter', () => {
+          underline.style.transform = 'scaleX(1)';
+        });
+        titleSpan.addEventListener('mouseleave', () => {
+          underline.style.transform = 'scaleX(0)';
+        });
+      }
     }
 
-    // Create resize UI
-    section.innerHTML = `<div class="resize-card" role="region" aria-live="polite">
-      <div class="resize-uploader" id="resize-dropZone">
-        <input id="resize-fileInput" type="file" accept="image/*" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true" />
-        <div class="upload-icon" style="text-align:center;margin-bottom:16px;">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-            <circle cx="9" cy="9" r="2"/>
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-          </svg>
-        </div>
-        <button class="btn btn-primary" id="resize-selectBtn" type="button">Select image</button>
-        <div class="resize-help">or drop image here</div>
-        <div class="file-limit">Max file size: 10 MB</div>
-      </div>
-      <div id="resize-editorView" style="display:none;max-width:900px;margin:0 auto;">
-        <div id="resize-previewSection" style="text-align:center;margin-bottom:32px;">
-          <img id="resize-previewImg" src="" alt="Preview" style="max-width:100%;max-height:400px;border:1px solid var(--light-border);border-radius:8px;" />
-          <div id="resize-imageDimensions" style="margin-top:12px;font-size:14px;color:var(--light-muted);"></div>
-        </div>
-        <div class="resize-settings">
-          <h2 style="font-size:24px;font-weight:700;margin-bottom:24px;">Resize Settings</h2>
-          <div style="margin-bottom:28px;">
-            <label for="resize-resizeMethod" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Resize Method</label>
-            <select id="resize-resizeMethod" class="form-select" style="max-width:400px;">
-              <option value="socialMedia">Social Media Preset</option>
-              <option value="bySize">Custom Size</option>
-              <option value="byPercent">By Percentage</option>
-            </select>
-          </div>
-          <div id="resize-socialMediaOptions">
-            <div style="margin-bottom:24px;">
-              <label for="resize-platformSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Choose Platform</label>
-              <select id="resize-platformSelect" class="form-select" style="max-width:400px;">
-                <option value="youtube">YouTube</option>
-                <option value="instagram">Instagram</option>
-                <option value="facebook">Facebook</option>
-                <option value="twitter">Twitter / X</option>
-                <option value="linkedin">LinkedIn</option>
-                <option value="tiktok">TikTok</option>
-                <option value="pinterest">Pinterest</option>
-              </select>
-            </div>
-            <div id="resize-presetTypeContainer" style="margin-bottom:24px;display:none;">
-              <label for="resize-presetTypeSelect" style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Preset Type</label>
-              <select id="resize-presetTypeSelect" class="form-select" style="max-width:400px;"></select>
-            </div>
-          </div>
-          <div id="resize-bySizeOptions" style="display:none;">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
-              <div><label style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Width (px)</label>
-              <input type="number" id="resize-widthInput" class="form-control" min="1" /></div>
-              <div><label style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Height (px)</label>
-              <input type="number" id="resize-heightInput" class="form-control" min="1" /></div>
-            </div>
-          </div>
-          <div id="resize-byPercentOptions" style="display:none;">
-            <label style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Resize Percentage (%)</label>
-            <input type="number" id="resize-percentInput" class="form-control" value="100" min="1" max="500" style="max-width:300px;" />
-          </div>
-          <div id="resize-dimensionsDisplay" style="display:none;margin:24px 0;padding:20px;background:rgba(91,140,255,0.06);border:1px solid rgba(91,140,255,0.2);border-radius:10px;">
-            <div style="margin-bottom:12px;font-weight:600;">✓ Final Dimensions</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-              <div><label style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Width</label>
-              <input type="number" id="resize-finalWidthDisplay" class="form-control" readonly /></div>
-              <div><label style="display:block;font-weight:600;margin-bottom:8px;font-size:14px;">Height</label>
-              <input type="number" id="resize-finalHeightDisplay" class="form-control" readonly /></div>
-            </div>
-          </div>
-          <div id="resize-aspectRatioControl" style="display:none;margin-bottom:24px;">
-            <input class="form-check-input" type="checkbox" id="resize-lockAspectRatio" checked />
-            <label class="form-check-label" for="resize-lockAspectRatio" style="font-weight:600;margin-left:8px;">Lock Aspect Ratio</label>
-          </div>
-          <div style="text-align:center;margin-top:32px;">
-            <button class="btn btn-primary" id="resize-exportBtn" type="button" style="font-size:18px;padding:14px 40px;">Export →</button>
-          </div>
-        </div>
-        <div id="resize-processingOverlay" style="display:none;flex-direction:column;align-items:center;padding:40px;text-align:center;">
-          <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--primary-500);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px"></div>
-          <div style="font-weight:600;font-size:18px;">Resizing...</div>
-        </div>
-        <div id="resize-successView" style="display:none;text-align:center;margin-top:32px;">
-          <div style="background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#fff;border-radius:12px;padding:32px;margin-bottom:24px;">
-            <div style="font-size:24px;font-weight:700;margin-bottom:8px;">✓ Image Resized!</div>
-            <div style="font-size:18px;" id="resize-successDimensions"></div>
-          </div>
-          <div style="margin-bottom:24px;">
-            <img id="resize-resizedImg" src="" alt="Resized" style="max-width:100%;max-height:500px;border:1px solid var(--light-border);border-radius:8px;" />
-          </div>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-            <a class="btn btn-primary" id="resize-downloadBtn" href="#" download style="font-size:16px;padding:12px 24px;">Download</a>
-            <button class="btn btn-ghost" id="resize-resizeAnotherBtn" type="button" style="font-size:16px;padding:12px 24px;">Resize Another</button>
-          </div>
-        </div>
-      </div>
-    </div>`;
+    // Add button hover effect
+    const selectBtn = document.getElementById('resizeSelectBtn');
+    if (selectBtn) {
+      selectBtn.addEventListener('mouseenter', () => {
+        const shimmer = selectBtn.querySelector('span:last-child');
+        if (shimmer) shimmer.style.left = '100%';
+      });
+      selectBtn.addEventListener('mouseleave', () => {
+        const shimmer = selectBtn.querySelector('span:last-child');
+        if (shimmer) shimmer.style.left = '-100%';
+      });
+    }
 
     // Initialize resize functionality
     setupResizeFunctionality();
@@ -144,133 +67,88 @@
   function setupResizeFunctionality() {
     const SOCIAL_PRESETS = {
       youtube: [{ name: 'Thumbnail (1280 × 720)', width: 1280, height: 720 }],
-      instagram: [{ name: 'Post Square (1080 × 1080)', width: 1080, height: 1080 }],
-      facebook: [{ name: 'Post (1200 × 630)', width: 1200, height: 630 }],
+      instagram: [
+        { name: 'Post Square (1080 × 1080)', width: 1080, height: 1080 },
+        { name: 'Post Portrait (1080 × 1350)', width: 1080, height: 1350 },
+        { name: 'Story/Reels (1080 × 1920)', width: 1080, height: 1920 }
+      ],
+      facebook: [
+        { name: 'Post (1200 × 630)', width: 1200, height: 630 },
+        { name: 'Story (1080 × 1920)', width: 1080, height: 1920 }
+      ],
       twitter: [{ name: 'Post (1200 × 675)', width: 1200, height: 675 }],
       linkedin: [{ name: 'Post (1200 × 627)', width: 1200, height: 627 }],
       tiktok: [{ name: 'Video (1080 × 1920)', width: 1080, height: 1920 }],
       pinterest: [{ name: 'Pin (1000 × 1500)', width: 1000, height: 1500 }]
     };
 
-    const fileInput = document.getElementById('resize-fileInput');
-    const selectBtn = document.getElementById('resize-selectBtn');
-    const dropZone = document.getElementById('resize-dropZone');
-    const editorView = document.getElementById('resize-editorView');
-    const previewSection = document.getElementById('resize-previewSection');
-    const previewImg = document.getElementById('resize-previewImg');
-    const processingOverlay = document.getElementById('resize-processingOverlay');
-    const successView = document.getElementById('resize-successView');
-    const resizedImg = document.getElementById('resize-resizedImg');
-    const downloadBtn = document.getElementById('resize-downloadBtn');
-    const resizeAnotherBtn = document.getElementById('resize-resizeAnotherBtn');
-    const exportBtn = document.getElementById('resize-exportBtn');
-    const resizeMethod = document.getElementById('resize-resizeMethod');
-    const platformSelect = document.getElementById('resize-platformSelect');
-    const presetTypeContainer = document.getElementById('resize-presetTypeContainer');
-    const presetTypeSelect = document.getElementById('resize-presetTypeSelect');
-    const widthInput = document.getElementById('resize-widthInput');
-    const heightInput = document.getElementById('resize-heightInput');
-    const percentInput = document.getElementById('resize-percentInput');
-    const finalWidthDisplay = document.getElementById('resize-finalWidthDisplay');
-    const finalHeightDisplay = document.getElementById('resize-finalHeightDisplay');
+    // Get DOM elements
+    const fileInput = document.getElementById('resizeFileInput');
+    const selectBtn = document.getElementById('resizeSelectBtn');
+    const dropZone = document.getElementById('resizeDropZone');
+    const editorView = document.getElementById('resizeEditorView');
+    const canvasContainer = document.getElementById('resizeCanvasContainer');
+    const previewImg = document.getElementById('resizePreviewImg');
+    const processingOverlay = document.getElementById('resizeProcessingOverlay');
+    const successView = document.getElementById('resizeSuccessView');
+    const resizedImg = document.getElementById('resizeResizedImg');
+    const downloadBtn = document.getElementById('resizeDownloadBtn');
+    const resizeAnotherBtn = document.getElementById('resizeAnotherBtn');
+    const exportBtn = document.getElementById('resizeExportBtn');
+
+    // Controls
+    const methodSelect = document.getElementById('resizeMethodSelect');
+    const platformSelect = document.getElementById('resizePlatformSelect');
+    const presetTypeContainer = document.getElementById('resizePresetTypeContainer');
+    const presetTypeSelect = document.getElementById('resizePresetTypeSelect');
+    const widthInput = document.getElementById('resizeWidthInput');
+    const heightInput = document.getElementById('resizeHeightInput');
+    const percentInput = document.getElementById('resizePercentInput');
+    const lockAspectRatio = document.getElementById('resizeLockAspectRatio');
+    const finalWidthDisplay = document.getElementById('resizeFinalWidthDisplay');
+    const finalHeightDisplay = document.getElementById('resizeFinalHeightDisplay');
+    const dimensionsDisplay = document.getElementById('resizeDimensionsDisplay');
+
+    // Social media options
+    const socialMediaOptions = document.getElementById('resizeSocialMediaOptions');
+    const bySizeOptions = document.getElementById('resizeBySizeOptions');
+    const byPercentOptions = document.getElementById('resizeByPercentOptions');
 
     let currentFile = null;
     let currentBase64 = '';
     let originalWidth = 0;
     let originalHeight = 0;
+    let aspectRatio = 1;
 
+    // File selection
     selectBtn.addEventListener('click', () => fileInput.click());
-    resizeAnotherBtn.addEventListener('click', () => {
-      dropZone.style.display = 'block';
-      editorView.style.display = 'none';
-      fileInput.value = '';
+    resizeAnotherBtn.addEventListener('click', resetToUploader);
+
+    // Click on drop zone (excluding select button) to open file dialog
+    dropZone.addEventListener('click', (e) => {
+      if (!e.target.closest('#resizeSelectBtn')) {
+        fileInput.click();
+      }
     });
 
+    // Keyboard navigation for drop zone
+    dropZone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+
+    // Drag and drop
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
     dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drag'); handleFiles(e.dataTransfer.files); });
     fileInput.addEventListener('change', () => handleFiles(fileInput.files));
 
-    function handleFiles(list) {
-      const files = Array.from(list || []).filter(f => /^image\//.test(f.type));
-      if (!files.length) return;
-      if (files[0].size > 10 * 1024 * 1024) {
-        alert('File exceeds 10 MB');
-        return;
-      }
-      processFile(files[0]);
-    }
+    // Method selection
+    methodSelect.addEventListener('change', updateUIForMethod);
 
-    async function processFile(file) {
-      currentFile = file;
-      currentBase64 = await fileToBase64(file);
-      const img = new Image();
-      img.onload = () => {
-        originalWidth = img.width;
-        originalHeight = img.height;
-        previewImg.src = img.src;
-        document.getElementById('resize-imageDimensions').textContent = `Original: ${originalWidth} × ${originalHeight} px`;
-        widthInput.value = originalWidth;
-        heightInput.value = originalHeight;
-        dropZone.style.display = 'none';
-        editorView.style.display = 'block';
-        previewSection.style.display = 'block';
-        successView.style.display = 'none';
-        updateUIForMethod();
-        platformSelect.dispatchEvent(new Event('change'));
-      };
-      img.src = URL.createObjectURL(file);
-    }
-
-    function fileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result).split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    resizeMethod.addEventListener('change', updateUIForMethod);
-
-    function updateUIForMethod() {
-      const method = resizeMethod.value;
-      document.getElementById('resize-socialMediaOptions').style.display = method === 'socialMedia' ? 'block' : 'none';
-      document.getElementById('resize-bySizeOptions').style.display = method === 'bySize' ? 'block' : 'none';
-      document.getElementById('resize-byPercentOptions').style.display = method === 'byPercent' ? 'block' : 'none';
-      document.getElementById('resize-aspectRatioControl').style.display = method === 'bySize' ? 'block' : 'none';
-      updateDimensionsDisplay();
-    }
-
-    function updateDimensionsDisplay() {
-      const method = resizeMethod.value;
-      if (method === 'socialMedia') {
-        const platform = platformSelect.value;
-        const presetIdx = parseInt(presetTypeSelect.value || 0);
-        if (SOCIAL_PRESETS[platform] && SOCIAL_PRESETS[platform][presetIdx]) {
-          const preset = SOCIAL_PRESETS[platform][presetIdx];
-          finalWidthDisplay.value = preset.width;
-          finalHeightDisplay.value = preset.height;
-          document.getElementById('resize-dimensionsDisplay').style.display = 'block';
-        }
-      } else if (method === 'bySize') {
-        const w = parseInt(widthInput.value);
-        const h = parseInt(heightInput.value);
-        if (w > 0 && h > 0) {
-          finalWidthDisplay.value = w;
-          finalHeightDisplay.value = h;
-          document.getElementById('resize-dimensionsDisplay').style.display = 'block';
-        }
-      } else if (method === 'byPercent') {
-        const percent = parseFloat(percentInput.value);
-        if (percent > 0 && originalWidth > 0) {
-          finalWidthDisplay.value = Math.round(originalWidth * (percent / 100));
-          finalHeightDisplay.value = Math.round(originalHeight * (percent / 100));
-          document.getElementById('resize-dimensionsDisplay').style.display = 'block';
-        }
-      }
-    }
-
+    // Platform selection
     platformSelect.addEventListener('change', () => {
       const platform = platformSelect.value;
       if (SOCIAL_PRESETS[platform]) {
@@ -283,18 +161,283 @@
           presetTypeSelect.appendChild(option);
         });
         updateDimensionsDisplay();
+        updatePresetDimensions();
       }
     });
 
-    presetTypeSelect.addEventListener('change', updateDimensionsDisplay);
-    widthInput.addEventListener('input', updateDimensionsDisplay);
-    heightInput.addEventListener('input', updateDimensionsDisplay);
+    // Preset selection
+    presetTypeSelect.addEventListener('change', () => {
+      updateDimensionsDisplay();
+      updatePresetDimensions();
+    });
+
+    // Size inputs
+    widthInput.addEventListener('input', () => {
+      if (lockAspectRatio.checked && originalWidth > 0) {
+        heightInput.value = Math.round(parseInt(widthInput.value) / aspectRatio);
+      }
+      updateDimensionsDisplay();
+      updateAspectRatioDisplay();
+    });
+
+    heightInput.addEventListener('input', () => {
+      if (lockAspectRatio.checked && originalHeight > 0) {
+        widthInput.value = Math.round(parseInt(heightInput.value) * aspectRatio);
+      }
+      updateDimensionsDisplay();
+      updateAspectRatioDisplay();
+    });
+
     percentInput.addEventListener('input', updateDimensionsDisplay);
 
-    exportBtn.addEventListener('click', async () => {
-      if (!currentBase64) return;
+    // Export button
+    exportBtn.addEventListener('click', () => {
+      // Show spinner overlay immediately when button is clicked
+      document.getElementById('resizeSpinnerOverlay').style.display = 'flex';
+      handleExport();
+    });
+
+    function handleFiles(list) {
+      const files = Array.from(list || []).filter(f => /^image\//.test(f.type));
+      if (!files.length) {
+        alert('Please select a valid image file.');
+        return;
+      }
+
+      const file = files[0];
+      if (file.size > 10 * 1024 * 1024) {
+        alert('File size exceeds 10 MB limit. Please choose a smaller file.');
+        return;
+      }
+
+      // Validate format
+      const validFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/tiff', 'image/heic', 'image/heif'];
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+      const isValidFormat = validFormats.includes(file.type) || ['heic', 'heif'].includes(fileExtension);
+
+      if (!isValidFormat) {
+        alert('Unsupported format. Please upload HEIC, JPEG, PNG, WebP, GIF, BMP, or TIFF.');
+        return;
+      }
+
+      processFile(file);
+    }
+
+    async function processFile(file) {
+      currentFile = file;
+
+      // Check if file is HEIC/HEIF and convert if needed
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+      const isHeic = ['heic', 'heif'].includes(fileExtension) || ['image/heic', 'image/heif'].includes(file.type);
+
+      try {
+        let imageBlob = file;
+
+        if (isHeic && window.heic2any) {
+          // Convert HEIC to a browser-compatible format
+          imageBlob = await window.heic2any({
+            blob: file,
+            toType: 'image/jpeg',
+            quality: 0.92
+          });
+        }
+
+        // Generate base64 from the processed image (original file or converted HEIC)
+        currentBase64 = await fileToBase64(imageBlob);
+
+        const objectUrl = URL.createObjectURL(imageBlob);
+
+        // Set the image source
+        previewImg.src = objectUrl;
+
+        // Show editor view
+        dropZone.style.display = 'none';
+        editorView.style.display = 'block';
+        canvasContainer.style.display = 'block';
+        successView.style.display = 'none';
+        document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+
+        // Initialize image when loaded
+        previewImg.onload = () => {
+          originalWidth = previewImg.naturalWidth;
+          originalHeight = previewImg.naturalHeight;
+          aspectRatio = originalWidth / originalHeight;
+
+          document.getElementById('resizeImageDimensions').textContent = `Original: ${originalWidth} × ${originalHeight} pixels`;
+
+          // Set initial values
+          widthInput.value = originalWidth;
+          heightInput.value = originalHeight;
+
+          // Update UI
+          updateUIForMethod();
+          updateAspectRatioDisplay();
+          platformSelect.dispatchEvent(new Event('change'));
+
+          URL.revokeObjectURL(objectUrl);
+        };
+
+        previewImg.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+          alert('Unable to load that image. Please try another file.');
+        };
+      } catch (error) {
+        console.error('Error processing image:', error);
+        document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+        alert('Unable to process that image. Please try another file.');
+      }
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function updateUIForMethod() {
+      const method = methodSelect.value;
+      socialMediaOptions.style.display = method === 'socialMedia' ? 'block' : 'none';
+      bySizeOptions.style.display = method === 'bySize' ? 'block' : 'none';
+      byPercentOptions.style.display = method === 'byPercent' ? 'block' : 'none';
+
+      // Update method description
+      updateMethodDescription(method);
+
+      updateDimensionsDisplay();
+    }
+
+    function updateMethodDescription(method) {
+      const methodDescription = document.getElementById('methodDescription');
+      if (!methodDescription) return;
+
+      const descriptions = {
+        socialMedia: 'Perfect dimensions for social platforms',
+        bySize: 'Set exact pixel dimensions',
+        byPercent: 'Scale by percentage of original'
+      };
+
+      methodDescription.textContent = descriptions[method] || '';
+    }
+
+    function updatePresetDimensions() {
+      const presetDimensions = document.getElementById('presetDimensions');
+      if (!presetDimensions) return;
+
+      const platform = platformSelect.value;
+      const presetIdx = parseInt(presetTypeSelect.value || 0);
+
+      if (SOCIAL_PRESETS[platform] && SOCIAL_PRESETS[platform][presetIdx]) {
+        const preset = SOCIAL_PRESETS[platform][presetIdx];
+        presetDimensions.textContent = `${preset.width} × ${preset.height} pixels`;
+      } else {
+        presetDimensions.textContent = 'Select a preset to see dimensions';
+      }
+    }
+
+    function updateAspectRatioDisplay() {
+      const aspectRatioDisplay = document.getElementById('currentAspectRatio');
+      if (!aspectRatioDisplay) return;
+
+      if (originalWidth > 0 && originalHeight > 0) {
+        // Calculate and display aspect ratio
+        const ratio = originalWidth / originalHeight;
+        const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+        const divisor = gcd(originalWidth, originalHeight);
+        const simplifiedWidth = originalWidth / divisor;
+        const simplifiedHeight = originalHeight / divisor;
+
+        aspectRatioDisplay.textContent = `Ratio: ${simplifiedWidth}:${simplifiedHeight} (${ratio.toFixed(2)}:1)`;
+      } else {
+        aspectRatioDisplay.textContent = 'Ratio: Auto';
+      }
+    }
+
+    function updateDimensionsDisplay() {
+      const method = methodSelect.value;
+
+      if (method === 'socialMedia') {
+        const platform = platformSelect.value;
+        const presetIdx = parseInt(presetTypeSelect.value || 0);
+        if (SOCIAL_PRESETS[platform] && SOCIAL_PRESETS[platform][presetIdx]) {
+          const preset = SOCIAL_PRESETS[platform][presetIdx];
+          finalWidthDisplay.value = preset.width;
+          finalHeightDisplay.value = preset.height;
+          dimensionsDisplay.style.display = 'block';
+        }
+      } else if (method === 'bySize') {
+        const w = parseInt(widthInput.value);
+        const h = parseInt(heightInput.value);
+        if (w > 0 && h > 0) {
+          finalWidthDisplay.value = w;
+          finalHeightDisplay.value = h;
+          dimensionsDisplay.style.display = 'block';
+        }
+      } else if (method === 'byPercent') {
+        const percent = parseFloat(percentInput.value);
+        if (percent > 0 && originalWidth > 0) {
+          finalWidthDisplay.value = Math.round(originalWidth * (percent / 100));
+          finalHeightDisplay.value = Math.round(originalHeight * (percent / 100));
+          dimensionsDisplay.style.display = 'block';
+        }
+      }
+    }
+
+    async function resizeImageFrontend(base64Data, targetWidth, targetHeight) {
+      return new Promise((resolve, reject) => {
+        // Create a new image element
+        const img = new Image();
+
+        img.onload = () => {
+          try {
+            // Create canvas with target dimensions
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas size to target dimensions
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+
+            // Enable high-quality image rendering
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            // Draw the image onto the canvas with the new dimensions
+            // This will automatically resize the image using bilinear interpolation
+            ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+            // Convert canvas to base64
+            // Use the same format as the original image when possible
+            const mimeType = currentFile.type || 'image/png';
+            const resizedBase64 = canvas.toDataURL(mimeType, 0.92).split(',')[1];
+
+            resolve(resizedBase64);
+          } catch (error) {
+            reject(new Error('Failed to resize image: ' + error.message));
+          }
+        };
+
+        img.onerror = () => {
+          reject(new Error('Failed to load image for resizing'));
+        };
+
+        // Set the image source to the base64 data
+        img.src = `data:${currentFile.type || 'image/png'};base64,${base64Data}`;
+      });
+    }
+
+    async function handleExport() {
+      if (!currentFile || !currentBase64) {
+        document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+        alert('Please select an image first');
+        return;
+      }
+
       let targetWidth, targetHeight;
-      const method = resizeMethod.value;
+      const method = methodSelect.value;
 
       if (method === 'bySize') {
         targetWidth = parseInt(widthInput.value);
@@ -305,51 +448,65 @@
         targetHeight = Math.round(originalHeight * (percent / 100));
       } else if (method === 'socialMedia') {
         const platform = platformSelect.value;
-        const presetIdx = parseInt(presetTypeSelect.value);
-        const preset = SOCIAL_PRESETS[platform][presetIdx];
-        targetWidth = preset.width;
-        targetHeight = preset.height;
+        const presetIdx = parseInt(presetTypeSelect.value || 0);
+        if (SOCIAL_PRESETS[platform] && SOCIAL_PRESETS[platform][presetIdx]) {
+          const preset = SOCIAL_PRESETS[platform][presetIdx];
+          targetWidth = preset.width;
+          targetHeight = preset.height;
+        }
       }
 
       if (!targetWidth || !targetHeight) {
+        document.getElementById('resizeSpinnerOverlay').style.display = 'none';
         alert('Invalid dimensions');
         return;
       }
 
-      previewSection.style.display = 'none';
-      document.querySelector('.resize-settings').style.display = 'none';
-      processingOverlay.style.display = 'flex';
+      // Show spinner overlay on image (keep image and controls visible)
+      successView.style.display = 'none';
 
       try {
-        const res = await fetchWithTimeout(API_BASE + '/resize', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image_base64: currentBase64, width: targetWidth, height: targetHeight })
-        });
-
-        const data = await res.json();
-        if (!data.resized_image_base64) throw new Error(data.error || 'Resize failed');
+        // Resize image using client-side canvas
+        const resizedBase64 = await resizeImageFrontend(currentBase64, targetWidth, targetHeight);
 
         const mimeType = currentFile.type || 'image/png';
         const fileExt = mimeType.split('/')[1] || 'png';
-        const downloadUrl = `data:${mimeType};base64,${data.resized_image_base64}`;
+        const downloadUrl = `data:${mimeType};base64,${resizedBase64}`;
         resizedImg.src = downloadUrl;
-        document.getElementById('resize-successDimensions').textContent = `New size: ${targetWidth} × ${targetHeight} pixels`;
+
+        document.getElementById('resizeSuccessDimensions').textContent = `Resized to: ${targetWidth} × ${targetHeight} pixels`;
+
+        // Setup download
         downloadBtn.href = downloadUrl;
-        downloadBtn.download = `${(currentFile.name || 'image').replace(/\.[^.]+$/, '')}-${targetWidth}x${targetHeight}.${fileExt}`;
-        processingOverlay.style.display = 'none';
-        successView.style.display = 'block';
+        const baseName = (currentFile.name || 'image').replace(/\.[^.]+$/, '');
+        downloadBtn.download = `${baseName}-resized.${fileExt}`;
+
+        // Show success view
+        document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+        successView.style.display = 'flex';
+
       } catch (err) {
-        console.error(err);
-        processingOverlay.style.display = 'none';
-        alert('Failed to resize: ' + err.message);
-        previewSection.style.display = 'block';
-        document.querySelector('.resize-settings').style.display = 'block';
+        console.error('Resize error:', err);
+        document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+        alert('Failed to resize image: ' + err.message);
       }
-    });
+    }
+
+    function resetToUploader() {
+      dropZone.style.display = 'block';
+      editorView.style.display = 'none';
+      canvasContainer.style.display = 'block';
+      successView.style.display = 'none';
+      document.querySelectorAll('.control-card').forEach(card => card.style.display = 'block');
+      document.getElementById('resizeSpinnerOverlay').style.display = 'none';
+      fileInput.value = '';
+      currentFile = null;
+      currentBase64 = '';
+    }
   }
 
   // Export for use in other modules
   window.initResizePage = initResizePage;
 
 })();
+
