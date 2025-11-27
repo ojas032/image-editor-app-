@@ -7,8 +7,8 @@
   let isImageLoaded = false;
   let selectedFormat = null;
 
-  function initHeicToJpegView() {
-    console.log('Initializing.*view');
+  function initHeicToJpgView() {
+    console.log('Initializing HEIC to JPG view');
 
     // Add class to indicate single conversion page
     document.body.classList.add('single-conversion-page');
@@ -20,7 +20,6 @@
     const editorView = document.getElementById('editorView');
     const canvasContainer = document.getElementById('canvasContainer');
     const canvas = document.getElementById('cropCanvas');
-    const imageDimensions = document.getElementById('imageDimensions'); // May not exist in HEIC pages
     const editorProcessingOverlay = document.getElementById('processingOverlay');
     const successView = document.getElementById('successView');
     const convertedImage = document.getElementById('convertedImage');
@@ -228,10 +227,13 @@
         canvas.onload = () => {
           isImageLoaded = true;
 
-          // Update dimensions display
+          // Update dimensions display (if element exists)
           const naturalWidth = canvas.naturalWidth;
           const naturalHeight = canvas.naturalHeight;
-          if (imageDimensions) imageDimensions.textContent = `Original: ${naturalWidth} × ${naturalHeight} pixels`;
+          const imageDimensions = document.getElementById('imageDimensions');
+          if (imageDimensions) {
+            imageDimensions.textContent = `Original: ${naturalWidth} × ${naturalHeight} pixels`;
+          }
 
           // Enable convert button now that image is loaded
           if (convertBtn) {
@@ -321,8 +323,7 @@
       }
 
       // Show processing overlay
-      if (canvasContainer) canvasContainer.style.display = 'none';
-      if (imageDimensions) imageDimensions.style.display = 'none';
+      canvasContainer.style.display = 'none';
       document.querySelectorAll('.control-card').forEach(card => card.style.display = 'none');
       editorProcessingOverlay.style.display = 'block';
       document.body.classList.add('has-processing-overlay');
@@ -372,7 +373,7 @@
         const actualFormat = convertedBlob.type.split('/')[1].toUpperCase();
 
         document.getElementById('successDimensions').textContent =
-          `Converted to ${actualFormat} • ${canvas ? canvas.naturalWidth : 'Unknown'} × ${canvas ? canvas.naturalHeight : 'Unknown'} pixels • ${fileSize}`;
+          `Converted to ${actualFormat} • ${canvas.naturalWidth} × ${canvas.naturalHeight} pixels • ${fileSize}`;
 
         // Setup download
         const baseName = (currentFile.name || 'image').replace(/\.[^.]+$/, '');
@@ -420,7 +421,10 @@
       canvasContainer.style.display = 'block';
       successView.style.display = 'none';
       editorProcessingOverlay.style.display = 'none';
-      if (imageDimensions) imageDimensions.style.display = 'block';
+      const imageDimensions = document.getElementById('imageDimensions');
+      if (imageDimensions) {
+        imageDimensions.style.display = 'block';
+      }
       document.querySelectorAll('.control-card').forEach(card => card.style.display = 'block');
 
       fileInput.value = '';
@@ -429,10 +433,8 @@
       isImageLoaded = false;
 
       // Clear canvas
-      if (canvas) {
-        const ctx = canvas.getContext('2d');
-        if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Reset button state
       if (convertBtn) {
@@ -445,13 +447,13 @@
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeicToJpegView);
+    document.addEventListener('DOMContentLoaded', initHeicToJpgView);
   } else {
-    initHeicToJpegView();
+    initHeicToJpgView();
   }
 
   // Export for potential external use
-  window.initHeicToJpegView = initHeicToJpegView;
+  window.initHeicToJpgView = initHeicToJpgView;
 
 })();
 

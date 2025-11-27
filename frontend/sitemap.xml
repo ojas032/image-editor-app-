@@ -57,6 +57,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- PNG to JPG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/png-to-jpg</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- JPEG to WebP Converter -->
   <url>
     <loc>https://www.imagenerd.in/convert/jpeg-to-webp</loc>
@@ -105,6 +113,63 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- JPG to PNG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpg-to-png</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- JPG to WebP Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpg-to-webp</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- HEIC to JPG Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/heic-to-jpg</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+
+  <!-- JPEG to Excel Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpeg-to-excel</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- JPG to Excel Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpg-to-excel</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- JPEG to PDF Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpeg-to-pdf</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- JPG to PDF Converter -->
+  <url>
+    <loc>https://www.imagenerd.in/convert/jpg-to-pdf</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Remove Background Tool -->
   <url>
     <loc>https://www.imagenerd.in/remove-background</loc>
@@ -143,6 +208,22 @@
     <lastmod>2025-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- Excel Conversion Tools Page -->
+  <url>
+    <loc>https://www.imagenerd.in/excel-conversion-tools</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Image Processing Tools Page -->
+  <url>
+    <loc>https://www.imagenerd.in/image-processing-tools</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
