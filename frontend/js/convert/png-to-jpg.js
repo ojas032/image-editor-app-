@@ -1,4 +1,4 @@
-// JPEG to PNG Converter Tool
+// PNG to JPEG Converter Tool
 (function() {
   'use strict';
 
@@ -7,8 +7,8 @@
   let isImageLoaded = false;
   let originalCanvas = null;
 
-  function initJpegToPngView() {
-    console.log('Initializing JPEG to PNG view');
+  function initPngToJpegView() {
+    console.log('Initializing PNG to JPEG view');
 
     // Add class to indicate single conversion page
     document.body.classList.add('single-conversion-page');
@@ -26,11 +26,8 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const convertAnotherBtn = document.getElementById('convertAnotherBtn');
 
-
-
-    // File selection - create temporary input to avoid click() issues with hidden elements
     // Create convert button below the image for single conversion pages
-    if (canvasContainer && canvasContainer.parentNode) {
+    if (canvasContainer) {
       // Create a new button below the image
       const newConvertBtn = document.createElement('button');
       newConvertBtn.id = 'convertBtnBelow';
@@ -41,7 +38,7 @@
       newConvertBtn.style.marginLeft = 'auto';
       newConvertBtn.style.marginRight = 'auto';
       newConvertBtn.style.display = 'block';
-      newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert to PNG';
+      newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert to JPEG';
 
       // Add the new button below the canvas
       canvasContainer.parentNode.insertBefore(newConvertBtn, canvasContainer.nextSibling);
@@ -59,7 +56,7 @@
 
         try {
           // Show processing overlay
-          if (canvasContainer) canvasContainer.style.display = 'none';
+          canvasContainer.style.display = 'none';
           if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'block';
           document.body.classList.add('has-processing-overlay');
 
@@ -67,7 +64,7 @@
           const API_BASE = 'https://api.imagenerd.in';
           const requestData = {
             image_base64: currentImage,
-            format: 'png'
+            format: 'jpg'
           };
 
           const response = await fetch(`${API_BASE}/convert`, {
@@ -90,14 +87,14 @@
           }
 
           // Convert base64 to blob
-          const convertedBlob = base64ToBlob(result.converted_image_base64, 'png');
+          const convertedBlob = base64ToBlob(result.converted_image_base64, 'jpg');
           const downloadUrl = URL.createObjectURL(convertedBlob);
 
           // Show success view
           if (convertedImage) convertedImage.src = downloadUrl;
           if (downloadBtn) {
             downloadBtn.href = downloadUrl;
-            downloadBtn.download = `${(currentFile.name || 'image').replace(/\.[^.]+$/, '')}_converted.png`;
+            downloadBtn.download = `${(currentFile.name || 'image').replace(/\.[^.]+$/, '')}_converted.jpg`;
           }
 
           const fileSize = formatFileSize(convertedBlob.size);
@@ -105,7 +102,7 @@
 
           const successDimensions = document.getElementById('successDimensions');
           if (successDimensions) {
-            successDimensions.textContent = `Converted to PNG • ${dimensionsText} • ${fileSize}`;
+            successDimensions.textContent = `Converted to JPEG • ${dimensionsText} • ${fileSize}`;
           }
 
           // Show success view
@@ -117,16 +114,16 @@
 
         } catch (error) {
           console.error('Conversion error:', error);
-          alert('Failed to convert image: ' + error.message);
+          alert('Conversion failed: ' + error.message);
 
           // Reset processing state
           if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'none';
           document.body.classList.remove('has-processing-overlay');
-          if (canvasContainer) canvasContainer.style.display = 'block';
+          canvasContainer.style.display = 'block';
         } finally {
           // Reset button state
           newConvertBtn.disabled = false;
-          newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert to PNG';
+          newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert to JPEG';
         }
       });
     }
@@ -139,7 +136,7 @@
       // Create a new file input element to avoid click() issues with hidden elements
       const tempInput = document.createElement('input');
       tempInput.type = 'file';
-      tempInput.accept = '.jpg,.jpeg,image/jpeg';
+      tempInput.accept = '.png,image/png';
       tempInput.style.display = 'none';
       tempInput.addEventListener('change', (event) => {
         handleFiles(event.target.files);
@@ -157,7 +154,7 @@
       if (!e.target.closest('#selectBtn')) {
         const tempInput = document.createElement('input');
         tempInput.type = 'file';
-        tempInput.accept = '.jpg,.jpeg,image/jpeg';
+        tempInput.accept = '.png,image/png';
         tempInput.style.display = 'none';
         tempInput.addEventListener('change', (event) => {
           handleFiles(event.target.files);
@@ -200,7 +197,7 @@
       const isValidFormat = validFormats.includes(file.type) || ['heic', 'heif'].includes(fileExtension);
 
       if (!isValidFormat) {
-        alert('Unsupported format. Please upload JPEG.');
+        alert('Unsupported format. Please upload PNG.');
         return;
       }
 
@@ -225,9 +222,9 @@
       canvas.src = objectUrl;
 
       // Show editor view
-      if (dropZone) dropZone.style.display = 'none';
-      if (editorView) editorView.style.display = 'block';
-      if (canvasContainer) canvasContainer.style.display = 'block';
+      dropZone.style.display = 'none';
+      editorView.style.display = 'block';
+      canvasContainer.style.display = 'block';
       if (successView) successView.style.display = 'none';
       if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'none';
 
@@ -258,14 +255,14 @@
         const reader = new FileReader();
         reader.onload = () => resolve(String(reader.result).split(',')[1]);
         reader.onerror = reject;
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
       });
     }
 
     function resetToUploader() {
-      if (dropZone) dropZone.style.display = 'block';
-      if (editorView) editorView.style.display = 'none';
-      if (canvasContainer) canvasContainer.style.display = 'block';
+      dropZone.style.display = 'block';
+      editorView.style.display = 'none';
+      canvasContainer.style.display = 'block';
       if (successView) successView.style.display = 'none';
       if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'none';
       document.body.classList.remove('has-processing-overlay');
@@ -291,24 +288,24 @@
     }
     const byteArray = new Uint8Array(byteNumbers);
     return new Blob([byteArray], { type: mimeType });
-    }
+  }
 
-    function formatFileSize(bytes) {
-      if (bytes === 0) return '0 Bytes';
-      const k = 1024;
-      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   }
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initJpegToPngView);
+    document.addEventListener('DOMContentLoaded', initPngToJpegView);
   } else {
-    initJpegToPngView();
+    initPngToJpegView();
   }
 
   // Export for potential external use
-  window.initJpegToPngView = initJpegToPngView;
+  window.initPngToJpegView = initPngToJpegView;
 
 })();

@@ -241,13 +241,13 @@
 
               <!-- Description -->
               <p style="font-size: 18px; color: var(--light-muted); line-height: 1.6; max-width: 600px; margin: 0 auto 32px; font-weight: 400;">
-                Convert your JPEG images to PNG format instantly. <span style="color: #5b8cff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(91, 140, 255, 0.3);">Free iPhone photo converter</span>.
+                Convert your JPEG images to PNG format instantly. <span style="color: #5b8cff; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(91, 140, 255, 0.3);">Free online converter</span>.
               </p>
 
               <!-- Action buttons -->
               <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 24px;">
                 <button class="btn btn-primary" id="selectBtn" type="button" aria-label="Select image to convert" style="font-size: 18px; padding: 16px 32px; font-weight: 600; border-radius: 12px; background: linear-gradient(135deg, #5b8cff 0%, #3b82f6 100%); box-shadow: 0 8px 24px rgba(91, 140, 255, 0.4); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.querySelector('span:last-child').style.left='100%'" onmouseout="this.querySelector('span:last-child').style.left='-100%'">
-                  <span style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;">Select HEIC Image</span>
+                  <span style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;">Select JPEG Image</span>
                   <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; z-index: 0;"></span>
                 </button>
 
@@ -278,7 +278,7 @@
               <!-- File format support -->
               <div class="file-limit" id="file-limit" style="font-size: 14px; color: var(--light-muted); opacity: 0.8;" aria-live="polite">
                 <span style="font-weight: 500;">Supported formats:</span>
-                <span style="color: #5b8cff;">HEIC, JPEG, PNG, WebP, GIF, BMP, TIFF</span>
+                <span style="color: #5b8cff;">JPEG, JPG</span>
                 <span style="margin: 0 8px;">•</span>
                 <span style="font-weight: 500;">Max size:</span>
                 <span style="color: #10b981;">10 MB</span>
@@ -346,7 +346,7 @@
         </div>
       </section>
 
-      <section id="convertSection" aria-label="JPEG to PNG converter">
+      <section id="convertSection2" aria-label="JPEG to PNG converter">
         <div role="region" aria-live="polite">
           <!-- Page Header (shown when editing) -->
           <div id="pageHeader" class="page-header" style="display: none;">
@@ -377,7 +377,7 @@
             <section class="popular-conversions">
         <h2 class="popular-heading">Popular Conversions</h2>
         <div class="conversions-grid">
-          <a href="/convert/jpeg-to-png" class="conversion-link" data-route="convert/jpeg-to-png">
+          <a href="/convert/jpg-to-png" class="conversion-link" data-route="convert/jpg-to-png">
             <div class="conversion-card">
               <div class="conversion-icon">
                 <span class="format-badge from">JPG</span>
@@ -386,8 +386,21 @@
                 </svg>
                 <span class="format-badge to">PNG</span>
               </div>
-              <h3>JPEG to PNG</h3>
+              <h3>JPG to PNG</h3>
               <p>Add transparency support</p>
+            </div>
+          </a>
+          <a href="/convert/jpeg-to-png" class="conversion-link" data-route="convert/jpeg-to-png">
+            <div class="conversion-card">
+              <div class="conversion-icon">
+                <span class="format-badge from">JPEG</span>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                <span class="format-badge to">PNG</span>
+              </div>
+              <h3>JPEG to PNG</h3>
+              <p>Alternative format</p>
             </div>
           </a>
           <a href="/convert/png-to-jpeg" class="conversion-link" data-route="convert/png-to-jpeg">
