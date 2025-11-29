@@ -301,63 +301,36 @@
                   </div>
 
             <!-- Main Editor Layout -->
-            <div class="editor-layout">
-              <!-- Left Side - Preview -->
-              <div class="editor-canvas-section">
-                <div id="resizeCanvasContainer" role="img" aria-label="YouTube Stories preview" aria-describedby="resize-canvas-instructions">
-                  <img id="resizePreviewImg" role="img" aria-label="Image to resize for YouTube Stories" tabindex="0" aria-describedby="resize-canvas-instructions resizeImageDimensions" alt="Image to resize for YouTube Stories" />
+            <div class="editor-layout" style="display: flex !important; flex-direction: column !important; align-items: center !important; max-width: 1200px; margin: 0 auto;">
+              <!-- Centered Preview -->
+              <div class="editor-canvas-section" style="width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important;">
+                <div id="resizeCanvasContainer" role="img" aria-label="YouTube Stories preview" aria-describedby="resize-canvas-instructions" style="display: flex; justify-content: center; align-items: center;">
+                  <img id="resizePreviewImg" role="img" aria-label="Image to resize for YouTube Stories" tabindex="0" aria-describedby="resize-canvas-instructions resizeImageDimensions" alt="Image to resize for YouTube Stories" style="max-width: 100%; height: auto;" />
 
                   <!-- Spinner overlay for processing -->
-                  <div id="resizeSpinnerOverlay" style="display:none;" role="status" aria-live="polite" aria-label="Processing status">
+                  <div id="resizeSpinnerOverlay" style="display:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;" role="status" aria-live="polite" aria-label="Processing status">
                     <div class="sr-only" aria-live="assertive" id="resize-processing-status">YouTube Stories resizing in progress</div>
                   </div>
 
-                  <!-- Zoom indicator (shown when zoomed in) -->
-                  <div id="resizeZoomIndicator" aria-hidden="true">
-                    🔍 Zoom
-                  </div>
-                </div>
-                <div id="resizeImageDimensions" aria-live="polite" aria-atomic="true"></div>
-                </div>
 
-              <!-- Right Side - Controls -->
-              <div class="editor-controls-section">
-                <!-- Preset Info -->
-                <div class="control-card">
-                  <h4>📱 YouTube Stories</h4>
-                  <div class="control-input-group">
-                    <div style="background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(255, 68, 68, 0.05) 100%); border: 1px solid rgba(255, 0, 0, 0.2); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-                      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff0000 0%, #ff4444 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                          <span style="font-size: 20px;">📱</span>
-                        </div>
-                        <div>
-                          <div style="font-size: 16px; font-weight: 600; color: var(--light-text);">Vertical Format</div>
-                          <div style="font-size: 12px; color: var(--light-muted);">Perfect for mobile viewing</div>
-                        </div>
-                      </div>
-                      <div style="font-size: 18px; font-weight: 700; color: #ff0000; text-align: center;">1080 × 1920 px</div>
-                      <div style="font-size: 14px; color: var(--light-text); text-align: center; margin-top: 4px;">9:16 Aspect Ratio</div>
-                    </div>
-                  </div>
                 </div>
+                <div id="resizeImageDimensions" aria-live="polite" aria-atomic="true" style="text-align: center; margin-top: 16px; width: 500px; max-width: 90%;"></div>
 
                 <!-- Export Button -->
-                <div class="control-card">
-                  <h4>⚡ Export YouTube Story</h4>
-                  <div class="action-buttons">
-                    <button class="resize-action-btn" id="resizeExportBtn" type="button" aria-describedby="resize-export-help">
-                      <span style="font-size:16px;margin-right:6px;">📤</span>
-                      Create Story Image
-                    </button>
-              </div>
+                <div style="display: flex; justify-content: center; margin-top: 24px;">
+                  <button class="resize-action-btn" id="resizeExportBtn" type="button" aria-describedby="resize-export-help" style="font-size: 18px; padding: 16px 48px; min-width: 280px; font-weight: 600; border-radius: 12px; background: linear-gradient(135deg, #ff0000 0%, #ff4444 100%); box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 10; cursor: pointer;">
+                    <span style="position: relative; z-index: 1;">📤 Create YouTube Story</span>
+                    <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; z-index: 0;"></span>
+                  </button>
+                </div>
                 <div id="resize-export-help" class="sr-only">Click to resize the image to YouTube Stories dimensions and download the result</div>
-              </div>
-            </div>
+                </div>
 
             <!-- Success view (hidden until resized) -->
             <div id="resizeSuccessView" class="success-modal" role="region" aria-labelledby="resize-success-heading" aria-live="polite">
               <div class="success-modal-content">
+                <!-- Close button -->
+                <button id="resizeSuccessClose" class="success-close-btn" aria-label="Close success modal">✕</button>
               <!-- Success message -->
                 <div class="success-message" role="status" aria-live="polite">
                   <div id="resize-success-heading">✓ YouTube Story Created!</div>
@@ -367,8 +340,8 @@
               </div>
 
               <!-- Preview image -->
-                <div class="success-image">
-                  <img id="resizeResizedImg" src="" alt="YouTube Story preview" />
+                <div class="success-image" style="display: flex; justify-content: center; align-items: center; margin: 24px 0;">
+                  <img id="resizeResizedImg" src="" alt="YouTube Story preview" style="max-width: 100%; max-height: 400px; border: 2px solid rgba(102, 126, 234, 0.2); border-radius: 12px; object-fit: contain; box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15); background: rgba(248, 250, 252, 0.5); padding: 8px;" />
               </div>
 
               <!-- Action buttons -->

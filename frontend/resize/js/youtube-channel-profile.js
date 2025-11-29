@@ -29,9 +29,9 @@
     }
   }
 
-  // YouTube Thumbnail page initialization
-  function initYouTubeyoutubeUchannelUprofilePage() {
-    console.log('YouTube Thumbnail page initialized');
+  // YouTube Channel Profile page initialization
+  function initYouTubeChannelProfilePage() {
+    console.log('YouTube Channel Profile page initialized');
 
     // Add title underline animation
     const titleSpan = document.querySelector('#resizeDropZone h2 span:first-child');
@@ -65,8 +65,8 @@
   }
 
   function setupYouTubeThumbnailFunctionality() {
-    // YouTube Thumbnail preset
-    const YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET = {
+    // YouTube Channel Profile preset
+    const YOUTUBE_CHANNEL_PROFILE_PRESET = {
       name: 'Channel Profile (800 × 800)',
       width: 800,
       height: 800
@@ -85,6 +85,7 @@
     const downloadBtn = document.getElementById('resizeDownloadBtn');
     const resizeAnotherBtn = document.getElementById('resizeAnotherBtn');
     const exportBtn = document.getElementById('resizeExportBtn');
+    const successCloseBtn = document.getElementById('resizeSuccessClose');
 
     let currentFile = null;
     let currentBase64 = '';
@@ -122,6 +123,20 @@
       // Show spinner overlay immediately when button is clicked
       document.getElementById('resizeSpinnerOverlay').style.display = 'flex';
       handleExport();
+    });
+
+    // Success modal close button
+    if (successCloseBtn) {
+      successCloseBtn.addEventListener('click', () => {
+        successView.classList.remove('show');
+      });
+    }
+
+    // Close modal when clicking outside
+    successView.addEventListener('click', (e) => {
+      if (e.target === successView) {
+        successView.classList.remove('show');
+      }
     });
 
     // Handle file selection
@@ -205,11 +220,11 @@
     function updateDimensionsDisplay() {
       const dimensionsEl = document.getElementById('resizeImageDimensions');
       if (dimensionsEl) {
-        dimensionsEl.textContent = `Original: ${originalWidth} × ${originalHeight} → YouTube Thumbnail: ${YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET.width} × ${YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET.height}`;
+        dimensionsEl.textContent = `Original: ${originalWidth} × ${originalHeight} → YouTube Channel Profile: ${YOUTUBE_CHANNEL_PROFILE_PRESET.width} × ${YOUTUBE_CHANNEL_PROFILE_PRESET.height}`;
       }
     }
 
-    // Handle export - resize to YouTube thumbnail dimensions
+    // Handle export - resize to YouTube channel profile dimensions locally
     async function handleExport() {
       if (!currentBase64) {
         alert('Please select an image first.');
@@ -220,46 +235,71 @@
         // Show processing overlay
         processingOverlay.style.display = 'flex';
 
-        // Prepare request data
-        const requestData = {
-          image: currentBase64,
-          width: YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET.width,
-          height: YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET.height,
-          format: 'jpeg',
-          quality: 95
-        };
+        // Create image from base64
+        const img = new Image();
+        img.src = currentBase64; // Use the full data URL from fileToBase64
 
-        // Make API request
-        const response = await fetchWithTimeout(`${API_BASE}/resize`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestData)
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
         });
 
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || `Server error: ${response.status}`);
+        // Create canvas for resizing
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set target dimensions (YouTube Channel Profile: 800x800)
+        const targetWidth = YOUTUBE_CHANNEL_PROFILE_PRESET.width;
+        const targetHeight = YOUTUBE_CHANNEL_PROFILE_PRESET.height;
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        // Calculate aspect ratio and positioning to maintain image proportions
+        const imgAspectRatio = img.width / img.height;
+        const targetAspectRatio = targetWidth / targetHeight;
+
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (imgAspectRatio > targetAspectRatio) {
+          // Image is wider than target aspect ratio
+          drawHeight = targetHeight;
+          drawWidth = drawHeight * imgAspectRatio;
+          offsetX = (targetWidth - drawWidth) / 2;
+          offsetY = 0;
+        } else {
+          // Image is taller than target aspect ratio
+          drawWidth = targetWidth;
+          drawHeight = drawWidth / imgAspectRatio;
+          offsetX = 0;
+          offsetY = (targetHeight - drawHeight) / 2;
         }
 
-        const result = await response.json();
+        // Fill background with white (or you could make it transparent)
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, targetWidth, targetHeight);
+
+        // Draw resized image centered
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+        // Convert canvas to base64
+        const resizedBase64 = canvas.toDataURL('image/jpeg', 0.95).split(',')[1];
 
         // Hide processing overlay
         processingOverlay.style.display = 'none';
 
         // Show success view
-        resizedImg.src = result.image;
-        successView.style.display = 'block';
+        resizedImg.src = 'data:image/jpeg;base64,' + resizedBase64;
+        successView.classList.add('show');
 
         // Set download link
-        downloadBtn.href = result.image;
-        downloadBtn.download = `youtube-channel-profile-${Date.now()}.jpg`;
+        downloadBtn.href = 'data:image/jpeg;base64,' + resizedBase64;
+        downloadBtn.download = `youtube-profile-${Date.now()}.jpg`;
 
         // Update success dimensions
         const successDimensions = document.getElementById('resizeSuccessDimensions');
         if (successDimensions) {
-          successDimensions.textContent = `Resized to: ${YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET.width} × ${YOUTUBE_YOUTUBE_CHANNEL_PROFILE_PRESET.height} pixels`;
+          successDimensions.textContent = `Resized to: ${YOUTUBE_CHANNEL_PROFILE_PRESET.width} × ${YOUTUBE_CHANNEL_PROFILE_PRESET.height} pixels`;
         }
 
         // Scroll to success view
@@ -279,7 +319,7 @@
     function resetToUploader() {
       // Hide editor and success views
       editorView.style.display = 'none';
-      successView.style.display = 'none';
+      successView.classList.remove('show');
 
       // Show drop zone
       dropZone.style.display = 'flex';
@@ -309,6 +349,6 @@
   }
 
   // Make function globally available
-  window.initYouTubeyoutubeUchannelUprofilePage = initYouTubeyoutubeUchannelUprofilePage;
+  window.initYouTubeChannelProfilePage = initYouTubeChannelProfilePage;
 
 })();

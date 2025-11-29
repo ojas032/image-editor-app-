@@ -85,6 +85,7 @@
     const downloadBtn = document.getElementById('resizeDownloadBtn');
     const resizeAnotherBtn = document.getElementById('resizeAnotherBtn');
     const exportBtn = document.getElementById('resizeExportBtn');
+    const successCloseBtn = document.getElementById('resizeSuccessClose');
 
     let currentFile = null;
     let currentBase64 = '';
@@ -124,6 +125,20 @@
       handleExport();
     });
 
+    // Success modal close button
+    if (successCloseBtn) {
+      successCloseBtn.addEventListener('click', () => {
+        successView.classList.remove('show');
+      });
+    }
+
+    // Close modal when clicking outside
+    successView.addEventListener('click', (e) => {
+      if (e.target === successView) {
+        successView.classList.remove('show');
+      }
+    });
+
     // Handle file selection
     async function handleFiles(files) {
       if (!files || files.length === 0) return;
@@ -159,7 +174,8 @@
 
         // Convert to base64
         const base64 = await fileToBase64(currentFile);
-        currentBase64 = base64;
+        // Extract just the base64 data (remove data URL prefix)
+        currentBase64 = base64.split(',')[1];
 
         // Load image to get dimensions
         const img = new Image();
@@ -209,7 +225,7 @@
       }
     }
 
-    // Handle export - resize to YouTube Stories dimensions
+    // Handle export - resize to YouTube Stories dimensions locally
     async function handleExport() {
       if (!currentBase64) {
         alert('Please select an image first.');
@@ -220,40 +236,65 @@
         // Show processing overlay
         processingOverlay.style.display = 'flex';
 
-        // Prepare request data
-        const requestData = {
-          image: currentBase64,
-          width: YOUTUBE_STORIES_PRESET.width,
-          height: YOUTUBE_STORIES_PRESET.height,
-          format: 'jpeg',
-          quality: 95
-        };
+        // Create image from base64
+        const img = new Image();
+        img.src = 'data:image/jpeg;base64,' + currentBase64; // Reconstruct data URL for canvas
 
-        // Make API request
-        const response = await fetchWithTimeout(`${API_BASE}/resize`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestData)
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
         });
 
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || `Server error: ${response.status}`);
+        // Create canvas for resizing
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set target dimensions (YouTube Stories: 1080x1920)
+        const targetWidth = YOUTUBE_STORIES_PRESET.width;
+        const targetHeight = YOUTUBE_STORIES_PRESET.height;
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        // Calculate aspect ratio and positioning to maintain image proportions
+        const imgAspectRatio = img.width / img.height;
+        const targetAspectRatio = targetWidth / targetHeight;
+
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (imgAspectRatio > targetAspectRatio) {
+          // Image is wider than target aspect ratio
+          drawHeight = targetHeight;
+          drawWidth = drawHeight * imgAspectRatio;
+          offsetX = (targetWidth - drawWidth) / 2;
+          offsetY = 0;
+        } else {
+          // Image is taller than target aspect ratio
+          drawWidth = targetWidth;
+          drawHeight = drawWidth / imgAspectRatio;
+          offsetX = 0;
+          offsetY = (targetHeight - drawHeight) / 2;
         }
 
-        const result = await response.json();
+        // Fill background with white (or you could make it transparent)
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, targetWidth, targetHeight);
+
+        // Draw resized image centered
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+        // Convert canvas to base64
+        const resizedBase64 = canvas.toDataURL('image/jpeg', 0.95).split(',')[1];
 
         // Hide processing overlay
         processingOverlay.style.display = 'none';
 
         // Show success view
-        resizedImg.src = result.image;
-        successView.style.display = 'block';
+        resizedImg.src = 'data:image/jpeg;base64,' + resizedBase64;
+        successView.classList.add('show');
 
         // Set download link
-        downloadBtn.href = result.image;
+        downloadBtn.href = 'data:image/jpeg;base64,' + resizedBase64;
         downloadBtn.download = `youtube-story-${Date.now()}.jpg`;
 
         // Update success dimensions
@@ -279,7 +320,7 @@
     function resetToUploader() {
       // Hide editor and success views
       editorView.style.display = 'none';
-      successView.style.display = 'none';
+      successView.classList.remove('show');
 
       // Show drop zone
       dropZone.style.display = 'flex';

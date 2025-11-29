@@ -66,7 +66,12 @@
 
   function setupResizeFunctionality() {
     const SOCIAL_PRESETS = {
-      youtube: [{ name: 'Thumbnail (1280 × 720)', width: 1280, height: 720 }],
+      youtube: [
+        { name: 'Thumbnail (1280 × 720)', width: 1280, height: 720 },
+        { name: 'Channel Cover (2560 × 1440)', width: 2560, height: 1440 },
+        { name: 'Channel Profile (800 × 800)', width: 800, height: 800 },
+        { name: 'Stories (1080 × 1920)', width: 1080, height: 1920 }
+      ],
       instagram: [
         { name: 'Post Square (1080 × 1080)', width: 1080, height: 1080 },
         { name: 'Post Portrait (1080 × 1350)', width: 1080, height: 1350 },
