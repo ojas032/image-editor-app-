@@ -1,4 +1,4 @@
-// JPEG to PNG Converter Tool
+// JPG to PNG Converter Tool
 (function() {
   'use strict';
 
@@ -7,8 +7,8 @@
   let isImageLoaded = false;
   let originalCanvas = null;
 
-  function initJpegToPngView() {
-    console.log('Initializing JPEG to PNG view');
+  function initJpgToPngView() {
+    console.log('Initializing JPG to PNG view');
 
     // Add class to indicate single conversion page
     document.body.classList.add('single-conversion-page');
@@ -30,7 +30,7 @@
 
     // File selection - create temporary input to avoid click() issues with hidden elements
     // Create convert button below the image for single conversion pages
-    if (canvasContainer && canvasContainer.parentNode) {
+    if (canvasContainer) {
       // Create a new button below the image
       const newConvertBtn = document.createElement('button');
       newConvertBtn.id = 'convertBtnBelow';
@@ -41,7 +41,7 @@
       newConvertBtn.style.marginLeft = 'auto';
       newConvertBtn.style.marginRight = 'auto';
       newConvertBtn.style.display = 'block';
-      newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert to PNG';
+      newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert';
 
       // Add the new button below the canvas
       canvasContainer.parentNode.insertBefore(newConvertBtn, canvasContainer.nextSibling);
@@ -59,38 +59,12 @@
 
         try {
           // Show processing overlay
-          if (canvasContainer) canvasContainer.style.display = 'none';
+          canvasContainer.style.display = 'none';
           if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'block';
           document.body.classList.add('has-processing-overlay');
 
-          // Convert image directly using API
-          const API_BASE = 'https://api.imagenerd.in';
-          const requestData = {
-            image_base64: currentImage,
-            format: 'png'
-          };
-
-          const response = await fetch(`${API_BASE}/convert`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData)
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Conversion failed');
-          }
-
-          const result = await response.json();
-
-          if (!result.converted_image_base64) {
-            throw new Error('Invalid response from server: missing converted_image_base64');
-          }
-
-          // Convert base64 to blob
-          const convertedBlob = base64ToBlob(result.converted_image_base64, 'png');
+          // Convert image locally using Canvas API for better performance
+          const convertedBlob = await convertImageLocally(canvas, 'png');
           const downloadUrl = URL.createObjectURL(convertedBlob);
 
           // Show success view
@@ -122,11 +96,11 @@
           // Reset processing state
           if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'none';
           document.body.classList.remove('has-processing-overlay');
-          if (canvasContainer) canvasContainer.style.display = 'block';
+          canvasContainer.style.display = 'block';
         } finally {
           // Reset button state
           newConvertBtn.disabled = false;
-          newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert to PNG';
+          newConvertBtn.innerHTML = '<span style="font-size:16px;margin-right:6px;">🔄</span> Convert';
         }
       });
     }
@@ -200,7 +174,7 @@
       const isValidFormat = validFormats.includes(file.type) || ['heic', 'heif'].includes(fileExtension);
 
       if (!isValidFormat) {
-        alert('Unsupported format. Please upload JPEG.');
+        alert('Unsupported format. Please upload JPG.');
         return;
       }
 
@@ -225,9 +199,9 @@
       canvas.src = objectUrl;
 
       // Show editor view
-      if (dropZone) dropZone.style.display = 'none';
-      if (editorView) editorView.style.display = 'block';
-      if (canvasContainer) canvasContainer.style.display = 'block';
+      dropZone.style.display = 'none';
+          editorView.style.display = 'block';
+      canvasContainer.style.display = 'block';
       if (successView) successView.style.display = 'none';
       if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'none';
 
@@ -263,9 +237,9 @@
     }
 
     function resetToUploader() {
-      if (dropZone) dropZone.style.display = 'block';
-      if (editorView) editorView.style.display = 'none';
-      if (canvasContainer) canvasContainer.style.display = 'block';
+      dropZone.style.display = 'block';
+      editorView.style.display = 'none';
+      canvasContainer.style.display = 'block';
       if (successView) successView.style.display = 'none';
       if (editorProcessingOverlay) editorProcessingOverlay.style.display = 'none';
       document.body.classList.remove('has-processing-overlay');
@@ -299,16 +273,45 @@
       const sizes = ['Bytes', 'KB', 'MB', 'GB'];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  }
+    }
+
+    // Convert image locally using Canvas API for better performance
+    function convertImageLocally(sourceCanvas, targetFormat) {
+      return new Promise((resolve, reject) => {
+        try {
+          // Create a new canvas with the same dimensions
+          const newCanvas = document.createElement('canvas');
+          const ctx = newCanvas.getContext('2d');
+
+          // Set canvas dimensions to match source
+          newCanvas.width = sourceCanvas.width;
+          newCanvas.height = sourceCanvas.height;
+
+          // Draw the source canvas content onto the new canvas
+          ctx.drawImage(sourceCanvas, 0, 0);
+
+          // Convert to blob in target format
+          newCanvas.toBlob((blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error('Failed to convert image to blob'));
+            }
+          }, `image/${targetFormat}`, targetFormat === 'jpeg' ? 0.92 : undefined); // Higher quality for JPEG
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
 
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initJpegToPngView);
+    document.addEventListener('DOMContentLoaded', initJpgToPngView);
   } else {
-    initJpegToPngView();
+    initJpgToPngView();
   }
 
   // Export for potential external use
-  window.initJpegToPngView = initJpegToPngView;
+  window.initJpgToPngView = initJpgToPngView;
 
 })();
