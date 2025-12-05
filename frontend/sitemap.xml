@@ -56,6 +56,30 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Instagram Profile Picture Resizer -->
+  <url>
+    <loc>https://www.imagenerd.in/resize/instagram-profile</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Instagram Post Resizer -->
+  <url>
+    <loc>https://www.imagenerd.in/resize/instagram-post</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Instagram Stories Resizer -->
+  <url>
+    <loc>https://www.imagenerd.in/resize/instagram-stories</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
   
   <!-- Crop Image Tool -->
   <url>

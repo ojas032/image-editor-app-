@@ -1,9 +1,9 @@
 /**
- * YouTube Thumbnail page JavaScript functionality
- * Handles image resizing operations with YouTube thumbnail preset pre-selected
+ * Instagram Post page JavaScript functionality
+ * Handles image resizing operations with Instagram Post preset pre-selected
  */
 
-(function() {
+(function () {
   'use strict';
 
   const API_BASE = 'https://api.imagenerd.in';
@@ -31,7 +31,7 @@
 
   // Instagram Post page initialization
   function initInstagramPostPage() {
-    console.log('YouTube Thumbnail page initialized');
+    console.log('Instagram Post page initialized');
 
     // Add title underline animation
     const titleSpan = document.querySelector('#resizeDropZone h2 span:first-child');
@@ -60,11 +60,32 @@
       });
     }
 
+    // Add close button listener
+    const successCloseBtn = document.getElementById('resizeSuccessClose');
+    if (successCloseBtn) {
+      successCloseBtn.addEventListener('click', () => {
+        const successView = document.getElementById('resizeSuccessView');
+        const dropZone = document.getElementById('resizeDropZone');
+        const editorView = document.getElementById('resizeEditorView');
+
+        if (successView) successView.style.display = 'none';
+        if (editorView) editorView.style.display = 'none';
+        if (dropZone) dropZone.style.display = 'flex';
+
+        // Reset state
+        const fileInput = document.getElementById('resizeFileInput');
+        if (fileInput) fileInput.value = '';
+
+        // Focus select button
+        if (selectBtn) selectBtn.focus();
+      });
+    }
+
     // Initialize resize functionality with YouTube preset
-    setupYouTubeThumbnailFunctionality();
+    setupInstagramPostFunctionality();
   }
 
-  function setupYouTubeThumbnailFunctionality() {
+  function setupInstagramPostFunctionality() {
     // Instagram Post preset
     const INSTAGRAM_POST_PRESET = {
       name: 'Post (1080 × 1080)',
@@ -209,7 +230,7 @@
       }
     }
 
-    // Handle export - resize to YouTube thumbnail dimensions
+    // Handle export - resize to Instagram Post dimensions using Canvas
     async function handleExport() {
       if (!currentBase64) {
         alert('Please select an image first.');
@@ -220,40 +241,71 @@
         // Show processing overlay
         processingOverlay.style.display = 'flex';
 
-        // Prepare request data
-        const requestData = {
-          image: currentBase64,
-          width: INSTAGRAM_POST_PRESET.width,
-          height: INSTAGRAM_POST_PRESET.height,
-          format: 'jpeg',
-          quality: 95
-        };
+        // Create an offscreen canvas
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
-        // Make API request
-        const response = await fetchWithTimeout(`${API_BASE}/resize`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestData)
+        // Set dimensions
+        const targetWidth = INSTAGRAM_POST_PRESET.width;
+        const targetHeight = INSTAGRAM_POST_PRESET.height;
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        // Load image
+        const img = new Image();
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = currentBase64;
         });
 
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || `Server error: ${response.status}`);
+        // Calculate scaling to cover the square area (center crop)
+        let sourceX = 0;
+        let sourceY = 0;
+        let sourceWidth = img.naturalWidth;
+        let sourceHeight = img.naturalHeight;
+
+        const targetRatio = targetWidth / targetHeight;
+        const sourceRatio = sourceWidth / sourceHeight;
+
+        if (sourceRatio > targetRatio) {
+          // Source is wider than target - crop width
+          const newSourceWidth = sourceHeight * targetRatio;
+          sourceX = (sourceWidth - newSourceWidth) / 2;
+          sourceWidth = newSourceWidth;
+        } else {
+          // Source is taller than target - crop height
+          const newSourceHeight = sourceWidth / targetRatio;
+          sourceY = (sourceHeight - newSourceHeight) / 2;
+          sourceHeight = newSourceHeight;
         }
 
-        const result = await response.json();
+        // Draw to canvas with high quality
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        // Draw background (white) in case of transparency issues, though we're exporting as JPEG usually
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, targetWidth, targetHeight);
+
+        ctx.drawImage(
+          img,
+          sourceX, sourceY, sourceWidth, sourceHeight,
+          0, 0, targetWidth, targetHeight
+        );
+
+        // Convert to blob/url
+        const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.95);
 
         // Hide processing overlay
         processingOverlay.style.display = 'none';
 
         // Show success view
-        resizedImg.src = result.image;
-        successView.style.display = 'block';
+        resizedImg.src = resizedDataUrl;
+        successView.style.display = 'flex';
 
         // Set download link
-        downloadBtn.href = result.image;
+        downloadBtn.href = resizedDataUrl;
         downloadBtn.download = `instagram-post-${Date.now()}.jpg`;
 
         // Update success dimensions
@@ -261,9 +313,6 @@
         if (successDimensions) {
           successDimensions.textContent = `Resized to: ${INSTAGRAM_POST_PRESET.width} × ${INSTAGRAM_POST_PRESET.height} pixels`;
         }
-
-        // Scroll to success view
-        successView.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         // Focus on download button
         downloadBtn.focus();
@@ -308,7 +357,7 @@
     }
   }
 
-// Make function globally available
-window.initInstagramPostPage = initInstagramPostPage;
+  // Make function globally available
+  window.initInstagramPostPage = initInstagramPostPage;
 
 })();

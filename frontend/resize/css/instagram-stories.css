@@ -2,7 +2,7 @@
 
 /* Override default resize styles with Instagram branding */
 #resizeDropZone {
-  background: linear-gradient(135deg, rgba(131, 58, 180, 0.05) 0%, rgba(193, 53, 132, 0.03) 50%, rgba(245, 96, 64, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(131, 58, 180, 0.05) 0%, rgba(193, 53, 132, 0.03) 50%, rgba(225, 48, 108, 0.02) 100%);
   border: 2px dashed rgba(131, 58, 180, 0.3);
   border-radius: 24px;
   padding: 48px 32px;
@@ -19,32 +19,134 @@
 
 #resizeDropZone:hover {
   border-color: rgba(131, 58, 180, 0.5);
-  background: linear-gradient(135deg, rgba(131, 58, 180, 0.08) 0%, rgba(193, 53, 132, 0.05) 50%, rgba(245, 96, 64, 0.03) 100%);
+  background: linear-gradient(135deg, rgba(131, 58, 180, 0.08) 0%, rgba(193, 53, 132, 0.05) 50%, rgba(225, 48, 108, 0.03) 100%);
 }
 
 #resizeDropZone.drag {
   border-color: #833ab4;
-  background: linear-gradient(135deg, rgba(131, 58, 180, 0.1) 0%, rgba(193, 53, 132, 0.07) 50%, rgba(245, 96, 64, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(131, 58, 180, 0.1) 0%, rgba(193, 53, 132, 0.07) 50%, rgba(225, 48, 108, 0.05) 100%);
   transform: scale(1.02);
+}
+
+/* Instagram icon */
+.instagram-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #833ab4 0%, #c13584 50%, #e1306c 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 16px rgba(131, 58, 180, 0.3);
 }
 
 /* Success modal Instagram branding */
 .success-modal {
-  background: linear-gradient(135deg, rgba(131, 58, 180, 0.1) 0%, rgba(193, 53, 132, 0.05) 100%);
-  border: 1px solid rgba(131, 58, 180, 0.2);
-  border-radius: 20px;
-  padding: 32px;
-  max-width: 500px;
-  margin: 40px auto;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(131, 58, 180, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
-.success-message h3 {
+.success-modal-content {
+  background: white;
+  padding: 32px;
+  border-radius: 24px;
+  max-width: 90%;
+  width: 500px;
+  text-align: center;
+  position: relative !important;
+  /* Override absolute from resize.css */
+  top: auto !important;
+  /* Reset inherited top: 50% */
+  left: auto !important;
+  /* Reset inherited left: 50% */
+  transform: none !important;
+  /* Reset inherited translate, let animation handle scale */
+  margin: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.success-actions .btn {
+  width: 100%;
+  white-space: normal;
+  /* Allow text wrap */
+  height: auto;
+  min-height: 48px;
+  padding: 12px 24px;
+  line-height: 1.4;
+}
+
+.success-close-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.success-message h3,
+#resize-success-heading {
+  font-size: 24px;
+  font-weight: 700;
   background: linear-gradient(135deg, #833ab4 0%, #c13584 50%, #e1306c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-bottom: 8px;
+}
+
+.success-dimensions {
+  font-size: 16px;
+  color: var(--light-text);
+  opacity: 0.8;
 }
 
 /* SEO content cards */
@@ -66,7 +168,7 @@
 .seo-content .platform-icon {
   width: 48px;
   height: 48px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -87,15 +189,17 @@
 }
 
 /* CTA section */
-.instagram-stories-cta {
-  background: linear-gradient(135deg, rgba(131, 58, 180, 0.05) 0%, rgba(193, 53, 132, 0.03) 50%, rgba(245, 96, 64, 0.03) 100%);
+.instagram-cta,
+.youtube-cta {
+  background: linear-gradient(135deg, rgba(131, 58, 180, 0.05) 0%, rgba(193, 53, 132, 0.03) 50%, rgba(225, 48, 108, 0.02) 100%);
   border: 1px solid rgba(131, 58, 180, 0.1);
   border-radius: 20px;
   padding: 40px;
   text-align: center;
 }
 
-.instagram-stories-cta h3 {
+.instagram-cta h3,
+.youtube-cta h3 {
   background: linear-gradient(135deg, #833ab4 0%, #c13584 50%, #e1306c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -104,14 +208,29 @@
 
 /* Animation keyframes */
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(1deg); }
-  66% { transform: translateY(5px) rotate(-1deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Responsive design */
@@ -125,7 +244,7 @@
     padding: 20px;
   }
 
-  .instagram-stories-cta {
+  .instagram-cta {
     padding: 32px 20px;
   }
 }
