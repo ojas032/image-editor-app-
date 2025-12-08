@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JEE Main & NEET Image Resizer - Photo, Postcard & Signature | ImageNerd</title>
+    <meta name="description"
+        content="Resize photos for JEE Main and NEET UG (NTA) exams. Create Passport size (10-200kb), Postcard size (4x6 inch), and Signature images instantly online." />
+    <meta name="keywords"
+        content="jee main photo resizer, neet photo size, 4x6 inch photo resizer, nta image requirements, jee postcard size photo, neet signature resize" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.imagenerd.in/resize/jee-neet-image-resizer" />
+
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css?v=1.0.2" />
+    <link rel="stylesheet" href="../../css/resize.css?v=1.0.0" />
+    <link rel="stylesheet" href="css/indian-exams.css?v=1.0.0" />
+
+    <script src="https://unpkg.com/navigo@8"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="/" data-route="home">
+                <img class="brand-mark" src="../../icon_without_bg.png" alt="ImageNerd" />
+                <span class="brand-name">ImageNerd</span>
+            </a>
+            <nav class="main-nav">
+                <a href="/compress">Compress</a>
+                <a href="/resize" aria-current="page">Resize</a>
+                <a href="/crop">Crop</a>
+                <a href="/convert">Convert</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-page-header"></div>
+
+        <section id="resizeSection">
+            <div class="text-center mb-5">
+                <span
+                    style="font-size: 48px; background: #e0f0ff; border-radius: 12px; padding: 10px; display:inline-block; margin-bottom:10px;">🎓</span>
+                <h1 class="exam-hero-jee" style="font-size: 36px; font-weight: 800;">JEE & NEET Image Resizer</h1>
+                <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
+                    Complete NTA exam solution: <strong>Passport Photo</strong>, <strong>Postcard Photo
+                        (4"x6")</strong>, and <strong>Signature</strong>.
+                </p>
+            </div>
+
+            <!-- Document Type Selector -->
+            <h3 class="text-center mb-2" style="font-size: 15px; font-weight: 600;">Select Document Type:</h3>
+            <p class="text-center text-muted mb-3" style="max-width: 500px; margin: 0 auto; font-size: 13px;">
+                Select the document you need to resize.
+            </p>
+            <div class="doc-type-grid" style="max-width: 550px; margin: 0 auto 30px;">
+                <div class="doc-type-card active" data-preset="nta-passport" style="padding: 14px 12px;">
+                    <div class="doc-type-icon" style="font-size: 24px; margin-bottom: 8px;">📸</div>
+                    <div class="doc-type-name" style="font-size: 14px; font-weight: 600;">Passport Photo</div>
+                    <div class="doc-type-specs" style="font-size: 11px;">3.5cm × 4.5cm<br>(10-200Kb)</div>
+                    <div style="font-size: 10px; color: #94a3b8; margin-top: 3px;">Standard ID</div>
+                </div>
+                <div class="doc-type-card" data-preset="nta-postcard" style="padding: 14px 12px;">
+                    <div class="doc-type-icon" style="font-size: 24px; margin-bottom: 8px;">🖼️</div>
+                    <div class="doc-type-name" style="font-size: 14px; font-weight: 600;">Postcard Photo</div>
+                    <div class="doc-type-specs" style="font-size: 11px;">4" × 6"<br>(10-200Kb)</div>
+                    <div style="font-size: 10px; color: #94a3b8; margin-top: 3px;">Date & name</div>
+                </div>
+                <div class="doc-type-card" data-preset="nta-signature" style="padding: 14px 12px;">
+                    <div class="doc-type-icon" style="font-size: 24px; margin-bottom: 8px;">✍️</div>
+                    <div class="doc-type-name" style="font-size: 14px; font-weight: 600;">Signature</div>
+                    <div class="doc-type-specs" style="font-size: 11px;">3.5cm × 1.5cm<br>(4-30Kb)</div>
+                    <div style="font-size: 10px; color: #94a3b8; margin-top: 3px;">Black on white</div>
+                </div>
+            </div>
+
+            <!-- Uploader -->
+            <div id="resizeDropZone" class="text-center p-5"
+                style="border: 2px dashed #cbd5e1; border-radius: 16px; background: #f8fafc; cursor: pointer; position: relative;">
+                <input id="resizeFileInput" type="file" accept="image/*" style="display:none;" />
+                <div style="margin-bottom: 20px;">
+                    <button class="btn btn-primary"
+                        style="padding: 12px 30px; font-size: 18px; border-radius: 10px; background: linear-gradient(135deg, #007bff 0%, #00d2ff 100%); border:none;">Select
+                        Image</button>
+                </div>
+                <p class="text-muted">or drag and drop your image here</p>
+            </div>
+
+            <!-- Editor View -->
+            <div id="resizeEditorView" style="display:none;">
+                <div class="editor-canvas-wrapper" style="padding: 15px; max-width: 600px; margin: 0 auto;">
+                    <img id="resizePreviewImg"
+                        style="max-height: 350px; max-width: 100%; object-fit: contain; display: block; margin: 0 auto;" />
+                </div>
+
+                <!-- Dimensions Info (Moved Below Image) -->
+                <div id="resizeImageDimensions" class="mb-4" style="text-align: center;"></div>
+
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button id="uploadAnotherImageBtn" class="btn btn-outline-secondary"
+                        style="padding: 10px 24px; font-size: 14px; font-weight: 500; border-radius: 8px; border: 2px solid #cbd5e1; background: white; color: #64748b; transition: all 0.2s;">
+                        📤 Upload Another Image
+                    </button>
+                </div>
+
+                <div style="text-align: center;">
+                    <button id="resizeExportBtn" class="btn btn-success"
+                        style="padding: 14px 36px; font-size: 16px; font-weight: 600; border-radius: 10px; background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); border:none; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); transition: transform 0.2s;">
+                        ⚡ Resize Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div id="resizeSuccessView" class="success-modal">
+                <div class="success-modal-content">
+                    <div class="success-message">
+                        <div>✓ Image Resized!</div>
+                    </div>
+                    <div class="success-image">
+                        <img id="resizeResizedImg" style="max-height: 300px;" />
+                    </div>
+                    <div class="success-actions">
+                        <a id="resizeDownloadBtn" class="btn btn-primary" href="#" download>📥 Download</a>
+                        <button id="resizeAnotherBtn" class="btn btn-ghost">🔄 Resize Another</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section style="margin-top: 60px; margin-bottom: 40px;">
+            <h2 class="text-center mb-4">How to Use JEE/NEET Image Resizer</h2>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h4>Select Type</h4>
+                    <p style="font-size: 14px; color: #64748b;">Choose between Passport Photo, Postcard Photo, or
+                        Signature based on what you need to upload.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h4>Upload Image</h4>
+                    <p style="font-size: 14px; color: #64748b;">Click "Select Image" to upload your photo. We support
+                        JPG, PNG, and HEIC formats.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <h4>Download</h4>
+                    <p style="font-size: 14px; color: #64748b;">Your image will be instantly resized to NTA
+                        specifications. Click Download to save it.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rules & Guidelines -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="text-center mb-4">NTA Photo Instructions</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="alert alert-info">
+                        <strong>Important:</strong> The photograph should cover 80% face (without mask) visible
+                        including ears against white background.
+                    </div>
+                    <p>Postcard size photograph (4" × 6") is required for JEE Main and NEET. It must be taken on or
+                        after the specified date (usually within 3 months).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section style="margin-bottom: 60px;">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion" id="jeeFaq" style="max-width: 800px; margin: 0 auto;">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Why are there two photo options (Passport vs Postcard)?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#jeeFaq">
+                        <div class="accordion-body">
+                            Please note that for JEE Main and NEET UG, candidates are required to upload <strong>two
+                                different types of photographs</strong>:
+                            <ol>
+                                <li><strong>Passport Size Photo:</strong> Used for the attendance sheet and potential
+                                    admit card.</li>
+                                <li><strong>Postcard Size Photo (4"x6"):</strong> Must be uploaded separately. This is
+                                    a larger version of your photo, often required to be pasted in the exam center
+                                    proforma.</li>
+                            </ol>
+                            Both photos usually need to be identical (same shot), just different sizes. Our tool helps
+                            you create both from the same original image.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq2">
+                            What is the size limit for JEE/NEET photos?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#jeeFaq">
+                        <div class="accordion-body">
+                            <ul>
+                                <li><strong>Passport Photo:</strong> 10 Kb to 200 Kb</li>
+                                <li><strong>Postcard Photo:</strong> 10 Kb to 200 Kb</li>
+                                <li><strong>Signature:</strong> 4 Kb to 30 Kb</li>
+                            </ul>
+                            Our tool automatically attempts to optimize your image to fit these constraints.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#faq3">
+                            Does the photo need a name and date?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#jeeFaq">
+                        <div class="accordion-body">
+                            Historically, NTA often requires the Candidate's Name and Date of Taking Photograph to be
+                            printed on the bottom of the photograph. Please check the current year's information
+                            bulletin to confirm. If required, ensure your uploaded image has this text, or edit it
+                            before resizing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="text-center py-4 text-muted">© 2025 ImageNerd</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/indian-exams-common.js?v=1.0.0"></script>
+    <script>
+        // Initialize specific exam
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.initExamResizer) window.initExamResizer('jee-neet');
+        });
+    </script>
+</body>
+
+</html>
