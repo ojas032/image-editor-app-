@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Reddit Post Generator - Create Realistic Reddit Screenshots | Free Online Tool</title>
+    <meta name="description"
+        content="Create realistic fake Reddit post screenshots for iPhone, Android, Desktop & Tablet. Free online Reddit post generator with customizable upvotes, comments, awards, and more. No watermarks!">
+    <meta name="keywords"
+        content="fake reddit post generator, reddit screenshot maker, fake reddit post, reddit mockup, reddit post simulator, create fake reddit screenshot">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fake Reddit Post Generator - Create Realistic Reddit Screenshots">
+    <meta property="og:description"
+        content="Free online tool to create realistic fake Reddit posts for all devices. Perfect for mockups, presentations, and content planning.">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fake Reddit Post Generator - Create Realistic Reddit Screenshots">
+    <meta name="twitter:description" content="Free online tool to create realistic fake Reddit posts for all devices.">
+
+    <link rel="stylesheet" href="css/fake-reddit-post.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">
+                    <span class="gradient-text">Fake Reddit Post Generator</span>
+                </h1>
+                <p class="subtitle">Create realistic Reddit screenshots for any device - iPhone, Android, Desktop &
+                    Tablet</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-header">
+                    <h2>Customize Your Post</h2>
+                    <p>Fill in the details to create your fake Reddit post</p>
+                </div>
+
+                <!-- Device Type Selection -->
+                <div class="form-section">
+                    <label class="form-label">
+                        <span class="label-icon">📱</span>
+                        Device Type
+                    </label>
+                    <div class="device-selector">
+                        <button class="device-btn active" data-device="iphone">
+                            <span class="device-icon">📱</span>
+                            iPhone
+                        </button>
+                        <button class="device-btn" data-device="android">
+                            <span class="device-icon">🤖</span>
+                            Android
+                        </button>
+                        <button class="device-btn" data-device="desktop">
+                            <span class="device-icon">💻</span>
+                            Desktop
+                        </button>
+                        <button class="device-btn" data-device="tablet">
+                            <span class="device-icon">📲</span>
+                            Tablet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Theme Selection -->
+                <div class="form-section">
+                    <label class="form-label">
+                        <span class="label-icon">🎨</span>
+                        Theme
+                    </label>
+                    <div class="theme-selector">
+                        <button class="theme-btn" data-theme="light">
+                            <span class="theme-icon">☀️</span>
+                            Light
+                        </button>
+                        <button class="theme-btn active" data-theme="dark">
+                            <span class="theme-icon">🌙</span>
+                            Dark
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Post Type -->
+                <div class="form-section">
+                    <label class="form-label">
+                        <span class="label-icon">📝</span>
+                        Post Type
+                    </label>
+                    <div class="post-type-selector">
+                        <button class="post-type-btn active" data-type="text">Text Post</button>
+                        <button class="post-type-btn" data-type="image">Image Post</button>
+                        <button class="post-type-btn" data-type="link">Link Post</button>
+                    </div>
+                </div>
+
+                <!-- User Details -->
+                <div class="form-section">
+                    <label class="form-label" for="username">
+                        <span class="label-icon">👤</span>
+                        Username
+                    </label>
+                    <input type="text" id="username" class="form-input" placeholder="u/username" value="u/throwaway123">
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label" for="subreddit">
+                        <span class="label-icon">📢</span>
+                        Subreddit
+                    </label>
+                    <input type="text" id="subreddit" class="form-input" placeholder="r/subreddit" value="r/AskReddit">
+                </div>
+
+                <!-- Post Details -->
+                <div class="form-section">
+                    <label class="form-label" for="post-title">
+                        <span class="label-icon">📌</span>
+                        Post Title
+                    </label>
+                    <textarea id="post-title" class="form-textarea" rows="2"
+                        placeholder="Enter post title...">What's the most interesting fact you know?</textarea>
+                </div>
+
+                <div class="form-section post-content-section">
+                    <label class="form-label" for="post-content">
+                        <span class="label-icon">✍️</span>
+                        Post Content (Optional)
+                    </label>
+                    <textarea id="post-content" class="form-textarea" rows="4"
+                        placeholder="Enter post content...">I'll go first: Honey never spoils. Archaeologists have found 3000-year-old honey in Egyptian tombs that was still perfectly edible!</textarea>
+                </div>
+
+                <div class="form-section image-upload-section" style="display: none;">
+                    <label class="form-label">
+                        <span class="label-icon">🖼️</span>
+                        Post Image
+                    </label>
+                    <div class="image-upload-area" id="image-upload-area">
+                        <input type="file" id="post-image-input" accept="image/*" style="display: none;">
+                        <div class="upload-placeholder" id="upload-placeholder">
+                            <span class="upload-icon">📸</span>
+                            <p>Click to upload image</p>
+                            <span class="upload-hint">PNG, JPG up to 10MB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section link-url-section" style="display: none;">
+                    <label class="form-label" for="link-url">
+                        <span class="label-icon">🔗</span>
+                        Link URL
+                    </label>
+                    <input type="text" id="link-url" class="form-input" placeholder="https://example.com">
+                </div>
+
+                <!-- Engagement Metrics -->
+                <div class="form-section">
+                    <label class="form-label" for="upvotes">
+                        <span class="label-icon">⬆️</span>
+                        Upvotes
+                    </label>
+                    <input type="number" id="upvotes" class="form-input" placeholder="0" value="12500">
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label" for="comments">
+                        <span class="label-icon">💬</span>
+                        Comments
+                    </label>
+                    <input type="number" id="comments" class="form-input" placeholder="0" value="342">
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label" for="post-time">
+                        <span class="label-icon">⏰</span>
+                        Time Posted
+                    </label>
+                    <input type="text" id="post-time" class="form-input" placeholder="e.g., 2h ago" value="3h ago">
+                </div>
+
+                <!-- Awards -->
+                <div class="form-section">
+                    <label class="form-label">
+                        <span class="label-icon">🏆</span>
+                        Awards
+                    </label>
+                    <div class="awards-grid">
+                        <div class="award-item">
+                            <input type="checkbox" id="award-gold" class="award-checkbox">
+                            <label for="award-gold" class="award-label">
+                                <span class="award-icon">🥇</span>
+                                <span>Gold</span>
+                            </label>
+                        </div>
+                        <div class="award-item">
+                            <input type="checkbox" id="award-silver" class="award-checkbox">
+                            <label for="award-silver" class="award-label">
+                                <span class="award-icon">🥈</span>
+                                <span>Silver</span>
+                            </label>
+                        </div>
+                        <div class="award-item">
+                            <input type="checkbox" id="award-wholesome" class="award-checkbox">
+                            <label for="award-wholesome" class="award-label">
+                                <span class="award-icon">🤗</span>
+                                <span>Wholesome</span>
+                            </label>
+                        </div>
+                        <div class="award-item">
+                            <input type="checkbox" id="award-helpful" class="award-checkbox">
+                            <label for="award-helpful" class="award-label">
+                                <span class="award-icon">💡</span>
+                                <span>Helpful</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="reset-btn">
+                        <span class="btn-icon">🔄</span>
+                        Reset
+                    </button>
+                    <button class="btn btn-primary" id="download-btn">
+                        <span class="btn-icon">⬇️</span>
+                        Download Screenshot
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="preview-panel">
+                <div class="preview-header">
+                    <h2>Live Preview</h2>
+                    <p>Your fake Reddit post will appear here</p>
+                </div>
+
+                <div class="preview-container" id="preview-container">
+                    <!-- Reddit Post Preview will be rendered here -->
+                    <div id="reddit-post-preview" class="reddit-post-preview">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">Why Use Our Fake Reddit Post Generator?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Multi-Device Support</h3>
+                    <p>Create realistic Reddit posts for iPhone, Android, Desktop, and Tablet views</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Light & Dark Themes</h3>
+                    <p>Switch between Reddit's light and dark themes for authentic screenshots</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Preview</h3>
+                    <p>See your changes in real-time with our live preview feature</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3>100% Free</h3>
+                    <p>No watermarks, no sign-up required, completely free to use</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Everything runs in your browser - no data is sent to our servers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Fully Customizable</h3>
+                    <p>Control every detail: upvotes, comments, awards, time, and more</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">Is this fake Reddit post generator really free?</h3>
+                    <p class="faq-answer">Yes! Our tool is completely free to use with no hidden costs, watermarks, or
+                        sign-up requirements.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What can I use fake Reddit posts for?</h3>
+                    <p class="faq-answer">Common uses include content mockups, marketing presentations, educational
+                        demonstrations, social media planning, and entertainment purposes.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do the screenshots look realistic?</h3>
+                    <p class="faq-answer">Yes! Our generator creates pixel-perfect replicas of Reddit's interface across
+                        all device types, making them indistinguishable from real screenshots.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I add custom images to my fake Reddit post?</h3>
+                    <p class="faq-answer">Absolutely! You can upload custom images for image posts, making your mockups
+                        even more realistic and tailored to your needs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Fake Reddit Post Generator. All rights reserved.</p>
+            <p class="footer-disclaimer">This tool is for educational and entertainment purposes only. Use responsibly.
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/fake-reddit-post.js"></script>
+</body>
+
+</html>
