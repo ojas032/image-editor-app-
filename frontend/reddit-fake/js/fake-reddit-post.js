@@ -247,17 +247,36 @@ class RedditPostGenerator {
                     ${awardsHTML}
                 </div>
                 <div class="post-actions">
-                    <button class="action-btn upvote-btn">
-                        <span class="action-icon">⬆</span>
-                        <span>${upvotes}</span>
-                        <span class="action-icon">⬇</span>
+                    <button class="action-btn vote-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2l-7 7h4v7h6v-7h4z"/>
+                        </svg>
+                        <span class="vote-count">${upvotes}</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 18l7-7h-4V4H7v7H3z"/>
+                        </svg>
                     </button>
+                    
                     <button class="action-btn comment-btn">
-                        <span class="action-icon">💬</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2C5.58 2 2 5.13 2 9c0 1.92.99 3.64 2.56 4.85L3.5 17l3.56-1.06C8.03 16.62 8.99 17 10 17c4.42 0 8-3.13 8-7s-3.58-7-8-7zm0 12c-.83 0-1.62-.19-2.33-.52l-1.92.57.57-1.92C5.52 11.62 5 10.36 5 9c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5z"/>
+                        </svg>
                         <span>${comments}</span>
                     </button>
+                    
+                    ${awards.length > 0 ? `
+                    <button class="action-btn award-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2l1.5 4.5h4.5l-3.5 2.5 1.5 4.5L10 11l-3.5 2.5 1.5-4.5-3.5-2.5h4.5z"/>
+                        </svg>
+                        <span>${awards.length}</span>
+                    </button>
+                    ` : ''}
+                    
                     <button class="action-btn share-btn">
-                        <span class="action-icon">↗️</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3l5 5-5 5v-3H4v-4h8V3z"/>
+                        </svg>
                         <span>Share</span>
                     </button>
                 </div>
