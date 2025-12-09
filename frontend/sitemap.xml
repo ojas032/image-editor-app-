@@ -234,6 +234,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Fake Reddit Post Generator -->
+  <url>
+    <loc>https://www.imagenerd.in/reddit-fake/fake-reddit-post-generator</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- About Us Page -->
   <url>
     <loc>https://www.imagenerd.in/about</loc>
