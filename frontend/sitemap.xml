@@ -242,6 +242,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Fake Twitter Tweet Generator -->
+  <url>
+    <loc>https://www.imagenerd.in/twitter-fake/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- About Us Page -->
   <url>
     <loc>https://www.imagenerd.in/about</loc>
