@@ -30,6 +30,11 @@ class SimpleStaticServer(http.server.SimpleHTTPRequestHandler):
             'resize': 'resize.html',
             'crop': 'crop.html',
             'convert': 'convert.html',
+            'remove-background': 'remove-background.html',
+            'twitter-fake': 'twitter-fake/index.html',
+            'passport-photo': 'passport-photo/index.html',
+            'qr-code': 'qr-code/index.html',
+            'reddit-fake': 'reddit-fake/fake-reddit-post-generator.html',
             'about': 'about.html',
             'contact': 'contact.html',
             'privacy': 'privacy.html',
@@ -123,6 +128,11 @@ def main():
             print("  /resize → resize.html")
             print("  /crop → crop.html")
             print("  /convert → convert.html")
+            print("  /remove-background → remove-background.html")
+            print("  /twitter-fake → twitter-fake/index.html")
+            print("  /passport-photo → passport-photo/index.html")
+            print("  /qr-code → qr-code/index.html")
+            print("  /reddit-fake → reddit-fake/fake-reddit-post-generator.html")
             print("  /about → about.html")
             print("  /contact → contact.html")
             print("  /privacy → privacy.html")

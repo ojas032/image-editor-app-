@@ -17,6 +17,7 @@ function initializeApp() {
     addEventListeners();
 
     // Initial render
+    updateCharCount();
     renderTweet();
 }
 
@@ -26,6 +27,9 @@ function addEventListeners() {
     inputs.forEach(input => {
         if (input.type === 'file') {
             input.addEventListener('change', handleFileUpload);
+        } else if (input.tagName === 'SELECT') {
+            input.addEventListener('change', renderTweet);
+            input.addEventListener('input', renderTweet);
         } else {
             input.addEventListener('input', renderTweet);
         }
@@ -282,7 +286,7 @@ async function downloadTweet() {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             const timestamp = new Date().getTime();
-            link.download = `tweet-${timestamp}.png`;
+            link.download = `tweet-${timestamp}.jpg`;
             link.href = url;
             link.click();
             URL.revokeObjectURL(url);
@@ -298,7 +302,7 @@ async function downloadTweet() {
                     'event_label': 'Download Tweet Image'
                 });
             }
-        });
+        }, 'image/jpeg', 0.95);
     } catch (error) {
         console.error('Error generating image:', error);
         alert('Error generating image. Please try again.');
