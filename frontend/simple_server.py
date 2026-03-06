@@ -105,7 +105,7 @@ def main():
     port = 3000
 
     # Change to frontend directory
-    frontend_dir = '/Users/ojasgupta/Desktop/image-editor-app/frontend'
+    frontend_dir = os.path.dirname(os.path.abspath(__file__))
     if not os.path.exists(frontend_dir):
         print(f"Error: Frontend directory not found: {frontend_dir}")
         sys.exit(1)

@@ -9,6 +9,26 @@
     <priority>1.0</priority>
   </url>
   
+  <!-- IBPS Image Resizer Tool -->
+  <url>
+    <loc>https://www.imagenerd.in/resize/ibps-image-resizer</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.imagenerd.in/en/resize/ibps-image-resizer</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.imagenerd.in/hi/resize/ibps-image-resizer</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Compress Image Tool -->
   <url>
     <loc>https://www.imagenerd.in/compress</loc>
