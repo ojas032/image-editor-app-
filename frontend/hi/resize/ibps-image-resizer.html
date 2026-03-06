@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBPS इमेज रिसाइजर - फोटो, सिग्नेचर, अंगूठा और घोषणा | ImageNerd</title>
+    <meta name="description" content="आधिकारिक IBPS इमेज रिसाइजर टूल। अपनी तस्वीर, हस्ताक्षर, बाएं अंगूठे का निशान और हस्तलिखित घोषणा को सटीक IBPS आयामों (200x230, 140x60, 240x240, 800x400) में बदलें।">
+    <meta name="keywords" content="IBPS इमेज रिसाइजर, IBPS फोटो साइज, IBPS सिग्नेचर साइज, IBPS अंगूठा निशान साइज, IBPS घोषणा साइज, ऑनलाइन IBPS रिसाइजर, बैंक परीक्षा फोटो रिसाइजर">
+    
+    <!-- SEO: Canonical and Hreflang -->
+    <link rel="canonical" href="https://www.imagenerd.in/hi/resize/ibps-image-resizer">
+    <link rel="alternate" hreflang="en" href="https://www.imagenerd.in/en/resize/ibps-image-resizer">
+    <link rel="alternate" hreflang="hi" href="https://www.imagenerd.in/hi/resize/ibps-image-resizer">
+    <link rel="alternate" hreflang="x-default" href="https://www.imagenerd.in/resize/ibps-image-resizer">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="IBPS इमेज रिसाइजर - फोटो, सिग्नेचर और अंगूठा रिसाइजर">
+    <meta property="og:description" content="फोटो, सिग्नेचर और अंगूठे के निशान के लिए आधिकारिक IBPS आयाम। मुफ्त में ऑनलाइन इमेज रिसाइज करें।">
+    <meta property="og:url" content="https://www.imagenerd.in/hi/resize/ibps-image-resizer">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.imagenerd.in/icon_bg.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../../style.css?v=1.0.2">
+    <link rel="stylesheet" href="../../../css/resize.css?v=1.0.0">
+    <link rel="stylesheet" href="../../resize/css/ibps-image-resizer.css?v=1.0.0">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "IBPS इमेज रिसाइजर",
+      "description": "IBPS बैंक परीक्षाओं (फोटो, सिग्नेचर, अंगूठा, घोषणा) के लिए इमेज को सटीक रूप से रिसाइज करें।",
+      "url": "https://www.imagenerd.in/hi/resize/ibps-image-resizer",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "inLanguage": ["en", "hi"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="/" data-route="home">
+                <img class="brand-mark" src="../../../icon_without_bg.png" alt="ImageNerd Logo">
+                <span class="brand-name">ImageNerd</span>
+            </a>
+            <nav class="main-nav">
+                <a href="/compress" data-route="compress">Compress</a>
+                <a href="/resize" data-route="resize" aria-current="page">Resize</a>
+                <a href="/crop" data-route="crop">Crop</a>
+                <a href="/convert" data-route="convert">Convert</a>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container py-5">
+            <div class="lang-toggle-container">
+                <button id="langToggle">English</button>
+            </div>
+
+            <div class="text-center mb-5">
+                <h1 class="fw-bold mb-3">IBPS इमेज रिसाइजर</h1>
+                <p class="subtitle text-muted mx-auto" style="max-width: 700px;">
+                    आधिकारिक IBPS आवश्यकताओं को पूरा करने के लिए अपनी तस्वीर, हस्ताक्षर, अंगूठे के निशान और हस्तलिखित घोषणा को सटीक रूप से रिसाइज करें।
+                </p>
+            </div>
+
+            <section id="resizeSection">
+                <!-- Drop Zone -->
+                <div id="resizeDropZone" class="upload-area mb-4">
+                    <input id="resizeFileInput" type="file" accept=".jpg,.jpeg,.png,.webp,.heic" style="display:none;">
+                    <div class="upload-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <button class="btn btn-primary mb-3" id="resizeSelectBtn">
+                        <span>इमेज चुनें</span>
+                    </button>
+                    <p class="drop-hint text-muted">या ड्रैग एंड ड्रॉप करें</p>
+                    <div id="resize-file-limit" class="mt-2 small text-muted">
+                        <span>समर्थित: HEIC, JPEG, PNG, WebP</span> • <span>अधिकतम आकार: 10 MB</span>
+                    </div>
+                </div>
+
+                <!-- Editor View -->
+                <div id="resizeEditorView" style="display:none;">
+                    <div class="row g-4">
+                        <div class="col-lg-7">
+                            <div class="card p-3 shadow-sm border-0 bg-light">
+                                <div id="resizeCanvasContainer" style="min-height: 300px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #e2e8f0; border-radius: 12px;">
+                                    <img id="resizePreviewImg" alt="IBPS इमेज पूर्वावलोकन" style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <div id="resizeSpinnerOverlay" style="display:none; position: absolute; top:0; left:0; right:0; bottom:0; background:rgba(255,255,255,0.7); display:flex; align-items:center; justify-content:center; z-index:10;">
+                                        <div class="spinner-border text-primary" role="status"></div>
+                                    </div>
+                                </div>
+                                <div id="resizeImageDimensions" class="mt-3 p-3 bg-white rounded border text-center"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="card p-4 shadow-sm border-0 h-100">
+                                <h4 id="methodLabel" class="fw-bold mb-4">दस्तावेज़ का प्रकार चुनें</h4>
+                                
+                                <div class="ibps-presets-grid">
+                                    <div class="preset-card active" data-preset="photo">
+                                        <span class="preset-icon">👤</span>
+                                        <h4>तस्वीर (Photo)</h4>
+                                        <p>200x230 px</p>
+                                    </div>
+                                    <div class="preset-card" data-preset="signature">
+                                        <span class="preset-icon">✍️</span>
+                                        <h4>हस्ताक्षर (Sign)</h4>
+                                        <p>140x60 px</p>
+                                    </div>
+                                    <div class="preset-card" data-preset="thumb">
+                                        <span class="preset-icon">👍</span>
+                                        <h4>अंगूठा निशान</h4>
+                                        <p>240x240 px</p>
+                                    </div>
+                                    <div class="preset-card" data-preset="declaration">
+                                        <span class="preset-icon">📄</span>
+                                        <h4>घोषणा पत्र</h4>
+                                        <p>800x400 px</p>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary w-100 py-3 fw-bold" id="resizeExportBtn">
+                                    <span>IBPS के लिए रिसाइज करें</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Success Modal -->
+            <div id="resizeSuccessView" class="success-modal">
+                <div class="success-modal-content">
+                    <div id="resize-success-heading" class="success-message">✓ IBPS के लिए तैयार!</div>
+                    <div id="resizeSuccessDimensions" class="mb-4 fw-bold"></div>
+                    <div class="success-image">
+                        <img id="resizeResizedImg" alt="IBPS रिसाइज्ड इमेज">
+                    </div>
+                    <div class="success-actions">
+                        <a id="resizeDownloadBtn" class="btn btn-primary px-4 py-2" href="#" download>इमेज डाउनलोड करें</a>
+                        <button id="resizeAnotherBtn" class="btn btn-outline-secondary px-4 py-2">दूसरा रिसाइज करें</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Section for SEO -->
+            <div class="seo-content mt-5">
+                <h2 class="fw-bold h4 mb-3">आधिकारिक IBPS इमेज स्पेसिफिकेशन</h2>
+                <p>IBPS परीक्षाओं (PO, Clerk, SO, RRB) के लिए आवेदन करते समय, आपको सख्त इमेज डायमेंशन और फ़ाइल आकार आवश्यकताओं का पालन करना चाहिए। ऐसा न करने पर आपका आवेदन रद्द किया जा सकता है।</p>
+                
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded bg-white">
+                            <h3 class="h6 fw-bold">फोटोग्राफ (Photograph)</h3>
+                            <ul class="small mb-0">
+                                <li>आयाम (Dimensions): 200 x 230 pixels</li>
+                                <li>फ़ाइल का आकार: 20KB से 50KB</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 border rounded bg-white">
+                            <h3 class="h6 fw-bold">हस्ताक्षर (Signature)</h3>
+                            <ul class="small mb-0">
+                                <li>आयाम (Dimensions): 140 x 60 pixels</li>
+                                <li>फ़ाइल का आकार: 10KB से 20KB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="fw-bold h4 mt-4 mb-3">IBPS इमेज रिसाइजर का उपयोग कैसे करें?</h2>
+                <ol>
+                    <li>दस्तावेज़ का प्रकार चुनें (फोटो, हस्ताक्षर, अंगूठा, या घोषणा)।</li>
+                    <li>अपने कंप्यूटर या फोन से अपनी मूल इमेज अपलोड करें।</li>
+                    <li>हमारा टूल स्वचालित रूप से आवश्यक पिक्सेल सेट कर देगा।</li>
+                    <li><strong>IBPS के लिए रिसाइज करें</strong> पर क्लिक करें और अपनी ऑप्टिमाइज्ड इमेज डाउनलोड करें।</li>
+                </ol>
+            </div>
+
+            <section id="instructionsSection" class="instructions-card mt-5">
+                <h3 class="fw-bold">निर्देश (Instructions)</h3>
+                <ul class="mb-0">
+                    <li>उस दस्तावेज़ का प्रकार चुनें जिसे आप रिसाइज करना चाहते हैं।</li>
+                    <li>अपनी इमेज अपलोड करें (JPEG, PNG, या HEIC)।</li>
+                    <li>सटीक आयाम और फ़ाइल आकार प्राप्त करने के लिए "IBPS के लिए रिसाइज करें" पर क्लिक करें।</li>
+                    <li>डाउनलोड करें और अपने IBPS आवेदन पोर्टल पर अपलोड करें।</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer mt-5">
+        <div class="container footer-inner py-4">
+            <p>© 2026 ImageNerd. सर्वाधिकार सुरक्षित।</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    <script src="../../resize/js/ibps-image-resizer.js?v=1.0.0"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.initIBPSPage) window.initIBPSPage();
+        });
+    </script>
+</body>
+</html>
