@@ -1,0 +1,164 @@
+/**
+ * IBPS Image Resizer specific styles
+ */
+
+.lang-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+#langToggle {
+    background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+    color: #0b1220;
+    border: 1px solid var(--light-border);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#langToggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.ibps-presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.preset-card {
+    background: var(--light-card);
+    border: 2px solid var(--light-border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.preset-card:hover {
+    border-color: #FF9933;
+    background: rgba(255, 153, 51, 0.05);
+}
+
+.preset-card.active {
+    border-color: #138808;
+    background: rgba(19, 136, 8, 0.05);
+    box-shadow: 0 8px 20px rgba(19, 136, 8, 0.1);
+}
+
+.preset-card h4 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: var(--light-text);
+}
+
+.preset-card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--light-muted);
+}
+
+.preset-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+#resizeEditorView {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.instructions-card {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 40px;
+    border-left: 5px solid #FF9933;
+}
+
+.instructions-card h3 {
+    margin-top: 0;
+    color: #0b1220;
+}
+
+.instructions-card ul {
+    padding-left: 20px;
+}
+
+.instructions-card li {
+    margin-bottom: 10px;
+    color: #475569;
+}
+
+/* Success Modal enhancements */
+.success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.success-modal-content {
+    background: white;
+    border-radius: 24px;
+    max-width: 600px;
+    width: 100%;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.success-message {
+    font-size: 24px;
+    font-weight: 800;
+    color: #138808;
+    margin-bottom: 20px;
+}
+
+.success-image img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 24px;
+}
+
+.success-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .preset-card {
+    background: rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .instructions-card {
+    background: rgba(255,255,255,0.03);
+    color: #c9d3ea;
+}
+
+[data-theme="dark"] .instructions-card li {
+    color: #c9d3ea;
+}
